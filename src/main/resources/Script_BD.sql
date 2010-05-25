@@ -1,0 +1,70 @@
+
+ CREATE DATABASE DB_PORTAL_TERRESTIAL_TRANSPORT;
+
+ USE DB_PLANTILLA;
+
+ CREATE TABLE TB_EMPRESAS(
+   COD_EMP           INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   NOM_EMP           VARCHAR(30),
+   APE_EMP           VARCHAR(30),
+   CUMPLE_EMP        DATE,
+   DIRECCION_EMP     VARCHAR(50),
+   DIREC_FOTO_EMP    VARCHAR(50),
+   MAIL_EMP          VARCHAR(50),
+   ID_EMP            VARCHAR(25),
+   PASSWORD_EMP      VARCHAR(25),
+   TIPO_EMP          VARCHAR(20),
+   ESTADO_EMP        VARCHAR(20)
+ ); 
+ 
+ CREATE TABLE TB_USUARIOS(
+   COD_USU           INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   NOM_USU           VARCHAR(30),
+   APE_USU           VARCHAR(30),
+   CUMPLE_USU        DATE,
+   DIRECCION_USU     VARCHAR(50),
+   DIREC_FOTO_USU    VARCHAR(50),
+   MAIL_USU          VARCHAR(50),
+   ID_USU            VARCHAR(25),
+   PASSWORD_USU      VARCHAR(25),
+   TIPO_USU          VARCHAR(20),
+   ESTADO_USU        VARCHAR(20)
+ );
+
+ CREATE TABLE TB_CLIENTES(
+   COD_CLI           INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   NOM_CLI           VARCHAR(30),
+   APE_CLI           VARCHAR(30),
+   CUMPLE_CLI        DATE,
+   DIRECCION_CLI     VARCHAR(50),
+   DIREC_FOTO_CLI    VARCHAR(50),
+   MAIL_CLI          VARCHAR(50),
+   ID_CLI            VARCHAR(25),
+   PASSWORD_CLI      VARCHAR(25),
+   TIPO_CLI          VARCHAR(20),
+   ESTADO_CLI        VARCHAR(20)
+ );
+ 
+ INSERT INTO TB_USUARIOS( COD_USU, NOM_USU,APE_USU, DIRECCION_USU, CUMPLE_USU,DIREC_FOTO_USU,MAIL_USU,ID_USU,PASSWORD_USU,TIPO_USU,ESTADO_USU )
+ VALUES
+  ( 1, 'RICARDO', 'GUERRA', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Ricardo.gif','i220051@cibertec.edu.pe', 'RGUERRA', 'ADMIN',
+    'ADMINISTRADOR', 'ENABLED' ),
+  ( 2, 'CARLOS', 'VERA', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Carlos.gif','i220051@cibertec.edu.pe', 'CVERA', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 3, 'JUAN', 'HUAMAN', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Juan.gif','i220051@cibertec.edu.pe', 'JHUAMAN', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 4, 'MARIO', 'GOMEZ', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Mario.gif','i220051@cibertec.edu.pe', 'MGOMEZ', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 5, 'JULIO', 'LA ROSA', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Julio.gif','i220051@cibertec.edu.pe', 'JLAROSA', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 6, 'CARLOS', 'CARLIN', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Carlos.gif','i220051@cibertec.edu.pe', 'CCARLIN', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 7, 'MILTON', 'BAUTISTA', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Milton.gif','i220051@cibertec.edu.pe', 'MBAUTISTA', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 8, 'MARCOS', 'RIVADENEIRA', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Marcos.gif','i220051@cibertec.edu.pe', 'MRIVADENERIA', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 9, 'DIEGO', 'TORRES', 'AV HUAYLAS 357 DPTO 7', '1983-04-10','Foto_Diego.gif','i220051@cibertec.edu.pe', 'DTORRES', 'ADMIN',
+    'MIEMBRO', 'ENABLED' ),
+  ( 10, 'JONATHAN', 'ROSALES', 'AV JOSE OLAYA 666', '1978-10-10', 'Foto_Jonathan.gif', 'Jhonathan@yahoo.com', 'JROSALES', 'ROSA',
+    'MIEMBRO', 'ENABLED' );
+

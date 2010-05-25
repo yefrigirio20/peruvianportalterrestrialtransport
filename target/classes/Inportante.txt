@@ -1,0 +1,46 @@
+
+
+  GENERACION DE WSDL DESDE UNA CLASE JAVA:
+  *************************************** 
+
+  ------------------------------------------------------------------
+  -cp:       Indica el classpath, es decir, donde tendrá que buscar los .class que hayamos generado.
+
+  -d:        Indica el directorio donde queremos que genere las clases.
+
+  -verbose:  Indica que nos vaya informando de las operaciones que va realizando.
+
+  -r:        Indica la ruta donde queremos que nos guarde los ficheros de recursos (wsdl y demás).
+
+  -wsdl:     Indica que queremos que nos genere el wsdl del WS.
+
+  Y por último tenemos la clase que implementará el WS.
+  ------------------------------------------------------------------
+
+ wsgen -cp . -d . -verbose -r WebContent/wsdl -wsdl ejemplo.ParteMetereologico -Xendorsed
+ 
+  wsgen -cp . -d . -verbose -r WebContent/wsdl -wsdl org.java.jaxws.bean.ParteMetereologico.java -Xendorsed
+
+  wsgen -cp . -d . -verbose -r ../../WebContent/wsdl -wsdl ParteMetereologico -Xendorsed
+  
+  
+ %AXIS2_HOME%/bin/WSDL2Java -p org.java.service -uri WebContent/wsdl/UsuarioServiceImpl.wsdl -s
+  
+ %JAXWS_HOME%/bin/wsgen -d src.org.java.jaxws.service -r WebContent/wsdl -wsdl ParteMetereologico -Xendorsed
+ 
+ %JAXWS_HOME%/bin/wsgen -d C:/XXX -r C:/XXX/wsdl -wsdl C:/ParteMetereologico.class -Xendorsed
+ 
+ %JAXWS_HOME%/bin/wsgen -d . -verbose -keep -wsdl -r WebContent/wsdl -s ejemplo.ParteMetereologico 
+
+ %JAXWS_HOME%/bin/wsgen -d . -verbose -r ../../WebContent/wsdl -wsdl JavaBean
+     
+ wsgen -cp . JavaBean -wsdl -servicename {http://mynamespace}MyService
+ 
+ %JAXWS_HOME%/bin/wsgen JavaBean
+ 
+  
+  C:\jaxws-ri\bin>wsgen -cp "project-home\jaxws-samples\bin"
+ -d "project-home\jaxws-samples\bin" -keep -wsdl
+ -r "project-home\jaxws-samples\src\test\echo\service\wsdl"
+ -s "project-home\jaxws-samples\src" test.echo.service.EchoService
+
