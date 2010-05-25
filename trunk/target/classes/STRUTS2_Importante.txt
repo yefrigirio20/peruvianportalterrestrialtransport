@@ -1,0 +1,34 @@
+
+ 
+  LINK:  http://struts.apache.org/2.x/docs/accessing-application-session-request-objects.html
+
+
+
+  ACCESO DESDE CLASES JAVA:
+  ------------------------
+
+  Map attr = (Map) ActionContext.getContext().get( "attr" );
+  attr.put( "myId", myProp );
+
+  Map application = (Map) ActionContext.getContext().get( "application" );
+  application.put( "myId", myProp );
+
+  Map session = (Map) ActionContext.getContext().get( "session" );
+  session.put( "myId", myProp );
+
+  Map request = (Map) ActionContext.getContext().get( "request" );
+  request.put( "myId", myProp );
+  
+  
+
+  ACCESO DESDE JSP:
+  ---------------- 
+
+  <s:property value="#session.myId" />
+
+  <s:property value="#request.myId" />
+
+  <s:property value="#attr.myId" />
+
+
+
