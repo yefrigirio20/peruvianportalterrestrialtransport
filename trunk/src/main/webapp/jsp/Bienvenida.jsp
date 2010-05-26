@@ -33,10 +33,9 @@
          <!-- INCLUDE PRINCIPAL -->
          <td width="85%" valign="top">             
 			   <form id="frnBienvenida" name="frnBienvenida" >		      
-			      Bienvenido Sr(a): 
+			      Bienvenida Empresa: 
 			      <strong>
-			      <s:property value="#session.objUsuario.nombres"   />
-			      <s:property value="#session.objUsuario.apellidos" />
+			        <s:property value="#session.objEmpresa.razonSocial" />
 			      </strong>
 			   </form>
          </td>
