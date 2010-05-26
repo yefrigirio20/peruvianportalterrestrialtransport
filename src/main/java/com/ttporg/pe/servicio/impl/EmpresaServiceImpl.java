@@ -1,13 +1,9 @@
 package com.ttporg.pe.servicio.impl;
 
 import java.util.List;
-
-import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.bean.Empresa;
-import com.ttporg.pe.bean.Usuario;
 import com.ttporg.pe.servicio.EmpresaService;
 import com.ttporg.pe.servicio.ServiceFactory;
-import com.ttporg.pe.servicio.UsuarioService;
 
 /**
  * @author Cesar Ricardo.
