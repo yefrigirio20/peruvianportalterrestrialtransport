@@ -30,7 +30,7 @@ public class Empresa implements Serializable{
     private String        email;
 	private String	      usuario;
 	private String	      password; 
-	private Portal        portal = new Portal();
+	private Portal        portal;
     private List<Cliente> listaClientes; 
     
 	//Constructores ...
