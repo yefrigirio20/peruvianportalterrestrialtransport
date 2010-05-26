@@ -23,11 +23,17 @@
 		</property>
 	</bean>		
 	
-	<bean id="empresaDao" class="com.ttporg.pe.dao.impl.EmpresaDaoImpl">
+	<bean id="clienteDao" class="com.ttporg.pe.dao.impl.ClienteDaoImpl">
 		<property name="sqlMapClient">
 			<ref bean="sqlMapClient" />
 		</property>
 	</bean>	
+	
+	<bean id="empresaDao" class="com.ttporg.pe.dao.impl.EmpresaDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>		
 	<!-- ========== /SPRING: Mapeo DAOS ========== -->
 
 </beans>
