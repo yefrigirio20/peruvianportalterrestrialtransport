@@ -15,6 +15,7 @@
 			useStatementNamespaces = "true" />
 
 	<sqlMap resource="com/ttporg/pe/mapping/Usuario.xml" />
-	 
+	<sqlMap resource="com/ttporg/pe/mapping/Empresa.xml" />
+		 
 </sqlMapConfig>
 
