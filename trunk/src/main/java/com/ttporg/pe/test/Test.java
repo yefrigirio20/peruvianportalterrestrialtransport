@@ -31,7 +31,7 @@ public class Test{
 				 
 	    Empresa empresa =  new Empresa();
 	    empresa.setUsuario(  "RGUERRA" );
-	    empresa.setPassword( "xxx" );    //Sacar del Script de la 'BD'.
+	    empresa.setPassword( "SqrAquYuou8=" );    //Sacar del Script de la 'BD'.
 
 		empresa = servicio.loginEmpresa( empresa );
 
