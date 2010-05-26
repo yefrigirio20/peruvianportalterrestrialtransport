@@ -2,6 +2,7 @@ package com.ttporg.pe.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,9 +31,12 @@ public class Empresa implements Serializable{
     private String        email;
 	private String	      usuario;
 	private String	      password; 
-	private Portal        portal;
+	private String	      numTarjetaCredito; 
+	private Date	      fechaExpiracionTarjeta; 
+	private boolean       estado;
+	private Portal        portal;	
     private List<Cliente> listaClientes; 
-    
+        
 	//Constructores ...
 	public Empresa(){
 		this.portal        = new Portal();
@@ -41,20 +45,24 @@ public class Empresa implements Serializable{
 
 	public Empresa( Integer id, String razonSocial, String ruc, String pais, String departamento, 
 			        String direccion, String telefono, String email, String usuario, String password, 
+			        String numTarjetaCredito, Date fechaExpiracionTarjeta, boolean estado,
 			        Portal portal, List<Cliente> listaClientes ){
 		super();
-		this.id            = id;
-		this.razonSocial   = razonSocial;
-		this.ruc           = ruc;
-		this.pais          = pais;
-		this.departamento  = departamento;
-		this.direccion     = direccion;
-		this.telefono      = telefono;
-		this.email         = email;
-		this.usuario       = usuario;
-		this.password      = password;
-		this.portal        = portal;
-		this.listaClientes = listaClientes;
+		this.id                     = id;
+		this.razonSocial            = razonSocial;
+		this.ruc                    = ruc;
+		this.pais                   = pais;
+		this.departamento           = departamento;
+		this.direccion              = direccion;
+		this.telefono               = telefono;
+		this.email                  = email;
+		this.usuario                = usuario;
+		this.password               = password;
+		this.numTarjetaCredito      = numTarjetaCredito;
+		this.fechaExpiracionTarjeta = fechaExpiracionTarjeta;
+		this.estado                 = estado;
+		this.portal                 = portal;		
+		this.listaClientes          = listaClientes;
 	}
 	
 	public Integer getId(){
@@ -152,7 +160,31 @@ public class Empresa implements Serializable{
 	public void setListaClientes( List<Cliente> listaClientes ){
 		this.listaClientes = listaClientes;
 	}
+		
+	public String getNumTarjetaCredito(){
+		return numTarjetaCredito;
+	}
 	
+	public void setNumTarjetaCredito( String numTarjetaCredito ){
+		this.numTarjetaCredito = numTarjetaCredito;
+	}
+
+	public Date getFechaExpiracionTarjeta(){
+		return fechaExpiracionTarjeta;
+	}
+	
+	public void setFechaExpiracionTarjeta( Date fechaExpiracionTarjeta ){
+		this.fechaExpiracionTarjeta = fechaExpiracionTarjeta;
+	}
+	
+	public boolean isEstado(){
+		return estado;
+	}
+	
+	public void setEstado( boolean estado ){
+		this.estado = estado;
+	}
+
 	public static long getSerialVersionUID(){
 		return serialVersionUID;
 	}	  
