@@ -71,22 +71,22 @@
  );
 
  /** CLIENTE **/
- INSERT INTO CLIENTE (ID_CLI, NOM_CLI, APE_CLI, FEC_NAC_CLI, DIR_CLI, FONO_CLI, MAIL_CLI, FOTO_CLI, TIP_CLI, USU_CLI, PASS_CLI, COD_CRED_CLI, FEC_EXP_CLI, EST_CLI) values (1, 'Cesar Ricardo', 'Guerra Arnaiz', null, 'Av.Huaylas 356 dpt 7 chorillos', '45785659', 'cesarricardo_guerra19@hotmail.com', 'Ricardo.jpg', 'USUARIO', 'admin', 'admin', '12345678', null, '1');
- INSERT INTO CLIENTE (ID_CLI, NOM_CLI, APE_CLI, FEC_NAC_CLI, DIR_CLI, FONO_CLI, MAIL_CLI, FOTO_CLI, TIP_CLI, USU_CLI, PASS_CLI, COD_CRED_CLI, FEC_EXP_CLI, EST_CLI) values (2, 'Ivan Francisco', 'Silva Vera', null, 'Av La Calera 2345 Surco', '5784568', 'ivanarturof@hotmail.com', 'Ivan.jpg', 'USUARIO', '123', '123', '24682475', null, '1');
+ INSERT INTO CLIENTE (ID_CLI, NOM_CLI, APE_CLI, FEC_NAC_CLI, DIR_CLI, FONO_CLI, MAIL_CLI, FOTO_CLI, TIP_CLI, USU_CLI, PASS_CLI, COD_CRED_CLI, FEC_EXP_CLI, EST_CLI) values (1, 'Cesar Ricardo', 'Guerra Arnaiz', '1983-02-12 15:35:00', 'Av.Huaylas 356 dpt 7 chorillos', '45785659', 'cesarricardo_guerra19@hotmail.com', 'Ricardo.jpg', 'USUARIO', 'admin', 'admin', '12345678', '2011-02-02 15:35:00', '1');
+ INSERT INTO CLIENTE (ID_CLI, NOM_CLI, APE_CLI, FEC_NAC_CLI, DIR_CLI, FONO_CLI, MAIL_CLI, FOTO_CLI, TIP_CLI, USU_CLI, PASS_CLI, COD_CRED_CLI, FEC_EXP_CLI, EST_CLI) values (2, 'Ivan Francisco', 'Silva Vera', '1982-10-10 15:35:00', 'Av La Calera 2345 Surco', '5784568', 'ivanarturof@hotmail.com', 'Ivan.jpg', 'USUARIO', '123', '123', '24682475', '2011-02-02 15:35:00', '1');
 
  /** EMPRESA **/
- INSERT INTO EMPRESA (ID_EMP, RAZ_SOC_EMP, RUC_EMP, PAIS_EMP, DEP_EMP, DIR_EMP, FONO_EMP, MAIL_EMP, USU_EMP, PASS_EMP, COD_CRED_EMP, FEC_EXP_EMP, EST_EMP) values (1, 'CRUZ DEL SUR', '57478556', 'Peru', 'Lima', 'Av.Arequipa 456 Lince', '548566698', 'cruzDelSur@yahoo.com', 'RGUERRA', 'SqrAquYuou8=', '9546878966', null, '1');
+ INSERT INTO EMPRESA (ID_EMP, RAZ_SOC_EMP, RUC_EMP, PAIS_EMP, DEP_EMP, DIR_EMP, FONO_EMP, MAIL_EMP, USU_EMP, PASS_EMP, COD_CRED_EMP, FEC_EXP_EMP, EST_EMP) values (1, 'CRUZ DEL SUR', '57478556', 'Peru', 'Lima', 'Av.Arequipa 456 Lince', '548566698', 'cruzDelSur@yahoo.com', 'RGUERRA', 'SqrAquYuou8=', '9546878966', '2011-02-02 15:35:00', '1');
  
  /** EMPRESA_CLIENTE **/
  INSERT INTO EMPRESA_CLIENTE (ID_EMP_CLI, ID_EMP, ID_CLI) values (1, 1, 1);
  INSERT INTO EMPRESA_CLIENTE (ID_EMP_CLI, ID_EMP, ID_CLI) values (2, 1, 2);
 
  /** PORTAL **/
- INSERT INTO PORTAL(ID_PTL, URL_PTL, EST_PTL, ID_EMP) values (1, null, '1', 1);
+ INSERT INTO PORTAL(ID_PTL, URL_PTL, EST_PTL, ID_EMP) values (1, '', '1', 1);
 
  /** INFORMACION **/
  INSERT INTO INFORMACION (ID_INFO, CABECERA_INFO, TITU_PRI_INFO, TEXTO_PRI_INFO, LINK_PRI_INFO, FOTO_PRI_INFO, TITU_IZQ1_INFO, TEXTO_IZQ1_INFO, LINK_IZQ1_INFO, FOTO_IZQ1_INFO, TITU_IZQ2_INFO, TEXTO_IZQ2_INFO, LINK_IZQ2_INFO, FOTO_IZQ2_INFO, EST_INFO, ID_PTL) values (1, 'CabCruzDelSur.jpg', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-
+   
  /* 
  INSERT INTO TB_USUARIOS( COD_USU, NOM_USU,APE_USU, DIRECCION_USU, CUMPLE_USU,DIREC_FOTO_USU,MAIL_USU,ID_USU,PASSWORD_USU,TIPO_USU,ESTADO_USU )
  VALUES
