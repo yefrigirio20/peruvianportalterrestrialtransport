@@ -1,13 +1,10 @@
 package com.ttporg.pe.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.ttporg.pe.bean.Usuario;
-import com.ttporg.pe.servicio.UsuarioService;
-import com.ttporg.pe.servicio.impl.UsuarioServiceImpl;
+import com.ttporg.pe.bean.Empresa;
+import com.ttporg.pe.servicio.EmpresaService;
+import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
 import com.ttporg.pe.util.ManejoEncriptacion;
-
+ 
 /**
  * @author Cesar Ricardo.
  * @clase: Test.java  
@@ -25,31 +22,20 @@ public class Test{
 	static ManejoEncriptacion xxx = new ManejoEncriptacion(); 
 	
 	/**
-	 * @param argumentos
+	 * @param  argumentos
 	 * @throws Exception 
 	 */
 	public static void main( String[] argumentos ) throws Exception{
 
-		UsuarioService servicio = new UsuarioServiceImpl();
+		EmpresaService servicio = new EmpresaServiceImpl();
 				 
-	    Usuario usuario =  new Usuario();
-		usuario.setUsuario(  "RGUERRA" );
-		usuario.setPassword( "hRoN8ON82Ct/w7wkG7nAuA=="   );
- 
-		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+	    Empresa empresa =  new Empresa();
+	    empresa.setUsuario(  "RGUERRA" );
+	    empresa.setPassword( "xxx" );    //Sacar del Script de la 'BD'.
 
-		listaUsuarios = (List<Usuario>)servicio.obtenerListaFiltrosUsuarios( usuario );
-		
-		//Iterando ...xi
-		for( int i=0; i<listaUsuarios.size(); i++ ){
-			 Usuario objUsuario = listaUsuarios.get(  i  ); 
-			 
-			 String nombres   = objUsuario.getNombres();
-			 String apellidos = objUsuario.getApellidos();
-			 
-			 System.out.println( "nombres:   " +  nombres   );
-			 System.out.println( "apellidos: " +  apellidos );
-		}
+		empresa = servicio.loginEmpresa( empresa );
+
+		System.out.println( "Empresa: " + empresa );
 		
 		String cadena = xxx.encriptarCIPHER( "ADMIN" );		
 		System.out.println( "CADENA ENCRIPTADA: " + cadena );
