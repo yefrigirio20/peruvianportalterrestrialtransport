@@ -1,13 +1,14 @@
 package com.ttporg.pe.action;
 
-
 import com.ttporg.pe.bean.BaseBean;
+import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.bean.Usuario;
+import com.ttporg.pe.servicio.EmpresaService;
 import com.ttporg.pe.servicio.UsuarioService;
+import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
 import com.ttporg.pe.servicio.impl.UsuarioServiceImpl;
 import com.ttporg.pe.servlet.LoggerBean;
 import com.ttporg.pe.util.ManejoEncriptacion;
-
 import static com.ttporg.pe.util.Constantes.*;
 
 /**
@@ -30,7 +31,7 @@ public class LoginMB extends BaseBean{
 	private ManejoEncriptacion manejoEncriptacion = null; 
 	
 	//Service.
-	private UsuarioService servicio = null;
+	private EmpresaService servicio = null;
 	
 	//Generacion de Log.
 	private LoggerBean loggerBean   = null;
@@ -40,7 +41,7 @@ public class LoginMB extends BaseBean{
 	private String	password;
 	 		
 	{
-	 this.servicio           = new UsuarioServiceImpl();	
+	 this.servicio           = new EmpresaServiceImpl();	
 	 this.loggerBean         = new LoggerBean();
 	 this.manejoEncriptacion = new ManejoEncriptacion(); 
 	}
@@ -65,24 +66,24 @@ public class LoginMB extends BaseBean{
 			//Validacion ...
 			if( (estadoUsuario == true) && (estadoPassword == true) ){
 				
-				Usuario objUsuario = new Usuario();
+				Empresa objEmpresa = new Empresa();
 
 				String encrypPassword = this.manejoEncriptacion.encriptarCIPHER( this.getPassword().toUpperCase() );
 				
-				objUsuario.setUsuario(  this.getUsuario()  );
-				objUsuario.setPassword( encrypPassword     );
+				objEmpresa.setUsuario(  this.getUsuario()  );
+				objEmpresa.setPassword( encrypPassword     );
 				
-				objUsuario = this.servicio.loginUsuario( objUsuario );
+				objEmpresa = this.servicio.loginEmpresa( objEmpresa );
 				
-				this.imprimeLog( "objUsuario: " + objUsuario );
+				this.imprimeLog( "objEmpresa: " + objEmpresa );
 				
-				if( objUsuario != null ){
+				if( objEmpresa != null ){
 					
 					//Seteando datos en 'Session'.
-					this.getObjSession().put( "objUsuario", objUsuario ); 
+					this.getObjSession().put( "objEmpresa", objEmpresa ); 
 										
 					//Obteniendo datos de 'Session'.
-					objUsuario = (Usuario)this.getObjSession().get( "objUsuario" );
+					objEmpresa = (Empresa)this.getObjSession().get( "objEmpresa" );
 					
 					addActionMessage( MENSAJE_AUTENTICACION_OK );
 					estadoRetorno = SUCCESS;                           //Se reenvia a la interfaz siguiente.	
