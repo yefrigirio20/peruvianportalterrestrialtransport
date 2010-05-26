@@ -35,7 +35,7 @@ function cambiarEstrella( parametro ){
 	   }
 	   if( parametro == "CUATRO" ){
            prenderTodas( formulario );
-           formulario.estrella_05.src      =  '<%=request.getContextPath()%>/imagenes/estrellaApagada.gif';	
+           formulario.estrella_05.src      =  '<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif';	
            formulario.mensajeRanking.value =  'Bueno!!!';				
 	   }
 	   if( parametro == "CINCO" ){
@@ -48,21 +48,21 @@ function cambiarEstrella( parametro ){
 function prenderTodas( formulario ){
 	 //alert( "prenderTodas" ); 
 	   
-	 formulario.estrella_01.src   =  "<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif";
-	 formulario.estrella_02.src   =  "<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif";
-	 formulario.estrella_03.src   =  "<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif";
-	 formulario.estrella_04.src   =  "<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif";
-	 formulario.estrella_05.src   =  "<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif";              
+	 formulario.estrella_01.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaPrendida.gif";
+	 formulario.estrella_02.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaPrendida.gif";
+	 formulario.estrella_03.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaPrendida.gif";
+	 formulario.estrella_04.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaPrendida.gif";
+	 formulario.estrella_05.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaPrendida.gif";              
 }
 
 function apagarTodas( formulario ){
 	 //alert( "apagarTodas" ); 
 		 
-	 formulario.estrella_01.src   =  "<%=request.getContextPath()%>/imagenes/estrellaApagada.gif";
-	 formulario.estrella_02.src   =  "<%=request.getContextPath()%>/imagenes/estrellaApagada.gif";
-	 formulario.estrella_03.src   =  "<%=request.getContextPath()%>/imagenes/estrellaApagada.gif";
-	 formulario.estrella_04.src   =  "<%=request.getContextPath()%>/imagenes/estrellaApagada.gif";
-	 formulario.estrella_05.src   =  "<%=request.getContextPath()%>/imagenes/estrellaApagada.gif";   
+	 formulario.estrella_01.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+	 formulario.estrella_02.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+	 formulario.estrella_03.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+	 formulario.estrella_04.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+	 formulario.estrella_05.src   =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";   
 }
 
 function seleccionarEstrella( msnParam ){
@@ -99,23 +99,23 @@ function seleccionarEstrella( msnParam ){
 		<table width="140" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
 		   <td valign="top" width="22">  
-		   <img src="<%=request.getContextPath()%>/imagenes/estrellaApagada.gif" name="estrella_01" id="estrella_01" onMouseOver="cambiarEstrella('UNO')" 
+		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_01" id="estrella_01" onMouseOver="cambiarEstrella('UNO')" 
 		        onClick="seleccionarEstrella('Malo!!!')" />   
 		   </td>
 		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/estrellaApagada.gif" name="estrella_02" id="estrella_02" onMouseOver="cambiarEstrella('DOS')"    
+		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_02" id="estrella_02" onMouseOver="cambiarEstrella('DOS')"    
 		        onClick="seleccionarEstrella('Regular!!!')"/>   
 		   </td>
 		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/estrellaApagada.gif" name="estrella_03" id="estrella_03" onMouseOver="cambiarEstrella('TRES')"    
+		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_03" id="estrella_03" onMouseOver="cambiarEstrella('TRES')"    
 		        onClick="seleccionarEstrella('Pasable!!!')"/>   
 		   </td>
 		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/estrellaApagada.gif" name="estrella_04" id="estrella_04" onMouseOver="cambiarEstrella('CUATRO')"    
+		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_04" id="estrella_04" onMouseOver="cambiarEstrella('CUATRO')"    
 		        onClick="seleccionarEstrella('Bueno!!!')"/>   
 		   </td>
 		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/estrellaApagada.gif" name="estrella_05" id="estrella_05" onMouseOver="cambiarEstrella('CINCO')"    
+		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_05" id="estrella_05" onMouseOver="cambiarEstrella('CINCO')"    
 		        onClick="seleccionarEstrella('Excelente!!!')"/>   
 		   </td>
 		  </tr>
