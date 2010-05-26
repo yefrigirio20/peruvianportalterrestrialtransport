@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Empresa">
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILISABLE' ****************** -->
+    <!-- ******************************************************** -->
+     <sql id="selectEmpresasSinTag">   
+          SELECT e.ID_EMP, e.RAZ_SOC_EMP, e.RUC_EMP, e.PAIS_EMP, 
+	             e.DEP_EMP, e.DIR_EMP, e.FONO_EMP, e.MAIL_EMP, e.USU_EMP, 
+	             e.PASS_EMP, e.COD_CRED_EMP, e.FEC_EXP_EMP, e.EST_EMP
+	      FROM   EMPRESA e
+     </sql>	       
+        
+     <sql id="selectEmpresasConTag">   
+        SELECT e.ID_EMP       AS  "id", 
+               e.RAZ_SOC_EMP  AS  "razonSocial", 
+               e.RUC_EMP      AS  "ruc", 
+               e.PAIS_EMP     AS  "pais", 
+		       e.DEP_EMP      AS  "departamento", 
+		       e.DIR_EMP      AS  "direccion", 
+		       e.FONO_EMP     AS  "telefono", 
+		       e.MAIL_EMP     AS  "email", 
+		       e.USU_EMP      AS  "usuario", 
+		       e.PASS_EMP     AS  "password", 
+		       e.COD_CRED_EMP AS  "tipo", 
+		       e.FEC_EXP_EMP  AS  "estado",
+		       e.EST_EMP      AS  "estado"
+		FROM   EMPRESA e 
+     </sql>	
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+    
+    <!-- FORMA #1: PARA HACER CONSULTAS, EN BASE A: 'resultMap' -->
+   	<resultMap id="atributosEmpresa" class="com.ttporg.pe.bean.Empresa">
+		<result property="id"                     column="ID_EMP"  	    columnIndex="1"  />
+		<result property="razonSocial"            column="RAZ_SOC_EMP"  columnIndex="2"  />		
+		<result property="ruc"                    column="RUC_EMP"      columnIndex="3"  />
+		<result property="pais"                   column="PAIS_EMP"     columnIndex="4"  />
+		<result property="departamento"           column="DEP_EMP"      columnIndex="5"  />
+		<result property="direccion"              column="DIR_EMP"      columnIndex="6"  />
+		<result property="telefono"               column="FONO_EMP"     columnIndex="7"  />
+		<result property="email"                  column="MAIL_EMP"     columnIndex="8"  />
+		<result property="usuario"                column="USU_EMP"      columnIndex="9"  />
+		<result property="password"               column="PASS_EMP"     columnIndex="10" />
+		<result property="numTarjetaCredito"      column="COD_CRED_EMP" columnIndex="11" />
+		<result property="fechaExpiracionTarjeta" column="FEC_EXP_EMP"  columnIndex="12" />
+		<result property="estado"                 column="EST_EMP"      columnIndex="13" />				
+	</resultMap>
+   
+	<select id="getEmpresa" resultMap="atributosEmpresa" parameterClass="java.lang.Integer" >
+        <include refid="selectEmpresasSinTag" />
+		WHERE  e.ID_EMP = #id#
+    </select>
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="empresa" type="com.ttporg.pe.bean.Empresa" />
+	
+	<select id="getUsuario2" resultClass="empresa" parameterClass="java.lang.Integer" >
+        <include refid="selectEmpresasConTag" />
+		WHERE  e.ID_EMP = #id#
+    </select>
+
+	<select id="getListaEmpresa" resultClass="empresa" parameterClass="java.lang.Integer" >
+        <include refid="selectEmpresasConTag" />
+    </select>
+
+	<insert id="insertEmpresa" parameterClass="com.ttporg.pe.bean.Empresa" >
+		INSERT INTO EMPRESA ( RAZ_SOC_EMP, RUC_EMP, PAIS_EMP, DEP_EMP, DIR_EMP, 
+		                      FONO_EMP, MAIL_EMP, USU_EMP, PASS_EMP, 
+		                      COD_CRED_EMP, FEC_EXP_EMP, EST_EMP )
+		                            
+		VALUES( #razonSocial#, #ruc#, #pais#, #departamento#, #direccion#, #telefono#, #email#, #usuario#, 
+		        #password#, #numTarjetaCredito#, #fechaExpiracionTarjeta#, #estado# )
+	</insert>
+    
+	<update id="updateEmpresa" parameterClass="com.ttporg.pe.bean.Empresa" >
+		     UPDATE EMPRESA e SET 
+								 e.RAZ_SOC_EMP  = #razonSocial#,
+								 e.RUC_EMP      = #ruc#,
+								 e.PAIS_EMP     = #pais#,
+								 e.DEP_EMP      = #departamento#,
+								 e.DIR_EMP      = #direccion#,
+								 e.FONO_EMP     = #telefono#,
+								 e.MAIL_EMP     = #email#,
+								 e.USU_EMP      = #usuario#,
+								 e.PASS_EMP     = #password#,
+								 e.COD_CRED_EMP = #numTarjetaCredito#,
+								 e.FEC_EXP_EMP  = #fechaExpiracionTarjeta#,
+								 e.EST_EMP      = #estado#
+		      WHERE e.ID_EMP = #id#
+	</update>
+   
+	<delete id="deleteEmpresa" parameterClass="java.util.Map">
+		DELETE FROM EMPRESA 
+		WHERE  ID_EMP = #codigoEliminacion# 
+	</delete>
+
+
+    <!-- ********************************************************* -->
+    <!-- *************** PROCESOS 'PERSONALIZADOS' *************** -->
+    <!-- ********************************************************* -->    
+	<select id="getLoginEmpresas" resultClass="empresa" parameterClass="com.ttporg.pe.bean.Empresa" >
+        <include refid="selectEmpresasConTag" />				
+		
+		<dynamic prepend="WHERE" >		
+			<isNotNull prepend="AND" property="usuario" >
+			   e.USU_EMP LIKE #usuario#
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="password" >
+			   e.PASS_EMP LIKE #password#
+			</isNotNull>
+		</dynamic>
+		ORDER BY e.RAZ_SOC_EMP 						
+    </select>    
+    
+ </sqlMap>
+
