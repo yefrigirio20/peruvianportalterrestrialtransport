@@ -1,68 +1,136 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+ 
 <html>
 <head>
 <title>...::: PORTAL TERRESTIAL TRANSPORT :::...</title>
 <link href="css.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 94px;
+        }
+    </style>
 </head>
 
+  <script language="javascript">
+	  function nuevo() {
+		  window.location = ("BienvenidaUsuarios.html");
+	  } 
+
+  </script>
+
+
 <body>
-<form id="form1" >
+<form id="frmIntranet" name="frmIntranet" action="" >
 
-     <br> </br>
-     <br> </br>
-   
-     <center>
-        <table>        
-            <tr>
-                <td>                     
-                    <table cellpadding="0" cellspacing="0" bgcolor="white" >                         
-                        <tr> 
-                           <td colspan="3" style="background-color:#E2D0AC; padding-bottom:6px; padding-top:8px; padding-left:12px;" align="center">
-							  <font color="#9E353F" size="5">INTRANET </font>        
-							</td>    
-                        </tr>
-                        
-                        <tr>
-                          <td colspan="3">
-                          </td>
-                        </tr>
-                         
-                        <tr>
-                            <td style="width: 69px">
-  					            <label for ="user" ><b>Usuario</b></label>
-  					        </td>
-  					        <td style="width: 171px">
-                                  <input type="text" maxlength ="20" value="" id = "txtusu" onkeypress="ejecutar(event,2);" style="width: 144px" />
-					        </td>
-					     </tr>
-					        <tr>
-					        <td style="width: 69px">
-					            <label for ="pass" ><b>Password</b></label>
-					        </td>
-					        <td style="width: 171px">
-					        <input type="password"   maxlength ="20"  value="" id = "txtpas" style="width: 144px" />
-					        </td>
-					        </tr>
-					        <tr>
-                            <td style="width: 69px"></td>
-                            <td style="width: 171px"></td>
-                            </tr>
-					        <tr>
-					        <td style="width: 79px; height: 44px;"></td>
-					        <td style="height: 44px">
-                                
-					        <input type ="button" value="Ingresar" ondblclick="Contacto.html" />
-					        </td>
-					    </tr>
-                    </table>
+<table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#8E826A" >
+  <tr>
+    <td height="57" colspan="5" valign="top">
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+      <tr>
+        <td width="600" class="menu" align="left" valign="top">
+		
+		<center>
+		<table width="650">
+		  <tr>
+				<td><a href="Index.html">Principal</a></td>
+				<td> | </td>
+				<td><a href="Servicios.html">Servicios</a></td>
+				<td> | </td>
+				<td><a href="Ventas.html">Ventas</a></td>
+				<td> | </td>
+				<td><a href="Registro.html">Registro</a></td>
+				<td>|</td>
+				<td><a href="Intranet.html">Intranet</a></td>
+				<td>|</td>
+				<td><a href="Contacto.html">Contacto</a></td>
+		  </tr>
+		</table>
+		</center>  
+ 
+        <td width="180" valign="middle">
+		
+			<table width="50%" border="0" align="center" cellpadding="0" cellspacing="4">
+			  <tr>
+				<td align="center">
+				   <a href="index.html"><img src="images/index_05.gif" alt="" width="13" height="12" border="0" /></a>
 				</td>
-            </tr>            
-          </table>
-
-        </center>
-    </form>
-
-  </body>
-
+				<td align="center">
+				   <a href="Contacto.html"><img src="images/index_09.gif" alt="" width="13" height="12" border="0" /></a>
+				</td>
+			  </tr>
+			</table>
+		
+		</td>
+        </tr>
+    </table></td>
+  </tr>
+  
+  <tr>
+    <td width="107" valign="top">&nbsp;</td> 
+	<td width="526" valign="top">
+	
+	<table border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="white" 
+            style="width: 248px" >
+      	  
+	  <tr>
+        <td colspan="3" style="background-color:#E2D0AC; padding-bottom:6px; padding-top:8px; padding-left:12px;" align =center >
+                                                       <font color="#9E353F"  size="5">INTRANET </font>        
+          </td>          
+	  </tr>
+	  
+      <tr>
+	     <td>&nbsp;</td>
+         <td class="style1">&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>	  
+	  <tr>	  
+	    <td width="13">&nbsp;</td>
+        <td class="style1">  <label for ="user" ><b>Usuario</b></label></td>
+        <td width="358"><input type="text" maxlength ="20" value="" id = "txtusu"  style="width: 144px" />
+</td>
+      </tr>
+	  <tr>
+	    <td width="13">&nbsp;</td>
+        <td class="style1"> <label for ="pass" ><b>Password</b></label></td>
+        <td><input type="password"   maxlength ="20"  value="" id = "txtpas" style="width: 144px" />
+</td>
+      </tr>
+      <tr>
+	     <td>&nbsp;</td>
+         <td class="style1">&nbsp;</td>
+         <td style="text-align:center ">&nbsp;</td>
+      </tr>
+      <tr>
+	     <td></td>
+         <td class="style1">&nbsp;</td>
+         <td style="text-align:center "><input type ="button" value="Ingresar" onclick="nuevo();" /></td>
+      </tr>
+      <tr>
+	     <td>&nbsp;</td>
+         <td class="style1">&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+    </table>
+	
+	</td>
+    <td width="147" valign="top">&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td height="70" colspan="5" valign="top">
+	<div class="footer">
+	<a href="index.html">Home</a> | Servicios | <a href="Servicios.html">Contact</a>
+	</div>
+	<div class="copyright">Copyright © 2003-2007 Companyname.com. All Rights Reserved.</div>
+	</td>
+  </tr>
+  
+</table>
+ 
+</body>
+</form>
+ 
 </html>
+
