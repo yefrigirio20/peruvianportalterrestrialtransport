@@ -1,5 +1,7 @@
 package com.ttporg.pe.bean;
 
+import java.io.Serializable;
+
 /**
  * @author Cesar Ricardo.
  * @clase: Informacion.java  
@@ -12,7 +14,9 @@ package com.ttporg.pe.bean;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  */
-public class Informacion{
+public class Informacion implements Serializable{
+ 
+	private static final long serialVersionUID = 7225330725902262349L;
 	
 	private Integer id;
 	private String  titulo;
