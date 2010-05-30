@@ -1,9 +1,3 @@
-/**
- * Creado el día 23/05/2010
- *
- * TODO Para cambiar la plantilla de comentarios generada ir a:
- * Window - Preferences - Java - Code Style - Code Templates
- */
 package com.ttporg.pe.bean;
 
 import java.io.Serializable;
