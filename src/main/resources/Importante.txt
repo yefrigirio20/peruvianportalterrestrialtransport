@@ -1,8 +1,26 @@
 
+    set JAXWS_HOME=C:\JAVA\JAX-WS\JAXWS2.1.2\jaxws-ri
+    %JAXWS_HOME%\bin\wsgen.bat -help
+        
+    A.- javac com/ttporg/pe/bean/Empresa.java
+    B.- javac com/ttporg/pe/dao/EmpresaDao.java
+    C.- javac com/ttporg/pe/dao/impl/EmpresaDaoImpl.java
+    D.- %JAXWS_HOME%/bin/wsgen -cp . com.ttporg.pe.dao.impl.EmpresaDaoImpl -s . -verbose -r ..\webapp\wsdl -wsdl
 
-  GENERACION DE WSDL DESDE UNA CLASE JAVA:
-  *************************************** 
 
+ 
+  GENERACION DE LIBERIAS JAX-WS:
+  -----------------------------
+  
+  Desde la Ruta de ubicacion del Jar de JAX ejecutar:
+  
+  java -jar JAXWS2.1.4-20080502.jar
+  
+  Se crearán las librerias y ejecutables.
+  
+  
+
+  CODIGOS PARA LA GENERACION:
   ------------------------------------------------------------------
   -cp:       Indica el classpath, es decir, donde tendrá que buscar los .class que hayamos generado.
 
@@ -17,30 +35,82 @@
   Y por último tenemos la clase que implementará el WS.
   ------------------------------------------------------------------
 
- wsgen -cp . -d . -verbose -r WebContent/wsdl -wsdl ejemplo.ParteMetereologico -Xendorsed
- 
-  wsgen -cp . -d . -verbose -r WebContent/wsdl -wsdl org.java.jaxws.bean.ParteMetereologico.java -Xendorsed
 
-  wsgen -cp . -d . -verbose -r ../../WebContent/wsdl -wsdl ParteMetereologico -Xendorsed
-  
-  
- %AXIS2_HOME%/bin/WSDL2Java -p org.java.service -uri WebContent/wsdl/UsuarioServiceImpl.wsdl -s
-  
- %JAXWS_HOME%/bin/wsgen -d src.org.java.jaxws.service -r WebContent/wsdl -wsdl ParteMetereologico -Xendorsed
- 
- %JAXWS_HOME%/bin/wsgen -d C:/XXX -r C:/XXX/wsdl -wsdl C:/ParteMetereologico.class -Xendorsed
- 
- %JAXWS_HOME%/bin/wsgen -d . -verbose -keep -wsdl -r WebContent/wsdl -s ejemplo.ParteMetereologico 
 
- %JAXWS_HOME%/bin/wsgen -d . -verbose -r ../../WebContent/wsdl -wsdl JavaBean
+  GENERAR WEBSERVICE DESDE UNA CLASE 'JAVA' 
+  ----------------------------------------  
+ 
+  I.-  UBICARSE DESDE LA RUTA 'SRC' DEL PROYECTO  EN DOS:
+      
+       Ejecutar en Orden:
+      
+       A.- javac org/java/ws/bean/Usuario.java
+       B.- javac org/java/ws/servidor/UsuarioDAO.java
+       C.- javac org/java/ws/servidor/UsuarioDAOImpl.java
+       D.- %JAXWS_HOME%/bin/wsgen -cp . org.java.ws.servidor.UsuarioDAOImpl -s . -verbose -r ..\WebContent\wsdl -wsdl 
+       E.- Ejecutar esta linea de Comandos o desplegar desde el Servidor: 
+           java org.java.ws.servidor.UsuarioDAOImpl
+       F.- Actualizar el nombre del 'WebService' en el WSDL, ya que luego de generarce no aparece.  
+    
+    
+    
+ 
+  GENERAR WEBSERVICE DESDE UN 'WSDL' 
+  ----------------------------------  
+ 
+  I.-  UBICARSE DESDE LA RUTA 'RAIZ' DEL PROYECTO  EN DOS:
+       - FORMA#1:   wsimport WebContent\WEB-INF\wsdl\music.wsdl -s src -verbose 
+       - FORMA#2:   %JAXWS_HOME%/bin/wsimport WebContent\WEB-INF\wsdl\music.wsdl -s src -verbose 
      
- wsgen -cp . JavaBean -wsdl -servicename {http://mynamespace}MyService
- 
- %JAXWS_HOME%/bin/wsgen JavaBean
- 
-  
-  C:\jaxws-ri\bin>wsgen -cp "project-home\jaxws-samples\bin"
- -d "project-home\jaxws-samples\bin" -keep -wsdl
- -r "project-home\jaxws-samples\src\test\echo\service\wsdl"
- -s "project-home\jaxws-samples\src" test.echo.service.EchoService
+  II.- UBICARSE DESDE LA RUTA 'SRC' DEL PROYECTO  EN DOS:
+       - FORMA#1:   wsimport ..\WebContent\WEB-INF\wsdl\music.wsdl -s . -verbose  
+       - FORMA#2:   %JAXWS_HOME%/bin/wsimport ..\WebContent\WEB-INF\wsdl\WEB-INF\music.wsdl -s . -verbose
 
+
+
+
+  GENERAR CLIENTE 'WEBSERVICE' 
+  ----------------------------  
+  
+  UBICARSE DESDE LA RUTA 'SRC' DEL PROYECTO EN DOS: 
+  
+  I.-  GENERACION DE CLASES:
+   
+       A.- DESDE 'URL':
+           %JAXWS_HOME%/bin/wsimport http://localhost:8090/servidorJaxWs/UsuarioDaoImpl?wsdl -s . -verbose
+        
+       B.- DESDE 'FICHERO':
+           %JAXWS_HOME%/bin/wsimport ..\WebContent\wsdl\UsuarioDAOImplService.wsdl -s . -verbose  
+
+
+  II.- COMPILACION & EJECUCION DE CLIENTE 'WS':
+            
+       A.- Ejecución desde Consola 'DOS':
+           - javac org/java/ws/test/ClienteWS.java 
+           - java  org/java/ws/test/ClienteWS PARAMETRO
+      
+       B.- Ejecución desde Clase JAVA:
+           - Ejecutar desde 'Java Aplication'.
+          
+          
+          
+          
+  LINK's IMPORTANTES 
+  ------------------
+  
+  http://willyxoft.wordpress.com/articulos/servicios_web_java_se
+
+  http://tundidor.com/blog/?p=63
+  http://tundidor.com/blog/?p=78
+  http://tundidor.com/blog/?p=335#more-335
+
+  http://www.javadb.com/create-a-simple-web-service
+  http://www.javadb.com/create-a-web-service-client-with-jax-ws
+
+  http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=WebServicesConEstado
+  
+  http://blogs.sun.com/artf/entry/using_jax_ws_2_1
+  
+  
+  
+  

@@ -7,9 +7,9 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
 
  <head>
-     <s:include value="../include/Titulo.jsp"  />  
-     <s:include value="../include/Estilos.jsp" /> 
-     <s:include value="../include/Scripts.jsp" /> 
+     <jsp:include page="../include/Titulo.jsp"  flush="false" />
+     <jsp:include page="../include/Estilos.jsp" flush="false" />
+     <jsp:include page="../include/Scripts.jsp" flush="false" /> 
  </head>
 
  <body bottomMargin="0" leftMargin="0" topMargin="0" rightMargin="0" marginwidth="0" marginheight="0" bgcolor="white">

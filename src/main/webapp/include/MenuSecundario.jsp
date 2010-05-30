@@ -34,7 +34,7 @@
      
     <td>
 	    <center>
-	     <a href="<%=request.getContextPath()%>/jsp/Login.jsp" >
+	     <a href="<%=request.getContextPath()%>/login.action" >
 		   <font size="2" face="Arial" class="textoMenuPrincipal" >Opcion #4</font>
 	     </a>
         </center>
@@ -50,7 +50,7 @@
   
       <td>   
 	     <center>               
-         <a href="ValidaUsuarioServlet" class="textoMenuPrincipal"  >
+         <a href="/login.action" class="textoMenuPrincipal"  >
             XXX
          </a> 
 		</center> 
