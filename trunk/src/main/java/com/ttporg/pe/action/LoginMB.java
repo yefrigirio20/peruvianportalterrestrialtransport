@@ -1,15 +1,15 @@
 package com.ttporg.pe.action;
 
+import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_ERROR_01;
+import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_ERROR_02;
+import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_OK;
+
 import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Empresa;
-import com.ttporg.pe.bean.Usuario;
 import com.ttporg.pe.servicio.EmpresaService;
-import com.ttporg.pe.servicio.UsuarioService;
 import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
-import com.ttporg.pe.servicio.impl.UsuarioServiceImpl;
 import com.ttporg.pe.servlet.LoggerBean;
 import com.ttporg.pe.util.ManejoEncriptacion;
-import static com.ttporg.pe.util.Constantes.*;
 
 /**
  * @author Cesar Ricardo.

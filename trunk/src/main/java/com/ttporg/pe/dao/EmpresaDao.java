@@ -46,5 +46,10 @@ public interface EmpresaDao{
 	 * loginEmpresa
 	 */
 	public Empresa loginEmpresa( Empresa empresa );
+	
+	/**
+	 * loginEmpresa2
+	 */
+	public Empresa loginEmpresa2( String usuario, String password );
  
 }

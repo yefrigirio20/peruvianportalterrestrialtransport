@@ -292,7 +292,7 @@ public class UsuarioDaoImpl extends SqlMapClientDaoSupport implements UsuarioDao
 		}
         
         return objUsuario;
-	}	
+	}		
 	
 	/**
 	 * getObjetoNegocio

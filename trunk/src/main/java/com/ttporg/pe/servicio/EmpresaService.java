@@ -46,5 +46,10 @@ public interface EmpresaService{
 	 * loginEmpresa
 	 */
 	public Empresa loginEmpresa( Empresa empresa );
+	
+	/**
+	 * loginEmpresa
+	 */
+	public Empresa loginEmpresa2( String usuario, String password );
  
 }

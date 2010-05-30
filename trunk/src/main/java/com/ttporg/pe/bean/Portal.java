@@ -9,7 +9,7 @@ package com.ttporg.pe.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+    
 /**
  * @author Cesar Ricardo.
  * @clase: Portal.java  
