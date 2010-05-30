@@ -6,7 +6,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 <sqlMap namespace="Empresa">
         
     <!-- ******************************************************** -->
-    <!-- ****************** SQL 'REUTILISABLE' ****************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
     <!-- ******************************************************** -->
      <sql id="selectEmpresasSinTag">   
           SELECT e.ID_EMP, e.RAZ_SOC_EMP, e.RUC_EMP, e.PAIS_EMP, 
