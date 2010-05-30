@@ -81,5 +81,16 @@ public class EmpresaServiceImpl extends ServiceFactory implements EmpresaService
 		Empresa objEmpresa = this.getEmpresaDAO().obtenerObjetoEmpresa_x_codigo( codigo );
 		return  objEmpresa;
 	}
+
+	/**
+	 * loginEmpresa2
+	 * @param  usuario
+	 * @param  password
+	 * @return Empresa
+	 */
+	public Empresa loginEmpresa2( String usuario, String password ){
+		Empresa objEmpresa = this.getEmpresaDAO().loginEmpresa2( usuario, password );
+		return  objEmpresa;
+	}
  
  }

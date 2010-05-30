@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.ttporg.pe.bean.Empresa;
+import com.ttporg.pe.bean.Usuario;
 import com.ttporg.pe.dao.EmpresaDao;
 
 /**
@@ -195,4 +196,28 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 		
 		return nombObjNegocio;
 	}
+
+	/**
+	 * loginEmpresa2
+	 */
+	public Empresa loginEmpresa2( String usuario, String password ){
+ 
+	        System.out.println( "DENTRO DE 'loginUsuario' " );
+	        
+	        Empresa objEmpresa = new Empresa(); 
+	        
+	        objEmpresa.setUsuario(  usuario  );
+	        objEmpresa.setPassword( password );
+	              
+	        try{ 
+	        	String nombReferMetodoMapeado = this.getObjetoNegocio( "getLoginEmpresas" );
+	        	
+	        	objEmpresa = (Empresa)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, objEmpresa );  
+	        } 
+	        catch( Exception e ){
+				   e.printStackTrace();
+			}
+	        
+	        return objEmpresa;
+		}
 }
