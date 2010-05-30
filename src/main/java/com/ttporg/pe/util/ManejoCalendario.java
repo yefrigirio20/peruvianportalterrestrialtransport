@@ -6,17 +6,16 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
-import org.apache.commons.lang.StringUtils;
  
 /**
  * @author: Ricardo Guerra.
  * @clase:  ManejoCalendario.java  
- * @descripción: Clase POJO para el manejo de conversiones y utilitarios de fechas.
+ * @descripcion: Clase POJO para el manejo de conversiones y utilitarios de fechas.
  * @author_web:  http://frameworksjava2008.blogspot.com - http://viviendoconjavaynomoririntentandolo.blogspot.com 
  * @author_email: cesarricardo_guerra19@hotmail.com.
- * @fecha_de_creación: 05-08-2009.
- * @fecha_de_ultima_actualización: 20-03-2009.
- * @versión: 3.0
+ * @fecha_de_creacion: 05-08-2009.
+ * @fecha_de_ultima_actualizacion: 20-03-2009.
+ * @version: 3.0
  */
 public class ManejoCalendario{
 	
@@ -25,7 +24,7 @@ public class ManejoCalendario{
 	private static int     diaNum;
 	private static int     mesNum;
 	private static int     anoNum;
-	private static int	   diaSemanaNum;
+	private static int     diaSemanaNum;
 	
 	private static String  diaTxt       =  ""; 
 	private static String  mesTxt       =  "";
@@ -53,19 +52,41 @@ public class ManejoCalendario{
 		
 		return fechaDateTime;
 	}
+        
+        /**
+	 * getHorasEntreDosFechas
+	 */
+	public int getHorasEntreDosFechas( Calendar fechaInicial, Calendar fechaFinal ){
+            
+            Integer    redondeoMesFecha = 1;
+            List<Date> listaZonaHoraria = new ArrayList<Date>();
+		
+            int contadorHoras = 0;
+            
+            for( ; fechaInicial.before( fechaFinal ); fechaInicial.add( Calendar.HOUR_OF_DAY, redondeoMesFecha ) ){  //Calendar.DAY_OF_WEEK para Obtener los doas. 
+                 //System.out.println( "Obteniendo Dias: " + fechaInicial.getTime() );
+                 listaZonaHoraria.add( fechaInicial.getTime() );
+                 
+                 contadorHoras++;
+            }
+            
+            return contadorHoras;
+	}
 	
 	/**
 	 * getDiasEntreDosFechas
 	 */
 	public List<Date> getDiasEntreDosFechas( Calendar fechaInicial, Calendar fechaFinal ){
-		Integer redondeoMesFecha = 1;
-		List<Date> listaZonaHoraria = new ArrayList<Date>();
+            
+            Integer    redondeoMesFecha = 1;
+            List<Date> listaZonaHoraria = new ArrayList<Date>();
 		
-        for( ; fechaInicial.before( fechaFinal ) ; fechaInicial.add( Calendar.DAY_OF_WEEK, redondeoMesFecha ) ){  //Calendar.DAY_OF_WEEK para Obtener los dìas. 
-       	     //System.out.println( "Obteniendo Dias: " + fechaInicial.getTime() );
-       	     listaZonaHoraria.add( fechaInicial.getTime() );
-		}
-        return listaZonaHoraria;
+            for( ; fechaInicial.before( fechaFinal ); fechaInicial.add( Calendar.DAY_OF_WEEK, redondeoMesFecha ) ){  //Calendar.DAY_OF_WEEK para Obtener los doas. 
+                 //System.out.println( "Obteniendo Dias: " + fechaInicial.getTime() );
+                 listaZonaHoraria.add( fechaInicial.getTime() );
+            }
+
+            return listaZonaHoraria;
 	}
 	
 	/**
@@ -75,7 +96,7 @@ public class ManejoCalendario{
 		Integer redondeoMesFecha = 1;
 		List<Date> listaZonaHoraria = new ArrayList<Date>();
 		
-        for( ; fechaInicial.before( fechaFinal ) ; fechaInicial.add( Calendar.MONTH, redondeoMesFecha ) ){  //Calendar.DAY_OF_WEEK para Obtener los dìas. 
+        for( ; fechaInicial.before( fechaFinal ) ; fechaInicial.add( Calendar.MONTH, redondeoMesFecha ) ){  //Calendar.DAY_OF_WEEK para Obtener los doas. 
        	     //System.out.println( "Obteniendo Meses: " + fechaInicial.getTime() );
        	     listaZonaHoraria.add( fechaInicial.getTime() );
 		}
@@ -110,7 +131,7 @@ public class ManejoCalendario{
 	 * getConvierteHoraStringDate
 	 */
 	public Date getConvierteHoraStringDate( String hora, String simbolo ){
-        String[] horaTransformar = StringUtils.split( hora.trim(), simbolo );                
+        String[] horaTransformar = hora.split( simbolo );                
         horasTxt   = horaTransformar[0];
         minutosTxt = horaTransformar[1];  
         
@@ -230,7 +251,7 @@ public class ManejoCalendario{
 		boolean rpta = false;
 		
 		try{
-			String[] cadenaSeparada = StringUtils.split( cadena, separador );    
+			String[] cadenaSeparada = cadena.split( separador );    
 			
 			diaNum  = Integer.parseInt(cadenaSeparada[0]);  
 			mesNum  = Integer.parseInt(cadenaSeparada[1]);   
@@ -260,7 +281,7 @@ public class ManejoCalendario{
 				rpta = false;
 			}
 			
-			//Valida año...
+			//Valida aoo...
 		    if( anoNum < 1900 ){
 				rpta = false;
 			}
@@ -860,7 +881,7 @@ public class ManejoCalendario{
 				textoHora = "" + (int)(horas - 12);
 			}
 		}
-		//Establece la parte del día.
+		//Establece la parte del doa.
 		if( horas < 12 ){
 			parteDelDia = " a.m.";
 		}
@@ -919,7 +940,7 @@ public class ManejoCalendario{
 				textoHora = "" + (int)(horas - 12);
 			}
 		}
-		//Establece la parte del día.
+		//Establece la parte del doa.
 		if(horas < 12){
 			parteDelDia = " a.m.";
 		}
@@ -1180,10 +1201,10 @@ public class ManejoCalendario{
 	}
 	
 	/**
-	*	getNumeroDiasEntreDosFechas  Obtiene el número de días entre 2 fechas. El valor 0 es retornado si
+	*	getNumeroDiasEntreDosFechas  Obtiene el nomero de doas entre 2 fechas. El valor 0 es retornado si
 	*	las fechas son las mismas.
 	*	El orden de las fechas no importa, el resultado es un valor absoluto,
-	*	es decir, el número de días >=0.
+	*	es decir, el nomero de doas >=0.
 	*/
 	public long getNumeroDiasEntreDosFechas( Date fechaInicio, Date fechaFin ){
 		
@@ -1220,12 +1241,12 @@ public class ManejoCalendario{
 	}
 	
 	/**
-	*	getNumeroMesesEntreDosFechas Obtiene el número de meses entre 2 fechas. El valor 0 es retornado si
+	*	getNumeroMesesEntreDosFechas Obtiene el nomero de meses entre 2 fechas. El valor 0 es retornado si
 	*	las fechas son las mismas.
 	*	El orden de las fechas no importa, el resultado es un valor absoluto,
-	*	es decir, el número de meses >=0.
+	*	es decir, el nomero de meses >=0.
 	*	
-	*	Se han considerado meses de 30 días.
+	*	Se han considerado meses de 30 doas.
 	*/
 	public long getNumeroMesesEntreDosFechas( Date fechaInicio, Date fechaFin ){
 		long Fecha = (getNumeroDiasEntreDosFechas(fechaInicio, fechaFin)/30);
@@ -1234,10 +1255,10 @@ public class ManejoCalendario{
 	}
 	
 	/**
-	*	getNumeroAnosEntreDosFechas Obtiene el número de años entre 2 fechas. El valor 0 es retornado si
+	*	getNumeroAnosEntreDosFechas Obtiene el nomero de aoos entre 2 fechas. El valor 0 es retornado si
 	*	las fechas son las mismas.
 	*	El orden de las fechas no importa, el resultado es un valor absoluto,
-	*	es decir, el número de años >=0.
+	*	es decir, el nomero de aoos >=0.
 	*/
 	public long getNumeroAnosEntreDosFechas( Date fechaInicio, Date fechaFin ){
 		long fecha = (getNumeroDiasEntreDosFechas(fechaInicio, fechaFin)/365);
@@ -1246,8 +1267,8 @@ public class ManejoCalendario{
 	}
 	
 	/**
-	*	getFechaEnElTiempo  Obtiene la fecha aumentada o disminuida en n días según la fecha parámetro.
-	*	Acepta n días negativos
+	*	getFechaEnElTiempo  Obtiene la fecha aumentada o disminuida en n doas segon la fecha parometro.
+	*	Acepta n doas negativos
 	**/	
 	public Date getFechaEnElTiempo( Date fechaActual, int n, String unidadTiempo ){
 		
@@ -1260,7 +1281,7 @@ public class ManejoCalendario{
 		else if( unidadTiempo.equals("MESES") == true ){
 			calendar.add(Calendar.MONTH,n);
 		}
-		else if( unidadTiempo.equals("AÑOS") == true ){
+		else if( unidadTiempo.equals("AoOS") == true ){
 			calendar.add(Calendar.YEAR,n);
 		}
 		
