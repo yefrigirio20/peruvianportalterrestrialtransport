@@ -2,7 +2,7 @@ package com.ttporg.pe.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-
+ 
 /**
  * @author Cesar Ricardo.
  * @clase: Cliente.java  
@@ -17,199 +17,126 @@ import java.util.Date;
  */
 public class Cliente implements Serializable{
  
-	private static final long serialVersionUID = -4020098539955009257L;
+	private static final long serialVersionUID = -4559388532885775967L; 
 	
 	private Integer	id;
-	private String	nombres;
-	private String	apellidos;
-	private Date	cumpleanos;
-	private String	direccion;
-	private String	foto;
-	private String	email;
-	private String	usuario;
-	private String	password;
-	private String	tipo;
-	private String	estado;
-	
-	//Constructores ...
-	public Cliente(){		
-	}	
-	
-	public Cliente( Integer id, String nombres, String apellidos, Date cumpleanos, String direccion, 
-			        String foto, String email, String usuario, String password, String tipo, String estado ){
-		super();
-		this.id         = id;
-		this.nombres    = nombres;
-		this.apellidos  = apellidos;
-		this.cumpleanos = cumpleanos;
-		this.direccion  = direccion;
-		this.foto       = foto;
-		this.email      = email;
-		this.usuario    = usuario;
-		this.password   = password;
-		this.tipo       = tipo;
-		this.estado     = estado;
-	}
+    private String	nombres;
+    private String	apellidos;
+    private Date	cumpleanos;
+    private String	direccion;
+    private String	foto;
+    private String	email;
+    private String	usuario;
+    private String	password;
+    private String	tipo;
+    private String	estado;
 
-	/**
-	 * @return Retorna el Id.
-	 */
-	public Integer getId(){
-		return id;
-	}
+    //Constructores ...
+    public Cliente(){		
+    }	
 
-	/**
-	 * @return Retorna el nombres.
-	 */
-	public String getNombres(){
-		return nombres;
-	}
+    public Cliente( Integer id, String nombres, String apellidos, Date cumpleanos, String direccion, 
+                            String foto, String email, String usuario, String password, String tipo, String estado ){
+            super();
+            this.id         = id;
+            this.nombres    = nombres;
+            this.apellidos  = apellidos;
+            this.cumpleanos = cumpleanos;
+            this.direccion  = direccion;
+            this.foto       = foto;
+            this.email      = email;
+            this.usuario    = usuario;
+            this.password   = password;
+            this.tipo       = tipo;
+            this.estado     = estado;
+    }
 
-	/**
-	 * @param nombres El nombres a ingresar.
-	 */
-	public void setNombres( String nombres ){
-		this.nombres = nombres;
-	}
+    public String getApellidos() {
+        return apellidos;
+    }
 
-	/**
-	 * @return Retorna el apellidos.
-	 */
-	public String getApellidos(){
-		return apellidos;
-	}
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
-	/**
-	 * @param apellidos El apellidos a ingresar.
-	 */
-	public void setApellidos( String apellidos ){
-		this.apellidos = apellidos;
-	}
+    public Date getCumpleanos() {
+        return cumpleanos;
+    }
 
-	/**
-	 * @return Retorna el cumpleanos.
-	 */
-	public Date getCumpleanos(){
-		return cumpleanos;
-	}
+    public void setCumpleanos(Date cumpleanos) {
+        this.cumpleanos = cumpleanos;
+    }
 
-	/**
-	 * @param cumpleanos El cumpleanos a ingresar.
-	 */
-	public void setCumpleanos( Date cumpleanos ){
-		this.cumpleanos = cumpleanos;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	/**
-	 * @return Retorna el direccion.
-	 */
-	public String getDireccion(){
-		return direccion;
-	}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-	/**
-	 * @param direccion El direccion a ingresar.
-	 */
-	public void setDireccion( String direccion ){
-		this.direccion = direccion;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	/**
-	 * @return Retorna el foto.
-	 */
-	public String getFoto(){
-		return foto;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	/**
-	 * @param foto El foto a ingresar.
-	 */
-	public void setFoto( String foto ){
-		this.foto = foto;
-	}
+    public String getEstado() {
+        return estado;
+    }
 
-	/**
-	 * @return Retorna el email.
-	 */
-	public String getEmail(){
-		return email;
-	}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
-	/**
-	 * @param email El email a ingresar.
-	 */
-	public void setEmail( String email ){
-		this.email = email;
-	}
+    public String getFoto() {
+        return foto;
+    }
 
-	/**
-	 * @return Retorna el usuario.
-	 */
-	public String getUsuario(){
-		return usuario;
-	}
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
-	/**
-	 * @param usuario El usuario a ingresar.
-	 */
-	public void setUsuario( String usuario ){
-		this.usuario = usuario;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	/**
-	 * @return Retorna el password.
-	 */
-	public String getPassword(){
-		return password;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param password El password a ingresar.
-	 */
-	public void setPassword( String password ){
-		this.password = password;
-	}
+    public String getNombres() {
+        return nombres;
+    }
 
-	/**
-	 * @return Retorna el tipo.
-	 */
-	public String getTipo(){
-		return tipo;
-	}
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
 
-	/**
-	 * @param tipo El tipo a ingresar.
-	 */
-	public void setTipo( String tipo ){
-		this.tipo = tipo;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	/**
-	 * @return Retorna el estado.
-	 */
-	public String getEstado(){
-		return estado;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	/**
-	 * @param estado El estado a ingresar.
-	 */
-	public void setEstado( String estado ){
-		this.estado = estado;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	/**
-	 * @return Retorna el serialVersionUID.
-	 */
-	public static long getSerialVersionUID(){
-		return serialVersionUID;
-	}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-	/**
-	 * @param id El id a ingresar.
-	 */
-	public void setId( Integer id ){
-		this.id = id;
-	}
-	
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }    
+    
 }
