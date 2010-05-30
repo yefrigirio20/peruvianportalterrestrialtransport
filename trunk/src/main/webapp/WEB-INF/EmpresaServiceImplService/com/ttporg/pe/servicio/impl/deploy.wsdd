@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EmpresaServiceImplService WSDL service -->
+
+  <service name="EmpresaServiceImpl" provider="java:RPC" style="document" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://impl.servicio.pe.ttporg.com"/>
+      <parameter name="wsdlServiceElement" value="EmpresaServiceImplService"/>
+      <parameter name="schemaQualified" value="http://xml.apache.org/xml-soap,http://impl.servicio.pe.ttporg.com,http://bean.pe.ttporg.com"/>
+      <parameter name="wsdlServicePort" value="EmpresaServiceImpl"/>
+      <parameter name="className" value="com.ttporg.pe.servicio.impl.EmpresaServiceImpl"/>
+      <parameter name="wsdlPortType" value="EmpresaServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:retNS="http://impl.servicio.pe.ttporg.com" xmlns:rtns="http://bean.pe.ttporg.com" name="loginEmpresa2" qname="loginEmpresa2" returnQName="retNS:loginEmpresa2Return" returnType="rtns:Empresa" soapAction="">
+        <parameter xmlns:pns="http://impl.servicio.pe.ttporg.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:usuario" type="tns:string"/>
+        <parameter xmlns:pns="http://impl.servicio.pe.ttporg.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="loginEmpresa2"/>
+
+      <typeMapping xmlns:ns="http://bean.pe.ttporg.com" qname="ns:Informacion" type="java:com.ttporg.pe.bean.Informacion" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://impl.servicio.pe.ttporg.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://bean.pe.ttporg.com" qname="ns:Portal" type="java:com.ttporg.pe.bean.Portal" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://bean.pe.ttporg.com" qname="ns:Empresa" type="java:com.ttporg.pe.bean.Empresa" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
