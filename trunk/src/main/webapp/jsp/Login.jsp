@@ -8,10 +8,9 @@
 <html>
 
  <head>
-     <s:include value="../include/Titulo.jsp"  />  
-     <s:include value="../include/Estilos.jsp" /> 
-     <s:include value="../include/Scripts.jsp" /> 
-     
+     <jsp:include page="../include/Titulo.jsp"  flush="false" />
+     <jsp:include page="../include/Estilos.jsp" flush="false" />
+     <jsp:include page="../include/Scripts.jsp" flush="false" />      
  </head>
 
 <body bottomMargin=0 leftMargin=0 topMargin=0 rightMargin=0 marginwidth="0" marginheight="0" bgcolor="white" onLoad="detectarControlesEnabledDisabled()" > 
@@ -39,7 +38,7 @@
 			     <center> <label> <strong> <font color="red" size="5" > INTRANET </font> </strong> </label> </center>
 			 <br></br>
 		 
-			 <s:form id="frnValidacion" name="frnValidacion" action="/LoginMB" >	
+			 <s:form id="frnValidacion" name="frnValidacion" action="/login.action" >	
 			     
 			    <s:actionerror cssErrorStyle="mensajeTextoError" />  
 			    <s:fielderror  cssErrorStyle="mensajeTextoError" />  
