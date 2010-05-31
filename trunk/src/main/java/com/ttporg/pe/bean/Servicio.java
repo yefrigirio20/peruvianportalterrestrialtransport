@@ -2,6 +2,7 @@ package com.ttporg.pe.bean;
 
 import java.io.Serializable; 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Cesar Ricardo.
@@ -24,8 +25,8 @@ public class Servicio implements Serializable{
     private String      descripcion;
 
     //Objetos Relacionados.
-    private ArrayList<Salida>   listaSalidas; 
-    private ArrayList<Vehiculo> listaVehiculos;
+    private List<Salida>   listaSalidas; 
+    private List<Vehiculo> listaVehiculos;
         
     //Constructores ...
     public Servicio(){
@@ -49,19 +50,19 @@ public class Servicio implements Serializable{
         this.id = id;
     }
 
-    public ArrayList<Salida> getListaSalidas() {
+    public List<Salida> getListaSalidas() {
         return listaSalidas;
     }
 
-    public void setListaSalidas(ArrayList<Salida> listaSalidas) {
+    public void setListaSalidas( List<Salida> listaSalidas) {
         this.listaSalidas = listaSalidas;
     }
 
-    public ArrayList<Vehiculo> getListaVehiculos() {
+    public List<Vehiculo> getListaVehiculos() {
         return listaVehiculos;
     }
 
-    public void setListaVehiculos(ArrayList<Vehiculo> listaVehiculos) {
+    public void setListaVehiculos( List<Vehiculo> listaVehiculos) {
         this.listaVehiculos = listaVehiculos;
     }
 
