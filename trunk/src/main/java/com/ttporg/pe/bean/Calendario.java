@@ -1,6 +1,6 @@
 package com.ttporg.pe.bean;
 
-import com.ttporg.pe.util.ManejoCalendario;
+import com.ttporg.pe.util.UtilCalendario;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,7 +32,7 @@ public class Calendario implements Serializable{
 
     public int getDuracion(){
         
-        ManejoCalendario manejador = new ManejoCalendario();
+        UtilCalendario manejador = new UtilCalendario();
         
         Calendar fecInicio = Calendar.getInstance();
         Calendar fecFin    = Calendar.getInstance();

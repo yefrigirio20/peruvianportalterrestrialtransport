@@ -9,7 +9,7 @@ import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.servicio.EmpresaService;
 import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
 import com.ttporg.pe.servlet.LoggerBean;
-import com.ttporg.pe.util.ManejoEncriptacion;
+import com.ttporg.pe.util.UtilEncriptacion;
 
 /**
  * @author Cesar Ricardo.
@@ -28,7 +28,7 @@ public class LoginMB extends BaseBean{
 	private static final long serialVersionUID = -9082650078047288321L;
 		
 	//Utilitarios ...
-	private ManejoEncriptacion manejoEncriptacion = null; 
+	private UtilEncriptacion manejoEncriptacion = null; 
 	
 	//Service.
 	private EmpresaService servicio = null;
@@ -43,7 +43,7 @@ public class LoginMB extends BaseBean{
 	{
 	 this.servicio           = new EmpresaServiceImpl();	
 	 this.loggerBean         = new LoggerBean();
-	 this.manejoEncriptacion = new ManejoEncriptacion(); 
+	 this.manejoEncriptacion = new UtilEncriptacion(); 
 	}
 	
 	/**
