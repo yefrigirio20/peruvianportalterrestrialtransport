@@ -502,6 +502,20 @@
 		</dependency>
      	<!-- ***** ADICIONALES (FIN) ****** -->
      	
+     	<!-- ***** DISPLAY-TAG(INICIO) ****** -->
+	    <dependency>
+	       <groupId>displaytag</groupId>
+	       <artifactId>displaytag</artifactId>
+	       <version>1.1.1</version>
+	    </dependency>     	
+	 
+	    <dependency>
+	       <groupId>displaytag</groupId>
+	       <artifactId>displaytag-export-poi</artifactId>
+	       <version>1.1.1</version>
+	    </dependency> 
+     	<!-- ****** DISPLAY-TAG(FIN) ******* -->
+     	
   </dependencies>
 
   <!-- ************************************* -->
