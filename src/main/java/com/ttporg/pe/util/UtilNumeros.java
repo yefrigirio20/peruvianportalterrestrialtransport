@@ -6,7 +6,7 @@ import java.text.DecimalFormatSymbols;
 
 /**
  * @author: Ricardo Guerra.
- * @clase:  ManejoNumeros.java  
+ * @clase:  UtilNumeros.java  
  * @descripciun: Clase POJO utilitario para el manejo de numeros.
  * @author_web:  http://frameworksjava2008.blogspot.com - http://viviendoconjavaynomoririntentandolo.blogspot.com 
  * @author_email: cesarricardo_guerra19@hotmail.com.
@@ -14,10 +14,10 @@ import java.text.DecimalFormatSymbols;
  * @fecha_de_ultima_actualizaciun: 20-03-2009.
  * @versiun: 3.0
  */
-public class ManejoNumeros{
+public class UtilNumeros{
 	
 	//Constructor ...
-	public ManejoNumeros(){		
+	public UtilNumeros(){		
 	}
 	
 	/** GENERA UN NUMERO 'ALEATORIO' ENTRE [ num1, num2 ], TANTO PARA DATOS DE TIPO:  'int, double y long' */
@@ -362,12 +362,12 @@ public class ManejoNumeros{
 		String  parte_decimal  =  "";
 		
 		double valor_decimal = n;
-		valor_decimal = ManejoNumeros.redondeaDouble(valor_decimal,2);
+		valor_decimal = UtilNumeros.redondeaDouble(valor_decimal,2);
 		parte_decimal = valor_decimal + "";
 		parte_decimal = parte_decimal.substring(parte_decimal.indexOf('.')+1, parte_decimal.length());
 		
 		
-		if(ManejoNumeros.leeInteger(parte_decimal) <10){
+		if(UtilNumeros.leeInteger(parte_decimal) <10){
 			parte_decimal = parte_decimal + "0";
 		}
 		

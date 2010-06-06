@@ -26,7 +26,7 @@ import javax.swing.ImageIcon;
 
 /**
  * @author: Ricardo Guerra.
- * @clase:  ManejoConvertidores.java  
+ * @clase:  UtilConvertidores.java  
  * @descripción: Clase POJO para el manejo de conversiones de distintos objetos JAVA.
  * @author_web:  http://frameworksjava2008.blogspot.com - http://viviendoconjavaynomoririntentandolo.blogspot.com 
  * @author_email: cesarricardo_guerra19@hotmail.com.
@@ -34,7 +34,7 @@ import javax.swing.ImageIcon;
  * @fecha_de_ultima_actualización: 20-03-2009.
  * @versión: 3.0
  */
-public class ManejoConvertidores implements Serializable{
+public class UtilConvertidores implements Serializable{
 
 	private static final long serialVersionUID = -2454627055596665003L;
 
