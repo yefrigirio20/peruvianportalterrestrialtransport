@@ -3,7 +3,7 @@ package com.ttporg.pe.test;
 import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.servicio.EmpresaService;
 import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
-import com.ttporg.pe.util.ManejoEncriptacion;
+import com.ttporg.pe.util.UtilEncriptacion;
  
 /**
  * @author Cesar Ricardo.
@@ -19,7 +19,7 @@ import com.ttporg.pe.util.ManejoEncriptacion;
  */
 public class Test_Encriptacion{
 
-	static ManejoEncriptacion xxx = new ManejoEncriptacion(); 
+	static UtilEncriptacion xxx = new UtilEncriptacion(); 
 	
 	/**
 	 * @param  argumentos
