@@ -42,8 +42,8 @@
      
       <td> 
 	    <center>                 
-         <a href="Servlet_Header_Request" class="textoMenuPrincipal"  >
-            Servlet_Header_Request
+         <a href="<%=request.getContextPath()%>/ValidaServlet" class="textoMenuPrincipal"  >
+            ValidaServlet
          </a> 
 		</center> 
       </td>    
