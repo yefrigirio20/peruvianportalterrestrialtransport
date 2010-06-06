@@ -20,7 +20,7 @@ import cryptix.util.core.Hex;
 
 /**
  * @author: Ricardo Guerra.
- * @clase:  ManejoEncriptacion.java  
+ * @clase:  UtilEncriptacion.java  
  * @descripción: Esta clase la creo con la finalidad del manejo
  *               de encriptacion y desencriptacion de datos, utilizando los algoritmos
  *               'SHA1, MD5, BASE64, CIPHER, SHA1PRNG, SUNJCE, BLOWFISH'.
@@ -43,7 +43,7 @@ import cryptix.util.core.Hex;
  * @fecha_de_ultima_actualización: 20-03-2009.
  * @versión: 2.0
  */
-public class ManejoEncriptacion implements Serializable{
+public class UtilEncriptacion implements Serializable{
 
 	  private static final long serialVersionUID = 3365758641697960097L;
 	
@@ -58,7 +58,7 @@ public class ManejoEncriptacion implements Serializable{
       private byte[]            arrayBytesSHA1;
       private byte[]            arrayBytesMD5;
 	  
-	  private ManejoConvertidores manejador;
+	  private UtilConvertidores manejador;
 	  
 	  private String 			caracterDecodificacion;
       private Cipher 			encriptacionCipher; 
@@ -69,9 +69,9 @@ public class ManejoEncriptacion implements Serializable{
       /** 
        * Constructor.
        */
-	  public ManejoEncriptacion(){
+	  public UtilEncriptacion(){
 	    	this.algoritmoEncriptacion  = "";
-			this.manejador              = new ManejoConvertidores();
+			this.manejador              = new UtilConvertidores();
 	    		    	
 	    	this.caracterDecodificacion = "UTF-8";
 	    	this.base64Encoder          = new BASE64Encoder();
@@ -109,7 +109,7 @@ public class ManejoEncriptacion implements Serializable{
 				String  datoOriginal = "Cesar Ricardo Guerra Arnaiz ==> 'JAVAMAN'";		
 				System.out.println( "Dato Original a Encriptar: " + datoOriginal );
 				
-				ManejoEncriptacion manejoEncriptacion = new ManejoEncriptacion();
+				UtilEncriptacion manejoEncriptacion = new UtilEncriptacion();
 				
 				/**-------------------------------------**/
 				/**--------- ENCRIPTANDO DATOS ---------**/	

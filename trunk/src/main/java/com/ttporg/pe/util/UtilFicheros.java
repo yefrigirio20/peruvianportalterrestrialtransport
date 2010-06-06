@@ -31,7 +31,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * @author: Ricardo Guerra.
- * @clase:  ManejoFicheros.java
+ * @clase:  UtilFicheros.java
  * @descripci?n: Clase POJO utilitario para el manejo de ficheros, tanto para la manipulacion de sus
  *               registros internos, como para el mantenimiento, compresion, etc de los ficheros y
  *               Directorios en si.
@@ -48,7 +48,7 @@ import org.apache.commons.lang.StringUtils;
  * @fecha_de_ultima_actualizaci?n: 26-09-2009.
  * @versi?n: 3.0
  */
-public class ManejoFicheros{
+public class UtilFicheros{
 
 	private static String   rutaDirectorio    = "C:\\Ficheros\\";
 	private static String   ficheroOrigen     = (rutaDirectorio + "PersonasLog.txt");
@@ -65,21 +65,21 @@ public class ManejoFicheros{
 	private static String   separador         = ",";
 	private static String[] cadenasBuscar     = { "Guer", "av" };
 
-	private static String   rutaDirectorioBackup = "C:\\BackupDestino\\";
-	private static String   ficheroBackup        = "RicardoGuerra.jpg";
+	private static String   rutaDirectorioBackup  = "C:\\BackupDestino\\";
+	private static String   ficheroBackup         = "RicardoGuerra.jpg";
 
 	private static String[]	archivoZipear	      = new String[]{ "C:\\ORIGEN\\VIDEO1.mpg", "C:\\ORIGEN\\VIDEO2.mpg", "C:\\ORIGEN\\VIDEO3.mpg" };
 	private static String	rutaArchivoComprimido = "C:\\DESTINO\\Comprimido.zip";
 	private static String	rutaSalida		      = "C:\\DESTINO";
-	private static int	TAMANO_BUFFER	      = 8192;
+	private static int	    TAMANO_BUFFER	      = 8192;
 
 	//Constructor.
-	public ManejoFicheros(){
+	public UtilFicheros(){
 	}
 
 	public static void main( String[] args ) throws IOException{
 
-		ManejoFicheros manejoFicheros = new ManejoFicheros();
+		UtilFicheros manejoFicheros = new UtilFicheros();
 
 		boolean creaReg     = false;
 		boolean leeReg      = false;

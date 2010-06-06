@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  * @author: Ricardo Guerra.
- * @clase:  ManejoContentType.java  
+ * @clase:  UtilContentType.java  
  * @descripción: Clase POJO utilitario para la validacion de formatos de ficheros Content Type.
  * @author_web:  http://frameworksjava2008.blogspot.com - http://viviendoconjavaynomoririntentandolo.blogspot.com 
  * @author_email: cesarricardo_guerra19@hotmail.com.
@@ -12,13 +12,13 @@ import java.io.File;
  * @fecha_de_ultima_actualización: 20-03-2009.
  * @versión: 2.0
  */
-public final class ManejoContentType{
+public final class UtilContentType{
 
   /** 
    * Ejecuta y prueba el manejo de la Clase.
    */
    public static void main( String[] args ){	    
-		ManejoContentType contentType = new ManejoContentType(); 
+		UtilContentType contentType = new UtilContentType(); 
 		String  resultado =  (String)contentType.getContenTypeByString( "MiArchivo.ppt" );
 	    System.out.println( "CONTENT TYPE: " + resultado );
 	}
@@ -26,7 +26,7 @@ public final class ManejoContentType{
   /** 
    * Constructor.
    */
-   public ManejoContentType(){
+   public UtilContentType(){
    }
 	
     /** Tipos de 'MIME TYPES' **/

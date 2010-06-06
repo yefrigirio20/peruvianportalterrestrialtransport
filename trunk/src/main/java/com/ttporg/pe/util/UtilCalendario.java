@@ -9,7 +9,7 @@ import java.util.TimeZone;
  
 /**
  * @author: Ricardo Guerra.
- * @clase:  ManejoCalendario.java  
+ * @clase:  UtilCalendario.java  
  * @descripcion: Clase POJO para el manejo de conversiones y utilitarios de fechas.
  * @author_web:  http://frameworksjava2008.blogspot.com - http://viviendoconjavaynomoririntentandolo.blogspot.com 
  * @author_email: cesarricardo_guerra19@hotmail.com.
@@ -17,7 +17,7 @@ import java.util.TimeZone;
  * @fecha_de_ultima_actualizacion: 20-03-2009.
  * @version: 3.0
  */
-public class ManejoCalendario{
+public class UtilCalendario{
 	
 	private static String  cadenaFecha  =  "";
 	
