@@ -1,7 +1,9 @@
 package com.ttporg.pe.servlet;
 
 import java.io.*;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  */
-public class ValidaUsuarioServlet extends HttpServlet implements Servlet{
+public class ValidaServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = 5755376929184172512L;
 
 	private static final String FORMATO_CONTEXTO = "text/html";
-
+	private static final String PAGINA_REENVIO   = "/jsp/Opcion_03.jsp";
+	
 	/**
 	 * service
 	 * @param request
@@ -33,12 +36,12 @@ public class ValidaUsuarioServlet extends HttpServlet implements Servlet{
 	    System.out.println( "********* DENTRO DE service **********" ); 
 	  
 		response.setContentType( FORMATO_CONTEXTO );
-
+		
 		PrintWriter escritor = null; 
 
 		try{
 			escritor = response.getWriter();
-			
+ 				
 			escritor.println( "<HTML>"    );
 			escritor.println( "<HEAD><TITLE>...::: OPCION: ' ' :::...</TITLE></HEAD>" );
 			escritor.println( "<BODY bgColor='black'>" );
@@ -51,6 +54,17 @@ public class ValidaUsuarioServlet extends HttpServlet implements Servlet{
 			escritor.println( "<BR></BR>" );
 			escritor.println( "</BODY>"   );
 			escritor.println( "</HTML>"   );
+			
+		    ServletContext    contexto    = null;
+		    RequestDispatcher despachador = null; 
+	 
+			contexto    = getServletContext();  
+			despachador = contexto.getRequestDispatcher( PAGINA_REENVIO );  
+			
+			//Atributos seteados y que seran enviados al otro servlet de parametro.
+			//request.setAttribute( "objTipo", tipo );
+			
+			despachador.forward( request, response ); 
 		} 
 		catch( IOException e ){
 			   e.printStackTrace();
@@ -63,7 +77,6 @@ public class ValidaUsuarioServlet extends HttpServlet implements Servlet{
 					escritor.close();
 				}			   
 		}
-    }
- 
+    } 
 
  } 

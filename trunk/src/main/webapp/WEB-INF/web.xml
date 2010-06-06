@@ -8,10 +8,17 @@
 		version="2.5" >
 	
 	<display-name>peruvianportalterrestrialtransport</display-name>
+
+	<servlet>
+		<servlet-name>ValidaServlet</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ValidaServlet</servlet-class>
+	</servlet>
 	
-	<welcome-file-list>
-		<welcome-file>/index.jsp</welcome-file>
-	</welcome-file-list>
+	<servlet-mapping>
+		<servlet-name>ValidaServlet</servlet-name>
+		<url-pattern>/ValidaServlet</url-pattern>
+		<!-- <url-pattern>/ok/ValidaServlet</url-pattern> -->
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>Servlet_Header_Request</servlet-name>
@@ -22,24 +29,6 @@
 		<servlet-name>Servlet_Header_Request</servlet-name>
 		<url-pattern>/Servlet_Header_Request</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ValidaUsuarioServlet</servlet-name>
-		<servlet-class>com.ttporg.pe.servlet.ValidaUsuarioServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>ValidaUsuarioServlet</servlet-name>
-		<url-pattern>/ValidaUsuarioServlet</url-pattern>
-	</servlet-mapping>
-	
-	<session-config>
-		<session-timeout>30</session-timeout>
-	</session-config>
-	
-	<login-config>
-		<auth-method>BASIC</auth-method>
-	</login-config>
 	
 	<servlet>
 		<display-name>Apache-Axis Servlet</display-name>
@@ -85,5 +74,17 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+			
+	<welcome-file-list>
+		<welcome-file>/index.jsp</welcome-file>
+	</welcome-file-list>		
+		
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>	
 		
 </web-app>
