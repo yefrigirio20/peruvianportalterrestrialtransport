@@ -125,7 +125,22 @@
             <name>Repository of PrimeFaces</name>
             <url>http://repository.prime.com.tr/org</url>
             <layout>default</layout>
-        </repository>			
+        </repository>	
+        
+		<repository>
+		    <id>dojoSnapshots</id>
+		    <name>Dojo Maven2 Snapshot Repository</name>
+		    <url>http://download.dojotoolkit.org/maven2-snapshot</url>
+		    <releases>
+		      <enabled>false</enabled>
+		    </releases>
+		    <snapshots>
+		      <enabled>true</enabled>
+		      <updatePolicy>always</updatePolicy>
+		      <checksumPolicy>warn</checksumPolicy>
+		    </snapshots>
+		    <layout>default</layout>
+		</repository>		
 		
 	</repositories> 
   
@@ -515,6 +530,14 @@
 	       <version>1.1.1</version>
 	    </dependency> 
      	<!-- ****** DISPLAY-TAG(FIN) ******* -->
+     	
+     	<!-- ***** DOJO (INICIO) ****** -->
+		<dependency>
+		   <groupId>org.apache.struts</groupId>
+		   <artifactId>struts2-dojo-plugin</artifactId>
+		   <version>2.1.8.1</version>
+		</dependency>
+     	<!-- ****** DOJO (FIN) ******* -->
      	
   </dependencies>
 
