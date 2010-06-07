@@ -4,15 +4,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
 
 <%@page import="com.ttporg.pe.bean.Usuario"%><html>
-<%@taglib prefix="s" uri="/struts-tags" %>
+
+<%@taglib prefix="s"  uri="/struts-tags" %>
+<%@taglib prefix="sx" uri="/struts-dojo-tags"%> 
 
  <head>
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
      <jsp:include page="../include/Scripts.jsp" flush="false" /> 
+     
+	<script type="text/javascript">
+		dojo.event.topic.subscribe("/beforeSelect", function(event, tab, tabContainer){
+		    event.cancel = true;
+		});
+	</script>     
  </head>
 
- <body bottomMargin="0" leftMargin="0" topMargin="0" rightMargin="0" marginwidth="0" marginheight="0" bgcolor="white">
+ <body style="margin:0px;" > 
   
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
@@ -26,6 +34,7 @@
    <!-- TABLA #2 -->
    <table width="100%" border="0" >
        <tr valign="top" >
+       
          <td width="15%" valign="top" height="100%">
             <jsp:include page="../include/Menu.jsp" flush="true"/>
          </td>

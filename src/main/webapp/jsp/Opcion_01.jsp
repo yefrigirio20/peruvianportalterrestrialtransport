@@ -13,7 +13,7 @@
      <jsp:include page="../include/Scripts.jsp" flush="false" /> 
  </head>
 
- <body bottomMargin="0" leftMargin="0" topMargin="0" rightMargin="0" marginwidth="0" marginheight="0" bgcolor="white">
+ <body style="margin:0px;" bgcolor="white">
   
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
