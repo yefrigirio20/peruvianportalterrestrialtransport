@@ -4,6 +4,7 @@
 <jsp:include page="../include/Estilos.jsp" flush="true" />
 
 <script language="JavaScript" type="text/javascript">
+
 //************** SCRIPT: MANEJO RANKING [INICIO] **************//
 function cambiarEstrella( parametro ){      
 	   //alert( parametro );     
@@ -16,7 +17,7 @@ function cambiarEstrella( parametro ){
 	   var estrella_05  =  document.getElementById( "estrella_05" );  
 	   
 	   if( parametro == "UNO" ){
-	       apagarTodas( formulario );	   
+	       apagarTodas( formulario );	  	        
 	       formulario.estrella_01.src      =  "<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif";
 	       formulario.mensajeRanking.value =  "Malo!!!";
 	   }
@@ -98,25 +99,25 @@ function seleccionarEstrella( msnParam ){
 		
 		<table width="140" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
-		   <td valign="top" width="22">  
+		   <td valign="top" width="22" >  
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_01" id="estrella_01" onMouseOver="cambiarEstrella('UNO')" 
-		        onClick="seleccionarEstrella('Malo!!!')" />   
+		        onClick="seleccionarEstrella('Malo!!!')"  />   
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_02" id="estrella_02" onMouseOver="cambiarEstrella('DOS')"    
-		        onClick="seleccionarEstrella('Regular!!!')"/>   
+		        onClick="seleccionarEstrella('Regular!!!')" />   
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_03" id="estrella_03" onMouseOver="cambiarEstrella('TRES')"    
-		        onClick="seleccionarEstrella('Pasable!!!')"/>   
+		        onClick="seleccionarEstrella('Pasable!!!')" />   
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_04" id="estrella_04" onMouseOver="cambiarEstrella('CUATRO')"    
-		        onClick="seleccionarEstrella('Bueno!!!')"/>   
+		        onClick="seleccionarEstrella('Bueno!!!')" />   
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_05" id="estrella_05" onMouseOver="cambiarEstrella('CINCO')"    
-		        onClick="seleccionarEstrella('Excelente!!!')"/>   
+		        onClick="seleccionarEstrella('Excelente!!!')" />   
 		   </td>
 		  </tr>
 		  
@@ -133,7 +134,7 @@ function seleccionarEstrella( msnParam ){
 
   <tr> 
 	  <td>
-	     <a href="<%=request.getContextPath()%>/jsp/Opcion_01.jsp" >
+	     <a href="<%=request.getContextPath()%>/jsp/Opcion_01.jsp" style="cursor:hand" />
 		   <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #1" width="20" height="19"  border="0" />
 		   <font size="2" face="Arial" class="textoMenu" >Opcion #1</font>
 	     </a>
@@ -144,7 +145,7 @@ function seleccionarEstrella( msnParam ){
   
   <tr> 
 	  <td>
-	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" >
+	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" />
 		   <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #2" width="20" height="19"  border="0" />
 		   <font size="2" face="Arial" class="textoMenu" >Opcion #2</font>
 	     </a>
@@ -155,7 +156,7 @@ function seleccionarEstrella( msnParam ){
   
   <tr> 
 	  <td>
-	     <A href="<%=request.getContextPath()%>/jsp/Opcion_03.jsp" >
+	     <A href="<%=request.getContextPath()%>/jsp/Opcion_03.jsp" style="cursor:hand" />
 		   <IMG src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #3" width="20" height="19" border="0" />
 		   <font size="2" face="Arial" class="textoMenu" >Opcion #3</font>
 	     </A>
@@ -166,7 +167,7 @@ function seleccionarEstrella( msnParam ){
   
   <tr> 
 	  <td>
-	     <A href="<%=request.getContextPath()%>/jsp/Opcion_04.jsp" >
+	     <A href="<%=request.getContextPath()%>/jsp/Opcion_04.jsp" style="cursor:hand" />
 		   <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #4" width="20" height="19" border="0" />
 		   <font size="2" face="Arial" class="textoMenu" >Opcion #4</font>
 	     </A>

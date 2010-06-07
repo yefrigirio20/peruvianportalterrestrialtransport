@@ -2,7 +2,7 @@
  
    <tr>   
      <td> 
-       <center><font size="5" face="Arial" color="blue">Parte Principal de la CABECERA  <strong>(Estructura INLUDE)</strong></font></center>
+       <center><img src="<%=request.getContextPath()%>/imagenes/ImagenCabecera.gif" width="1200" height="240" style="height:180px; width:100%"></center>
      </td>            
    </tr>
    
