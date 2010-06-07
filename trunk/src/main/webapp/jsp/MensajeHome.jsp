@@ -9,7 +9,7 @@
    <title>MENSAJES BIENVENIDA (HOME)</title>
  </head>
 
- <body bottomMargin="0" leftMargin="0" topMargin="0" rightMargin="0" marginwidth="0" marginheight="0" > 
+ <body style="margin:0px;" >  
 
 	<center>
 	  <table width="100%" bgcolor="green" height="100%">
