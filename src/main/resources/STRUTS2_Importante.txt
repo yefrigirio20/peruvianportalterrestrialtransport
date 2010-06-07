@@ -1,5 +1,13 @@
 
- 
+  TUTORIALES CONTROLES:
+  --------------------
+  
+  http://www.roseindia.net/struts/struts2/struts2uitags/index.shtml 
+  http://struts.apache.org/2.0.14/docs/ui-tag-reference.html
+  http://mundogeek.net/archivos/2009/02/13/etiquetas-struts-2/
+  
+  
+   
   LINK:  http://struts.apache.org/2.x/docs/accessing-application-session-request-objects.html
 
 
