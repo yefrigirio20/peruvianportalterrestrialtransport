@@ -78,15 +78,15 @@
   <!-- Permite que corra en 'Jetty', asi los Jars de Tomcat son seran incluidos.-->
   <repositories>
 	
-	  <repository>
-		  <releases><enabled>false</enabled></releases>
-		  <snapshots><enabled>true</enabled></snapshots>
-		  <id>apache-maven-snapshots</id>
-		  <name>Repository of Snapshots</name>
-		  <url>http://people.apache.org/repo/m2-snapshot-repository</url>
-	  </repository>
+	   <repository>
+		    <releases><enabled>false</enabled></releases>
+		    <snapshots><enabled>true</enabled></snapshots>
+		    <id>apache-maven-snapshots</id>
+		    <name>Repository of Snapshots</name>
+		    <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+	   </repository>
 		
-	  <repository>
+	   <repository>
             <id>maven.org</id>
             <name>Repository of Maven.org</name>
             <url>http://repo1.maven.org/maven2</url>
@@ -143,20 +143,18 @@
 		    <layout>default</layout>
 		</repository>		
 		
-	</repositories> 
+		<repository>
+			<id>maven.org</id>
+			<name>Repository of Maven.org</name>
+			<url>http://repo2.maven.org/</url>
+		</repository>
+		
+  </repositories> 
   
   <!-- *********************************** -->
   <!-- **** DEPENDENCIAS DEL PROYECTO **** -->
   <!-- *********************************** -->
   <dependencies>
- 	
-		<dependency>
-			<groupId>com.sun</groupId>
-			<artifactId>tools</artifactId>
-			<version>1.5.0</version>
-			<scope>system</scope>
-			<systemPath>${java.home}/../lib/tools.jar</systemPath>
-		</dependency>	 	
  	
 		<dependency>
 			<groupId>junit</groupId>
@@ -263,19 +261,26 @@
 		</dependency>
 		<!-- ****** API: SPRING (FIN) ****** -->
  
-     	<!-- ***** API: STRUTS2 (INICIO) ***** -->
+     	<!-- ***** API: STRUTS2 (INICIO) ***** -->	    
+		<dependency>
+		    <groupId>org.apache.struts</groupId>
+		    <artifactId>struts2-api</artifactId>
+		    <version>2.0.5</version>
+		    <scope>compile</scope>
+		</dependency>	
+		
         <dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
 			<version>2.1.8.1</version>
 			<scope>compile</scope>
-	    </dependency>   
+	    </dependency> 
 	    
 		<dependency>
-		    <groupId>org.apache.struts</groupId>
-		    <artifactId>struts2-api</artifactId>
-		    <version>2.0.5</version>
-		</dependency>	
+		   <groupId>org.apache.struts</groupId>
+		   <artifactId>struts2-dojo-plugin</artifactId>
+		   <version>2.1.8.1</version>
+		</dependency>
      	<!-- ****** API: STRUTS2 (FIN) ******* -->
   
      	<!-- ***** API: IBATIS (INICIO) ****** -->	
@@ -538,16 +543,8 @@
 	       <artifactId>displaytag-export-poi</artifactId>
 	       <version>1.1.1</version>
 	    </dependency> 
-     	<!-- ****** DISPLAY-TAG(FIN) ******* -->
-     	
-     	<!-- ***** DOJO (INICIO) ****** -->
-		<dependency>
-		   <groupId>org.apache.struts</groupId>
-		   <artifactId>struts2-dojo-plugin</artifactId>
-		   <version>2.1.8.1</version>
-		</dependency>
-     	<!-- ****** DOJO (FIN) ******* -->
-     	
+     	<!-- ****** DISPLAY-TAG(FIN) ******* -->   	
+
   </dependencies>
 
   <!-- ************************************* -->
