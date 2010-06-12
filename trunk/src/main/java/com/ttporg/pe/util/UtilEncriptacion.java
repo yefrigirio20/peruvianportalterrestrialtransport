@@ -17,6 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 import cryptix.util.core.Hex;
+//import org.apache.commons.codec.binary.Hex;
 
 /**
  * @author: Ricardo Guerra.
