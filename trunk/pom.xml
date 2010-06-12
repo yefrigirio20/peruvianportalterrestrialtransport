@@ -494,13 +494,7 @@
 		    <groupId>com.thoughtworks.xstream</groupId>
 		    <artifactId>xstream</artifactId>
 		    <version>1.3.1</version>
-		</dependency>
-
-	    <dependency>
-		    <groupId>org.hdiv</groupId>
-		    <artifactId>hdiv-jstl-taglibs-1.1.2</artifactId>
-		    <version>2.0.3</version>
-		</dependency>
+		</dependency> 
 
 		<!--
 		<dependency>
@@ -521,15 +515,36 @@
 			<artifactId>jax-qname</artifactId>
 			<version>1.1</version>
 			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>compile</scope>
-		</dependency>
+		</dependency> 
      	<!-- ***** ADICIONALES (FIN) ****** -->
+
+     	<!-- ***** SERVLET & JSP (INICIO) ****** -->
+	    <dependency>
+	      <groupId>javax.servlet</groupId>
+	      <artifactId>servlet-api</artifactId>
+	      <version>2.5</version>
+	      <scope>provided</scope>
+	    </dependency>
+	
+	    <dependency>
+	      <groupId>javax.servlet.jsp</groupId>
+	      <artifactId>jsp-api</artifactId>
+	      <version>2.1</version>
+	      <scope>provided</scope>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>javax.servlet</groupId>
+	        <artifactId>jstl</artifactId>
+	        <version>1.1.2</version>
+	    </dependency>
+	
+	    <dependency>
+	        <groupId>taglibs</groupId>
+	        <artifactId>standard</artifactId>
+	        <version>1.1.2</version>
+	    </dependency>
+     	<!-- ****** SERVLET & JSP (FIN) ******** -->
 
      	<!-- ***** DISPLAY-TAG(INICIO) ****** -->
 	    <dependency>
