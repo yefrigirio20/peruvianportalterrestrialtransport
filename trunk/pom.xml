@@ -509,12 +509,6 @@
 		    <artifactId>log4j</artifactId>
 		    <version>1.2.14</version>
 		</dependency>
-		
-		<dependency>
-		   <groupId>javax.xml</groupId>
-		   <artifactId>jax-qname</artifactId>
-		   <version>1.1</version>
-		</dependency>
                 
          <!-- LA TENEMOS EN EL: lib
          <dependency>
