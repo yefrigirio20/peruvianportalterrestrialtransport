@@ -27,7 +27,7 @@ package com.ttporg.pe.action;
  import com.ttporg.pe.servicio.EmpresaService;
  import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
  import com.ttporg.pe.servlet.LoggerBean; 
-
+ 
 /**
  * @author Cesar Ricardo.
  * @clase: EnviarEmailMB.java  
