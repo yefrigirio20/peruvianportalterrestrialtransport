@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Usuario">
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILISABLE' ****************** -->
+    <!-- ******************************************************** -->
+     <sql id="selectUsuariosSinTag">   
+          SELECT u.COD_USU, u.NOM_USU, u.APE_USU, u.CUMPLE_USU, 
+	             u.DIRECCION_USU, u.DIREC_FOTO_USU, u.MAIL_USU, 
+	             u.ID_USU, u.PASSWORD_USU, u.TIPO_USU, u.ESTADO_USU
+	      FROM   TB_USUARIOS u
+     </sql>	       
+        
+     <sql id="selectUsuariosConTag">   
+        SELECT u.COD_USU         AS  "id", 
+               u.NOM_USU         AS  "nombres", 
+               u.APE_USU         AS  "apellidos", 
+               u.CUMPLE_USU      AS  "cumpleanos", 
+		       u.DIRECCION_USU   AS  "direccion", 
+		       u.DIREC_FOTO_USU  AS  "foto", 
+		       u.MAIL_USU        AS  "email", 
+		       u.ID_USU          AS  "usuario", 
+		       u.PASSWORD_USU    AS  "password", 
+		       u.TIPO_USU        AS  "tipo", 
+		       u.ESTADO_USU      AS  "estado"
+		FROM   TB_USUARIOS u 
+     </sql>	
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+    
+    <!-- FORMA #1: PARA HACER CONSULTAS, EN BASE A: 'resultMap' -->
+   	<resultMap id="atributosUsuario" class="com.ttporg.pe.bean.Usuario">
+		<result property="id"         column="COD_USU"  	  columnIndex="1"  />
+		<result property="nombres"    column="NOM_USU"  	  columnIndex="2"  />		
+		<result property="apellidos"  column="APE_USU"        columnIndex="3"  />
+		<result property="cumpleanos" column="CUMPLE_USU"     columnIndex="4"  />
+		<result property="direccion"  column="DIRECCION_USU"  columnIndex="5"  />
+		<result property="foto"       column="DIREC_FOTO_USU" columnIndex="6"  />
+		<result property="email"      column="MAIL_USU"       columnIndex="7"  />
+		<result property="usuario"    column="ID_USU"         columnIndex="8"  />
+		<result property="password"   column="PASSWORD_USU"   columnIndex="9"  />
+		<result property="tipo"       column="TIPO_USU"       columnIndex="10" />
+		<result property="estado"     column="ESTADO_USU"     columnIndex="11" />				
+	</resultMap>
+   
+	<select id="getUsuario" resultMap="atributosUsuario" parameterClass="java.lang.Integer" >
+        <include refid="selectUsuariosSinTag" />
+		WHERE  u.COD_USU = #id#
+    </select>
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="usuario" type="com.ttporg.pe.bean.Usuario" />
+	
+	<select id="getUsuario2" resultClass="usuario" parameterClass="java.lang.Integer" >
+        <include refid="selectUsuariosConTag" />
+		WHERE  u.COD_USU = #id#
+    </select>
+
+	<select id="getListaUsuario" resultClass="usuario" parameterClass="java.lang.Integer" >
+        <include refid="selectUsuariosConTag" />
+    </select>
+
+	<insert id="insertUsuario" parameterClass="com.ttporg.pe.bean.Usuario" >
+		INSERT INTO TB_USUARIOS ( NOM_USU, APE_USU, CUMPLE_USU,
+		                          DIRECCION_USU, DIREC_FOTO_USU, MAIL_USU,
+		                          ID_USU, PASSWORD_USU, TIPO_USU, ESTADO_USU )
+		                            
+		VALUES( #nombres#, #apellidos#, #cumpleanos#, #direccion#, #foto#,
+		        #email#, #usuario#, #password#, #tipo#, #estado# )
+	</insert>
+    
+	<update id="updateUsuario" parameterClass="com.ttporg.pe.bean.Usuario" >
+		     UPDATE TB_USUARIOS u SET 
+								u.NOM_USU        = #nombres#,
+								u.APE_USU        = #apellidos#,
+								u.CUMPLE_USU     = #cumpleanos#,
+								u.DIRECCION_USU  = #direccion#,
+								u.DIREC_FOTO_USU = #foto#,
+								u.MAIL_USU       = #email#,
+								u.ID_USU         = #usuario#,
+								u.PASSWORD_USU   = #password#,
+								u.TIPO_USU       = #tipo#,
+								u.ESTADO_USU     = #estado#
+		      WHERE  u.COD_USU = #id#
+	</update>
+   
+	<delete id="deleteUsuario" parameterClass="java.util.Map">
+		DELETE FROM TB_USUARIOS 
+		WHERE  COD_USU = #codigoEliminacion# 
+	</delete>
+
+
+    <!-- ********************************************************* -->
+    <!-- *************** PROCESOS 'PERSONALIZADOS' *************** -->
+    <!-- ********************************************************* -->
+
+	<select id="getListaUsuarioPorEstado" resultClass="usuario" parameterClass="java.lang.String" >
+        <include refid="selectUsuariosConTag" />
+		WHERE    u.TIPO_USU LIKE #tipo#
+		ORDER BY u.NOM_USU 
+    </select>
+    
+	<select id="getListaUsuarioFiltroNombreApellido" resultClass="usuario" parameterClass="java.lang.String" >
+        <include refid="selectUsuariosConTag" />
+		WHERE    u.NOM_USU LIKE #nombres# AND u.APE_USU LIKE #apellidos# 
+		ORDER BY u.NOM_USU 
+    </select>
+    
+	<select id="getListaNombreApellidoUsuario" resultClass="usuario" parameterClass="java.lang.String" >
+        SELECT   u.COD_USU   AS  "id", 
+                 u.NOM_USU   AS  "nombres", 
+                 u.APE_USU   AS  "apellidos"
+		FROM  TB_USUARIOS u 
+		ORDER BY u.NOM_USU 
+    </select>
+    
+	<select id="getFiltrosUsuarios" resultClass="usuario" parameterClass="com.ttporg.pe.bean.Usuario" >
+        <include refid="selectUsuariosConTag" />				
+		
+		<dynamic prepend="WHERE" >		
+			<isNotNull prepend="AND" property="tipo" >
+			   u.TIPO_USU LIKE #tipo#
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="id" >
+			   u.COD_USU LIKE #id#
+			</isNotNull>
+	
+			<isNotNull prepend="AND" property="nombres" >
+			   u.NOM_USU LIKE #nombres#
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="apellidos" >
+			   u.APE_USU LIKE #apellidos#
+			</isNotNull>
+		</dynamic>
+		ORDER BY u.NOM_USU 						
+    </select>
+    
+	<select id="getLoginUsuarios" resultClass="usuario" parameterClass="com.ttporg.pe.bean.Usuario" >
+        <include refid="selectUsuariosConTag" />				
+		
+		<dynamic prepend="WHERE" >		
+			<isNotNull prepend="AND" property="usuario" >
+			   u.ID_USU LIKE #usuario#
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="password" >
+			   u.PASSWORD_USU LIKE #password#
+			</isNotNull>
+		</dynamic>
+		ORDER BY u.NOM_USU 						
+    </select>    
+    
+ </sqlMap>
+

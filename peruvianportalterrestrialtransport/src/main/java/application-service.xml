@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- ========== SPRING: FactoryBean ========== -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="configLocation">
+			<value>classpath:/com/ttporg/pe/conexion/SqlMapConfig.xml</value>
+		</property>
+		<property name="useTransactionAwareDataSource">
+			<value>true</value>
+		</property>
+	</bean>
+	<!-- ========== /SPRING: FactoryBean ========== -->
+
+	<!-- ========== SPRING: Mapeo DAOS ========== -->
+	<bean id="usuarioDao" class="com.ttporg.pe.dao.impl.UsuarioDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>		
+	
+	<bean id="clienteDao" class="com.ttporg.pe.dao.impl.ClienteDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+	
+	<bean id="empresaDao" class="com.ttporg.pe.dao.impl.EmpresaDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>		
+	<!-- ========== /SPRING: Mapeo DAOS ========== -->
+
+</beans>
+
+

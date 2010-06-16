@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://java.sun.com/xml/ns/javaee" 
+		xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		id="WebApp_ID" 
+		version="2.5" >
+	
+	<display-name>peruvianportalterrestrialtransport</display-name>
+ 
+    <!-- Ubicacion del archivo de configuracion XML de SPRING --> 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:/applicationContext.xml</param-value>
+    </context-param>	
+	 
+    <!-- ContextLoaderListener, utilizado para la version 2.5.3 de Spring. Importante, si se usa la 2.0 de Spring no se mapea --> 
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>	
+     
+	<servlet>
+		<servlet-name>ValidaServlet</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ValidaServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ValidaServlet</servlet-name>
+		<url-pattern>/ValidaServlet</url-pattern>
+	</servlet-mapping>
+		
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+	</filter>
+    	
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+			
+	<welcome-file-list>
+		<welcome-file>/indexSWF.jsp</welcome-file>
+	</welcome-file-list>		
+		
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>	
+		
+</web-app>
