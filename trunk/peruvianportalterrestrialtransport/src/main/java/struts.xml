@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+   
+ <!DOCTYPE struts PUBLIC  
+     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
+     "http://struts.apache.org/dtds/struts-2.0.dtd">  
+       
+ <struts>  
+     
+    <constant name="com.ttporg.pe.msj" value="Application" />
+ 
+	<package name="intro" extends="struts-default">
+	   
+	    <!-- ***** PROCESO: LOGIN ***** -->
+		<action name="login" class="com.ttporg.pe.action.LoginMB" method="" >	
+			<result name="input"   type="dispatcher" >jsp/Login.jsp</result>
+			<result name="error"   type="dispatcher" >jsp/ErrorLogin.jsp</result>			
+			<result name="success" type="dispatcher" >jsp/Bienvenida.jsp</result>
+		</action>
+
+	    <!-- ***** PROCESO #Servlet_Header_Request ***** -->
+		<action name="Servlet_Header_Request" class="com.ttporg.pe.action.Servlet_Header_Request" method="validarUsuario" >	 
+		    <result name="success" type="dispatcher" >jsp/Login.jsp</result>
+		</action>		
+	    <!-- ***** PROCESO #02 ***** -->	    	    		
+		
+	</package>
+
+</struts>
