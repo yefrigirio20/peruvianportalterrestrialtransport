@@ -72,12 +72,6 @@
     <dependent-module archiveName="cryptix-3.2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/cryptix/cryptix/3.2.0/cryptix-3.2.0.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="displaytag-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/displaytag/displaytag/1.1.1/displaytag-1.1.1.jar">
-      <dependency-type>uses</dependency-type>
-    </dependent-module>
-    <dependent-module archiveName="displaytag-export-poi-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/displaytag/displaytag-export-poi/1.1.1/displaytag-export-poi-1.1.1.jar">
-      <dependency-type>uses</dependency-type>
-    </dependent-module>
     <dependent-module archiveName="dom4j-1.4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/dom4j/dom4j/1.4/dom4j-1.4.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
@@ -102,19 +96,13 @@
     <dependent-module archiveName="isorelax-20020414.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/isorelax/isorelax/20020414/isorelax-20020414.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="itext-1.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/com/lowagie/itext/1.3/itext-1.3.jar">
-      <dependency-type>uses</dependency-type>
-    </dependent-module>
     <dependent-module archiveName="javassist-3.7.ga.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/jboss/javassist/3.7.ga/javassist-3.7.ga.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="jaxen-1.0-FCS.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/jaxen/jaxen/1.0-FCS/jaxen-1.0-FCS.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jcl104-over-slf4j-1.4.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/slf4j/jcl104-over-slf4j/1.4.2/jcl104-over-slf4j-1.4.2.jar">
-      <dependency-type>uses</dependency-type>
-    </dependent-module>
-    <dependent-module archiveName="jstl-1.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/javax/servlet/jstl/1.1.0/jstl-1.1.0.jar">
+    <dependent-module archiveName="jstl-1.1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/javax/servlet/jstl/1.1.2/jstl-1.1.2.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="junit-4.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/junit/junit/4.5/junit-4.5.jar">
@@ -138,9 +126,6 @@
     <dependent-module archiveName="ognl-2.7.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/ognl/ognl/2.7.3/ognl-2.7.3.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="poi-3.0-FINAL.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/poi/poi/3.0-FINAL/poi-3.0-FINAL.jar">
-      <dependency-type>uses</dependency-type>
-    </dependent-module>
     <dependent-module archiveName="relaxngDatatype-20020414.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/relaxngDatatype/relaxngDatatype/20020414/relaxngDatatype-20020414.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
@@ -154,12 +139,6 @@
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="servlet-api-2.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/javax/servlet/servlet-api/2.3/servlet-api-2.3.jar">
-      <dependency-type>uses</dependency-type>
-    </dependent-module>
-    <dependent-module archiveName="slf4j-api-1.4.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/slf4j/slf4j-api/1.4.2/slf4j-api-1.4.2.jar">
-      <dependency-type>uses</dependency-type>
-    </dependent-module>
-    <dependent-module archiveName="slf4j-log4j12-1.4.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/slf4j/slf4j-log4j12/1.4.2/slf4j-log4j12-1.4.2.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="spring-2.5.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/springframework/spring/2.5.3/spring-2.5.3.jar">
