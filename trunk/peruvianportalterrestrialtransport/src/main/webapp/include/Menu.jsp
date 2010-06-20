@@ -17,21 +17,24 @@ function cambiarEstrella( parametro ){
 	   var estrella_05  =  document.getElementById( "estrella_05" );  
 	   
 	   if( parametro == "UNO" ){
-	       apagarTodas( formulario );	  	        
-	       formulario.estrella_01.src      =  "<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif";
+	       prenderTodas( formulario );	  	        
+		   formulario.estrella_02.src      =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+		   formulario.estrella_03.src      =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+		   formulario.estrella_04.src      =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+		   formulario.estrella_05.src      =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
 	       formulario.mensajeRanking.value =  "Malo!!!";
 	   }
 	   if( parametro == "DOS" ){
-	       apagarTodas( formulario );
-	       formulario.estrella_01.src      =  '<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif';
-	       formulario.estrella_02.src      =  '<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif';
+	       prenderTodas( formulario );
+		   formulario.estrella_03.src      =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+		   formulario.estrella_04.src      =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
+		   formulario.estrella_05.src      =  "<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif";
 	       formulario.mensajeRanking.value =  'Regular!!!';		   		   
 	   }
 	   if( parametro == "TRES" ){
-	       apagarTodas( formulario );
-	       formulario.estrella_01.src      =  '<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif';
-	       formulario.estrella_02.src      =  '<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif';
-	       formulario.estrella_03.src      =  '<%=request.getContextPath()%>/imagenes/estrellaPrendida.gif';
+	       prenderTodas( formulario );
+	       formulario.estrella_04.src      =  '<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif';
+	       formulario.estrella_05.src      =  '<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif';
 	       formulario.mensajeRanking.value =  'Pasable!!!';			   		   	
 	   }
 	   if( parametro == "CUATRO" ){
@@ -70,56 +73,198 @@ function seleccionarEstrella( msnParam ){
      //alert( "seleccionarEstrella" ); 
 		 
 	   if( msnParam == "Malo!!!" ){
-	       alert("Su opinion es: " + msnParam );  
+	       alert("Su opinion es: " + msnParam + ", gracias por votar." );  
 	   }
 	   if( msnParam == "Regular!!!" ){
-	       alert("Su opinion es: " + msnParam );  	   		   
+	       alert("Su opinion es: " + msnParam + ", gracias por votar." );    	   		   
 	   }
 	   if( msnParam == "Pasable!!!" ){
-	       alert("Su opinion es: " + msnParam );  		   		   	
+	       alert("Su opinion es: " + msnParam + ", gracias por votar." );    		   		   	
 	   }
 	   if( msnParam == "Bueno!!!" ){
-	       alert("Su opinion es: " + msnParam );  			
+	       alert("Su opinion es: " + msnParam + ", gracias por votar." );    			
 	   }
 	   if( msnParam == "Excelente!!!" ){
-	       alert("Su opinion es: " + msnParam );  		
+	       alert("Su opinion es: " + msnParam + ", gracias por votar." );   		
 	   }
 }  
   //************** SCRIPT: MANEJO RANKING [FIN] **************//  
 </script>
 
-<table width="100%" height="700" border="1" cellPadding="4" cellSpacing="0" style="BORDER-COLLAPSE: collapse" bgcolor="white" > 
+<script src="Scripts/swfobject_modified.js" type="text/javascript"></script>
+ <table width="101%" height="700" border="1" cellPadding="4" cellSpacing="0" style="BORDER-COLLAPSE: collapse" bgcolor="white" > 
   <tr>
     <td  height="30" align="center" class="menu" > <StrONG> MENU </StrONG> </td>
   </tr>
   
   <tr> 
+	  <td align="center">
+        <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,1,1,0" width="257" height="162">
+          <param name="src" value="../swf/AmimacionLogos.swf" />
+          <embed src="<%=request.getContextPath()%>/swf/AmimacionLogos.swf" pluginspage="http://www.adobe.com/shockwave/download/" width="257" height="162"></embed>
+      </object></td> 
+  </tr> 
+  
+  <tr> <td></td> </tr> 
+  
+  <tr> 
+	  <td>                 
+         <table width="100%" border="0" bgcolor="#0066FF" >
+            <tr> 
+             <td align="center" >
+ 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" /><font size="2" face="Arial" class="textoMenu" style="color:white" ><strong>Servicios</strong></font>
+	     </a>            
+              </td> 
+            </tr> 
+         </table> 
+         
+         <marquee bgcolor="#FFFFFF" width="50%" height="80" direction="up" scrolldelay="250" >      
+         <table width="100" border="0">
+         
+              <tr> 
+                <td width="20"> </td>  
+                <td width="80"> </td>
+              </tr> 
+              
+              <tr> 
+                <td width="20">                
+                 <a href="<%=request.getContextPath()%>/jsp/BusquedaAgencia.jsp" style="cursor:hand" />
+                   <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Empresas" width="20" height="19"  border="0" />
+                 </a>
+                </td>  
+                <td width="80">
+                   <a href="<%=request.getContextPath()%>/jsp/BusquedaAgencia.jsp" style="cursor:hand" />
+                   <font size="2" face="Arial" class="textoMenu" >Empresas</font> </a>             
+                </td>
+              </tr>
+              
+              <tr> 
+                <td width="20">
+                     <a href="<%=request.getContextPath()%>/jsp/BusquedaBuses.jsp" style="cursor:hand" />
+                       <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Buses" width="20" height="19"  border="0" />
+                     </a>
+                </td>  
+                <td width="80">
+                   <a href="<%=request.getContextPath()%>/jsp/BusquedaBuses.jsp" style="cursor:hand" />
+                   <font size="2" face="Arial" class="textoMenu" >Buses</font> </a>            
+                </td>
+              </tr>
+        </table>
+        
+        </marquee>
+        
+	  </td>  
+  </tr> 
+  
+  <tr> <td></td> </tr> 
+    
+ <tr> 
+	  <td>
+         <table width="100%" border="0" bgcolor="#0066FF" >
+            <tr> 
+             <td align="center" >
+ 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" /><font size="2" face="Arial" class="textoMenu" style="color:white" ><strong>Informes</strong></font>
+	     </a>            
+              </td> 
+            </tr> 
+         </table> 
+ 
+         <marquee bgcolor="#FFFFFF" width="50%" height="200" direction="up" scrolldelay="250" > 
+             <table width="100" border="0">
+             
+                  <tr> 
+                    <td width="20"> </td>  
+                    <td width="80"> </td>
+                  </tr> 
+                  
+                  <tr> 
+                    <td width="20">                
+                     <a href="<%=request.getContextPath()%>/jsp/BusquedaAgencia.jsp" style="cursor:hand" />
+                       <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Empresas" width="20" height="19"  border="0" />
+                     </a>
+                    </td>  
+                    <td width="80">
+                       <a href="<%=request.getContextPath()%>/jsp/Informes.jsp" style="cursor:hand" />
+                       <font size="2" face="Arial" class="textoMenu" >Informacion #01</font> </a>             
+                    </td>
+                  </tr>
+                  
+                  <tr> 
+                    <td width="20">
+                         <a href="<%=request.getContextPath()%>/jsp/Informes.jsp" style="cursor:hand" />
+                           <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Buses" width="20" height="19"  border="0" />
+                         </a>
+                    </td>  
+                    <td width="80">
+                       <a href="<%=request.getContextPath()%>/jsp/BusquedaBuses.jsp" style="cursor:hand" />
+                       <font size="2" face="Arial" class="textoMenu" >Informacion #02</font> </a>            
+                    </td>
+                  </tr>
+            </table>
+        
+        </marquee>    
+            
+	  </td>  
+  </tr> 
+  
+  <tr> <td></td> </tr> 
+  
+   <tr> 
     <td>
 		<form id="frmRanking" name="frmRanking">
 		
-		<table width="140" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
+         <table width="100%" border="0" bgcolor="#0066FF" >
+            <tr> 
+             <td align="center" >
+ 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" /><font size="2" face="Arial" class="textoMenu" style="color:white" ><strong>Ranking</strong></font>
+	     </a>            
+              </td> 
+            </tr> 
+         </table>         
+        
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr> 
+            <td colspan="5">
+             &nbsp;
+            </td>  
+          </tr>
+        
+		  <tr> 
+            <td colspan="5">
+             &nbsp;Califique porfavor el servicio que le ofrecemos.
+            </td>  
+          </tr>
+        </table>
+        
+		<table width="70%" border="0" cellspacing="0" cellpadding="0">
+           <tr>          
+		   <td colspan="5">&nbsp; </td>          
+          </tr>
+          
+          <tr>
 		   <td valign="top" width="22" >  
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_01" id="estrella_01" onMouseOver="cambiarEstrella('UNO')" 
-		        onClick="seleccionarEstrella('Malo!!!')"  />   
+		      onClick="seleccionarEstrella('Malo!!!')" style="cursor:hand" />   
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_02" id="estrella_02" onMouseOver="cambiarEstrella('DOS')"    
-		        onClick="seleccionarEstrella('Regular!!!')" />   
+		      onClick="seleccionarEstrella('Regular!!!')" style="cursor:hand" />    
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_03" id="estrella_03" onMouseOver="cambiarEstrella('TRES')"    
-		        onClick="seleccionarEstrella('Pasable!!!')" />   
+		      onClick="seleccionarEstrella('Pasable!!!')" style="cursor:hand" />   
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_04" id="estrella_04" onMouseOver="cambiarEstrella('CUATRO')"    
-		        onClick="seleccionarEstrella('Bueno!!!')" />   
+		      onClick="seleccionarEstrella('Bueno!!!')" style="cursor:hand" />    
 		   </td>
 		   <td valign="top" width="22">
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_05" id="estrella_05" onMouseOver="cambiarEstrella('CINCO')"    
-		        onClick="seleccionarEstrella('Excelente!!!')" />   
+		     onClick="seleccionarEstrella('Excelente!!!')" style="cursor:hand" />    
 		   </td>
 		  </tr>
+		  
+		  <tr> <td></td> </tr> 
 		  
 		  <tr>
 		    <td colspan="5"> 
@@ -131,54 +276,26 @@ function seleccionarEstrella( msnParam ){
 		</form>  
     </td> 
   </tr> 
-
-  <tr> 
-	  <td>
-	     <a href="<%=request.getContextPath()%>/jsp/Opcion_01.jsp" style="cursor:hand" />
-		   <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #1" width="20" height="19"  border="0" />
-		   <font size="2" face="Arial" class="textoMenu" >Opcion #1</font>
-	     </a>
-	  </td> 
-  </tr> 
   
   <tr> <td></td> </tr> 
   
   <tr> 
-	  <td>
-	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" />
-		   <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #2" width="20" height="19"  border="0" />
-		   <font size="2" face="Arial" class="textoMenu" >Opcion #2</font>
-	     </a>
-	  </td> 
-  </tr> 
-  
-  <tr> <td></td> </tr> 
-  
-  <tr> 
-	  <td>
-	     <A href="<%=request.getContextPath()%>/jsp/Opcion_03.jsp" style="cursor:hand" />
-		   <IMG src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #3" width="20" height="19" border="0" />
-		   <font size="2" face="Arial" class="textoMenu" >Opcion #3</font>
-	     </A>
-	  </td> 
-  </tr> 
-  
-  <tr> <td></td> </tr> 
-  
-  <tr> 
-	  <td>
-	     <A href="<%=request.getContextPath()%>/jsp/Opcion_04.jsp" style="cursor:hand" />
-		   <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Opcion #4" width="20" height="19" border="0" />
-		   <font size="2" face="Arial" class="textoMenu" >Opcion #4</font>
-	     </A>
-	  </td> 
+	  <td align="center"> 
+	  
+	    <br>
+	    <br>
+	    
+        <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,1,1,0" width="243" height="138">
+            <param name="src" value="../swf/Paisajes.swf" />
+            <embed src="<%=request.getContextPath()%>/swf/Paisajes.swf" pluginspage="http://www.adobe.com/shockwave/download/" width="243" height="138"></embed>
+      </object>
+      
+      <br>
+      <br>
+      
+      </td> 
   </tr>   
   
   <tr> <td></td> </tr> 
               
 </table>
-
-
-
-
-		
