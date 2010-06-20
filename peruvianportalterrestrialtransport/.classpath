@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
-	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/javax/servlet/jstl/1.1.0/jstl-1.1.0.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/javax/servlet/jstl/1.1.2/jstl-1.1.2.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/javax/mail/mail/1.4/mail-1.4.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/javax/xml/soap/saaj-api/1.3/saaj-api-1.3.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/javax/servlet/servlet-api/2.3/servlet-api-2.3.jar"/>
@@ -30,8 +30,6 @@
 	<classpathentry exported="true" kind="var" path="M2_REPO/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/cryptix/cryptix/3.2.0/cryptix-3.2.0.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/displaytag/displaytag/1.1.1/displaytag-1.1.1.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/displaytag/displaytag-export-poi/1.1.1/displaytag-export-poi-1.1.1.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/dom4j/dom4j/1.4/dom4j-1.4.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/freemarker/freemarker/2.3.15/freemarker-2.3.15.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/hdiv/hdiv-core/2.0.3/hdiv-core-2.0.3.jar"/>
@@ -40,22 +38,17 @@
 	<classpathentry exported="true" kind="var" path="M2_REPO/com/ibatis/ibatis2-dao/2.1.6.589/ibatis2-dao-2.1.6.589.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/com/ibatis/ibatis2-sqlmap/2.1.6.589/ibatis2-sqlmap-2.1.6.589.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/isorelax/isorelax/20020414/isorelax-20020414.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/com/lowagie/itext/1.3/itext-1.3.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/jboss/javassist/3.7.ga/javassist-3.7.ga.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/jaxen/jaxen/1.0-FCS/jaxen-1.0-FCS.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/org/slf4j/jcl104-over-slf4j/1.4.2/jcl104-over-slf4j-1.4.2.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/junit/junit/4.5/junit-4.5.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/logkit/logkit/1.0.1/logkit-1.0.1.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/msv/msv/20020414/msv-20020414.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/mysql/mysql-connector-java/5.0.5/mysql-connector-java-5.0.5.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/ognl/ognl/2.7.3/ognl-2.7.3.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/org/apache/poi/poi/3.0-FINAL/poi-3.0-FINAL.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/relaxngDatatype/relaxngDatatype/20020414/relaxngDatatype-20020414.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/com/sun/xml/messaging/saaj/saaj-impl/1.3.2/saaj-impl-1.3.2.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/saxpath/saxpath/1.0-FCS/saxpath-1.0-FCS.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.4.2/slf4j-api-1.4.2.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.4.2/slf4j-log4j12-1.4.2.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/springframework/spring/2.5.3/spring-2.5.3.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/springframework/spring-test/2.5.6/spring-test-2.5.6.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/taglibs/standard/1.1.2/standard-1.1.2.jar"/>
