@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+	
+ <%@taglib uri="/struts-tags"      prefix="s"  %>
+ <%@taglib uri="/struts-dojo-tags" prefix="sx" %> 
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+ <%@page import="com.ttporg.pe.bean.Usuario" %>
 
-<%@page import="com.ttporg.pe.bean.Usuario"%><html>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@taglib prefix="s"  uri="/struts-tags" %>
-<%@taglib prefix="sx" uri="/struts-dojo-tags"%> 
-
- <head>
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ 
+ <head> 
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
      <jsp:include page="../include/Scripts.jsp" flush="false" /> 
