@@ -11,50 +11,38 @@
    <tr>   
      <td height="30"> 
 	    <center>
-	     <a href="<%=request.getContextPath()%>/jsp/Opcion_01.jsp" style="cursor:hand" />
-		   <font size="2" face="Arial" class="textoMenuPrincipal" >Opcion #1</font>
+	     <a href="<%=request.getContextPath()%>/jsp/Home.jsp" style="cursor:hand" />
+		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>Home</strong></font>
 	     </a>
 		</center> 
      </td>  
     
-     <td>
+ 
+    
+     <td >
 	    <center>
-	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" />
-		   <font size="2" face="Arial" class="textoMenuPrincipal" >Opcion #2</font>
+	     <a href="<%=request.getContextPath()%>/jsp/BusquedaPasaje.jsp" style="cursor:hand; " />
+		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>Disponibilidad de Asientos</strong></font>
+	     </a>
+		</center> 
+     </td>
+
+     <td >
+	    <center>
+	     <a href="<%=request.getContextPath()%>/jsp/RegistroCliente.jsp" style="cursor:hand;" />
+		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>&nbsp; &nbsp; Registro &nbsp; &nbsp;</strong></font>
 	     </a>
 		</center> 
      </td> 
-     
-     <td>
-	     <center>
-		   <a href="<%=request.getContextPath()%>/jsp/BusquedaPasaje.jsp" style="cursor:hand" />
-	       <font size="2" face="Arial" class="textoMenuPrincipal" >Buscar</font> </a> 
-		 </center>
-    </td> 
-     
-    <td>
+         
+    <td >
 	    <center>
-	     <a href="<%=request.getContextPath()%>/login.action" style="cursor:hand" />
-		   <font size="2" face="Arial" class="textoMenuPrincipal" >Login</font>
+	     <a href="<%=request.getContextPath()%>/login.action" style="cursor:hand;" />
+		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>&nbsp; &nbsp; Login &nbsp; &nbsp;</strong></font>
 	     </a>
         </center>
      </td>  
-     
-      <td> 
-	    <center>                 
-         <a href="<%=request.getContextPath()%>/ValidaServlet" class="textoMenuPrincipal" style="cursor:hand" />
-            ValidaServlet
-         </a> 
-		</center> 
-      </td>    
-  
-      <td>   
-	     <center>               
-         <a href="/login.action" class="textoMenuPrincipal" style="cursor:hand" />
-            XXX
-         </a> 
-		</center> 
-      </td>           
+          
    </tr>
    
  </table>

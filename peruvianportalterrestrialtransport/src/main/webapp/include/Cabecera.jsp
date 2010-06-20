@@ -1,8 +1,9 @@
- <table width="100%" bgcolor="gray" height="100">
- 
+<table width="100%" bgcolor="#AFD2F9" cellpadding="0" cellspacing="0"  > 
    <tr>   
-     <td> 
-       <center><img src="<%=request.getContextPath()%>/imagenes/ImagenCabecera.gif" width="1200" height="240" style="height:180px; width:100%"></center>
+     <td align="left"><object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,1,1,0" width="1500" height="200">
+       <param name="src" value="../swf/Cabecera.swf" />
+       <embed src="<%=request.getContextPath()%>/swf/Cabecera.swf" pluginspage="http://www.adobe.com/shockwave/download/" width="1500" height="200"></embed>
+     </object>
      </td>            
    </tr>
    
