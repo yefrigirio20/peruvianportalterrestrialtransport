@@ -1,8 +1,8 @@
  
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %> 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %> 
   
  <%@ page import="com.ttporg.pe.bean.Usuario" %>  
  
@@ -16,16 +16,16 @@
      <jsp:include page="../include/Scripts.jsp" flush="false" /> 
      
 	  <!-- ESTILO DE FORMATO DLE CALENDARIO -->
-	  <link rel="stylesheet" type="text/css" media="all" href="../js/calendario/calendar-win2k-cold-1.css" title="calendar-win2k-cold-1.css" />
+	  <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/calendario/calendar-win2k-cold-1.css" title="calendar-win2k-cold-1.css" />
 	
 	  <!-- PROGRAMA PRINCIPAL DEL CALENDARIO -->
-	  <script type="text/javascript" src="../js/calendario/calendar.js">       </script>
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar.js">       </script>
 	
 	  <!-- LENGUAJE DEL CALENDARIO -->
-	  <script type="text/javascript" src="../js/calendario/calendar-en.js">    </script>
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-en.js">    </script>
 	
 	  <!-- FUNCIONES PARA EL CALENDARIO -->
-	  <script type="text/javascript" src="../js/calendario/calendar-setup.js"> </script>     
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-setup.js"> </script>     
      
 	  <script type="text/javascript">
 	    function catcalc( cal ){
@@ -67,8 +67,9 @@
 
          <!-- INCLUDE PRINCIPAL -->
          <td width="85%" valign="top">             
-           <form id="frnRegistroCliente" >		 
-           
+     	 
+           <form id="idFrnRegistroCliente" name="frnRegistroCliente" method="post" action="<%=request.getContextPath()%>/ServletRegistroCliente" >
+             
             <table width="80%" border="0" align="center" cellpadding="0" cellspacing="2" >
                  <tr>
                    <td width="10%" >&nbsp;</td>
@@ -95,8 +96,24 @@
                  
                  <tr>
                    <td width="10%" >&nbsp;</td>
-                   <td width="60%" >&nbsp;</td>
-                   <td width="45%" >&nbsp;</td>
+                   <td width="80%" colspan="2" > 
+ 
+                     <c:if test="${objValidacion.mensajesNOK != null}" >  
+			 	        <table width="40%" >
+				            <c:forEach var="paramObjeto" items="${objValidacion.mensajesNOK}">
+				
+				               <tr> <td> <font color="red" > ${paramObjeto} </font> </td> </tr>
+				
+				            </c:forEach>
+				            
+					        <c:if test="${estadoValidacion == true}" > 					        
+						        <strong><font color="red" > ${objValidacion.mensajeOK} </font></strong>	 
+					        </c:if>  
+				        </table>
+				        <br></br>
+                     </c:if> 
+                     
+                   </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
                  
@@ -111,31 +128,31 @@
                             <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Nombres:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
-                               <td width="40%" ><input type="text" name="textfield" /></td>
+                               <td width="40%" ><input type="text" id="txtIdNombres" name="txtNombres" /></td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Apellidos:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
-                               <td width="40%" ><input type="text" name="textfield" /></td>
+                               <td width="40%" ><input type="text" id="txtIdApellidos" name="txtApellidos" /></td>
                                <td width="10%" align="left" >&nbsp;</td>
                              </tr>
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Fecha Nacimiento<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
-                               <td width="40%" ><input type="text" id="txtIdFechaNacimiento" name="txtFechaNacimiento" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" > </td>
+                               <td width="40%" ><input type="text" id="txtIdFechaNacimiento" name="txtFechaNacimiento" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" /> </td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Direccion<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
-                               <td width="40%" ><input type="text" name="textfield3" /></td>
+                               <td width="40%" ><input type="text" id="txtIdDireccion" name="txtDireccion" value="" /></td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                               <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Email<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
-                               <td width="40%" ><input type="text" name="textfield4" /></td>
+                               <td width="40%" ><input type="text" id="txtIdEmail" name="txtEmail" /></td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                           </table> 
@@ -154,16 +171,22 @@
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>
                                 <td width="40%">Usuario:<strong><font color="#FF0000" size="+1" >*</font></strong> </td>
-                                <td width="40%"><input type="text" name="textfield7" />	</td>
+                                <td width="40%"><input type="text" id="txtIdUsuario" name="txtUsuario" />	</td>
                                 <td width="10%" >&nbsp;</td>
                               </tr>
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>
                                 <td width="40%">Password:<strong><font color="#FF0000" size="+1" >*</font></strong> </td>
-                                <td width="40%"><input type="text" name="textfield7" />	</td>
+                                <td width="40%"><input type="password" id="txtIdPassword" name="txtPassword" />	</td>
                                 <td width="10%" >&nbsp;</td>
                               </tr>
-                        </table>
+                              <tr align="left">
+                                <td width="10%" >&nbsp;</td>
+                                <td width="40%">Confirmar Password:<strong><font color="#FF0000" size="+1" >*</font></strong> </td>
+                                <td width="40%"><input type="password" id="txtIdConfirmPassword" name="txtConfirmPassword" />	</td>
+                                <td width="10%" >&nbsp;</td>
+                              </tr>
+                          </table>
                         </fieldset>
                    </td>
                    <td width="10%" >&nbsp;</td>
@@ -194,7 +217,7 @@
                  </tr>             
                  <tr>
                    <td width="10%" >&nbsp;</td>
-                   <td><input type="submit" name="Seguir" value="Seguir" style="width:100px; height:30px;" /></td>
+                   <td><input type="submit" name="Registrar" value="Registrar" style="width:100px; height:30px;" /></td>
                    <td>&nbsp;</td>
                    <td width="10%" >&nbsp;</td>
                  </tr>

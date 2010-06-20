@@ -22,7 +22,7 @@
 
   <form id="idFrmPopupBus" name="frmBusquedaPasaje" >
   
-  <br> </br>
+  <br></br>
     
   <center> 
      <font face="Arial" color="#9E353F" size="5">

@@ -23,10 +23,11 @@ package com.ttporg.pe.action;
  import javax.servlet.http.HttpServletRequest;
  import javax.servlet.http.HttpServletResponse;
  import org.apache.commons.lang.StringUtils;
- import com.ttporg.pe.bean.BeanParametrosEmail;
+
+import com.ttporg.pe.dto.BeanParametrosEmailDto;
  import com.ttporg.pe.servicio.EmpresaService;
  import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
- import com.ttporg.pe.servlet.LoggerBean; 
+import com.ttporg.pe.servlet.LoggerBean; 
  
 /**
  * @author Cesar Ricardo.
@@ -44,7 +45,7 @@ package com.ttporg.pe.action;
 	
 	private static final long serialVersionUID = 5940034219102598271L;
 
-	private	 BeanParametrosEmail  objEMAIL 	       =  null;
+	private	 BeanParametrosEmailDto  objEMAIL 	       =  null;
 	private	 Properties 		  props 	       =  null;
 	private  String               Confirmacion     =  "";
 	private  int                  totalEMAILs      =  0;	
@@ -62,7 +63,7 @@ package com.ttporg.pe.action;
 	private  String               CodigoAleatorio;
 	
 	private  EmpresaService       servicio   = null;
-	private  BeanParametrosEmail  paramEmail = null;
+	private  BeanParametrosEmailDto  paramEmail = null;
 	
 	//Generacion de Log.
 	private LoggerBean loggerBean   = null;
@@ -70,7 +71,7 @@ package com.ttporg.pe.action;
 	{
 	 this.servicio           = new EmpresaServiceImpl();	
 	 this.loggerBean         = new LoggerBean();
-	 this.paramEmail         = new BeanParametrosEmail();
+	 this.paramEmail         = new BeanParametrosEmailDto();
 	}
 	
 	public void EnviarEMAIL() throws ServletException, IOException{
@@ -99,7 +100,7 @@ package com.ttporg.pe.action;
 			this.COPIAS = 1;
 		}
 				
-		BeanParametrosEmail objParametrosEMAIL = new BeanParametrosEmail();
+		BeanParametrosEmailDto objParametrosEMAIL = new BeanParametrosEmailDto();
 
 		objParametrosEMAIL.setCuentaEmailRemitente( this.FROM );        //QUIEN MANDARA - handymansconsultant@gmail.com
 		objParametrosEMAIL.setDireccion( "smtp.gmail.com");
@@ -416,11 +417,11 @@ package com.ttporg.pe.action;
 		return ArregloEmail;		
 	}
 		
-	public BeanParametrosEmail getBeanParametrosEMAIL(){
+	public BeanParametrosEmailDto getBeanParametrosEMAIL(){
 		return objEMAIL;
 	}
 
-	public void setParametrosEmail( BeanParametrosEmail ParametrosEmail ){
+	public void setParametrosEmail( BeanParametrosEmailDto ParametrosEmail ){
 		this.objEMAIL = ParametrosEmail;
 	}
 	
@@ -430,12 +431,12 @@ package com.ttporg.pe.action;
 	
 	private class SMTPAuthenticator extends javax.mail.Authenticator{
 		
-		private	BeanParametrosEmail	 objParametrosEmail  =  null;
+		private	BeanParametrosEmailDto	 objParametrosEmail  =  null;
 
 		public SMTPAuthenticator(){			
 		}
 
-		public SMTPAuthenticator( BeanParametrosEmail ParametrosEmail){
+		public SMTPAuthenticator( BeanParametrosEmailDto ParametrosEmail){
 			this.objParametrosEmail = ParametrosEmail;
 		}
 
@@ -450,7 +451,7 @@ package com.ttporg.pe.action;
 	/****************** IMPRESION ******************/
 	/***********************************************/ 	
 	
-	private void imprimir( BeanParametrosEmail objEMAIL ){		
+	private void imprimir( BeanParametrosEmailDto objEMAIL ){		
 		System.out.println( " ");
 		System.out.println( "PARAMETROS DE ENVIO DEL EMAIL");
 		System.out.println( "-----------------------------");
