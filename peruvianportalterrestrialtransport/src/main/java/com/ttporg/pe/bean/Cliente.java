@@ -36,7 +36,7 @@ public class Cliente implements Serializable{
     }	
 
     public Cliente( Integer id, String nombres, String apellidos, Date cumpleanos, String direccion, 
-                            String foto, String email, String usuario, String password, String tipo, String estado ){
+                    String foto, String email, String usuario, String password, String tipo, String estado ){
             super();
             this.id         = id;
             this.nombres    = nombres;

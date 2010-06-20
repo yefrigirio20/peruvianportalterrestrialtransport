@@ -1,4 +1,4 @@
-package com.ttporg.pe.bean;
+package com.ttporg.pe.dto;
 
 import java.io.Serializable;
 import java.util.Vector;
@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMultipart;
   * @fecha_de_ultima_actualización: dd-mm-yyyy.
   * @versión 1.0
   */
- public class BeanParametrosEmail implements Serializable{
+ public class BeanParametrosEmailDto implements Serializable{
  
 	private static final long serialVersionUID = -3234147478034925761L;
 	
@@ -47,7 +47,7 @@ import javax.mail.internet.MimeMultipart;
 	private  MimeMultipart  objMultiParte	               =   null;
  
 	//Constructores ... 
-	public BeanParametrosEmail(){		
+	public BeanParametrosEmailDto(){		
 	}
 	
 	public int getId(){

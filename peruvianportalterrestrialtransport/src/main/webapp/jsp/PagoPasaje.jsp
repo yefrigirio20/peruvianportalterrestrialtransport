@@ -16,16 +16,16 @@
      <jsp:include page="../include/Scripts.jsp" flush="false" /> 
      
 	  <!-- ESTILO DE FORMATO DLE CALENDARIO -->
-	  <link rel="stylesheet" type="text/css" media="all" href="../js/calendario/calendar-win2k-cold-1.css" title="calendar-win2k-cold-1.css" />
+	  <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/calendario/calendar-win2k-cold-1.css" title="calendar-win2k-cold-1.css" />
 	
 	  <!-- PROGRAMA PRINCIPAL DEL CALENDARIO -->
-	  <script type="text/javascript" src="../js/calendario/calendar.js">       </script>
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar.js">       </script>
 	
 	  <!-- LENGUAJE DEL CALENDARIO -->
-	  <script type="text/javascript" src="../js/calendario/calendar-en.js">    </script>
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-en.js">    </script>
 	
 	  <!-- FUNCIONES PARA EL CALENDARIO -->
-	  <script type="text/javascript" src="../js/calendario/calendar-setup.js"> </script>     
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-setup.js"> </script>     
      
 	  <script type="text/javascript">
 	    function catcalc( cal ){
