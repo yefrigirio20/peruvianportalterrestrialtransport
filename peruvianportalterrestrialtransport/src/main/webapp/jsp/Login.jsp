@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+ <%@taglib uri="/struts-tags"      prefix="s"  %>
+ <%@taglib uri="/struts-dojo-tags" prefix="sx" %> 
 
-<%@ taglib prefix="s" uri="/struts-tags" %>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
-
- <head>
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ 
+ <head> 
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
      <jsp:include page="../include/Scripts.jsp" flush="false" />      
  </head>
 
- <body style="margin:0px;" onLoad="detectarControlesEnabledDisabled()" > 
+ <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
   
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
@@ -34,14 +33,14 @@
          <!-- INCLUDE PRINCIPAL -->
          <td width="85%" valign="top">
              
-             <br>
+             <br></br>
              
              <center>
                 <font color="#9E353F" size="5"> Login Clientes </font>
              </center> 
                 
-             <br>
-             <br>   
+             <br></br>
+             <br></br>
                    
 			 <s:form id="frnValidacion" name="frnValidacion" action="/login.action" >	
 			     

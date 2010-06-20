@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+ 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %> 
+  
+ <%@ page import="com.ttporg.pe.bean.Usuario" %>  
+ 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
-
-<%@page import="com.ttporg.pe.bean.Usuario"%><html>
-<%@taglib prefix="s" uri="/struts-tags" %>
-
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ 
  <head>
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
@@ -99,8 +103,8 @@
                  <tr> 
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" > 
-                      <FIELDSET style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-			             <LEGEND ACCESSKEY=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Datos Cliente: </LEGEND>
+                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
+			             <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Datos Cliente: </legend>
                    
                           <table width="100%" >  
                              
@@ -136,7 +140,7 @@
                              </tr>
                           </table> 
                           
-                        </FIELDSET>  
+                        </fieldset>  
                    </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>                 
@@ -144,8 +148,8 @@
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" >
-                      <FIELDSET style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-                        <LEGEND ACCESSKEY=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Atenticación: </LEGEND>
+                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
+                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Atenticación: </legend>
                         <table width="100%" align="center" >
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>
@@ -160,7 +164,7 @@
                                 <td width="10%" >&nbsp;</td>
                               </tr>
                         </table>
-                        </FIELDSET>
+                        </fieldset>
                    </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
@@ -197,9 +201,9 @@
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="60%" >&nbsp;</td>
-                   <td width="45%" align="right" ><A href="http://www.verisign.es/ssl/ssl-information-center/index.html?sl=t13630207740000018">
-                     <IMG src="../imagenes/LogoVeriSign.gif" width="100" height="45">
-                   </A></td>
+                   <td width="45%" align="right" ><a href="http://www.verisign.es/ssl/ssl-information-center/index.html?sl=t13630207740000018">
+                     <img src="../imagenes/LogoVeriSign.gif" width="100" height="45" />
+                   </a></td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
                  <tr>
