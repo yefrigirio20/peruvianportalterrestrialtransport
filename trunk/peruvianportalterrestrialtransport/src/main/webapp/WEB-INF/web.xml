@@ -20,6 +20,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>	
      
+    <!-- ********** SERVLETS ********** -->  
 	<servlet>
 		<servlet-name>ValidaServlet</servlet-name>
 		<servlet-class>com.ttporg.pe.servlet.ValidaServlet</servlet-class>
@@ -29,6 +30,47 @@
 		<servlet-name>ValidaServlet</servlet-name>
 		<url-pattern>/ValidaServlet</url-pattern>
 	</servlet-mapping>
+		
+	<servlet>
+		<servlet-name>ServletBusquedaPasaje</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletBusquedaPasaje</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletBusquedaPasaje</servlet-name>
+		<url-pattern>/ServletBusquedaPasaje</url-pattern>
+	</servlet-mapping>	
+	
+	<servlet>
+		<servlet-name>ServletPopupBus</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletPopupBus</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletPopupBus</servlet-name>
+		<url-pattern>/ServletPopupBus</url-pattern>
+	</servlet-mapping>		
+	
+	<servlet>
+		<servlet-name>ServletRegistroCliente</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletRegistroCliente</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletRegistroCliente</servlet-name>
+		<url-pattern>/ServletRegistroCliente</url-pattern>
+	</servlet-mapping>	
+	
+	<servlet>
+		<servlet-name>ServletPagoPasaje</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletPagoPasaje</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletPagoPasaje</servlet-name>
+		<url-pattern>/ServletPagoPasaje</url-pattern>
+	</servlet-mapping>	
+	<!-- ***************************** --> 
 		
 	<filter>
 		<filter-name>struts2</filter-name>
