@@ -35,7 +35,7 @@
          <td width="85%" valign="top">
                          
              <br></br>
-			     <center> <label> <strong> <font color="red" size="5" > ERROR ENCONTRADO</font> </strong> </label> </center>
+			     <center> <label> <strong> <font color="#9E353F" size="5" > ERROR ENCONTRADO</font> </strong> </label> </center>
 			 <br></br>
 		    
 		    <font color="white" size="3" >

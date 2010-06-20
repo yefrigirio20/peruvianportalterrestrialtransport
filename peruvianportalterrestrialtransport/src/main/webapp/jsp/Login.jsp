@@ -33,27 +33,38 @@
 
          <!-- INCLUDE PRINCIPAL -->
          <td width="85%" valign="top">
-           
-			 <br></br>
-			     <center> <label> <strong> <font color="red" size="5" > INTRANET </font> </strong> </label> </center>
-			 <br></br>
-		 
+             
+             <br>
+             
+             <center>
+                <font color="#9E353F" size="5"> Login Clientes </font>
+             </center> 
+                
+             <br>
+             <br>   
+                   
 			 <s:form id="frnValidacion" name="frnValidacion" action="/login.action" >	
 			     
 			    <s:actionerror cssErrorStyle="mensajeTextoError" />  
 			    <s:fielderror  cssErrorStyle="mensajeTextoError" />  
-			     
-			    <table width="100%" > 
+			                      
+                <center> 
+			    <table width="80%" > 
 			      <tr> 
-				   <td>    
-				     <center>
-				       <table width="60%"> 
-					   	  <tr> 
-					   	     <td> &nbsp; </td>
+                   <td align="right" width="30%" >
+                     <img src="<%=request.getContextPath()%>/imagenes/Atenticacion.png" alt="Empresas" width="133" height="137" border="0" />
+                   </td>               
+                  
+				   <td align="right" width="90%" >  
+				     
+				       <table width="90%"> 
+                       
+					   	  <tr>                           
+		   	              <td>&nbsp;   </td>
 							 <td> <s:textfield name="usuario" label="Usuario " cssStyle="mensajeTextoError" disabled="false" />  </td>
 						  </tr>  
 						  <tr> 
-							  <td> &nbsp; </td>
+							  <td>&nbsp;  </td>
 							  <td> <s:password name="password" label="Password " cssStyle="mensajeTextoError" disabled="false"  /> </td>
 						  </tr>
 						  
@@ -62,12 +73,13 @@
 						  </tr>				  		  
 						  
 						</table>
-					  </center>
+					   
 				   </td>   
 				  </tr>
 				  
 				</table> 
-					
+				</center>
+                	
 			  </s:form>
                       
          </td>
