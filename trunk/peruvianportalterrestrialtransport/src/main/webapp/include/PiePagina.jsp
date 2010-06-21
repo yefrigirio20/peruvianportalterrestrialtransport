@@ -11,7 +11,7 @@
             
 			<table>				
 				<tr align="center">
-				   <td><font color="#003D97">Copyright 2008 - <strong>Peruvian Portal Terrestrial Transport</strong>.</font></td>
+				   <td><font color="#003D97">Copyright 2010 - <strong>Peruvian Portal Terrestrial Transport</strong>.</font></td>
 				</tr>   
 				<tr align="center">
 				  <td><font color="#003D97">Prohibida su reproduccion sin consentimiento expreso. Todos los derechos reservados</font></td>
