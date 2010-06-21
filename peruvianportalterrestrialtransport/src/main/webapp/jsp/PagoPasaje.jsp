@@ -46,7 +46,7 @@
      
  </head>
 
- <body style="margin:0px;" >
+ <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" >
   
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
@@ -66,9 +66,10 @@
          </td>
 
          <!-- INCLUDE PRINCIPAL -->
-         <td width="85%" valign="top">             
-           <form id="frnRegistroCliente" >		 
-           
+         <td width="85%" valign="top" > 
+  
+           <form id="idFrnPagoPasaje" name="frnPagoPasaje" method="post" action="<%=request.getContextPath()%>/ServletPagoPasaje" >
+                      
             <table width="80%" border="0" align="center" cellpadding="0" cellspacing="2" >
                  <tr>
                    <td width="10%" >&nbsp;</td>
@@ -93,48 +94,64 @@
                    <td width="10%" >&nbsp;</td>
                  </tr>
                  
+                 <!-- ******************* VALIDACION DE 'JSP' ******************* -->
                  <tr>
                    <td width="10%" >&nbsp;</td>
-                   <td width="80%" >&nbsp;</td>
-                   <td width="45%" >&nbsp;</td>
+                   <td width="80%" colspan="2" > 
+ 
+                     <c:if test="${objValidacion.mensajesNOK != null}" >  
+			 	        <table width="40%" >
+				            <c:forEach var="paramObjeto" items="${objValidacion.mensajesNOK}">
+				
+				               <tr> <td> <font color="red" > ${paramObjeto} </font> </td> </tr>
+				
+				            </c:forEach>
+				            
+					        <c:if test="${estadoValidacion == true}" > 					        
+						        <strong><font color="red" > ${objValidacion.mensajeOK} </font></strong>	 
+					        </c:if>  
+				        </table>
+				        <br></br>
+                     </c:if> 
+                     
+                   </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
+                 <!-- ************************************************************** -->
                  
                  <tr> 
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" > 
-                      <FIELDSET style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-			             <LEGEND ACCESSKEY=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Pagos: </LEGEND>
+                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
+			             <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Pagos: </legend>
                    
                           <table width="100%" >  
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Tipo Pago:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
-                               <td width="40%" ><input type="text" name="textfield5" /></td>
+                               <td width="40%" >
+                                   <select id="idChoTipoPago" name="choTipoPago" style="width:150px;">
+                                      <option id="idTarjetaCredito" >Tarjeta Credito</option>
+                                   </select>                               
+                               </td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                              
                             <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Numero Tarjeta:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
-                               <td width="40%" ><input type="text" name="textfield" /></td>
+                               <td width="40%" ><input type="text" id="txtIdNumeroTarjeta" name="txtNumeroTarjeta" /></td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Fecha Expiracion:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
-                               <td width="40%" ><input type="text" id="txtIdFechaExpiracion" name="txtFechaExpiracion" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" > </td>
+                               <td width="40%" ><input type="text" id="txtIdFechaExpiracion" name="txtFechaExpiracion" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" /> </td>
                                <td width="10%" align="left" >&nbsp;</td>
-                             </tr>
-                             <tr>
-                               <td width="10%" >&nbsp;</td>
-                               <td width="40%" >Codigo Seguridad: <strong><font color="#FF0000" size="+1" >*</font></strong></td>
-                               <td width="40%" ><input type="text" name="textfield2" /></td>
-                               <td width="10%" >&nbsp;</td>
                              </tr>
                           </table> 
                           
-                        </FIELDSET>  
+                        </fieldset>  
                    </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
