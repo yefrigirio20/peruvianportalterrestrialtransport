@@ -21,7 +21,7 @@ public class Departamento implements Serializable{
 	private static final long serialVersionUID = 4221295068386594114L;
 	
 	private Integer	id;
-    private String      nombre;
+    private String  nombre;
  
     //Objetos Relacionados.
     private List<Empresa> listaEmpresas;

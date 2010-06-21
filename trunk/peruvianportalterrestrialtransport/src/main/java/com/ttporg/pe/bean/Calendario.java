@@ -22,9 +22,9 @@ public class Calendario implements Serializable{
 	private static final long serialVersionUID = 8169477857746198292L; 
 	
 	private Integer	id;
-    private Date        fechaHoraSalida; 
-    private Date        fechaHoraLlegada; 
-    private int         duracion;   
+    private Date    fechaHoraSalida; 
+    private Date    fechaHoraLlegada; 
+    private int     duracion;   
     
     //Constructores ...
     public Calendario(){
