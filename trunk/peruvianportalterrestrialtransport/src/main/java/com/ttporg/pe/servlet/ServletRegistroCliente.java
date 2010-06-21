@@ -11,6 +11,7 @@ import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.dto.BeanValidacionDto;
 import com.ttporg.pe.servicio.ClienteService;
 import com.ttporg.pe.util.UtilCalendario;
+import com.ttporg.pe.util.UtilSingleton;
   
 /**
  * @author Cesar Ricardo.
@@ -31,13 +32,16 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	private ServletContext    contexto       = null;
 	private RequestDispatcher despachador    = null;
 	
+	//Singleton ...
+	private UtilSingleton     utilSingleton  = null;
+	
 	//Service ...
 	private ClienteService    servicio       = null;
 	
 	//Utilitarios ...
 	private UtilCalendario    utilCalendario = new UtilCalendario();
 	
-	private String REDIRECCIONAMIENTO     = "/jsp/RegistroCliente.jsp";	
+	private String REDIRECCIONAMIENTO        = "/jsp/RegistroCliente.jsp";	
 	
 	/**
 	 * service
@@ -47,19 +51,21 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
 	    System.out.println( "********* DENTRO DE service **********" ); 
  
-	    BeanValidacionDto objValidacion    = new BeanValidacionDto();
-	    boolean           estadoValidacion = true;
+	    BeanValidacionDto objValidacion      = new BeanValidacionDto();
+	    boolean           estadoValidacion   = true;
+	    String            MENSAJE_VALIDACION = " * Ingresar un valor en: ";
 	    
 	    try{	    	   
     	    String nombres         = request.getParameter( "txtNombres"   );
     	    String apellidos       = request.getParameter( "txtApellidos" );
-    	    String fechaNacimiento = request.getParameter( "txtFechaNacimiento"   );
+    	    String fechaNacimiento = request.getParameter( "txtFechaNacimiento" );
     	    String direccion       = request.getParameter( "txtDireccion" );
-    	    String email           = request.getParameter( "txtEmail"   );
-    	    String usuario         = request.getParameter( "txtUsuario" );
-    	    String password        = request.getParameter( "txtPassword" );
+    	    String email           = request.getParameter( "txtEmail"     );
+    	    String usuario         = request.getParameter( "txtUsuario"   );
+    	    String password        = request.getParameter( "txtPassword"  );
     	    String confirPassword  = request.getParameter( "txtConfirmPassword" );
     	   
+    	    System.out.println( "" );
     	    System.out.println( "DATOS INGRESADOS DEL CLIENTE: "      );
     	    System.out.println( "------------------------------"      ); 
     	    System.out.println( "Nombres:         " + nombres         ); 
@@ -71,10 +77,8 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     	    System.out.println( "Password:        " + password        ); 
     	    System.out.println( "Conf.Password:   " + confirPassword  );
     	    System.out.println( "" );
-    	   
-    	    String MENSAJE_VALIDACION = " * Ingresar un valor en: ";
-    	   
-    	    //Validacion Ingreso.
+    	       	   
+    	    //------------- VALIDACION 'JSP' -------------//
     	    if( nombres.equals( "" ) ){
     		    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Nombres]" );
     		    estadoValidacion = false;
@@ -111,12 +115,12 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     		      objValidacion.getMensajesNOK().add( " * Confirmacion de Password Incorrecta." );
     		      estadoValidacion = false;
     	    }
-    	   
+    	    //---------------------------------------//
+    	    
     	    //Validacion ...
     	    if( estadoValidacion == true ){
     	    	objValidacion.setMensajeOK( "Proceso Exitoso" ); 
-    	    
-       	   
+    	           	   
 	    	    //---------------------------- MEMORIA Y/O BD ----------------------------//
 	    	    //this.servicio.ingresarCliente( objCliente );  //PERSISTENCIA.
 	    	    
@@ -138,6 +142,9 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	    	    		                          null, email, usuario, password, "USUARIO", "true" );
 	    	     
 	    	    //Guardar el 'SINGLETON'.
+	    	    this.utilSingleton = UtilSingleton.getInstancia();
+	    	    this.utilSingleton.setEstadoActivacion( true );
+	    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
 	    	    
 	    	    //------------------------------------------------------------------------//    	    
     	    }

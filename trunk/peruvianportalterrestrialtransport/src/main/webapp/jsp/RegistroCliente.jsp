@@ -46,7 +46,7 @@
      
  </head>
 
- <body>
+ <body onload="detectarControlesEnabledDisabled()" >
   
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
@@ -94,6 +94,7 @@
                    <td width="10%" >&nbsp;</td>
                  </tr>
                  
+                 <!-- ******************* VALIDACION DE 'JSP' ******************* -->
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" > 
@@ -116,6 +117,7 @@
                    </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
+                 <!-- ************************************************************** -->
                  
                  <tr> 
                    <td width="10%" >&nbsp;</td>
