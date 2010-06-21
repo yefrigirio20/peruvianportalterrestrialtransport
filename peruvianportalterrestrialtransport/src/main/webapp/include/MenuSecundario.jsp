@@ -21,7 +21,13 @@
     
      <td >
 	    <center>
+	     <!--  
 	     <a href="<%=request.getContextPath()%>/jsp/BusquedaPasaje.jsp" style="cursor:hand; " />
+		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>Disponibilidad de Asientos</strong></font>
+	     </a>
+	     -->
+	     
+	     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje" style="cursor:hand; " />
 		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>Disponibilidad de Asientos</strong></font>
 	     </a>
 		</center> 
@@ -46,5 +52,6 @@
    </tr>
    
  </table>
+ 
  
  
