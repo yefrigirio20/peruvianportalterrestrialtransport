@@ -24,13 +24,13 @@ public class Calendario implements Serializable{
 	private Integer	id;
     private Date    fechaHoraSalida; 
     private Date    fechaHoraLlegada; 
-    private int     duracion;   
+    private Integer duracion;   
     
     //Constructores ...
     public Calendario(){
     }
 
-    public int getDuracion(){
+    public Integer getDuracion(){
         
         UtilCalendario manejador = new UtilCalendario();
         
@@ -71,7 +71,7 @@ public class Calendario implements Serializable{
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(Integer duracion) {
         this.duracion = duracion;
     }
 
