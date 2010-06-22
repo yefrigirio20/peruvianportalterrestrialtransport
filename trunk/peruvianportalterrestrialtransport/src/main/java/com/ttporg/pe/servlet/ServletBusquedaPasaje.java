@@ -40,6 +40,7 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	//Singleton ...
 	private UtilSingleton     utilSingleton      = null;
 	
+	
 	//Service ...
 	//private ClienteService    servicio           = null;
 	
@@ -64,13 +65,16 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    String codigoDepartamento = request.getParameter( "choDepartamento" );
     	    String codigoEmpresa      = request.getParameter( "choEmpresa"      );
     	    String opcion             = request.getParameter( "opcion"          );
-    	    
+    	    String opcion2            = request.getParameter( "opcion2"         );
+    	    String codigoSalida       = request.getParameter( "codigoSalida"    );
+    	      
     	    System.out.println( "" );
     	    System.out.println( "DATOS INGRESADOS DEL CLIENTE: " );
     	    System.out.println( "------------------------------" ); 
     	    System.out.println( "opcion:             " + opcion  );
     	    System.out.println( "codigoDepartamento: " + codigoDepartamento ); 
     	    System.out.println( "codigoEmpresa:      " + codigoEmpresa      );
+    	    System.out.println( "codigoSalida:       " + codigoSalida      );
     	    System.out.println( "" );
     	    
 		    //BeanValidacionDto objValidacion      = new BeanValidacionDto();
@@ -159,22 +163,80 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 		    	if( opcion.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
 		    		listaSalida = new ArrayList<Salida>();
 		    		
+		    		Salida salida_01 = new Salida();
+		    		salida_01.setId( 1 );
+		    		salida_01.setDepartamentoSalida( "LIMA"   );
+		    		salida_01.setDepartamentoDestino( "CUZCO" );
+		    		
+		    		Salida salida_02 = new Salida();
+		    		salida_02.setId( 2 );
+		    		salida_02.setDepartamentoSalida( "LIMA"   );
+		    		salida_02.setDepartamentoDestino( "CUZCO" );
+		    		
+		    		
+		    		List<Calendario> listaCalendario = new ArrayList<Calendario>();
+		    		
 		    		Calendario calendario_A01 = new Calendario();
 		    		calendario_A01.setId( 1 );
 		    		calendario_A01.setFechaHoraSalida(  new Date() );
-		    		calendario_A01.setFechaHoraLlegada( new Date() );
+		    		calendario_A01.setFechaHoraLlegada( this.utilCalendario.getFechaIncrementaEnHoras( new Date(), 8 ) );
+		    		calendario_A01.setDuracion( this.utilCalendario.getHorasEntreDosFechas( calendario_A01.getFechaHoraSalida(), calendario_A01.getFechaHoraLlegada() ) );   
+		    	
+		    		Calendario calendario_A02 = new Calendario();
+		    		calendario_A02.setId( 2 );
+		    		calendario_A02.setFechaHoraSalida(  new Date() );
+		    		calendario_A02.setFechaHoraLlegada( this.utilCalendario.getFechaIncrementaEnHoras( new Date(), 8 ) );
+		    		calendario_A02.setDuracion( this.utilCalendario.getHorasEntreDosFechas( calendario_A02.getFechaHoraSalida(), calendario_A02.getFechaHoraLlegada() ) );   
+
+		    		//Agregar Calendarios a Salida ...
+		    		listaCalendario.add( calendario_A01 );
+		    		listaCalendario.add( calendario_A02 );
+		    		
+		    		salida_01.setListaCalendarioSalidas( listaCalendario );
+		    		
+		    		salida_02.setListaCalendarioSalidas( listaCalendario );
+		    		
+		    		
+		    		//Agregando a Lista de Salidas.
+		    		listaSalida.add( salida_01 );
+		    		listaSalida.add( salida_02 );
+		    		
+		    		/*
+		            for( int i=0; i<listaSalida.size(); i++ ){
+						 Salida xxx = listaSalida.get( i );
+						 
+					     System.out.println( "ID:       " + xxx.getId() );
+					     System.out.println( "SALIDA:   " + xxx.getDepartamentoSalida()  );
+					     System.out.println( "DESTINO:  " + xxx.getDepartamentoDestino() );
+					     
+					     for( int j=0; j<xxx.getListaCalendarioSalidas().size(); j++ ){
+					    	  Calendario calendario = (Calendario)xxx.getListaCalendarioSalidas().get( j );
+					    	  
+					    	  System.out.println( "LLEGADA:  " + calendario.getFechaHoraLlegada() );
+					    	  System.out.println( "SALIDA:   " + calendario.getFechaHoraSalida()  );
+					    	  System.out.println( "DURACION: " + calendario.getDuracion() );
+					     }
+		            }
+		            */
+		    		
+		            System.out.println( "SI ENTRO ...!!!" );
+		            
+		            if( (opcion2 != null) && (opcion2.equals( "cargarListadoCalendario" ) ) ){		            	
+		            	request.setAttribute( "listaCalendario", listaCalendario );         //estadoValidacion ...
+		            }		            
 		    	}
 		    	//--------------------------------------------------------------//
 	    	}
 	    	
+	    	request.setAttribute( "listaSalida",        listaSalida   );             //estadoValidacion ...
             request.setAttribute( "listaDepartamento",  listaDepartamento );         //estadoValidacion ...
             request.setAttribute( "listaEmpresa",       listaEmpresa  );             //estadoValidacion ...
             request.setAttribute( "listaServicio",      listaServicio );             //estadoValidacion ...
             
             request.setAttribute( "codigoDepartamento", codigoDepartamento );        //estadoValidacion ...        
             request.setAttribute( "codigoEmpresa",      codigoEmpresa );             //estadoValidacion ...   
-            request.setAttribute( "tamanoLista",        listaDepartamento.size() );  //estadoValidacion ...
-     	   
+            request.setAttribute( "tamanoLista",        listaDepartamento.size() );  //estadoValidacion ...     	             
+             
             this.contexto    = this.getServletContext();
             this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );
             

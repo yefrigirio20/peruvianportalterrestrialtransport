@@ -46,14 +46,43 @@ public class UtilCalendario{
 
 	/**
 	 * getConvertidorUtilDateToSqlTimestamp
-	 */
+	 **/
 	public java.sql.Timestamp getConvertidorUtilDateToSqlTimestamp( java.util.Date fecha ){
 		java.sql.Timestamp fechaDateTime = new java.sql.Timestamp( fecha.getTime() );		
 		
 		return fechaDateTime;
 	}
-        
-        /**
+       
+    /**
+     * getHorasEntreDosFechas
+     * @param  fechaInicialParam
+     * @param  fechaFinalParam
+     * @return int
+     */
+	public int getHorasEntreDosFechas( Date fechaInicialParam, Date fechaFinalParam ){
+            
+		    Calendar fechaInicial = Calendar.getInstance();
+		    fechaInicial.setTime( fechaInicialParam );
+		    
+		    Calendar fechaFinal   = Calendar.getInstance();
+		    fechaFinal.setTime( fechaFinalParam );
+		    
+            Integer    redondeoMesFecha = 1;
+            List<Date> listaZonaHoraria = new ArrayList<Date>();
+		
+            int contadorHoras = 0;
+            
+            for( ; fechaInicial.before( fechaFinal ); fechaInicial.add( Calendar.HOUR_OF_DAY, redondeoMesFecha ) ){  //Calendar.DAY_OF_WEEK para Obtener los doas. 
+                 //System.out.println( "Obteniendo Dias: " + fechaInicial.getTime() );
+                 listaZonaHoraria.add( fechaInicial.getTime() );
+                 
+                 contadorHoras++;
+            }
+            
+            return contadorHoras;
+	}	
+	
+    /**
 	 * getHorasEntreDosFechas
 	 */
 	public int getHorasEntreDosFechas( Calendar fechaInicial, Calendar fechaFinal ){
@@ -170,8 +199,8 @@ public class UtilCalendario{
 			cadenaFecha = anoTxt + "-" + mesTxt + "-"+ diaTxt;
 		}
 		catch( Exception e ){
-			e.printStackTrace();
-			System.out.println("El Error encontrado es: " + e.getMessage() );
+			   e.printStackTrace();
+			   System.out.println("El Error encontrado es: " + e.getMessage() );
 		}
 
 		return cadenaFecha;
@@ -202,6 +231,34 @@ public class UtilCalendario{
 
 		return fechaDate;
 	}
+	
+	/**
+	 * getFormatoFechaDateReturnaDate
+	 */
+	public Date getFormatoFechaDateReturnaDate( int ano, int mes, int dia, int hora, int minuto ){
+
+		Calendar calendario = null;
+		Date     fechaDate	= null;
+		
+		try{
+	        int anoFormat  =  ano;
+	        int mesFormat  =  mes - 1;
+	        int diaFormat  =  dia;
+	        int horaFormat =  hora;
+	        int minFormat  =  minuto;
+	        
+	        calendario = Calendar.getInstance();        
+	        calendario.set( anoFormat, mesFormat, diaFormat, horaFormat, minFormat );
+	        
+	        fechaDate = calendario.getTime(); 
+		}
+		catch( Exception e ){
+			e.printStackTrace();
+			System.out.println("El Error encontrado es: " + e.getMessage() );
+		}
+
+		return fechaDate;
+	}	
 	
 	/**
 	 * getTotalDiasDelMes
@@ -1388,5 +1445,36 @@ public class UtilCalendario{
 
 		return htrx;
 	}		
+	
+	/**
+	 * getFechaIncrementaEnHoras
+	 * @param fecha
+	 * @param horaExtra
+	 */
+	public Date getFechaIncrementaEnHoras( Date fecha, int horaExtra ){
+ 
+		Date newFecha = null;
+		
+	    Calendar calendario = Calendar.getInstance();
+		calendario.setTime( fecha );
+		
+		int diaNum  = calendario.get(Calendar.DATE);
+		int mesNum  = calendario.get(Calendar.MONTH) + 1;
+        int anoNum  = calendario.get(Calendar.YEAR);
+        int horaNum = calendario.get(Calendar.HOUR_OF_DAY) + horaExtra;
+        int minNum  = calendario.get(Calendar.MINUTE);
+		
+        System.out.println( diaNum  );
+        System.out.println( mesNum  ); 
+        System.out.println( anoNum  );
+        System.out.println( horaNum );
+        System.out.println( minNum  );
+        
+        newFecha = this.getFormatoFechaDateReturnaDate( anoNum, mesNum, diaNum, horaNum, minNum );  
+        
+		System.out.println( "FECHA LLEGADA: " + newFecha );
+		
+		return newFecha;
+	}
 	
  }

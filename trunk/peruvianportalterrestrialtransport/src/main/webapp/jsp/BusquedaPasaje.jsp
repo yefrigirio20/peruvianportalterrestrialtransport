@@ -50,7 +50,7 @@
 
 		var newwindow = window.open( url, 'name','height=460, width=250, scrollbars=1, left=520, top=180' );
 		
-		if( window.focus){ 
+		if( window.focus ){ 
 		    newwindow.focus()
 		}
 		
@@ -121,7 +121,7 @@
 				        
 				      <tr>
 					     <td width="10%" >&nbsp;</td>
-				         <td width="80%" colspan="2"> 
+				         <td width="80%" colspan="2" > 
 				         
 	                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px;" >
 	     <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Filtro: </legend>
@@ -192,6 +192,7 @@
                                            <option value="12" > SAN MARTIN </option> 
                                            <option value="13" > PUNO </option> 
                                            <option value="14" > UCAYALI </option> 
+                                           <option value="15" > CHIMBOTE </option> 
                                        </select>
                                      </td>
                                      <td width="10%" >&nbsp;</td>
@@ -216,6 +217,7 @@
                                            <option value="12" > SAN MARTIN </option> 
                                            <option value="13" > PUNO </option> 
                                            <option value="14" > UCAYALI </option>  
+                                           <option value="15" > CHIMBOTE </option> 
                                        </select>
                                      </td>
                                      <td width="10%" >&nbsp;</td>
@@ -244,48 +246,70 @@
 				    </tr>	 
 				       
                      <tr> 
-                         <td colspan="4">
-                             <table border="0" width="100%" bgcolor="white">
+                       <td colspan="4" align="center" >        
+                         
+                         <table border="0" width="60%" bgcolor="white" >
+                              
                                  <tr>
                                      <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Orden</td>
                                      <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Origen</td>
                                      <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Destino</td>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Salida</td>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Duracion </td>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Nro. Asientos</td>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Acciones</td>
+                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Detalle</td>
                                  </tr>
-                                 <tr>
-                                     <td style="text-align:center">1</td>
-                                     <td style="text-align:center">Lima</td>
-                                     <td style="text-align:center">Ica</td>
-                                     <td style="text-align:center">10:00 p.m.</td>
-                                     <td style="text-align:center">4:00 hrs</td>
-                                     <td style="text-align:center">                        
-                                        <font> 35 </font>                  
-                                     </td>
-                                     <td style="text-align:center">   
-                                     <a href="popupex.html" onclick="return PopupBus('PopupBus.jsp')" title="Ver Asientos">                
-                    <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
-                                     </a>
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                     <td style="text-align:center">2</td>
-                                     <td style="text-align:center">Lima</td>
-                                     <td style="text-align:center">Puno</td>
-                                     <td style="text-align:center">6:00 a.m.</td>
-                                     <td style="text-align:center">16:00 hrs</td>
-                                          <td style="text-align:center">                        
-                                        <font> 20 </font>                  
-                                     </td>
-                                     <td style="text-align:center">   
-                                     <a href="popupex.html" onclick="return popitup('PopupBus.jsp')" title="Ver Asientos">                
-                    <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
-                                     </a>
-                                     </td>        
-                                 </tr>              
-                            </table>       
+                                 
+                                 <c:if test="${listaSalida != null}" > 
+	                                 <c:forEach var="objListaSalida" items="${listaSalida}" >                                 
+		                                 <tr>
+		                                     <td style="text-align:center">${objListaSalida.id}</td>
+		                                     <td style="text-align:center">${objListaSalida.departamentoSalida}</td>
+		                                     <td style="text-align:center">${objListaSalida.departamentoDestino}</td>
+				                                     
+		                                     <td style="text-align:center">   
+			                                     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?codigoSalida=${objListaSalida.id}&opcion=cargarListadoFiltrado&opcion2=cargarListadoCalendario" style="cursor:hand; " >                
+			                     <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" alt="Ver Asientos" width="20" height="19"  border="0" /> 
+			                                     </a>
+		                                     </td>
+		                                 </tr>                                                                 
+	                               </c:forEach> 
+	                            </c:if>
+	                            
+	                            <c:if test="${listaSalida == null}" > 
+	                               <tr>
+		                               <td colspan="7">
+		                                  Realizar un busquea de pasajes ...
+		                               </td>
+		                           </tr>    
+	                            </c:if>             
+                        </table>  
+                           
+                        <c:if test="${listaCalendario != null}" >     
+                           <table border="0" width="60%" bgcolor="white" >
+                                     <tr>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Salida</td>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Llegada</td>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Duracion</td>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Ver</td>
+                                     </tr> 
+                                     
+	                                 <c:forEach var="objCalendario" items="${listaCalendario}" >                                 
+		                                 <tr>
+		                                     <td style="text-align:center">
+                                               <fmt:formatDate value="${objCalendario.fechaHoraSalida}" type="DATE" pattern="MM-dd-yyyy"/>
+                                             </td>
+		                                     <td style="text-align:center">
+                                             <fmt:formatDate value="${objCalendario.fechaHoraLlegada}" type="DATE" pattern="MM-dd-yyyy"/>
+                                             </td>
+		                                     <td style="text-align:center">${objCalendario.duracion}</td> 
+			                                     
+		                                     <td style="text-align:center">   
+			                                     <a href="popupex.html" onclick="return PopupBus('jsp/PopupBus.jsp')" title="Ver Asientos">                
+			                          <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
+			                                     </a>
+		                                     </td>
+		                                 </tr>                                                                 
+	                               </c:forEach> 	                                    
+                            </table>    
+                          </c:if>         
                         </td>
                     </tr> 
                     
