@@ -396,8 +396,17 @@
 		       <artifactId>displaytag-export-poi</artifactId>
 		       <version>1.1.1</version>
 		    </dependency> 
-	     	****** DISPLAY-TAG(FIN) ******* -->   	
-	
+	     	****** DISPLAY-TAG(FIN) ******* -->   
+                
+                
+                <!-- ***** ITEXT (INICIO) ****** -->
+                <dependency>
+                    <groupId>com.lowagie</groupId>
+                    <artifactId>itext</artifactId>
+                    <version>2.1.7</version>
+                </dependency>
+                <!-- ******* ITEXT (FIN) ******* -->
+                 
 	  </dependencies>
 	
 	  <!-- ************************************* -->
