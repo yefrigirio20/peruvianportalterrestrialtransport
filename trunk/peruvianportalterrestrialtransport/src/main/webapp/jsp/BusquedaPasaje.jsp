@@ -276,7 +276,7 @@
 	                            <c:if test="${listaSalida == null}" > 
 	                               <tr>
 		                               <td colspan="7">
-		                                  Realizar un busquea de pasajes ...
+		                                  Realizar un busqueda de pasajes ...
 		                               </td>
 		                           </tr>    
 	                            </c:if>             
