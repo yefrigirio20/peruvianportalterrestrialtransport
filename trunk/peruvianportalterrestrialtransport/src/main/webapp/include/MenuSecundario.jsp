@@ -3,7 +3,10 @@
    final String nombServlet = "Servlet_Header_Request"; 
  %>
 
-<jsp:include page="../include/Estilos.jsp" flush="true" />
+
+<%@page import="com.ttporg.pe.bean.Cliente"%>
+<%@page import="com.ttporg.pe.bean.BaseBean"%>
+<%@page import="com.ttporg.pe.util.UtilSingleton"%><jsp:include page="../include/Estilos.jsp" flush="true" />
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
  
@@ -21,15 +24,26 @@
     
      <td >
 	    <center>
-	     <!--  
-	     <a href="<%=request.getContextPath()%>/jsp/BusquedaPasaje.jsp" style="cursor:hand; " />
-		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>Disponibilidad de Asientos</strong></font>
-	     </a>
-	     -->
+	     
+	     <% 	     
+			//Obteniendo datos de 'Session'.
+			UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
+	     
+	        if( utilSingleton != null && 
+	            utilSingleton.getObjetoSingleton() != null && 
+	            utilSingleton.getObjetoSingleton().getCliente() != null  ){
+	     %>
 	     
 	     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje" style="cursor:hand; " />
 		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>Disponibilidad de Asientos</strong></font>
 	     </a>
+	     
+          <%}
+          else{
+            %>     
+               <strong> <font size="2" face="Arial" color="red"> Registrarse  </font/> </strong>                 
+            <%}%>  
+	     
 		</center> 
      </td>
 

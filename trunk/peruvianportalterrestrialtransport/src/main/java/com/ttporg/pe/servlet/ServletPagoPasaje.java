@@ -60,7 +60,8 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    String tipoPago        = request.getParameter( "choTipoPago"        );
 	    	    String numeroTarjeta   = request.getParameter( "txtNumeroTarjeta"   );
 	    	    String fechaExpiracion = request.getParameter( "txtFechaExpiracion" );
-		    	
+	    	    String precio          = request.getParameter( "txtPrecio" );
+	    	    
 	    	    String idAsientoSelec  = request.getParameter( "idAsiento"          );
 	    	     
 	    	    System.out.println( "" );
@@ -69,6 +70,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    System.out.println( "Tipo Pago:        " + tipoPago        ); 
 	    	    System.out.println( "Numero Tarjeta:   " + numeroTarjeta   );
 	    	    System.out.println( "Fecha Expiracion: " + fechaExpiracion ); 
+	    	    System.out.println( "Precio:           " + precio ); 
 	    	    System.out.println( "" );
 	    	    System.out.println( "idAsientoSelec:   " + idAsientoSelec       ); 
 	    	    
@@ -81,7 +83,35 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    Asiento asiento = new Asiento();
 		    	    asiento.setId( Integer.parseInt( idAsientoSelec ) );
 		    	    
+		    	    Pago pago = new Pago();
+		    	    pago.setId( 1 );
+		    	    pago.setMontoPago(  Double.parseDouble( precio ) );
+		    	    pago.setTipoPago(   tipoPago );
+		    	    pago.setNumTarjeta( numeroTarjeta );
+		    	    
+		    	    //----------------------------------//
+		    	    String[] arrayCadena = fechaExpiracion.split( "-" );  //Fecha STRING a DATE.
+		    	    
+		    	    String anio = arrayCadena[ 0 ];
+		    	    String mes  = arrayCadena[ 1 ];
+		    	    String dia  = arrayCadena[ 2 ];
+		    	    
+		    	    System.out.println( "Anio: " + anio );
+		    	    System.out.println( "Mes:  " + mes  );
+		    	    System.out.println( "Dia:  " + dia  );
+		    	    
+		    	    Date xxx = this.utilCalendario.getFecha( Integer.parseInt( anio ), 
+		    	    		                                             Integer.parseInt( mes  ), 
+		    	    		                                             Integer.parseInt( dia  ) );
+		    	    //----------------------------------//
+		    	    
+		    	    pago.setFechaExpiracion( xxx );
+		    	    
+		    	    //Asiento.
 		    	    this.utilSingleton.getObjetoSingleton().setAsiento( asiento );  
+		    	    
+		    	    //Pago.
+		    	    this.utilSingleton.getObjetoSingleton().setPago( pago );
 		    	    //------------------------------------------------------//
 	    	    }	    	    
 	    	    
@@ -168,7 +198,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 			    	    this.utilSingleton.setEstadoActivacion( true );
 			    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
 			    	    this.utilSingleton.getObjetoSingleton().setPago(    objPago    );
-			    	  //------------------------------------------------------//
+			    	  //-----------------------------------------------------------//
 		    	    }		    	    
 	    	    }
 	    	    

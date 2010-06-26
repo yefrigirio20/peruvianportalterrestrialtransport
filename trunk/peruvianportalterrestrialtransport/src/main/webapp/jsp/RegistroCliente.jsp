@@ -178,7 +178,7 @@
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" >
                       <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Atenticación: </legend>
+                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Autenticación: </legend>
                         <table width="100%" align="center" >
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>

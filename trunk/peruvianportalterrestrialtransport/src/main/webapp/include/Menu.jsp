@@ -1,7 +1,8 @@
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<jsp:include page="../include/Estilos.jsp" flush="true" />
+
+<%@page import="com.ttporg.pe.util.UtilSingleton"%><jsp:include page="../include/Estilos.jsp" flush="true" />
 
 <script language="JavaScript" type="text/javascript">
 
@@ -126,8 +127,17 @@ function seleccionarEstrella( msnParam ){
                 <td width="80"> </td>
               </tr> 
               
+         <% 	     
+			//Obteniendo datos de 'Session'.
+			UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
+	     
+	        if( utilSingleton != null && 
+	            utilSingleton.getObjetoSingleton() != null && 
+	            utilSingleton.getObjetoSingleton().getCliente() != null  ){
+	     %>
+              
               <tr> 
-                <td width="20">                
+                <td width="20">   
                  <a href="<%=request.getContextPath()%>/jsp/BusquedaAgencia.jsp" style="cursor:hand" />
                    <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Empresas" width="20" height="19"  border="0" />
                  </a>
@@ -149,6 +159,15 @@ function seleccionarEstrella( msnParam ){
                    <font size="2" face="Arial" class="textoMenu" >Buses</font> </a>            
                 </td>
               </tr>
+              
+             <%}
+	           else{
+               %>     
+                  <tr> 
+                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> Registrarse</font/> </strong>  </td>  
+                  </tr> 
+               <%}%>  
+              
         </table>
         
         </marquee>
@@ -177,6 +196,15 @@ function seleccionarEstrella( msnParam ){
                     <td width="80"> </td>
                   </tr> 
                   
+         <% 	     
+			//Obteniendo datos de 'Session'.
+			UtilSingleton utilSingleton2 = UtilSingleton.getINSTANCIA_GUARDADA();
+	     
+	        if( utilSingleton2 != null && 
+	        	utilSingleton2.getObjetoSingleton() != null && 
+	        	utilSingleton2.getObjetoSingleton().getCliente() != null  ){
+	     %>
+                  
                   <tr> 
                     <td width="20">                
                      <a href="<%=request.getContextPath()%>/jsp/BusquedaAgencia.jsp" style="cursor:hand" />
@@ -200,6 +228,15 @@ function seleccionarEstrella( msnParam ){
                        <font size="2" face="Arial" class="textoMenu" >Informacion #02</font> </a>            
                     </td>
                   </tr>
+                  
+             <%}
+	           else{
+               %>     
+                  <tr> 
+                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> Registrarse</font/> </strong>  </td>  
+                  </tr>  
+               <%}%>  
+                  
             </table>
         
         </marquee>    

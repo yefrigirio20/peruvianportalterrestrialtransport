@@ -21,6 +21,17 @@
     </listener>	
      
     <!-- ********** SERVLETS ********** -->  
+    <servlet>
+		<servlet-name>ServletGeneraBoleto</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletGeneraBoleto</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletGeneraBoleto</servlet-name>
+		<url-pattern>/ServletGeneraBoleto</url-pattern>
+	</servlet-mapping>
+    
+    
 	<servlet>
 		<servlet-name>ValidaServlet</servlet-name>
 		<servlet-class>com.ttporg.pe.servlet.ValidaServlet</servlet-class>
