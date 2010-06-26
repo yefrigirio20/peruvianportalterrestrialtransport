@@ -69,7 +69,7 @@
 	    }  
 
 	   function conexionServletPopup( myFrm, parametro ){              
-			 alert( "**** DENTRO DE 'conexionServletPopup' ****" );	 
+			 //alert( "**** DENTRO DE 'conexionServletPopup' ****" );	 
 			 
 	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
 

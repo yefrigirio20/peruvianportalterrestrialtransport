@@ -1,4 +1,5 @@
- 
+ <%@ page contentType="text/html;charset=utf-8" %>
+  
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
@@ -168,7 +169,7 @@
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" >
                       <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Atenticación: </legend>
+                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >AtenticaciÃ³n: </legend>
                         <table width="100%" align="center" >
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>
@@ -269,7 +270,7 @@
 	        button         :    "idLlamarObjetoCalendario",  // NOMBRE DEL SCRIPT PARA EL CALENDARIO(PARA OPCIONES DEL BOTON E IMAGENES)
 	        align          :    "Tl",                        // ALINEAMIENTO (defaults to "Bl")
 	        singleClick    :    true,                        // MODO DOBLE CLICK
-	        step           :    1                            // MOSTRAR TODOS LOS AÑOS EN COMBO BOX
+	        step           :    1                            // MOSTRAR TODOS LOS AÃ‘OS EN COMBO BOX
 	    });
 	</script>	 
 		   
