@@ -162,7 +162,7 @@ public class Test_ObjetosRelacionados{
 		List<Vehiculo> listaVehiculo = new ArrayList<Vehiculo>();
 		listaVehiculo.add( vehiculo_01 );
 		
-		servicio_01.setListaVehiculos( listaVehiculo );
+		servicio_01.setVehiculo( listaVehiculo.get( 0 ) );
 		
 		//----- Agregando: [Asiento] en [Vehiculo] -----//
 		List<Asiento> listaAsiento = new ArrayList<Asiento>();
@@ -215,7 +215,7 @@ public class Test_ObjetosRelacionados{
 				  String nomServicio = objServicio.getNombre();
 				  
 				  List<Salida>   listaSalida   = objServicio.getListaSalidas();
-				  List<Vehiculo> listaVehiculo = objServicio.getListaVehiculos();
+				  Vehiculo  listaVehiculo = objServicio.getVehiculo();
 				  
 				  System.out.println( " - Id.Servicio:    " + idServicio  );
 				  System.out.println( " - Nomb.Servicio:  " + nomServicio );
@@ -248,8 +248,8 @@ public class Test_ObjetosRelacionados{
 					   }					   
 				  }
 				  
-				  for( int y=0; y<listaVehiculo.size(); y++ ){
-					   Vehiculo objVehiculo = listaVehiculo.get( y );
+				 // for( int y=0; y<listaVehiculo.size(); y++ ){
+					   Vehiculo objVehiculo = listaVehiculo;
 					   
 					   int    idVehiculo  = objVehiculo.getId();
 					   String modVehiculo = objVehiculo.getModelo();
@@ -270,7 +270,7 @@ public class Test_ObjetosRelacionados{
 							System.out.println( " - Nom.Fila:       " + nomFila    );
 							System.out.println( " - Nom.Columna:    " + nomColumna );
 					   }
-				  }
+				  //}
 			 }	
 		}
 		
