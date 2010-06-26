@@ -4,11 +4,10 @@
   "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
           
 <validators>
-
     <field name="usuario">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-            <message  key="mensaje.validacion" />
+            <message key="mensaje.validacion" />
         </field-validator>
 
     </field>
@@ -19,5 +18,5 @@
             <message key="mensaje.validacion" />
         </field-validator>
     </field>
-    
 </validators>
+

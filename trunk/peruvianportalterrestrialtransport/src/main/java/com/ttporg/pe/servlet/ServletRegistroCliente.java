@@ -64,7 +64,8 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     	    String usuario         = request.getParameter( "txtUsuario"   );
     	    String password        = request.getParameter( "txtPassword"  );
     	    String confirPassword  = request.getParameter( "txtConfirmPassword" );
-    	   
+    	    String dni             = request.getParameter( "txtDni"       );
+    	        	   
     	    System.out.println( "" );
     	    System.out.println( "DATOS INGRESADOS DEL CLIENTE: "      );
     	    System.out.println( "------------------------------"      ); 
@@ -73,6 +74,7 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     	    System.out.println( "FechaNacimiento: " + fechaNacimiento ); 
     	    System.out.println( "Direccion:       " + direccion       );
     	    System.out.println( "Email:           " + email           ); 
+    	    System.out.println( "Dni:              " + dni            );
     	    System.out.println( "Usuario:         " + usuario         );
     	    System.out.println( "Password:        " + password        ); 
     	    System.out.println( "Conf.Password:   " + confirPassword  );
@@ -93,6 +95,10 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     	    }
     	    if( direccion.equals( "" ) ){
     	 	    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Direccion]" );
+   		        estadoValidacion = false;
+    	    }
+    	    if( dni.equals( "" ) ){
+    	 	    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Dni]" );
    		        estadoValidacion = false;
     	    }
     	    if( email.equals( "" ) ){
@@ -138,15 +144,14 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	    	    		                                        Integer.parseInt( mes  ), 
 	    	    		                                        Integer.parseInt( dia  ) );
 	    	    
-	    	    Cliente objCliente = new Cliente( 1, nombres, apellidos, cumpleanos, direccion,  
-	    	    		                          null, email, usuario, password, "USUARIO", "true" );
-	    	     
-	    	    //Guardar el 'SINGLETON'.
+	    	    Cliente objCliente = new Cliente( 1, nombres, apellidos, cumpleanos, direccion, 
+	                                              null, email, dni, usuario, password, "USUARIO", "true" ); 
+	    	    
+	    	    //------------- Guardar el 'SINGLETON'. -------------//
 	    	    this.utilSingleton = UtilSingleton.getInstancia();
 	    	    this.utilSingleton.setEstadoActivacion( true );
-	    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
-	    	    
-	    	    //------------------------------------------------------------------------//    	    
+	    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );	    	    
+	    	    //---------------------------------------------------//    	    
     	    }
     	    
             request.setAttribute( "estadoValidacion", estadoValidacion );  //estadoValidacion ...

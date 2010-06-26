@@ -3,10 +3,7 @@ package com.ttporg.pe.action;
 import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_ERROR_01;
 import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_ERROR_02;
 import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_OK;
-
 import com.ttporg.pe.bean.BaseBean;
-import com.ttporg.pe.bean.Cliente;
-import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.servicio.EmpresaService;
 import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
@@ -53,6 +50,7 @@ public class LoginMB extends BaseBean{
 	 * execute
 	 */
 	public String execute(){
+		System.out.println( "******  execute() *********" );
 		
 		String estadoRetorno = "";
 		
@@ -69,56 +67,67 @@ public class LoginMB extends BaseBean{
 			//Validacion ...
 			if( (estadoUsuario == true) && (estadoPassword == true) ){
 				
-				Cliente objCliente = new Cliente();  
+				Cliente objCliente = new Cliente();
 
-				String encrypPassword = this.manejoEncriptacion.encriptarCIPHER( this.getPassword().toUpperCase() );
+				//String encrypPassword = this.manejoEncriptacion.encriptarCIPHER( this.getPassword().toUpperCase() );
 				
-				objCliente.setUsuario(  this.getUsuario()  );
-				objCliente.setPassword( encrypPassword     );
+				objCliente.setUsuario(  this.usuario  );
+				//objCliente.setPassword( encrypPassword   );
+				objCliente.setPassword( this.password ); 
+								
+				//objCliente = this.servicio.loginEmpresa( objCliente );
 				
-				//objEmpresa = this.servicio.loginEmpresa( objEmpresa );
-				
- 
 	    	    //---------------- Obtener 'SINGLETON'. ----------------//
 				UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
- 	    	    
+			 
 	    	    System.out.println( "Util Singleton: " + utilSingleton );
 	    	    
 	    	    //Validacion ...
 	    	    if( (utilSingleton != null) && (utilSingleton.isEstadoActivacion() == true) ){
-	    	    	Cliente objClienteSingleton = utilSingleton.getObjetoSingleton().getCliente();
-	    	    	
-	    	    	System.out.println( "objClienteSingleton SINGLETON: " + objClienteSingleton );
-					
-					if( objClienteSingleton.getId()       == Integer.parseInt( this.getUsuario() ) && 
-						objClienteSingleton.getPassword() == this.getPassword() ){
-								    	    	
-						addActionMessage( MENSAJE_AUTENTICACION_OK );
-						estadoRetorno = SUCCESS;                           //Se reenvia a la interfaz siguiente.
-					}					
-					else{	
-						 addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
-						 estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
-					}					
+	    	    	 Cliente objClienteSingleton = utilSingleton.getObjetoSingleton().getCliente();
+				
+	    	    	 System.out.println( "Singleton EXISTE: " );
+		    	    
+	    	    	 //Validando ...
+	    	    	 if( objClienteSingleton.getUsuario().equalsIgnoreCase( this.usuario )  &&
+	    	    		 objClienteSingleton.getPassword().equalsIgnoreCase( this.password ) ){
+	    	    		 
+	    				  //Setear Obj.Singleton en SESION.
+	    	    		  this.getObjSession().put( "objCliente", objClienteSingleton ); 
+	    	    		  
+	  					  addActionMessage( MENSAJE_AUTENTICACION_OK );
+						  estadoRetorno = SUCCESS;                           //Se reenvia a la interfaz siguiente.	
+	 				}
+	 				else{	
+	 					 addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
+	 					 estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
+	 				}	
 				}
 				else{
-					 addActionError( MENSAJE_AUTENTICACION_ERROR_01 );
+					 addActionError( MENSAJE_AUTENTICACION_ERROR_02 );
 					 estadoRetorno = INPUT;
 				}
+	    	    
+
 				
-				//--------------------------------------------------------------//
+				//this.imprimeLog( "objCliente: " + objCliente );
 				
-	    	    /*
-	    	     //PARA SESIONES ...
-				this.imprimeLog( "objEmpresa: " + objUsuario );
 				
-				if( objUsuario != null ){
+				
+				/*
+				if( objCliente != null ){
+										
+					//UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();	 	    	    
+		    	    //System.out.println( "Util Singleton: " + utilSingleton );
+					
+	    	    	//System.out.println( "Usuario  s: " + utilSingleton.getObjetoSingleton().getCliente().getUsuario() );
+	    	    	//System.out.println( "Password s: " + utilSingleton.getObjetoSingleton().getCliente().getPassword() );
 					
 					//Seteando datos en 'Session'.
-					this.getObjSession().put( "objUsuario", objCliente ); 
+					this.getObjSession().put( "objCliente", objCliente ); 
 										
 					//Obteniendo datos de 'Session'.
-					objUsuario = (Usuario)this.getObjSession().get( "objCliente" );
+					//objEmpresa = (Empresa)this.getObjSession().get( "objEmpresa" );
 					
 					addActionMessage( MENSAJE_AUTENTICACION_OK );
 					estadoRetorno = SUCCESS;                           //Se reenvia a la interfaz siguiente.	
@@ -126,13 +135,15 @@ public class LoginMB extends BaseBean{
 				else{	
 					 addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
 					 estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
-				}
-				*/			
+				}			
 			}
 			else{
 				 addActionError( MENSAJE_AUTENTICACION_ERROR_02 );
 				 estadoRetorno = INPUT;
-			}
+			
+			*/
+	    	    
+			}	    
 		}
 		catch( Exception e ){
 			   addActionError( "Exception: " + e.getMessage() );     //Setea el mensaje de Error Personalizado.
