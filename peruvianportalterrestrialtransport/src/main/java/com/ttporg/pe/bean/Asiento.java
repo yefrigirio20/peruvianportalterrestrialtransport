@@ -18,7 +18,7 @@ public class Asiento implements Serializable{
  
 	private static final long	serialVersionUID	= 8515852719018556407L;
 	
-	private Integer	     id;
+	private Integer	      id;
     private String        fila;
     private String        columna;
     private boolean       estado;   //True = Libre - False = Ocupado

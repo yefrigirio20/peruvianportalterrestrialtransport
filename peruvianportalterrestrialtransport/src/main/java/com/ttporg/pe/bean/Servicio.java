@@ -15,7 +15,7 @@ import java.util.List;
  * @fecha_de_creación: dd-mm-yyyy.
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
- */
+ **/
 public class Servicio implements Serializable{
  
 	private static final long serialVersionUID = 9077905645082144658L;
@@ -26,52 +26,56 @@ public class Servicio implements Serializable{
 
     //Objetos Relacionados.
     private List<Salida>   listaSalidas; 
-    private List<Vehiculo> listaVehiculos;
+    private Vehiculo       vehiculo;
         
     //Constructores ...
     public Servicio(){
-        this.listaSalidas   = new ArrayList<Salida>();
-        this.listaVehiculos = new ArrayList<Vehiculo>();
+        this.listaSalidas = new ArrayList<Salida>();
+        this.vehiculo     = new Vehiculo();
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<Salida> getListaSalidas() {
-        return listaSalidas;
-    }
-
-    public void setListaSalidas( List<Salida> listaSalidas) {
-        this.listaSalidas = listaSalidas;
-    }
-
-    public List<Vehiculo> getListaVehiculos() {
-        return listaVehiculos;
-    }
-
-    public void setListaVehiculos( List<Vehiculo> listaVehiculos) {
-        this.listaVehiculos = listaVehiculos;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }   
+	public Integer getId(){
+		return id;
+	}
+	
+	public void setId( Integer id ){
+		this.id = id;
+	}
+	
+	public String getNombre(){
+		return nombre;
+	}
+	
+	public void setNombre( String nombre ){
+		this.nombre = nombre;
+	}
+	
+	public String getDescripcion(){
+		return descripcion;
+	}
+	
+	public void setDescripcion( String descripcion ){
+		this.descripcion = descripcion;
+	}
+	
+	public List<Salida> getListaSalidas(){
+		return listaSalidas;
+	}
+	
+	public void setListaSalidas( List<Salida> listaSalidas ){
+		this.listaSalidas = listaSalidas;
+	}
+	
+	public Vehiculo getVehiculo(){
+		return vehiculo;
+	}
+	
+	public void setVehiculo( Vehiculo vehiculo ){
+		this.vehiculo = vehiculo;
+	}
+	
+	public static long getSerialVersionUID(){
+		return serialVersionUID;
+	}    
     
 }
