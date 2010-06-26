@@ -56,10 +56,12 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	    System.out.println( "********* DENTRO DE service **********" ); 
         
 	    try{
-	    	String nombreServicio = request.getParameter( "nombreServicio" );
-	    	
-	    	System.out.println( "nombreServicio: " + nombreServicio );
-	    	
+	    	String nombreServicio = request.getParameter( "nombreServicio" );	    	
+	    	String idAsientoSeleccionado      = request.getParameter( "idAsiento" );
+	    		    	
+	    	System.out.println( "nombreServicio: " + nombreServicio );	    	
+	    	System.out.println( "idAsiento:      " + idAsientoSeleccionado );
+	    		    	
 	    	Servicio objServicio = new Servicio();
 	    	
 	    	objServicio.setId(     1 );
@@ -89,6 +91,30 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 		    	 
 		    	 contador ++;
 	    	}	    	   	 
+	    	
+	    	//SETEO HARDCODE... 
+	    	for( int i=0; i<listaAsiento.size(); i++ ){
+	
+		    	 Asiento asiento = listaAsiento.get( i );
+		    	 
+		    	 if( (asiento.getId() == 5) || (asiento.getId() == 7) || (asiento.getId() == 9) || 
+		    	     (asiento.getId() == 13) || (asiento.getId() == 17) || (asiento.getId() == 11) ){
+		    		 asiento.setEstado( true );
+		    	 }
+		    }	
+	    
+	    		    	
+	    	//Validando ...
+	    	if( idAsientoSeleccionado != null ){
+		    	for( int i=0; i<listaAsiento.size(); i++ ){
+ 		
+			    	 Asiento asiento = listaAsiento.get( i );
+			    	 
+			    	 if( asiento.getId() == Integer.parseInt( idAsientoSeleccionado ) ){
+			    		 asiento.setEstado( true );
+			    	 }
+			    }	
+	    	}
 	    	
 	    	request.setAttribute( "listaAsiento", objServicio.getVehiculo().getListaAsientos() );  //estadoValidacion ...
 	    	
