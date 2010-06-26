@@ -42,7 +42,21 @@
 	        }
 	        var date2 = new Date(time);
 	        field.value = date2.print("%Y-%m-%d %H:%M");
-	    }    
+	    } 
+
+	    function conexionGenerarBoleto( myFrm ){              
+			 //alert( "**** DENTRO DE 'conexionServlet' ****" );	 
+			 
+	         var url = "<%=request.getContextPath()%>/ServletMONICA";
+	         //alert( url );
+
+	         var urlNew = url; /*+ '?idAsiento=' + idAsiento;*/
+	         //alert( urlNew );
+	         	
+	         myFrm.method = '' + 'POST';
+	         myFrm.action = urlNew; 		 		 
+	         myFrm.submit();
+	    } 
 	</script>    
      
  </head>
@@ -184,9 +198,13 @@
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td>&nbsp;</td>
-                   <td align="right"><input type="submit" name="Seguir" value="Pagar" style="width:100px; height:30px;" /></td>
-                   <td width="10%" >&nbsp;</td>
+                   <td align="right">                    
+                      <input type="submit" name="Seguir" value="Pagar" style="width:100px; height:30px;" />   
+                   </td>
+                   <td width="10%" > 
+                   </td>
                  </tr>
+                 
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" >
@@ -194,7 +212,11 @@
 	                     <img src="<%=request.getContextPath()%>/imagenes/LogoVeriSign.gif" width="100" height="45" >
 	                   </a>
                    </td>
-                   <td width="45%" align="right" >&nbsp;</td>
+                   <td width="45%" align="right" >                       
+                   <c:if test="${estadoValidacion == true}" > 
+                         <input type="submit" name="Generar Boleto" value="Generar Boleto" 
+ style="width:100px; height:30px;background:#F00;color:#CCC" onclick="javascript:conexionGenerarBoleto( this.form )" />
+                      </c:if> </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
                  <tr>
