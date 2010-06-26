@@ -19,6 +19,7 @@ public class Pago{
 	private Integer id;
 	private String  tipoPago;
 	private String  numTarjeta;
+	private double  montoPago;	
 	private Date    fechaExpiracion;  
 	private Cliente cliente;
 	
@@ -27,10 +28,11 @@ public class Pago{
 		this.cliente = new Cliente();
 	}
 		
-	public Pago( Integer id, String tipoPago, String  numTarjeta, Date fechaExpiracion, Cliente cliente ){
+	public Pago( Integer id, String tipoPago, String  numTarjeta, double  montoPago, Date fechaExpiracion, Cliente cliente ){
 		super();
 		this.id              = id;
 		this.tipoPago        = tipoPago;
+		this.montoPago       = montoPago;
 		this.numTarjeta      = numTarjeta;
 		this.fechaExpiracion = fechaExpiracion;
 		this.cliente         = cliente;
@@ -74,6 +76,14 @@ public class Pago{
 	
 	public void setCliente( Cliente cliente ){
 		this.cliente = cliente;
+	}
+	
+	public double getMontoPago(){
+		return montoPago;
+	}
+	
+	public void setMontoPago( double montoPago ){
+		this.montoPago = montoPago;
 	}	
 	
  }

@@ -159,7 +159,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 			    	    
 			    	    System.out.println( "Nombre Cliente que Pago:: " + objCliente.getNombres() );
 			    	    
-			    	    Pago objPago = new Pago( 1, tipoPago, numeroTarjeta, expiracion, objCliente );
+			    	    Pago objPago = new Pago( 1, tipoPago, numeroTarjeta, 40, expiracion, objCliente );
 			    	    
 			    	    System.out.println( "objPago: " + objPago );
 		    	    	    	     

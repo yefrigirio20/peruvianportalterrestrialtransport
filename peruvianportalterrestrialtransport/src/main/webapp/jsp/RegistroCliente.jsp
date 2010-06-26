@@ -140,12 +140,21 @@
                                <td width="40%" ><input type="text" id="txtIdApellidos" name="txtApellidos" /></td>
                                <td width="10%" align="left" >&nbsp;</td>
                              </tr>
+                             
+                             <tr>
+                               <td width="10%" >&nbsp;</td>
+                               <td width="40%" >Dni<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
+                               <td width="40%" ><input type="text" id="txtIdDni" name="txtDni" /> </td>
+                               <td width="10%" >&nbsp;</td>
+                             </tr>
+                             
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Fecha Nacimiento<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
                                <td width="40%" ><input type="text" id="txtIdFechaNacimiento" name="txtFechaNacimiento" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" /> </td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
+                             
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Direccion<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>

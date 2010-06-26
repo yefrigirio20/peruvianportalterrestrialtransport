@@ -24,6 +24,7 @@ public class Cliente implements Serializable{
     private String	apellidos;
     private Date	cumpleanos;
     private String	direccion;
+    private String	dni;
     private String	foto;
     private String	email;
     private String	usuario;
@@ -36,7 +37,7 @@ public class Cliente implements Serializable{
     }	
 
     public Cliente( Integer id, String nombres, String apellidos, Date cumpleanos, String direccion, 
-                    String foto, String email, String usuario, String password, String tipo, String estado ){
+                    String foto, String email, String dni, String usuario, String password, String tipo, String estado ){
             super();
             this.id         = id;
             this.nombres    = nombres;
@@ -46,6 +47,7 @@ public class Cliente implements Serializable{
             this.foto       = foto;
             this.email      = email;
             this.usuario    = usuario;
+            this.dni        = dni;  
             this.password   = password;
             this.tipo       = tipo;
             this.estado     = estado;
@@ -137,6 +139,18 @@ public class Cliente implements Serializable{
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
-    }    
-    
+    }
+	
+	public String getDni(){
+		return dni;
+	}
+	
+	public void setDni( String dni ){
+		this.dni = dni;
+	}
+	
+	public static long getSerialVersionUID(){
+		return serialVersionUID;
+	}    
+        
 }
