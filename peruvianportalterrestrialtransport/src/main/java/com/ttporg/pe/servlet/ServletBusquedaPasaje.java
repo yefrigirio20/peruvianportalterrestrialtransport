@@ -95,7 +95,7 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	    	
 	    	Departamento departamento_02 = new Departamento();
 	    	departamento_02.setId(     2 );
-	    	departamento_02.setNombre( "AYACUCO" );
+	    	departamento_02.setNombre( "AYACUCHO" );
 	    	
 	    	Departamento departamento_03 = new Departamento();
 	    	departamento_03.setId(     3 );

@@ -32,13 +32,13 @@
 	    } 
 
 	    function conexionCompraBoleto( myFrm, idAsiento ){              
-			 alert( "**** DENTRO DE 'conexionCompraBoleto' ****" );	 
+			 //alert( "**** DENTRO DE 'conexionCompraBoleto' ****" );	 
 			 
 	         var url = "<%=request.getContextPath()%>/ServletPagoPasaje";
-	         alert( url );
+	         //alert( url );
              
 	         var urlNew = url + '?idAsiento=' + idAsiento;
-	         alert( urlNew );
+	         //alert( urlNew );
 	         	
 			 //window.opener.document.idFrmBusquedaPasaje.idTxtDia.value = window.document.idFrmPopupBus.datos.value;	
 			 	
@@ -251,15 +251,21 @@
             
         <br> </br>
            <strong>#Total Asientos:</strong> <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;"/>
+        
+        <br> </br>
+        <br> </br>
         <br> </br>
          
         <table width="80%" >
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="90%" colspan="2" align="center" >                                      
-                       <input type="button" name="btnComprar" value="Comprar Pasaje" onclick="javascript:conexionCompraBoleto( this.form, 100 )" />
+                       <a onclick="opener.location=('<%=request.getContextPath()%>/ServletPagoPasaje'); self.close();" style="cursor:pointer">
+                          <strong> <font style="color:#FFF; background:#F00; border:thin; border-color:#000" > Comprar Pasaje </font> </strong>
+                       </a>
                    </td>
-                   <td width="10%" >&nbsp;</td>
+                   <td width="10%" >&nbsp;
+                   </td>
               </tr>
         
         </table>

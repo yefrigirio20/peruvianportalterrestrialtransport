@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ttporg.pe.bean.Asiento;
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.dto.BeanValidacionDto;
@@ -60,6 +61,8 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    String numeroTarjeta   = request.getParameter( "txtNumeroTarjeta"   );
 	    	    String fechaExpiracion = request.getParameter( "txtFechaExpiracion" );
 		    	
+	    	    String idAsientoSelec  = request.getParameter( "idAsiento"          );
+	    	     
 	    	    System.out.println( "" );
 	    	    System.out.println( "DATOS INGRESADOS DEL CLIENTE: "       );
 	    	    System.out.println( "------------------------------"       ); 
@@ -67,6 +70,20 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    System.out.println( "Numero Tarjeta:   " + numeroTarjeta   );
 	    	    System.out.println( "Fecha Expiracion: " + fechaExpiracion ); 
 	    	    System.out.println( "" );
+	    	    System.out.println( "idAsientoSelec:   " + idAsientoSelec       ); 
+	    	    
+	    	    if( idAsientoSelec != null ){
+	    	    	
+		    	    //---------------- Guardar el 'SINGLETON'. ----------------//
+		    	    this.utilSingleton = UtilSingleton.getInstancia();
+		    	    this.utilSingleton.setEstadoActivacion( true );
+		    	    
+		    	    Asiento asiento = new Asiento();
+		    	    asiento.setId( Integer.parseInt( idAsientoSelec ) );
+		    	    
+		    	    this.utilSingleton.getObjetoSingleton().setAsiento( asiento );  
+		    	    //------------------------------------------------------//
+	    	    }	    	    
 	    	    
 	    	    //------------- VALIDACION 'JSP' -------------//
 	    	    if( tipoPago == null || tipoPago.equals( "" ) ){
