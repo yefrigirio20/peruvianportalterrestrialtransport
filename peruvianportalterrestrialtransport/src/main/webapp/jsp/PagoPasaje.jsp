@@ -1,4 +1,5 @@
- 
+ <%@ page contentType="text/html;charset=utf-8" %>
+  
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
@@ -234,7 +235,7 @@
 	        button         :    "idLlamarObjetoCalendario",  // NOMBRE DEL SCRIPT PARA EL CALENDARIO(PARA OPCIONES DEL BOTON E IMAGENES)
 	        align          :    "Tl",                        // ALINEAMIENTO (defaults to "Bl")
 	        singleClick    :    true,                        // MODO DOBLE CLICK
-	        step           :    1                            // MOSTRAR TODOS LOS AÑOS EN COMBO BOX
+	        step           :    1                            // MOSTRAR TODOS LOS AÃ‘OS EN COMBO BOX
 	    });
 	</script>	 
 		   

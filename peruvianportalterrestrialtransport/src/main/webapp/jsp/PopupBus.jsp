@@ -1,3 +1,4 @@
+ <%@ page contentType="text/html;charset=utf-8" %>
  
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
@@ -15,6 +16,20 @@
 		    eje_y = (screen.height-document.body.clientHeight) / 2; 
 		    moveTo( eje_x, eje_y );
 	    }  
+
+	    function conexionServlet( myFrm, idAsiento ){              
+			 alert( "**** DENTRO DE 'conexionServlet' ****" );	 
+			 
+	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
+	         alert( url );
+
+	         var urlNew = url + '?idAsiento=' + idAsiento;
+	         alert( urlNew );
+	         	
+	         myFrm.method = '' + 'POST';
+	         myFrm.action = urlNew; 		 		 
+	         myFrm.submit();
+	    } 
     </script>
  
 </head>
@@ -26,7 +41,7 @@
     
   <center> 
      <font face="Arial" color="#9E353F" size="5">
-       Verificación de Asientos
+       VerificaciÃ³n de Asientos
      </font>   
   </center>
    
@@ -166,28 +181,32 @@
 	                      if( contador < 10 ){ 
 	                    	  System.out.println( "opcion #1: " );
 	                      %>	                      
-		                        <td style="text-align:center" bgcolor="#999999" >                 	                       	                      
-		                          <c:if test="${objListaAsientos.estado == true}" >
-		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#060;color:#CCC"  />
-		                          </c:if>
-		                          
-		                          <c:if test="${objListaAsientos.estado == false}" >
-		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#900;color:#CCC" />
-		                          </c:if>                     
-		                      	</td>
+	                        <td style="text-align:center" bgcolor="#999999" >                 	                       	                      
+	                          <c:if test="${objListaAsientos.estado == false}" >
+	                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " 
+	                          	        style="background:#060;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaAsientos.id} )" />
+	                          </c:if>
+	                          
+	                          <c:if test="${objListaAsientos.estado == true}" >
+	                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " 
+	                          	        style="background:#900;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaAsientos.id} )" />
+	                          </c:if>                     
+	                      	</td>
 	                      <%}
 	                      if( contador > 10 ){ 	                    	  
 	                    	  System.out.println( "opcion #2: " );
 	                      %>	
-		                        <td style="text-align:center"  bgcolor="#CDCDCD">              	                       	                      
-		                          <c:if test="${objListaAsientos.estado == true}" >
-		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#060;color:#CCC"  />
-		                          </c:if>
-		                          
-		                          <c:if test="${objListaAsientos.estado == false}" >
-		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#900;color:#CCC" />
-		                          </c:if>                     
-		                      	</td>	                          
+	                        <td style="text-align:center"  bgcolor="#CDCDCD">              	                       	                      
+	                          <c:if test="${objListaAsientos.estado == false}" >
+	                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " 
+	                          	        style="background:#060;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaAsientos.id} )" />
+	                          </c:if>
+	                          
+	                          <c:if test="${objListaAsientos.estado == true}" >
+	                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  "    
+	                          	        style="background:#900;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaAsientos.id} )" />
+	                          </c:if>                     
+	                      	</td>	                          
 	                      <%}%>  
 	                      
 	                      <% contador ++; %>                

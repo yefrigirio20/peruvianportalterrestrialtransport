@@ -1,4 +1,5 @@
- 
+ <%@ page contentType="text/html;charset=utf-8" %>
+  
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
@@ -86,17 +87,17 @@
 				      <tr>                         
 					     <td width="10%" >&nbsp;</td>
 				         <td width="80%" colspan="2" >
-                           <p>Esta es su p·gina
-                             principal del Portal Perubian Terrestrial Transport. AquÌ Ud. Podr· elegir los destinos, horarios,
+                           <p>Esta es su p√°gina
+                             principal del Portal Perubian Terrestrial Transport. Aqu√≠ Ud. Podr√° elegir los destinos, horarios,
                              servicios, etc. entre todas las empresas registradas en nuestro portal web, para que se pueda dirigir al destino turistico de su agrado.
                            </p>
                            <p>Las empresas de
                              transporte registradas con nosotros, son empresas formalmente establecidas
-                             y consolidadas, por lo que el servicio que Ud. encontrar· entre nuestros
-                             clientes ser· siempre de primera calidad.         
+                             y consolidadas, por lo que el servicio que Ud. encontrar√° entre nuestros
+                             clientes ser√° siempre de primera calidad.         
                            </p>
                            <p>Esperamos que el servicio
-                             que reciba sea de su entera satisfacciÛn.         
+                             que reciba sea de su entera satisfacci√≥n.         
                          </p></td> 
 				         <td width="10%" >&nbsp;</td>
 				      </tr>
