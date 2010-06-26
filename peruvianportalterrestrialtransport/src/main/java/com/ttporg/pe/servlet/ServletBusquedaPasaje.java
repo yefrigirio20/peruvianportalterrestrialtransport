@@ -53,7 +53,7 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	 * service
 	 * @param request
 	 * @param response
-	 */	
+	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
 	    System.out.println( "********* DENTRO DE service **********" ); 
 	    
@@ -67,14 +67,19 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    String opcion             = request.getParameter( "opcion"          );
     	    String opcion2            = request.getParameter( "opcion2"         );
     	    String codigoSalida       = request.getParameter( "codigoSalida"    );
-    	      
+    	    
+    	    String nomCiudadOrigen    = request.getParameter( "choCiudadOrigen"  );
+    	    String nomCiudadDestina   = request.getParameter( "choCiudadDestino" );
+    	        	    
     	    System.out.println( "" );
     	    System.out.println( "DATOS INGRESADOS DEL CLIENTE: " );
     	    System.out.println( "------------------------------" ); 
     	    System.out.println( "opcion:             " + opcion  );
     	    System.out.println( "codigoDepartamento: " + codigoDepartamento ); 
     	    System.out.println( "codigoEmpresa:      " + codigoEmpresa      );
-    	    System.out.println( "codigoSalida:       " + codigoSalida      );
+    	    System.out.println( "codigoSalida:       " + codigoSalida       );
+    	    System.out.println( "nomCiudadOrigen:    " + nomCiudadOrigen    );
+    	    System.out.println( "nomCiudadDestina:   " + nomCiudadDestina   );
     	    System.out.println( "" );
     	    
 		    //BeanValidacionDto objValidacion      = new BeanValidacionDto();
@@ -165,13 +170,13 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 		    		
 		    		Salida salida_01 = new Salida();
 		    		salida_01.setId( 1 );
-		    		salida_01.setDepartamentoSalida( "LIMA"   );
-		    		salida_01.setDepartamentoDestino( "CUZCO" );
+		    		salida_01.setDepartamentoSalida(  nomCiudadOrigen  );
+		    		salida_01.setDepartamentoDestino( nomCiudadDestina );
 		    		
 		    		Salida salida_02 = new Salida();
 		    		salida_02.setId( 2 );
-		    		salida_02.setDepartamentoSalida( "LIMA"   );
-		    		salida_02.setDepartamentoDestino( "CUZCO" );
+		    		salida_02.setDepartamentoSalida(  nomCiudadOrigen  );
+		    		salida_02.setDepartamentoDestino( nomCiudadDestina );
 		    		
 		    		
 		    		List<Calendario> listaCalendario = new ArrayList<Calendario>();
@@ -179,15 +184,15 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 		    		Calendario calendario_A01 = new Calendario();
 		    		calendario_A01.setId( 1 );
 		    		calendario_A01.setFechaHoraSalida(  new Date() );
-		    		calendario_A01.setFechaHoraLlegada( this.utilCalendario.getFechaIncrementaEnHoras( new Date(), 8 ) );
-		    		calendario_A01.setDuracion( this.utilCalendario.getHorasEntreDosFechas( calendario_A01.getFechaHoraSalida(), calendario_A01.getFechaHoraLlegada() ) );   
+		    		calendario_A01.setFechaHoraLlegada( this.utilCalendario.getFechaIncrementaEnHoras( new Date(), 4 ) );
+		    		//calendario_A01.setDuracion( this.utilCalendario.getHorasEntreDosFechas( calendario_A01.getFechaHoraSalida(), calendario_A01.getFechaHoraLlegada() ) );   
 		    	
 		    		Calendario calendario_A02 = new Calendario();
 		    		calendario_A02.setId( 2 );
 		    		calendario_A02.setFechaHoraSalida(  new Date() );
 		    		calendario_A02.setFechaHoraLlegada( this.utilCalendario.getFechaIncrementaEnHoras( new Date(), 8 ) );
-		    		calendario_A02.setDuracion( this.utilCalendario.getHorasEntreDosFechas( calendario_A02.getFechaHoraSalida(), calendario_A02.getFechaHoraLlegada() ) );   
-
+		    		//calendario_A02.setDuracion( this.utilCalendario.getHorasEntreDosFechas( calendario_A02.getFechaHoraSalida(), calendario_A02.getFechaHoraLlegada() ) );   
+		    		
 		    		//Agregar Calendarios a Salida ...
 		    		listaCalendario.add( calendario_A01 );
 		    		listaCalendario.add( calendario_A02 );
