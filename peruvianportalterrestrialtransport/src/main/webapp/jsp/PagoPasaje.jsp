@@ -47,7 +47,7 @@
 	    function conexionGenerarBoleto( myFrm ){              
 			 //alert( "**** DENTRO DE 'conexionServlet' ****" );	 
 			 
-	         var url = "<%=request.getContextPath()%>/ServletMONICA";
+	         var url = "<%=request.getContextPath()%>/ServletGeneraBoleto";
 	         //alert( url );
 
 	         var urlNew = url; /*+ '?idAsiento=' + idAsiento;*/
@@ -140,7 +140,17 @@
                       <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
 			             <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Pagos: </legend>
                    
-                          <table width="100%" >  
+                          <table width="100%" > 
+                          
+                             <tr>
+                               <td width="10%" >&nbsp;</td>
+                               <td width="40%" ><strong><font color="#FF0000" size="2" >Precio (s/):</font></strong></td>
+                               <td width="40%" > 
+                                  <input type="text" id="txtIdPrecio" value="45" name="txtPrecio" style=" width : 33px; background-color: #C7C7C7"/>
+                               </td>
+                               <td width="10%" align="left" >&nbsp;</td>
+                             </tr>
+                           
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" >Tipo Pago:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
