@@ -69,17 +69,17 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    System.out.println( "" );
 	    	    
 	    	    //------------- VALIDACION 'JSP' -------------//
-	    	    if( tipoPago.equals( "" ) ){
+	    	    if( tipoPago == null || tipoPago.equals( "" ) ){
 	    		    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Tipo Pago]" );
 	    		    estadoValidacion = false;
 	    	    }
 	    	    
-	    	    if( numeroTarjeta.equals( "" ) ){
+	    	    if( numeroTarjeta == null || numeroTarjeta.equals( "" ) ){
 	    		    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Numero Tarjeta]" );
 	    		    estadoValidacion = false;
 	    	    }
 	    	    
-	    	    if( fechaExpiracion.equals( "" ) ){
+	    	    if( fechaExpiracion == null || fechaExpiracion.equals( "" ) ){
 	    		    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Fecha Expiracion]" );
 	    		    estadoValidacion = false;
 	    	    }
@@ -152,13 +152,12 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 			    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
 			    	    this.utilSingleton.getObjetoSingleton().setPago(    objPago    );
 			    	  //------------------------------------------------------//
-		    	    }
-		    	    
+		    	    }		    	    
 	    	    }
 	    	    
 	            request.setAttribute( "estadoValidacion", estadoValidacion );  //estadoValidacion ...
 	            request.setAttribute( "objValidacion",    objValidacion    );  //Objeto Validacion ...
-	    	   
+	            
 	            this.contexto    = this.getServletContext();
 	            this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );
 	           
