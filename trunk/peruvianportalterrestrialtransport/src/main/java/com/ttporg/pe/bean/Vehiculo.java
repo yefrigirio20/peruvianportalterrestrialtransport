@@ -21,9 +21,9 @@ public class Vehiculo implements Serializable{
 	private static final long serialVersionUID = -7873497104356206374L;
 	
 	private Integer	id;
-    private String      nombre;
-    private String      modelo;
-    private String      tipo;
+    private String  nombre;
+    private String  modelo;
+    private String  tipo;
     
     //Objetos Relacionados.
      private List<Asiento> listaAsientos;

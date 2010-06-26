@@ -16,7 +16,7 @@ import java.util.Date;
  * @fecha_de_creación: dd-mm-yyyy.
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
- */
+ **/
 public class Calendario implements Serializable{
  
 	private static final long serialVersionUID = 8169477857746198292L; 
@@ -31,42 +31,23 @@ public class Calendario implements Serializable{
     }
 
     public Integer getDuracion(){
-        
-        UtilCalendario manejador = new UtilCalendario();
-        
+    	
+        UtilCalendario utilCalendario = new UtilCalendario();
+         
         Calendar fecInicio = Calendar.getInstance();
         Calendar fecFin    = Calendar.getInstance();
  
         this.duracion = 0;
         
-        if( (this.fechaHoraSalida == null) && (this.fechaHoraLlegada == null) ){
+        if( (this.fechaHoraSalida != null) && (this.fechaHoraLlegada != null) ){
            
-            fecInicio.setTime( this.fechaHoraSalida  );
-            fecFin.setTime(    this.fechaHoraLlegada );
+        	fecInicio.setTime( this.fechaHoraSalida  );
+        	fecFin.setTime(    this.fechaHoraLlegada );
+        	
+        	int duracionNew = utilCalendario.getHorasEntreDosFechas( fecInicio, fecFin );
 
-            int  diaFI     = fecInicio.get( Calendar.DATE  );
-            int  mesFI     = fecInicio.get( Calendar.MONTH ) + 1;
-            int  anoFI     = fecInicio.get( Calendar.YEAR  );
-            int  horaFI    = fecInicio.get( Calendar.DAY_OF_MONTH );
-            int  minutoFI  = fecInicio.get( Calendar.MINUTE );
-            int  segundoFI = fecInicio.get( Calendar.SECOND );
-
-            int  diaFF     = fecFin.get( Calendar.DATE   );
-            int  mesFF     = fecFin.get( Calendar.MONTH  ) + 1;
-            int  anoFF     = fecFin.get( Calendar.YEAR   );
-            int  horaFF    = fecFin.get( Calendar.DAY_OF_MONTH );
-            int  minutoFF  = fecFin.get( Calendar.MINUTE );
-            int  segundoFF = fecFin.get( Calendar.SECOND );
-
-            System.out.println( "FechaInicio: " + fecInicio.getTime() );
-            System.out.println( "FechaFin:    " + fecFin.getTime()    );
-
-            int diferenciaHoras = manejador.getHorasEntreDosFechas( fecInicio, fecFin );
-
-            System.out.println( "DIFERENCIA HORAS: " + diferenciaHoras ); 
-            
-            this.setDuracion( diferenciaHoras );
-        }
+        	 this.duracion = duracionNew;  
+        }       
         
         return duracion;
     }
