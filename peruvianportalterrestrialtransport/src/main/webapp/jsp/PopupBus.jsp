@@ -18,14 +18,30 @@
 	    }  
 
 	    function conexionServlet( myFrm, idAsiento ){              
-			 alert( "**** DENTRO DE 'conexionServlet' ****" );	 
+			 //alert( "**** DENTRO DE 'conexionServlet' ****" );	 
 			 
 	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
-	         alert( url );
+	         //alert( url );
 
+	         var urlNew = url + '?idAsiento=' + idAsiento;
+	         //alert( urlNew );
+	         	
+	         myFrm.method = '' + 'POST';
+	         myFrm.action = urlNew; 		 		 
+	         myFrm.submit();
+	    } 
+
+	    function conexionCompraBoleto( myFrm, idAsiento ){              
+			 alert( "**** DENTRO DE 'conexionCompraBoleto' ****" );	 
+			 
+	         var url = "<%=request.getContextPath()%>/ServletPagoPasaje";
+	         alert( url );
+             
 	         var urlNew = url + '?idAsiento=' + idAsiento;
 	         alert( urlNew );
 	         	
+			 //window.opener.document.idFrmBusquedaPasaje.idTxtDia.value = window.document.idFrmPopupBus.datos.value;	
+			 	
 	         myFrm.method = '' + 'POST';
 	         myFrm.action = urlNew; 		 		 
 	         myFrm.submit();
@@ -234,16 +250,14 @@
        </table>
             
         <br> </br>
-           <input type="text" name="datos" id="datos" value="<%=contador%>" width="280"/>
+           <strong>#Total Asientos:</strong> <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;"/>
         <br> </br>
          
         <table width="80%" >
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="90%" colspan="2" align="center" >                                      
-                     <a href="JavaScript:close();" title="pasar valor" onClick="window.opener.document.idFrmBusquedaPasaje.idTxtDia.value = window.document.idFrmPopupBus.datos.value;" >              
-                         <input type="button" name="btnComprar" value="Comprar" />
-                     </a>                   
+                       <input type="button" name="btnComprar" value="Comprar Pasaje" onclick="javascript:conexionCompraBoleto( this.form, 100 )" />
                    </td>
                    <td width="10%" >&nbsp;</td>
               </tr>
