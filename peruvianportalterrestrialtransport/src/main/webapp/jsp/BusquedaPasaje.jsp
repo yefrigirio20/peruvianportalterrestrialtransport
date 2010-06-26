@@ -67,7 +67,26 @@
 	         myFrm.action = url + '?opcion=' + tipo; 		 		 
 	         myFrm.submit();
 	    }  
-	        
+
+	   function conexionServletPopup( myFrm, parametro ){              
+			 alert( "**** DENTRO DE 'conexionServletPopup' ****" );	 
+			 
+	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
+
+	         url = url + '?nombreServicio=' + 'PREMIUM'; 
+	         
+	         //alert( url );
+	
+	 		 var newwindow = window.open( url, 'name','height=460, width=250, scrollbars=1, left=520, top=180' );
+			
+			 if( window.focus ){ 
+			     newwindow.focus()
+			 }
+	
+	         //myFrm.method = '' + 'POST';
+	         //myFrm.action = url + '?opcion=' + parametro; 		 		 
+	         //myFrm.submit();
+	    } 
 	  </script>
  </head>
 
@@ -178,21 +197,21 @@
                                      <td>Ciudad Origen:</td>
                                      <td>
                                        <select id="idChoCiudadOrigen" name="choCiudadOrigen" style="width:150px;">
-                                           <option value="1"  > LIMA </option> 
-                                           <option value="2"  > ICA </option> 
-                                           <option value="3"  > CHINCHA </option> 
-                                           <option value="4"  > AYACUCHO </option> 
-                                           <option value="5"  > CUZCO </option> 
-                                           <option value="6"  > LORETO </option> 
-                                           <option value="7"  > PIURA</option> 
-                                           <option value="8"  > TACNA </option> 
-                                           <option value="9"  > HUANUCO </option> 
-                                           <option value="10" > HUANCAYO </option> 
-                                           <option value="11" > CAJAMARCA </option> 
-                                           <option value="12" > SAN MARTIN </option> 
-                                           <option value="13" > PUNO </option> 
-                                           <option value="14" > UCAYALI </option> 
-                                           <option value="15" > CHIMBOTE </option> 
+                                           <option value="LIMA"  > LIMA </option> 
+                                           <option value="ICA"  > ICA </option> 
+                                           <option value="CHINCHA" > CHINCHA </option> 
+                                           <option value="AYACUCHO"  > AYACUCHO </option> 
+                                           <option value="CUZCO"  > CUZCO </option> 
+                                           <option value="LORETO"  > LORETO </option> 
+                                           <option value="PIURA"  > PIURA</option> 
+                                           <option value="TACNA"  > TACNA </option> 
+                                           <option value="HUANUCO"  > HUANUCO </option> 
+                                           <option value="HUANCAYO" > HUANCAYO </option> 
+                                           <option value="CAJAMARCA" > CAJAMARCA </option> 
+                                           <option value="SAN MARTIN" > SAN MARTIN </option> 
+                                           <option value="PUNO" > PUNO </option> 
+                                           <option value="UCAYALI" > UCAYALI </option> 
+                                           <option value="CHIMBOTE" > CHIMBOTE </option> 
                                        </select>
                                      </td>
                                      <td width="10%" >&nbsp;</td>
@@ -203,21 +222,20 @@
                                      <td>Ciudad Destino:</td>
                                      <td>
                                        <select id="idChoCiudadDestino" name="choCiudadDestino" style="width:150px;">
-                                           <option value="1"  > LIMA </option> 
-                                           <option value="2"  > ICA </option> 
-                                           <option value="3"  > CHINCHA </option> 
-                                           <option value="4"  > AYACUCHO </option> 
-                                           <option value="5"  > CUZCO </option> 
-                                           <option value="6"  > LORETO </option> 
-                                           <option value="7"  > PIURA</option> 
-                                           <option value="8"  > TACNA </option> 
-                                           <option value="9"  > HUANUCO </option> 
-                                           <option value="10" > HUANCAYO </option> 
-                                           <option value="11" > CAJAMARCA </option> 
-                                           <option value="12" > SAN MARTIN </option> 
-                                           <option value="13" > PUNO </option> 
-                                           <option value="14" > UCAYALI </option>  
-                                           <option value="15" > CHIMBOTE </option> 
+                                           <option value="ICA"  > ICA </option> 
+                                           <option value="CHINCHA"  > CHINCHA </option> 
+                                           <option value="AYACUCHO"  > AYACUCHO </option> 
+                                           <option value="CUZCO"  > CUZCO </option> 
+                                           <option value="LORETO"  > LORETO </option> 
+                                           <option value="PIURA"  > PIURA</option> 
+                                           <option value="TACNA"  > TACNA </option> 
+                                           <option value="HUANUCO"  > HUANUCO </option> 
+                                           <option value="HUANCAYO" > HUANCAYO </option> 
+                                           <option value="CAJAMARCA" > CAJAMARCA </option> 
+                                           <option value="SAN MARTIN" > SAN MARTIN </option> 
+                                           <option value="PUNO" > PUNO </option> 
+                                           <option value="UCAYALI" > UCAYALI </option> 
+                                           <option value="CHIMBOTE" > CHIMBOTE </option> 
                                        </select>
                                      </td>
                                      <td width="10%" >&nbsp;</td>
@@ -248,40 +266,43 @@
                      <tr> 
                        <td colspan="4" align="center" >        
                          
-                         <table border="0" width="60%" bgcolor="white" >
-                              
-                                 <tr>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Orden</td>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Origen</td>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Destino</td>
-                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Detalle</td>
-                                 </tr>
-                                 
-                                 <c:if test="${listaSalida != null}" > 
-	                                 <c:forEach var="objListaSalida" items="${listaSalida}" >                                 
-		                                 <tr>
-		                                     <td style="text-align:center">${objListaSalida.id}</td>
-		                                     <td style="text-align:center">${objListaSalida.departamentoSalida}</td>
-		                                     <td style="text-align:center">${objListaSalida.departamentoDestino}</td>
-				                                     
-		                                     <td style="text-align:center">   
-			                                     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?codigoSalida=${objListaSalida.id}&opcion=cargarListadoFiltrado&opcion2=cargarListadoCalendario" style="cursor:hand; " >                
-			                     <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" alt="Ver Asientos" width="20" height="19"  border="0" /> 
-			                                     </a>
-		                                     </td>
-		                                 </tr>                                                                 
-	                               </c:forEach> 
-	                            </c:if>
-	                            
-	                            <c:if test="${listaSalida == null}" > 
-	                               <tr>
-		                               <td colspan="7">
-		                                  Realizar un busqueda de pasajes ...
-		                               </td>
-		                           </tr>    
-	                            </c:if>             
-                        </table>  
-                           
+                         <c:if test="${listaCalendario == null}" > 
+ 	                        <table border="0" width="60%" bgcolor="white" >
+	                              
+	                                 <tr>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Orden</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Origen</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Destino</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Detalle</td>
+	                                 </tr>
+	                                 
+	                                 <c:if test="${listaSalida != null}" > 
+		                                 <c:forEach var="objListaSalida" items="${listaSalida}" >                                 
+			                                 <tr>
+			                                     <td style="text-align:center">${objListaSalida.id}</td>
+			                                     <td style="text-align:center">${objListaSalida.departamentoSalida}</td>
+			                                     <td style="text-align:center">${objListaSalida.departamentoDestino}</td>
+					                                     
+			                                     <td style="text-align:center">   
+				                                     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?codigoSalida=${objListaSalida.id}&opcion=cargarListadoFiltrado&opcion2=cargarListadoCalendario" 
+				                                        style="cursor:hand; " >                
+				                     <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" alt="Ver Asientos" width="20" height="19"  border="0" /> 
+				                                     </a>
+			                                     </td>
+			                                 </tr>                                                                 
+		                               </c:forEach> 
+		                            </c:if>
+		                            
+		                            <c:if test="${listaSalida == null}" > 
+		                               <tr>
+			                               <td colspan="7">
+			                                  Realizar un busquea de pasajes ...
+			                               </td>
+			                           </tr>    
+		                            </c:if>             
+	                        </table>  
+                        </c:if> 
+                            
                         <c:if test="${listaCalendario != null}" >     
                            <table border="0" width="60%" bgcolor="white" >
                                      <tr>
@@ -294,18 +315,19 @@
 	                                 <c:forEach var="objCalendario" items="${listaCalendario}" >                                 
 		                                 <tr>
 		                                     <td style="text-align:center">
-                                               <fmt:formatDate value="${objCalendario.fechaHoraSalida}" type="DATE" pattern="MM-dd-yyyy"/>
+                                               <fmt:formatDate value="${objCalendario.fechaHoraSalida}" type="DATE" pattern="MM-dd-yyyy--hh:mm"/>
                                              </td>
 		                                     <td style="text-align:center">
-                                             <fmt:formatDate value="${objCalendario.fechaHoraLlegada}" type="DATE" pattern="MM-dd-yyyy"/>
+                                             <fmt:formatDate value="${objCalendario.fechaHoraLlegada}" type="DATE" pattern="MM-dd-yyyy--hh:mm"/>
                                              </td>
 		                                     <td style="text-align:center">${objCalendario.duracion}</td> 
 			                                     
-		                                     <td style="text-align:center">   
-			                                     <a href="popupex.html" onclick="return PopupBus('jsp/PopupBus.jsp')" title="Ver Asientos">                
+		                                     <td style="text-align:center" >   
+			                                     <a href="javascript:conexionServletPopup( this.form )" title="Ver Asientos" >                
 			                          <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
 			                                     </a>
 		                                     </td>
+		                                     
 		                                 </tr>                                                                 
 	                               </c:forEach> 	                                    
                             </table>    
@@ -356,3 +378,4 @@
 
 </html>
 
+ 
