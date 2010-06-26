@@ -69,7 +69,16 @@
 						  </tr>
 						  
 					   	  <tr>
-							 <td colspan="2" > <s:submit value="Continuar" align="center" /> </td>
+							 <td colspan="2" > 
+							    <s:submit value="Continuar" align="center" /> 
+							 
+							    <!--  
+							 	 <s:i18n name="com.ttporg.pe.msj.package_es" >
+								     <s:text name="login.usuario" />
+								 </s:i18n>
+	                             -->
+	                             
+							 </td>
 						  </tr>				  		  
 						  
 						</table>
