@@ -6,7 +6,7 @@
 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
- <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" >
  
  <head>
     <script type="text/javascript"> 
@@ -30,8 +30,9 @@
      </font>   
   </center>
    
+  <!--   
   <center>
-        <table border="0" background="images/BusPopup.jpg" >
+       <table border="0" background="<%=request.getContextPath()%>/images/BusPopup.jpg" >
             <tr>
                 <td colspan="3" >&nbsp;  </td>
             </tr>
@@ -139,13 +140,65 @@
                 <td>&nbsp;
                     </td>
                 <td>
-   <input type="button" name="    " value="  36  " style="background:#060;color:#CCC" />
-   <input type="button" name="    " value="  37  " style="background:#060;color:#CCC" />
+   <input type="button" name="    " value="  36  " style="background:#900" />
+   <input type="button" name="    " value="  37  " style="background:#900" />
                 </td>  
             </tr>
         </table>
         
         <br> </br>
+       -->
+        
+        <br> </br>
+        
+        <% int contador = 0; %>
+       
+        <c:if test="${listaAsiento != null}" > 
+          <center>
+            <table border="0" width="80%" >                    
+                        
+                 <c:forEach var="objListaAsientos" items="${listaAsiento}" >                                 
+	                  <tr>   
+	                      
+	                      <% 
+	                      System.out.println( "contador: " + contador );
+	                      
+	                      if( contador < 10 ){ 
+	                    	  System.out.println( "opcion #1: " );
+	                      %>	                      
+		                        <td style="text-align:center" bgcolor="#999999" >                 	                       	                      
+		                          <c:if test="${objListaAsientos.estado == true}" >
+		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#060;color:#CCC"  />
+		                          </c:if>
+		                          
+		                          <c:if test="${objListaAsientos.estado == false}" >
+		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#900;color:#CCC" />
+		                          </c:if>                     
+		                      	</td>
+	                      <%}
+	                      if( contador > 10 ){ 	                    	  
+	                    	  System.out.println( "opcion #2: " );
+	                      %>	
+		                        <td style="text-align:center"  bgcolor="#CDCDCD">              	                       	                      
+		                          <c:if test="${objListaAsientos.estado == true}" >
+		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#060;color:#CCC"  />
+		                          </c:if>
+		                          
+		                          <c:if test="${objListaAsientos.estado == false}" >
+		                          	 <input type="button" name="    " value="  ${objListaAsientos.id}  " style="background:#900;color:#CCC" />
+		                          </c:if>                     
+		                      	</td>	                          
+	                      <%}%>  
+	                      
+	                      <% contador ++; %>                
+	                  </tr>                                                                 
+                  </c:forEach> 	                                    
+             </table>   
+             </center>
+         </c:if>         
+       
+       <br> </br>
+       
        
        <table width="70%">
             <tr>
@@ -162,7 +215,7 @@
        </table>
             
         <br> </br>
-           <input type="text" name="datos" id="datos" value="Escribe aca lo que quieras pasar al 'frmPADRE'" width="280"/>
+           <input type="text" name="datos" id="datos" value="<%=contador%>" width="280"/>
         <br> </br>
          
         <table width="80%" >
