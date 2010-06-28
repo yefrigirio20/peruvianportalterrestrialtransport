@@ -1,16 +1,25 @@
  <%@ page contentType="text/html;charset=utf-8" %>
- 
+  
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>  
+ 
+ <%@taglib uri="/struts-tags"                       prefix="s"   %>
+ <%@taglib uri="/struts-dojo-tags"                  prefix="sx"  %>  
 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
- <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" >
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  
  <head>
-    <script type="text/javascript"> 
+     <jsp:include page="../include/Titulo.jsp"  flush="false" />
+     <jsp:include page="../include/Estilos.jsp" flush="false" />
+     <jsp:include page="../include/Scripts.jsp" flush="false" />    
+     
+     <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" /> 
+     
+     <script type="text/javascript"> 
 	    function centrarPopup(){ 
 		    eje_x = (screen.width-document.body.clientWidth)   / 2; 
 		    eje_y = (screen.height-document.body.clientHeight) / 2; 
@@ -39,8 +48,6 @@
              
 	         var urlNew = url + '?idAsiento=' + idAsiento;
 	         //alert( urlNew );
-	         	
-			 //window.opener.document.idFrmBusquedaPasaje.idTxtDia.value = window.document.idFrmPopupBus.datos.value;	
 			 	
 	         myFrm.method = '' + 'POST';
 	         myFrm.action = urlNew; 		 		 
@@ -49,17 +56,14 @@
     </script>
  
 </head>
-<body onload="centrarPopup()" bgcolor="#AFD2F9" >
+
+ <body onload="detectarControlesEnabledDisabled()" > 
 
   <form id="idFrmPopupBus" name="frmBusquedaPasaje" >
-  
-  <br></br>
     
-  <center> 
-     <font face="Arial" color="#9E353F" size="5">
-       Verificación de Asientos
-     </font>   
-  </center>
+  <center>
+    <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloVerificaAsiento" /> </font>
+  </center> 
    
   <!--   
   <center>
@@ -234,41 +238,46 @@
        
        <br> </br>
        
-       
-       <table width="70%">
-            <tr>
-                <td>
-   <input type="button" name="    " value="    " style="background:#060" />
-                    <font face="Arial" size="2" color="#060" >Disponible</font>
-                </td> 
-                
-                 <td>
-   <input type="button" name="    " value="    " style="background:#900" />
-                    <font face="Arial" size="2" color="#900" >Ocupado</font>
-                </td> 
-            </tr>
-       </table>
-            
+       <center>  
+	       <table width="70%">
+	            <tr>
+	                <td>
+	                    <input type="button" name="    " value="    " style="background:#060" />
+	                    <font face="Arial" size="2" color="#060" > <fmt:message key="texto.label.disponible" /> </font>
+	                </td> 
+	                
+	                 <td>
+	                    <input type="button" name="    " value="    " style="background:#900" />
+	                    <font face="Arial" size="2" color="#900" > <fmt:message key="texto.label.ocupado" /> </font>
+	                </td> 
+	            </tr>
+	       </table>
+       </center>    
+        
         <br> </br>
-           <strong>#Total Asientos:</strong> <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;"/>
+        
+        <center>
+          <strong>#<fmt:message key="texto.label.totalAsientos" />:</strong> <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;"/>
+        </center>
         
         <br> </br>
         <br> </br>
         <br> </br>
-         
-        <table width="80%" >
-                 <tr>
-                   <td width="10%" >&nbsp;</td>
-                   <td width="90%" colspan="2" align="center" >                                      
-                       <a onclick="opener.location=('<%=request.getContextPath()%>/ServletPagoPasaje'); self.close();" style="cursor:pointer">
-                          <strong> <font style="color:#FFF; background:#F00; border:thin; border-color:#000" > Comprar Pasaje </font> </strong>
-                       </a>
-                   </td>
-                   <td width="10%" >&nbsp;
-                   </td>
-              </tr>
         
-        </table>
+        <center> 
+	        <table width="80%" >
+	                 <tr>
+	                   <td width="10%" >&nbsp;</td>
+	                   <td width="90%" colspan="2" align="center" >                                      
+	                       <a onclick="opener.location=('<%=request.getContextPath()%>/ServletPagoPasaje'); self.close();" style="cursor:pointer">
+	                          <strong> <font style="color:#FFF; background:#F00; border:thin; border-color:#000; " > &nbsp;&nbsp;&nbsp; <fmt:message key="texto.label.comprarPasaje" /> &nbsp;&nbsp;&nbsp; </font> </strong>
+	                       </a>
+	                   </td>
+	                   <td width="10%" >&nbsp;
+	                   </td>
+	              </tr>        
+	         </table>
+        </center>
         
         <br> </br>
         <br> </br>

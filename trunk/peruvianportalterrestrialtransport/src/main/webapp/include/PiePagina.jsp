@@ -1,9 +1,15 @@
 
-<hr align="center" size="2" noShade />
+ <%@ page contentType="text/html;charset=utf-8" %>
+ 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+ 
+ <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
 
-<jsp:include page="../include/Estilos.jsp" flush="true" />
+ <hr align="center" size="2" noShade />
 
-<table width="100%" class="piePagina" >
+ <jsp:include page="../include/Estilos.jsp" flush="true" />
+
+ <table width="100%" class="piePagina" >
    <tr>
      <td height="30" > 
 	  <center>            
@@ -11,14 +17,14 @@
             
 			<table>				
 				<tr align="center">
-				   <td><font color="#003D97">Copyright 2010 - <strong>Peruvian Portal Terrestrial Transport</strong>.</font></td>
+				   <td><font color="#003D97"><fmt:message key="texto.label.piePagina.copyright" /> - <strong><fmt:message key="texto.label.piePagina.mensaje_01" /></strong>.</font></td>
 				</tr>   
 				<tr align="center">
-				  <td><font color="#003D97">Prohibida su reproduccion sin consentimiento expreso. Todos los derechos reservados</font></td>
+				  <td><font color="#003D97"><fmt:message key="texto.label.piePagina.mensaje_02" /></font></td>
 				</tr>
 				<tr align="center">
 				   <td>
-				      <a href="http://localhost:8080/peruvianportalterrestrialtransport" style="cursor:hand" ><font color="red"><strong>www.peruvianportalterrestrialtransport.com</strong></font></a>  
+				      <a href="http://localhost:8080/peruvianportalterrestrialtransport" style="cursor:hand" ><font color="red"><strong><fmt:message key="texto.label.piePagina.linkWebsite" /></strong></font></a>  
 				    </td>
 				</tr>
 			</table>   

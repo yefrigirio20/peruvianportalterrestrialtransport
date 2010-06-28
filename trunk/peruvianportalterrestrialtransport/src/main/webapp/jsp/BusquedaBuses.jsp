@@ -5,6 +5,9 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>  
  
+ <%@taglib uri="/struts-tags"                       prefix="s"    %>
+ <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %>  
+ 
  <%@page import="com.ttporg.pe.bean.Usuario" %>
  
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -15,9 +18,11 @@
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
      <jsp:include page="../include/Scripts.jsp" flush="false" /> 
+     
+     <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
  </head>
 
- <body style="margin:0px;" > 
+ <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
   
   <form id="idFrmBusquedaPasaje" name="frmBusquedaPasaje" >
   
@@ -48,13 +53,11 @@
 				      </tr>	
 				      	  
 					  <tr>
-				        <td colspan="4" >
-						  <center> 
-				             <font color="#9E353F" size="5">
-				               Buses
-				             </font>  
-				          </center>        
-				        </td>          
+	                   <td colspan="4" >
+	                     <center>
+	                       <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloBuses" /> </font>
+	                     </center>
+	                   </td>        
 					  </tr>
                       
 				      <tr> <td width="10%" colspan="4" >&nbsp;</td> </tr>
@@ -62,24 +65,26 @@
 				      <tr>                         
 					     <td width="10%" >&nbsp;</td>
 				         <td width="80%" colspan="2" >
-                         Peruvian Portal Terrestrial Transport. Cuenta con un motor de busqueda de las agencias de las diferentes Empresas de Transporte subscritas al portal.
+				           <label>
+                             Peruvian Portal Terrestrial Transport. Cuenta con un motor de busqueda de las agencias de las diferentes Empresas de Transporte subscritas al portal.
+                           </label>
                          </td> 
 				         <td width="10%" >&nbsp;</td>
 				      </tr>	
-				        
-				      <tr> <td width="10%" colspan="4" >&nbsp;</td> </tr>
-                        
+				      
+					 <tr> <td width="10%" colspan="4" >&nbsp;</td> </tr> 
+ 
 				      <tr>
 					     <td width="10%" >&nbsp;</td>
 				         <td width="80%" colspan="2"> 
-	                      <FIELDSET style="border:1px solid #0066FF;font-family: Arial; font-size: 13px;" >
-				             <LEGEND ACCESSKEY=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Filtro: </LEGEND>
+	                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px;" >
+				             <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><fmt:message key="texto.label.filtro" />:  </legend> 
 	                   
 	                          <table width="100%" >
                                  
                                   <tr>	  
                                      <td width="10%" >&nbsp;</td>
-                                     <td width="40%">Empresa</td>
+                                     <td width="40%"><label><fmt:message key="texto.label.empresa" />:</label></td>
                                      <td width="40%">
                                         <select id="idChoDepartamento" name="choDepartamento" style="width:150px;">
                                            <option>Lima</option>
@@ -87,12 +92,12 @@
                                            <option>Puno</option>
                                         </select>
                                      </td>    
-                                     <td width="10%" align="left" ><input type="submit" id="idBtnConsultar" name="btnConsultar" value="Consultar" width="200" /></td>
+                                     <td width="10%" align="left" > <button id="idBtnConsultar" type="submit" > <fmt:message key="texto.button.consultar" /> </button>  </td>
                                   </tr>
                                   
                                   <tr>
                                      <td width="10%" >&nbsp;</td>
-                                     <td>Servicio:</td>
+                                     <td><label><label><fmt:message key="texto.label.servicio" />:</label></label></td>
                                      <td>
                                        <select id="idChoEmpresa" name="choEmpresa" style="width:150px;">
                                           <option>Cruz del Sur</option>
@@ -111,7 +116,7 @@
                                   </tr>	
                                                                   
 	                          </table>
-	                       </FIELDSET>      
+	                       </fieldset>      
 				         </td>
      
                          

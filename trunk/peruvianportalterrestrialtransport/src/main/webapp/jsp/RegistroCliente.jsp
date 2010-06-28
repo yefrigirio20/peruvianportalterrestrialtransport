@@ -1,9 +1,12 @@
  <%@ page contentType="text/html;charset=utf-8" %>
   
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %> 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>  
+ 
+ <%@taglib uri="/struts-tags"                       prefix="s"    %>
+ <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %>  
   
  <%@ page import="com.ttporg.pe.bean.Usuario" %>  
  
@@ -14,21 +17,23 @@
  <head>
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
-     <jsp:include page="../include/Scripts.jsp" flush="false" /> 
+     <jsp:include page="../include/Scripts.jsp" flush="false" />    
      
-	  <!-- ESTILO DE FORMATO DLE CALENDARIO -->
-	  <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/calendario/calendar-win2k-cold-1.css" title="calendar-win2k-cold-1.css" />
-	
-	  <!-- PROGRAMA PRINCIPAL DEL CALENDARIO -->
-	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar.js">       </script>
-	
-	  <!-- LENGUAJE DEL CALENDARIO -->
-	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-en.js">    </script>
-	
-	  <!-- FUNCIONES PARA EL CALENDARIO -->
-	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-setup.js"> </script>     
+     <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
      
-	  <script type="text/javascript">
+	 <!-- ESTILO DE FORMATO DLE CALENDARIO -->
+	 <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/calendario/calendar-win2k-cold-1.css" title="calendar-win2k-cold-1.css" />
+	
+	 <!-- PROGRAMA PRINCIPAL DEL CALENDARIO -->
+	 <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar.js">       </script>
+	
+	 <!-- LENGUAJE DEL CALENDARIO -->
+	 <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-en.js">    </script>
+	
+	 <!-- FUNCIONES PARA EL CALENDARIO -->
+	 <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-setup.js"> </script>     
+     
+	 <script type="text/javascript">
 	    function catcalc( cal ){
 	        var date = cal.date;
 	        var time = date.getTime()
@@ -47,13 +52,15 @@
      
  </head>
 
- <body onload="detectarControlesEnabledDisabled()" >
+ <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
   
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
       <tr valign="top" >
         <td width="100%" height="22" colspan="4" >
-             <jsp:include page="../include/Cabecera.jsp" flush="false" />
+            <strong> <fmt:message key="texto.label.usuario" /> </strong>
+            
+            <jsp:include page="../include/Cabecera.jsp" flush="false" />
         </td>
       </tr>
     </table>
@@ -62,8 +69,11 @@
    <table width="100%" border="0" >
        <tr valign="top" >
        
-         <td width="15%" valign="top" height="100%">
-            <jsp:include page="../include/Menu.jsp" flush="true"/>
+         <td width="15%" valign="top" height="100%" >  
+         
+           <form id="idFrnXXX" >
+              <jsp:include page="../include/Menu.jsp" flush="true" />
+           </form> 
          </td>
 
          <!-- INCLUDE PRINCIPAL -->
@@ -78,11 +88,15 @@
                    <td width="45%" >&nbsp;</td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
-                 <tr>
-                   <td colspan="4" ><center>
-                     <font color="#9E353F" size="5"> Registro de Cliente </font>
-                   </center></td>
-                 </tr>
+                 
+				  <tr>
+                   <td colspan="4" >
+                     <center>
+                       <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloRegisCliente" /> </font>
+                     </center>
+                   </td>        
+				  </tr>
+                 
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="60%" >&nbsp;</td>
@@ -91,7 +105,7 @@
                  </tr>
                  <tr>
                    <td width="10%" >&nbsp;</td>
-                   <td width="60%" colspan="2" >Los campos marcados con <strong><font color="#FF0000" size="+1" >*</font></strong> deben de ser ingresados de forma obligatoria.</td>
+                   <td width="60%" colspan="2" ><label>Los campos marcados con <strong><font color="#FF0000" size="+1" >*</font></strong> deben de ser ingresados de forma obligatoria.<label></td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
                  
@@ -104,12 +118,12 @@
 			 	        <table width="40%" >
 				            <c:forEach var="paramObjeto" items="${objValidacion.mensajesNOK}">
 				
-				               <tr> <td> <font color="red" > ${paramObjeto} </font> </td> </tr>
+				               <tr> <td> <span class="mensajeTextoError" > ${paramObjeto} </span> </td> </tr>
 				
 				            </c:forEach>
 				            
 					        <c:if test="${estadoValidacion == true}" > 					        
-						        <strong><font color="red" > ${objValidacion.mensajeOK} </font></strong>	 
+						        <strong><span class="mensajeTextoError" > ${objValidacion.mensajeOK} </span> </strong>	 
 					        </c:if>  
 				        </table>
 				        <br></br>
@@ -124,46 +138,46 @@
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" > 
                       <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-			             <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Datos Cliente: </legend>
+			             <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><fmt:message key="texto.label.datosCliente" />: </legend>
                    
                           <table width="100%" >  
                              
                             <tr>
                                <td width="10%" >&nbsp;</td>
-                               <td width="40%" >Nombres:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
+                               <td width="40%" ><label><fmt:message key="texto.label.nombres" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong></td>
                                <td width="40%" ><input type="text" id="txtIdNombres" name="txtNombres" /></td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                              <tr>
                                <td width="10%" >&nbsp;</td>
-                               <td width="40%" >Apellidos:<strong><font color="#FF0000" size="+1" >*</font></strong></td>
+                               <td width="40%" ><label><fmt:message key="texto.label.apellidos" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong></td>
                                <td width="40%" ><input type="text" id="txtIdApellidos" name="txtApellidos" /></td>
                                <td width="10%" align="left" >&nbsp;</td>
                              </tr>
                              
                              <tr>
                                <td width="10%" >&nbsp;</td>
-                               <td width="40%" >Dni<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
+                               <td width="40%" ><label><fmt:message key="texto.label.dni" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
                                <td width="40%" ><input type="text" id="txtIdDni" name="txtDni" /> </td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                              
                              <tr>
                                <td width="10%" >&nbsp;</td>
-                               <td width="40%" >Fecha Nacimiento<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
+                               <td width="40%" ><label><fmt:message key="texto.label.fechaNacimiento" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
                                <td width="40%" ><input type="text" id="txtIdFechaNacimiento" name="txtFechaNacimiento" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" /> </td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                              
                              <tr>
                                <td width="10%" >&nbsp;</td>
-                               <td width="40%" >Direccion<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
+                               <td width="40%" ><label><fmt:message key="texto.label.direccion" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
                                <td width="40%" ><input type="text" id="txtIdDireccion" name="txtDireccion" value="" /></td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
                               <tr>
                                <td width="10%" >&nbsp;</td>
-                               <td width="40%" >Email<strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
+                               <td width="40%" ><label><fmt:message key="texto.label.email" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong>:</td>
                                <td width="40%" ><input type="text" id="txtIdEmail" name="txtEmail" /></td>
                                <td width="10%" >&nbsp;</td>
                              </tr>
@@ -178,23 +192,23 @@
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" >
                       <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Autenticación: </legend>
+                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><fmt:message key="texto.label.autenticacion" />: </legend>
                         <table width="100%" align="center" >
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>
-                                <td width="40%">Usuario:<strong><font color="#FF0000" size="+1" >*</font></strong> </td>
+                                <td width="40%"><label><fmt:message key="texto.label.usuario" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong> </td>
                                 <td width="40%"><input type="text" id="txtIdUsuario" name="txtUsuario" />	</td>
                                 <td width="10%" >&nbsp;</td>
                               </tr>
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>
-                                <td width="40%">Password:<strong><font color="#FF0000" size="+1" >*</font></strong> </td>
+                                <td width="40%"><label><fmt:message key="texto.label.password" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong> </td>
                                 <td width="40%"><input type="password" id="txtIdPassword" name="txtPassword" />	</td>
                                 <td width="10%" >&nbsp;</td>
                               </tr>
                               <tr align="left">
                                 <td width="10%" >&nbsp;</td>
-                                <td width="40%">Confirmar Password:<strong><font color="#FF0000" size="+1" >*</font></strong> </td>
+                                <td width="40%"><label><fmt:message key="texto.label.confPassword" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong> </td>
                                 <td width="40%"><input type="password" id="txtIdConfirmPassword" name="txtConfirmPassword" />	</td>
                                 <td width="10%" >&nbsp;</td>
                               </tr>
@@ -229,7 +243,9 @@
                  </tr>             
                  <tr>
                    <td width="10%" >&nbsp;</td>
-                   <td><input type="submit" name="Registrar" value="Registrar" style="width:100px; height:30px;" /></td>
+                   <td>
+                      <button id="idBtnPagar" name="Pagar" style="width:100px; height:30px;" > <fmt:message key="texto.button.pagar" /> </button>
+                    </td>
                    <td>&nbsp;</td>
                    <td width="10%" >&nbsp;</td>
                  </tr>
