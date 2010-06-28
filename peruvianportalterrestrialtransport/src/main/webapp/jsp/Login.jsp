@@ -1,8 +1,13 @@
  <%@ page contentType="text/html;charset=utf-8" %>
+  
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>  
  
- <%@taglib uri="/struts-tags"      prefix="s"  %>
- <%@taglib uri="/struts-dojo-tags" prefix="sx" %> 
-
+ <%@taglib uri="/struts-tags"                       prefix="s"   %>
+ <%@taglib uri="/struts-dojo-tags"                  prefix="sx"  %> 
+ 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -10,11 +15,13 @@
  <head> 
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
-     <jsp:include page="../include/Scripts.jsp" flush="false" />      
+     <jsp:include page="../include/Scripts.jsp" flush="false" />    
+     
+     <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />       
  </head>
 
  <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
-  
+    
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
       <tr>
@@ -32,57 +39,83 @@
          </td>
 
          <!-- INCLUDE PRINCIPAL -->
-         <td width="85%" valign="top">
+         <td width="85%" valign="top">             
              
              <br></br>
              
              <center>
-                <font color="#9E353F" size="5"> Login Clientes </font>
+                <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloLogin" /> </font>
              </center> 
                 
              <br></br>
              <br></br>
                    
 			 <s:form id="frnValidacion" name="frnValidacion" action="/login.action" >	
-			     
-			    <s:actionerror cssErrorStyle="mensajeTextoError" />  
-			    <s:fielderror  cssErrorStyle="mensajeTextoError" />  
-			                      
-                <center> 
-			    <table width="80%" > 
-			      <tr> 
-                   <td align="right" width="30%" >
-                     <img src="<%=request.getContextPath()%>/imagenes/Atenticacion.png" alt="Empresas" width="133" height="137" border="0" />
-                   </td>               
-                  
-				   <td align="right" width="90%" >  
-				     
-				       <table width="90%"> 
-                       
-					   	  <tr>                           
-		   	              <td>&nbsp;   </td>
-							 <td> <s:textfield name="usuario" label="Usuario " cssStyle="mensajeTextoError" disabled="false" />  </td>
-						  </tr>  
-						  <tr> 
-							  <td>&nbsp;  </td>
-							  <td> <s:password name="password" label="Password " cssStyle="mensajeTextoError" disabled="false"  /> </td>
+			 
+			   		<s:i18n name="com.ttporg.pe.msj.Internacionalizacion_es" > 
+				        
+				        <span class="mensajeTextoError" >
+					      <s:actionerror cssErrorStyle="mensajeTextoError" />  
+					      <s:fielderror  cssErrorStyle="mensajeTextoError" />  
+					    </span>
+					                      
+		                <center> 
+					    <table width="80%" > 
+					      <tr> 
+		                   <td align="right" width="30%" >
+		                     <img src="<%=request.getContextPath()%>/imagenes/Atenticacion.png" alt="Atenticacion" width="133" height="137" border="0" />
+		                   </td>               
+		                  
+						   <td align="right" width="90%" >  
+						     
+						       <table width="90%"> 
+		                       
+							   	  <tr>                           
+									  <td>										 
+										 <label><fmt:message key="texto.label.usuario" /></label>										   
+									  </td>
+									 <td>
+									     <s:textfield name="usuario" cssStyle="textoLabel" disabled="false" />  
+								     </td>
+								  </tr>  
+								  
+								  <tr> 
+									  <td>
+										  <span class="textoLabel" >
+										    <fmt:message key="texto.label.password" />
+										  </span>
+									  </td>
+									  <td> 
+									    <s:password name="password" cssStyle="textoLabel" disabled="false" />
+									  </td>
+								  </tr>
+								  
+							   	  <tr>
+									 <td colspan="2" align="center" > 
+	                                     <br></br>
+	                                     <br></br>
+ 									 </td>
+								  </tr>	
+								  								  
+							   	  <tr>
+									 <td colspan="2" align="center" >
+									   <span class="botonStruts2" > 
+	                                      <s:submit name="btnLogin" cssStyle="botonStruts2" value="  %{getText('texto.button.procesar')} " />
+	                                   </span>  
+ 									 </td>
+								  </tr>				  		  
+								  
+								</table>							   
+						     </td>   
 						  </tr>
 						  
-					   	  <tr>
-							 <td colspan="2" > <s:submit value="Continuar" align="center" /> </td>
-						  </tr>				  		  
-						  
-						</table>
-					   
-				   </td>   
-				  </tr>
-				  
-				</table> 
-				</center>
-                	
+						</table> 
+					  </center>
+					
+	              </s:i18n>  	
 			  </s:form>
                       
-         </td>
+         </td>  
          <!-- FIN INCLUDE PRINCIPAL -->
          
        </tr>

@@ -1,9 +1,12 @@
- <%@ page contentType="text/html;charset=utf-8" %>
+  <%@ page contentType="text/html;charset=utf-8" %>
   
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>  
+ 
+ <%@taglib uri="/struts-tags"                       prefix="s"    %>
+ <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %> 
  
  <%@page import="com.ttporg.pe.bean.Usuario" %>
  
@@ -14,10 +17,12 @@
  <head>
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
-     <jsp:include page="../include/Scripts.jsp" flush="false" />     
+     <jsp:include page="../include/Scripts.jsp" flush="false" />    
+     
+     <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />    
  </head>
 
- <body style="margin:0px;" > 
+ <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
   
   <form id="idFrmBusquedaPasaje" name="frmBusquedaPasaje" >
   
@@ -48,13 +53,11 @@
 				      </tr>	
 				      	  
 					  <tr>
-				        <td colspan="4" >
-						  <center> 
-				             <font color="#9E353F" size="5">
-				               Informes
-				             </font>  
-				          </center>        
-				        </td>          
+					    <td align="center" colspan="4" >
+			             <center>
+			                <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloInformes" /> </font>  
+			             </center>       
+				        </td>       
 					  </tr>
                       
 				      <tr> <td width="10%" colspan="4" >&nbsp;</td> </tr>
@@ -62,7 +65,10 @@
 				      <tr>                         
 					     <td width="10%" >&nbsp;</td>
 				         <td width="80%" colspan="2" >
-                         Peruvian Portal Terrestrial Transport, brinda la informacion resaltante de cada empresa registrada en el Portal.</td> 
+					         <label>
+	                           Peruvian Portal Terrestrial Transport, brinda la informacion resaltante de cada empresa registrada en el Portal. 
+					         </label>
+				         </td>
 				         <td width="10%" >&nbsp;</td>
 				      </tr>
                     

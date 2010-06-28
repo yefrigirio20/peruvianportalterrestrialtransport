@@ -1,8 +1,13 @@
 
-<%@ taglib prefix="s" uri="/struts-tags" %>
+ <%@ page contentType="text/html;charset=utf-8" %>
+ 
+ <%@ page import="com.ttporg.pe.util.UtilSingleton" %>
+ 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
+ 
+<fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
 
-
-<%@page import="com.ttporg.pe.util.UtilSingleton"%><jsp:include page="../include/Estilos.jsp" flush="true" />
+<jsp:include page="../include/Estilos.jsp" flush="true" />
 
 <script language="JavaScript" type="text/javascript">
 
@@ -94,16 +99,20 @@ function seleccionarEstrella( msnParam ){
 
 <script src="Scripts/swfobject_modified.js" type="text/javascript"></script>
  <table width="101%" height="700" border="1" cellPadding="4" cellSpacing="0" style="BORDER-COLLAPSE: collapse" bgcolor="white" > 
+ 
   <tr>
-    <td  height="30" align="center" class="menu" > <StrONG> MENU </StrONG> </td>
+    <td height="30" align="center" class="menu" > 
+       <font size="2" face="Arial" class="textoMenu" style="color:white" ><strong><fmt:message key="texto.label.menu.home" /></strong></font>
+    </td>
   </tr>
   
   <tr> 
 	  <td align="center">
-        <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,1,1,0" width="257" height="162">
-          <param name="src" value="../swf/AmimacionLogos.swf" />
-          <embed src="<%=request.getContextPath()%>/swf/AmimacionLogos.swf" pluginspage="http://www.adobe.com/shockwave/download/" width="257" height="162"></embed>
-      </object></td> 
+        <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,1,1,0" width="257" height="162" >  
+           <param name="src" value="../swf/AmimacionLogos.swf" />
+           <embed src="<%=request.getContextPath()%>/swf/AmimacionLogos.swf" pluginspage="http://www.adobe.com/shockwave/download/" width="257" height="162" ></embed>
+        </object>
+      </td> 
   </tr> 
   
   <tr> <td></td> </tr> 
@@ -113,7 +122,8 @@ function seleccionarEstrella( msnParam ){
          <table width="100%" border="0" bgcolor="#0066FF" >
             <tr> 
              <td align="center" >
- 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" /><font size="2" face="Arial" class="textoMenu" style="color:white" ><strong>Servicios</strong></font>
+ 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" />
+ 	        <font size="2" face="Arial" class="textoMenu" style="color:white" ><strong><fmt:message key="texto.label.menu.servicios" /></strong></font>
 	     </a>            
               </td> 
             </tr> 
@@ -144,7 +154,8 @@ function seleccionarEstrella( msnParam ){
                 </td>  
                 <td width="80">
                    <a href="<%=request.getContextPath()%>/jsp/BusquedaAgencia.jsp" style="cursor:hand" />
-                   <font size="2" face="Arial" class="textoMenu" >Empresas</font> </a>             
+                      <font size="2" face="Arial" class="textoMenu" ><fmt:message key="texto.label.menu.agencias" /></font> 
+                   </a>             
                 </td>
               </tr>
               
@@ -156,7 +167,8 @@ function seleccionarEstrella( msnParam ){
                 </td>  
                 <td width="80">
                    <a href="<%=request.getContextPath()%>/jsp/BusquedaBuses.jsp" style="cursor:hand" />
-                   <font size="2" face="Arial" class="textoMenu" >Buses</font> </a>            
+                      <font size="2" face="Arial" class="textoMenu" ><fmt:message key="texto.label.menu.buses" /></font> 
+                   </a>            
                 </td>
               </tr>
               
@@ -164,7 +176,7 @@ function seleccionarEstrella( msnParam ){
 	           else{
                %>     
                   <tr> 
-                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> Registrarse</font/> </strong>  </td>  
+                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.menuPrincipal.registrarse" /> </font> </strong>  </td>  
                   </tr> 
                <%}%>  
               
@@ -182,20 +194,19 @@ function seleccionarEstrella( msnParam ){
          <table width="100%" border="0" bgcolor="#0066FF" >
             <tr> 
              <td align="center" >
- 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" /><font size="2" face="Arial" class="textoMenu" style="color:white" ><strong>Informes</strong></font>
-	     </a>            
+		 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" />
+		            <font size="2" face="Arial" class="textoMenu" style="color:white" ><strong><fmt:message key="texto.label.menu.informes" /></strong></font>
+			     </a>            
               </td> 
             </tr> 
          </table> 
  
          <marquee bgcolor="#FFFFFF" width="50%" height="200" direction="up" scrolldelay="250" > 
-             <table width="100" border="0">
-             
+             <table width="100" border="0">             
                   <tr> 
                     <td width="20"> </td>  
                     <td width="80"> </td>
-                  </tr> 
-                  
+                  </tr>                   
          <% 	     
 			//Obteniendo datos de 'Session'.
 			UtilSingleton utilSingleton2 = UtilSingleton.getINSTANCIA_GUARDADA();
@@ -213,7 +224,8 @@ function seleccionarEstrella( msnParam ){
                     </td>  
                     <td width="80">
                        <a href="<%=request.getContextPath()%>/jsp/Informes.jsp" style="cursor:hand" />
-                       <font size="2" face="Arial" class="textoMenu" >Informacion #01</font> </a>             
+                          <font size="2" face="Arial" class="textoMenu" ><fmt:message key="texto.label.menu.informacion" /></font> 
+                       </a>             
                     </td>
                   </tr>
                   
@@ -225,7 +237,8 @@ function seleccionarEstrella( msnParam ){
                     </td>  
                     <td width="80">
                        <a href="<%=request.getContextPath()%>/jsp/BusquedaBuses.jsp" style="cursor:hand" />
-                       <font size="2" face="Arial" class="textoMenu" >Informacion #02</font> </a>            
+                          <font size="2" face="Arial" class="textoMenu" ><fmt:message key="texto.label.menu.informacion" /></font> 
+                       </a>            
                     </td>
                   </tr>
                   
@@ -233,7 +246,7 @@ function seleccionarEstrella( msnParam ){
 	           else{
                %>     
                   <tr> 
-                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> Registrarse</font/> </strong>  </td>  
+                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.menuPrincipal.registrarse" /> </font> </strong>  </td>  
                   </tr>  
                <%}%>  
                   
@@ -253,8 +266,9 @@ function seleccionarEstrella( msnParam ){
          <table width="100%" border="0" bgcolor="#0066FF" >
             <tr> 
              <td align="center" >
- 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" /><font size="2" face="Arial" class="textoMenu" style="color:white" ><strong>Ranking</strong></font>
-	     </a>            
+		 	     <a href="<%=request.getContextPath()%>/jsp/Opcion_02.jsp" style="cursor:hand" />
+		            <font size="2" face="Arial" class="textoMenu" style="color:white" ><strong><fmt:message key="texto.label.menu.ranking" /></strong></font>
+			     </a>            
               </td> 
             </tr> 
          </table>         

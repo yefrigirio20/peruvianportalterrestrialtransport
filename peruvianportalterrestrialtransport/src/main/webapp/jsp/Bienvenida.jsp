@@ -1,10 +1,13 @@
  <%@ page contentType="text/html;charset=utf-8" %>
- 	
- <%@taglib uri="/struts-tags"      prefix="s"  %>
- <%@taglib uri="/struts-dojo-tags" prefix="sx" %> 
-
- <%@page import="com.ttporg.pe.bean.Usuario" %>
-
+  
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>  
+ 
+ <%@taglib uri="/struts-tags"                       prefix="s"    %>
+ <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %> 
+ 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -12,16 +15,18 @@
  <head> 
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
-     <jsp:include page="../include/Scripts.jsp" flush="false" /> 
+     <jsp:include page="../include/Scripts.jsp" flush="false" />    
      
-	<script type="text/javascript">
+     <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
+     
+	 <script type="text/javascript">
 		dojo.event.topic.subscribe("/beforeSelect", function(event, tab, tabContainer){
 		    event.cancel = true;
 		});
 	</script>     
  </head>
 
- <body style="margin:0px;" > 
+ <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
   
    <!-- TABLA #1 -->
    <table width="100%" height="28" border="0" >
@@ -41,14 +46,24 @@
          </td>
 
          <!-- INCLUDE PRINCIPAL -->
-         <td width="85%" valign="top">             
-			   <form id="frnBienvenida" name="frnBienvenida" >		      
-			      Bienvenido Cliente: 
-			      <strong>
-			        <s:property value="#session.objCliente.nombres" /> &nbsp;&nbsp; <s:property value="#session.objCliente.apellidos" />
-			      </strong>
+         <td width="85%" valign="top">   
  
- 				  <table width="70%" border="0" align="center" cellpadding="0" cellspacing="2" >
+             <table width="90%" border="0" align="center" cellpadding="0" cellspacing="2" >
+			      <tr>
+				     <td width="80%" colspan="3" > 
+				          &nbsp;
+					      <label> <strong> <fmt:message key="texto.label.saludoBienvenida" />: </strong> </label>	
+					      &nbsp;					      
+					      <label style="color: #9E353F" > 
+					        <s:property value="#session.objCliente.nombres" /> &nbsp;&nbsp; <s:property value="#session.objCliente.apellidos" />
+					      </label>
+				     </td>
+			         <td width="20%" >&nbsp;</td>
+			      </tr>		
+             </table>
+         
+
+			 <table width="70%" border="0" align="center" cellpadding="0" cellspacing="2" >
 				
 				      <tr>
 					     <td width="10%" >&nbsp;</td>
@@ -58,32 +73,36 @@
 				      </tr>	
 				      	  
 					  <tr>
-				        <td colspan="4" >
-						  <center> 
-				             <font color="#9E353F" size="5">
-				               Bienvenida
-				             </font>  
-				          </center>        
-				        </td>          
+					    <td align="center" colspan="4" >
+			             <center>
+			                <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloBienvenida" /> </font>
+			             </center>       
+				        </td>       
 					  </tr>
                       
 				      <tr> <td width="10%" colspan="4" >&nbsp;</td> </tr>
                       
 				      <tr>                         
 					     <td width="10%" >&nbsp;</td>
-				         <td width="80%" colspan="2" >
-                           <p>Esta es su página
-                             principal del Portal Perubian Terrestrial Transport. Aquí Ud. Podrá elegir los destinos, horarios,
-                             servicios, etc. entre todas las empresas registradas en nuestro portal web, para que se pueda dirigir al destino turistico de su agrado.
-                           </p>
-                           <p>Las empresas de
-                             transporte registradas con nosotros, son empresas formalmente establecidas
-                             y consolidadas, por lo que el servicio que Ud. encontrará entre nuestros
-                             clientes será siempre de primera calidad.         
-                           </p>
-                           <p>Esperamos que el servicio
-                             que reciba sea de su entera satisfacción.         
-                         </p></td> 
+				         <td width="80%" colspan="4" align="left" >
+				           <label>
+	                           Esta es su página principal del Portal Perubian Terrestrial Transport. Aquí Ud. Podrá elegir los destinos, horarios, servicios, etc. entre todas las empresas registradas en nuestro portal web, para que se pueda dirigir al destino turistico de su agrado.
+	                       </label>	  
+	                                            
+	                       <br></br>
+	                       <br></br>
+	                       
+	                       <label>    
+	                           Las empresas de transporte registradas con nosotros, son empresas formalmente establecidas y consolidadas, por lo que el servicio que Ud. encontrará entre nuestros clientes será siempre de primera calidad.         
+	                       </label>  
+	                       
+	                       <br></br>
+	                       <br></br>
+	                       
+	                       <label>   	
+	                           Esperamos que el servicio que reciba sea de su entera satisfacción. 
+	                       </label>
+                         </td> 
 				         <td width="10%" >&nbsp;</td>
 				      </tr>
                     

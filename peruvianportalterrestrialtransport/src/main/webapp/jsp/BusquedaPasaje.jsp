@@ -5,6 +5,9 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>  
  
+ <%@taglib uri="/struts-tags"                       prefix="s"    %>
+ <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %> 
+ 
  <%@page import="com.ttporg.pe.bean.Usuario" %>
  
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,9 +15,11 @@
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  
  <head> 
-     <jsp:include page="../include/Titulo.jsp"  flush="false" />
-     <jsp:include page="../include/Estilos.jsp" flush="false" />
-     <jsp:include page="../include/Scripts.jsp" flush="false" /> 
+      <jsp:include page="../include/Titulo.jsp"  flush="false" />
+      <jsp:include page="../include/Estilos.jsp" flush="false" />
+      <jsp:include page="../include/Scripts.jsp" flush="false" /> 
+     
+      <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
      
 	  <!-- ESTILO DE FORMATO DLE CALENDARIO -->
 	  <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/calendario/calendar-win2k-cold-1.css" title="calendar-win2k-cold-1.css" />
@@ -91,7 +96,7 @@
 	  </script>
  </head>
 
- <body> 
+ <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
   
   <form id="idFrmBusquedaPasaje" name="frmBusquedaPasaje" >
   
@@ -123,13 +128,11 @@
 				      </tr>	
 				      	  
 					  <tr>
-				        <td colspan="4" >
-						  <center> 
-				             <font color="#9E353F" size="5">
-				               Busqueda de Pasajes
-				             </font>  
-				          </center>        
-				        </td>          
+	                   <td colspan="4" >
+	                     <center>
+	                       <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloBusquedaPasaje" /> </font>
+	                     </center>
+	                   </td>        
 					  </tr>
 					  
 				      <tr>
@@ -144,13 +147,13 @@
 				         <td width="80%" colspan="2" > 
 				         
 	                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px;" >
-	     <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" >Filtro: </legend>
+	     <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><label><fmt:message key="texto.label.filtro" />:</label> </legend>
 	                   
 	                          <table width="100%" >
                                  
                                   <tr>	  
                                      <td width="10%" >&nbsp;</td>
-                                     <td width="40%">Departamento</td>
+                                     <td width="40%"><label><fmt:message key="texto.label.departamento" />:</label></td>
                                      <td width="40%" >
                                          <select id="idChoDepartamento" name="choDepartamento" style="width:150px;" onchange="conexionServlet( this.form, 'cargarEmpresa' )" >  
   										    <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
@@ -159,13 +162,13 @@
 					                     </select>
                                      </td>    
                                      <td width="10%" align="left" >
- <input type="submit" id="idBtnConsultar" name="btnConsultar" value="Consultar" width="200" onclick="conexionServlet( this.form, 'cargarListadoFiltrado' )" /> 
+                                         <button id="idBtnConsultar" type="submit" width="200" onclick="conexionServlet( this.form, 'cargarListadoFiltrado' )" > <fmt:message key="texto.button.consultar" /> </button> 
                                      </td>
                                   </tr>
                                   
                                   <tr>
                                      <td width="10%" >&nbsp;</td>
-                                     <td width="40%">Empresa:</td>
+                                     <td width="40%"><label><fmt:message key="texto.label.empresa" />:</label></td>
                                      <td width="40%" >
                                        <select id="idChoEmpresa" name="choEmpresa" style="width:150px;" onchange="conexionServlet( this.form, 'cargarServTransporte' )" >
                                            <c:if test="${listaEmpresa != null}" > 
@@ -180,7 +183,7 @@
                                   
                                   <tr>
                                      <td width="10%" >&nbsp;</td>
-                                     <td>Servicio Transporte:</td>
+                                     <td><label><fmt:message key="texto.label.servicioTransporte" />:</label></td>
                                      <td>
                                        <select id="idChoServTransporte" name="choServTransporte" style="width:150px;">
                                            <c:if test="${listaServicio != null}" > 
@@ -195,7 +198,7 @@
                                   
                                   <tr>
                                      <td width="10%" >&nbsp;</td>
-                                     <td>Ciudad Origen:</td>
+                                     <td><label><fmt:message key="texto.label.ciudadOrigen" />:</label></td>
                                      <td>
                                        <select id="idChoCiudadOrigen" name="choCiudadOrigen" style="width:150px;">
                                            <option value="LIMA"  > LIMA </option> 
@@ -220,7 +223,7 @@
                                   
                                   <tr>
                                      <td width="10%" >&nbsp;</td>
-                                     <td>Ciudad Destino:</td>
+                                     <td><label><fmt:message key="texto.label.ciudadDestino" />:</label></td>
                                      <td>
                                        <select id="idChoCiudadDestino" name="choCiudadDestino" style="width:150px;">
                                            <option value="ICA"  > ICA </option> 
@@ -244,7 +247,7 @@
                                   
                                   <tr>
                                      <td width="10%" >&nbsp;</td>
-                                     <td>Fecha:</td>
+                                     <td><label><fmt:message key="texto.label.fecha" />:</label></td>
                                      <td>
                                         <input type="text" id="txtIdFecha" name="txtFecha" /><img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" > 
                                      </td>
@@ -271,18 +274,18 @@
  	                        <table border="0" width="60%" bgcolor="white" >
 	                              
 	                                 <tr>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Orden</td>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Origen</td>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Destino</td>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Detalle</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.orden" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.origen" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.destino" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.detalle" /></td>
 	                                 </tr>
 	                                 
 	                                 <c:if test="${listaSalida != null}" > 
 		                                 <c:forEach var="objListaSalida" items="${listaSalida}" >                                 
 			                                 <tr>
-			                                     <td style="text-align:center">${objListaSalida.id}</td>
-			                                     <td style="text-align:center">${objListaSalida.departamentoSalida}</td>
-			                                     <td style="text-align:center">${objListaSalida.departamentoDestino}</td>
+			                                     <td style="text-align:center"><label>${objListaSalida.id}</label></td>
+			                                     <td style="text-align:center"><label>${objListaSalida.departamentoSalida}</label></td>
+			                                     <td style="text-align:center"><label>${objListaSalida.departamentoDestino}</label></td>
 					                                     
 			                                     <td style="text-align:center">   
 				                                     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?codigoSalida=${objListaSalida.id}&opcion=cargarListadoFiltrado&opcion2=cargarListadoCalendario" 
@@ -297,7 +300,7 @@
 		                            <c:if test="${listaSalida == null}" > 
 		                               <tr>
 			                               <td colspan="7">
-			                                  Realizar un busquea de pasajes ...
+			                                  <label>Realizar un busquea de pasajes ...</label>
 			                               </td>
 			                           </tr>    
 		                            </c:if>             
@@ -307,10 +310,10 @@
                         <c:if test="${listaCalendario != null}" >     
                            <table border="0" width="60%" bgcolor="white" >
                                      <tr>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Salida</td>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Llegada</td>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Duracion</td>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Ver</td>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.salida" /></td>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.llegada" /></td>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.duracion" /></td>
+                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.ver" /></td>
                                      </tr> 
                                      
 	                                 <c:forEach var="objCalendario" items="${listaCalendario}" >                                 
@@ -321,11 +324,11 @@
 		                                     <td style="text-align:center">
                                              <fmt:formatDate value="${objCalendario.fechaHoraLlegada}" type="DATE" pattern="MM-dd-yyyy--hh:mm"/>
                                              </td>
-		                                     <td style="text-align:center">${objCalendario.duracion}</td> 
+		                                     <td style="text-align:center"><label>${objCalendario.duracion}</label></td> 
 			                                     
 		                                     <td style="text-align:center" >   
 			                                     <a href="javascript:conexionServletPopup( this.form )" title="Ver Asientos" >                
-			                          <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
+			                                        <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
 			                                     </a>
 		                                     </td>
 		                                     
