@@ -1,7 +1,5 @@
 package com.ttporg.pe.bean;
 
-import java.io.Serializable;
-
 /**
  * @author Cesar Ricardo.
  * @clase: Asiento.java  
@@ -14,17 +12,18 @@ import java.io.Serializable;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  */
-public class Asiento implements Serializable{
- 
-	private static final long	serialVersionUID	= 8515852719018556407L;
-	
+public class Asiento{
+
 	private Integer	      id;
     private String        fila;
     private String        columna;
-    private boolean       estado;   //True = Libre - False = Ocupado
+    private String        estado;   //True = Libre - False = Ocupado
+    
+    private Vehiculo      vehiculo;
     
     //Constructores ...
     public Asiento(){
+    	this.vehiculo = new Vehiculo();
     }
 
     public String getColumna() {
@@ -34,16 +33,16 @@ public class Asiento implements Serializable{
     public void setColumna(String columna) {
         this.columna = columna;
     }
+    
+	public String getEstado(){
+		return estado;
+	}
+	
+	public void setEstado( String estado ){
+		this.estado = estado;
+	}
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public String getFila() {
+	public String getFila() {
         return fila;
     }
 
@@ -57,6 +56,14 @@ public class Asiento implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
-    }   
+    }
+	
+	public Vehiculo getVehiculo(){
+		return vehiculo;
+	}
+	
+	public void setVehiculo( Vehiculo vehiculo ){
+		this.vehiculo = vehiculo;
+	}   
     
 }

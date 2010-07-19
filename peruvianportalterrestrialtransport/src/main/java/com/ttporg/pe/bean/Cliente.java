@@ -1,8 +1,7 @@
 package com.ttporg.pe.bean;
 
-import java.io.Serializable;
 import java.util.Date;
- 
+
 /**
  * @author Cesar Ricardo.
  * @clase: Cliente.java  
@@ -15,18 +14,16 @@ import java.util.Date;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  */
-public class Cliente implements Serializable{
- 
-	private static final long serialVersionUID = -4559388532885775967L; 
-	
+public class Cliente{
+
 	private Integer	id;
     private String	nombres;
     private String	apellidos;
+    private String	dni;
     private Date	cumpleanos;
     private String	direccion;
-    private String	dni;
-    private String	foto;
     private String	email;
+    
     private String	usuario;
     private String	password;
     private String	tipo;
@@ -37,120 +34,108 @@ public class Cliente implements Serializable{
     }	
 
     public Cliente( Integer id, String nombres, String apellidos, Date cumpleanos, String direccion, 
-                    String foto, String email, String dni, String usuario, String password, String tipo, String estado ){
-            super();
-            this.id         = id;
-            this.nombres    = nombres;
-            this.apellidos  = apellidos;
-            this.cumpleanos = cumpleanos;
-            this.direccion  = direccion;
-            this.foto       = foto;
-            this.email      = email;
-            this.usuario    = usuario;
-            this.dni        = dni;  
-            this.password   = password;
-            this.tipo       = tipo;
-            this.estado     = estado;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public Date getCumpleanos() {
-        return cumpleanos;
-    }
-
-    public void setCumpleanos(Date cumpleanos) {
+                    String foto, String email, String dni, String usuario, String password, String tipo, 
+                    String estado ){
+        super();
+        this.id         = id;
+        this.nombres    = nombres;
+        this.apellidos  = apellidos;
         this.cumpleanos = cumpleanos;
+        this.direccion  = direccion;
+        this.email      = email;
+        this.usuario    = usuario;
+        this.dni        = dni;  
+        this.password   = password;
+        this.tipo       = tipo;
+        this.estado     = estado;
     }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
+	
+	public Integer getId(){
+		return id;
+	}
+	
+	public String getNombres(){
+		return nombres;
+	}
+	
+	public String getApellidos(){
+		return apellidos;
+	}
 	
 	public String getDni(){
 		return dni;
+	}
+	
+	public Date getCumpleanos(){
+		return cumpleanos;
+	}
+	
+	public String getDireccion(){
+		return direccion;
+	}
+	
+	public String getEmail(){
+		return email;
+	}
+	
+	public String getUsuario(){
+		return usuario;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	public String getTipo(){
+		return tipo;
+	}
+	
+	public String getEstado(){
+		return estado;
+	}
+	
+	public void setId( Integer id ){
+		this.id = id;
+	}
+
+	public void setNombres( String nombres ){
+		this.nombres = nombres;
+	}
+	
+	public void setApellidos( String apellidos ){
+		this.apellidos = apellidos;
 	}
 	
 	public void setDni( String dni ){
 		this.dni = dni;
 	}
 	
-	public static long getSerialVersionUID(){
-		return serialVersionUID;
+	public void setCumpleanos( Date cumpleanos ){
+		this.cumpleanos = cumpleanos;
+	}
+	
+	public void setDireccion( String direccion ){
+		this.direccion = direccion;
+	}
+	
+	public void setEmail( String email ){
+		this.email = email;
+	}
+	
+	public void setUsuario( String usuario ){
+		this.usuario = usuario;
+	}
+	
+	public void setPassword( String password ){
+		this.password = password;
+	}
+	
+	public void setTipo( String tipo ){
+		this.tipo = tipo;
+	}
+	
+	public void setEstado( String estado ){
+		this.estado = estado;
 	}    
         
 }

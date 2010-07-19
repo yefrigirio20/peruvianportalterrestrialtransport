@@ -19,71 +19,51 @@ public class Pago{
 	private Integer id;
 	private String  tipoPago;
 	private String  numTarjeta;
-	private double  montoPago;	
 	private Date    fechaExpiracion;  
-	private Cliente cliente;
 	
 	//Constructores ...
 	public Pago(){
-		this.cliente = new Cliente();
 	}
-		
-	public Pago( Integer id, String tipoPago, String  numTarjeta, double  montoPago, Date fechaExpiracion, Cliente cliente ){
+ 
+	public Pago( Integer id, String tipoPago, String  numTarjeta, 
+			     Date fechaExpiracion ){
 		super();
 		this.id              = id;
 		this.tipoPago        = tipoPago;
-		this.montoPago       = montoPago;
 		this.numTarjeta      = numTarjeta;
 		this.fechaExpiracion = fechaExpiracion;
-		this.cliente         = cliente;
-	}	
-	
-	public String getNumTarjeta(){
-		return numTarjeta;
 	}
 	
-	public void setNumTarjeta( String numTarjeta ){
-		this.numTarjeta = numTarjeta;
-	}
-
 	public Integer getId(){
 		return id;
-	}
-	
-	public void setId( Integer id ){
-		this.id = id;
 	}
 	
 	public String getTipoPago(){
 		return tipoPago;
 	}
 	
-	public void setTipoPago( String tipoPago ){
-		this.tipoPago = tipoPago;
+	public String getNumTarjeta(){
+		return numTarjeta;
 	}
 	
 	public Date getFechaExpiracion(){
 		return fechaExpiracion;
 	}
 	
+	public void setId( Integer id ){
+		this.id = id;
+	}
+	
+	public void setTipoPago( String tipoPago ){
+		this.tipoPago = tipoPago;
+	}
+	
+	public void setNumTarjeta( String numTarjeta ){
+		this.numTarjeta = numTarjeta;
+	}
+	
 	public void setFechaExpiracion( Date fechaExpiracion ){
 		this.fechaExpiracion = fechaExpiracion;
-	}
-	
-	public Cliente getCliente(){
-		return cliente;
-	}
-	
-	public void setCliente( Cliente cliente ){
-		this.cliente = cliente;
-	}
-	
-	public double getMontoPago(){
-		return montoPago;
-	}
-	
-	public void setMontoPago( double montoPago ){
-		this.montoPago = montoPago;
 	}	
 	
  }
