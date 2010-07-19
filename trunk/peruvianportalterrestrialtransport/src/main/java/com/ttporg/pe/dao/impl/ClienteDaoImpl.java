@@ -68,17 +68,10 @@ public class ClienteDaoImpl extends SqlMapClientDaoSupport implements ClienteDao
 		
 		try{
         	String nombReferMetodoMapeado = this.getObjetoNegocio( "insertCliente" );
-        	
-            Cliente objEmpresa = (Cliente)getSqlMapClientTemplate().insert( nombReferMetodoMapeado, cliente );  
-            
-        	System.out.println( "objEmpresa: " + objEmpresa ); 
-			
-        	if( objEmpresa != null ){
-        		mensaje = true;	
-        	}
-        	else{
-        		mensaje = false;	
-        	}					
+     	
+        	this.getSqlMapClientTemplate().insert( nombReferMetodoMapeado, cliente );
+        		
+        	mensaje = true;	 					
 		}
 		catch( Exception e ){
 	           e.printStackTrace();
