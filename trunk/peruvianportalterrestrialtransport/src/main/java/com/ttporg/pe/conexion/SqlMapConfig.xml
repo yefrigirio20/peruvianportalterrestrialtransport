@@ -12,9 +12,19 @@
 			maxSessions            = "10"
 			maxTransactions        = "5"
 			useStatementNamespaces = "true" />
-
-	<sqlMap resource="com/ttporg/pe/mapping/Usuario.xml" />
-	<sqlMap resource="com/ttporg/pe/mapping/Empresa.xml" />
-		 
+			
+	<sqlMap resource="com/ttporg/pe/mapping/Departamento.xml" />	
+	<sqlMap resource="com/ttporg/pe/mapping/Vehiculo.xml"     />	
+	<sqlMap resource="com/ttporg/pe/mapping/Cliente.xml"      />
+	<sqlMap resource="com/ttporg/pe/mapping/Empresa.xml"      />
+	<sqlMap resource="com/ttporg/pe/mapping/Agencia.xml"      /> 
+	<sqlMap resource="com/ttporg/pe/mapping/Servicio.xml"     />	
+	<sqlMap resource="com/ttporg/pe/mapping/Asiento.xml"      />	
+	<sqlMap resource="com/ttporg/pe/mapping/Salida.xml"       />	
+	<sqlMap resource="com/ttporg/pe/mapping/Calendario.xml"   />
+	<sqlMap resource="com/ttporg/pe/mapping/Pago.xml"         />	
+	<sqlMap resource="com/ttporg/pe/mapping/ClientePago.xml"  />
+	<sqlMap resource="com/ttporg/pe/mapping/Transaccion.xml"  />
+	
 </sqlMapConfig>
 
