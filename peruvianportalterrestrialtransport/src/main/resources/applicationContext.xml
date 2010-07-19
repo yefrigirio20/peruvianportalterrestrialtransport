@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
-        "http://www.springframework.org/dtd/spring-beans.dtd">
-
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"      
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+                           
     <!-- ========== SPRING: Data Source ========== --> 
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
 	  <property name="location">
@@ -21,7 +22,8 @@
 
 	
 	<!-- ========== SPRING: SERVICIOS ========== -->
-	<import resource="application-service.xml" />
+	<import resource="application-entityBean.xml" />
+	<import resource="application-service.xml"    />
 	
 </beans>
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>	
+  
+    <!-- 
+    IMPORTANTE: El nombre del mapeo de los objetos y listas deben de tener el mismo
+    nombre con el que se creo en la clase. 
+    -->
+  
+	<!-- Bean de 'Departamento' -->
+	<bean id="departamento" class="com.ttporg.pe.bean.Departamento" singleton="false"></bean> 
+
+	<!-- Bean de 'Empresa' -->
+	<bean id="empresa" class="com.ttporg.pe.bean.Empresa" >
+	   <property name="departamento" ref="departamento" />
+	</bean> 
+ 	
+	<!-- Bean de 'Cliente' -->
+	<bean id="cliente" class="com.ttporg.pe.bean.Cliente" singleton="false"></bean>
+  
+	<!-- Bean de 'Pago' -->
+	<bean id="pago" class="com.ttporg.pe.bean.Pago" singleton="false"></bean>  
+  	
+	<!-- Bean de 'Asiento' -->
+	<bean id="asiento" class="com.ttporg.pe.bean.Asiento" singleton="false">
+	   <property name="vehiculo" ref="vehiculo" />
+	</bean> 
+  	
+ 	<!-- Bean de 'Vehiculo' -->
+	<bean id="vehiculo" class="com.ttporg.pe.bean.Vehiculo" singleton="false">
+	   <property name="servicio" ref="servicio" />
+	</bean> 	
+  	  	
+	<!-- Bean de 'Calendario' -->
+	<bean id="calendario" class="com.ttporg.pe.bean.Calendario" singleton="false">
+	   <property name="salida" ref="salida" />
+	</bean> 
+  	  	
+ 	<!-- Bean de 'Salida' -->
+	<bean id="salida" class="com.ttporg.pe.bean.Salida" singleton="false">
+	   <property name="servicio" ref="servicio" />
+	</bean> 
+  	
+	<!-- Bean de 'Servicio' -->
+	<bean id="servicio" class="com.ttporg.pe.bean.Servicio" singleton="false">
+	   <property name="agencia" ref="agencia" />
+	</bean>
+  	
+	<!-- Bean de 'Agencia' -->
+	<bean id="agencia" class="com.ttporg.pe.bean.Agencia" singleton="false">
+	   <property name="empresa" ref="empresa" />
+	</bean>	
+  
+	<!-- Bean de 'ClientePago' -->
+	<bean id="clientePago" class="com.ttporg.pe.bean.ClientePago" singleton="false">
+	    <property name="cliente" ref="cliente" />
+	    <property name="pago"    ref="pago"    />
+	</bean>
+ 
+	<!-- Bean de 'Transaccion' -->
+	<bean id="transaccion" class="com.ttporg.pe.bean.Transaccion" singleton="false" >
+	    <property name="empresa"  ref="empresa"  />
+	    <property name="cliente"  ref="cliente"  />
+	    <property name="agencia"  ref="agencia"  />
+	    <property name="servicio" ref="servicio" />
+	    <property name="salida"   ref="salida"   />
+	    <property name="vehiculo" ref="vehiculo" />
+	    <property name="asiento"  ref="asiento"  />
+	</bean>
+		
+</beans>

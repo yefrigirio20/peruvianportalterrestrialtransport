@@ -18,8 +18,8 @@
 	</bean>
 	<!-- ========== /SPRING: FactoryBean ========== -->
 
-	<!-- ========== SPRING: Mapeo DAOS ========== -->
-	<bean id="usuarioDao" class="com.ttporg.pe.dao.impl.UsuarioDaoImpl">
+	<!-- ========== SPRING: Mapeo DAOS ========== -->	
+	<bean id="departamentoDao" class="com.ttporg.pe.dao.impl.DepartamentoDaoImpl">
 		<property name="sqlMapClient">
 			<ref bean="sqlMapClient" />
 		</property>
@@ -30,8 +30,62 @@
 			<ref bean="sqlMapClient" />
 		</property>
 	</bean>	
-	
+ 
 	<bean id="empresaDao" class="com.ttporg.pe.dao.impl.EmpresaDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	 
+	
+	<bean id="agenciaDao" class="com.ttporg.pe.dao.impl.AgenciaDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="vehiculoDao" class="com.ttporg.pe.dao.impl.VehiculoDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="servicioDao" class="com.ttporg.pe.dao.impl.ServicioDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="asientoDao" class="com.ttporg.pe.dao.impl.AsientoDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="salidaDao" class="com.ttporg.pe.dao.impl.SalidaDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="calendarioDao" class="com.ttporg.pe.dao.impl.CalendarioDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="pagoDao" class="com.ttporg.pe.dao.impl.PagoDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="clientePagoDao" class="com.ttporg.pe.dao.impl.ClientePagoDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>	
+ 
+	<bean id="transaccionDao" class="com.ttporg.pe.dao.impl.TransaccionDaoImpl">
 		<property name="sqlMapClient">
 			<ref bean="sqlMapClient" />
 		</property>
