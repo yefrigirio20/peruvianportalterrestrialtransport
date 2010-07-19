@@ -63,12 +63,12 @@ public class EmpresaServiceImpl extends ServiceFactory implements EmpresaService
 	}
 	
 	/**
-	 * obtenerListaEmpresas_x_codigo
+	 * obtenerListaEmpresas
 	 * @param  codigo
 	 * @return List<Empresa>
 	 */
-	public List<Empresa> obtenerListaEmpresas_x_codigo( int codigo ){
-		List<Empresa> listaEmpresa = this.getEmpresaDAO().obtenerListaEmpresas_x_codigo( codigo );
+	public List<Empresa> obtenerListaEmpresas(){
+		List<Empresa> listaEmpresa = this.getEmpresaDAO().obtenerListaEmpresas();
 		return listaEmpresa;
 	}
 	

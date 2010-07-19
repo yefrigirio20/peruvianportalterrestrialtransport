@@ -2,7 +2,6 @@ package com.ttporg.pe.servicio;
 
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.bean.Empresa;
-import com.ttporg.pe.bean.Usuario;
 
 /**
   * @author Cesar Ricardo.
@@ -17,12 +16,7 @@ import com.ttporg.pe.bean.Usuario;
  * @versión 1.0
  */
 public interface PeruvianPortalService{
-	
-	/**
-	 * loginUsuario
-	 */
-	public Usuario loginUsuario( Usuario usuario );
-	
+ 
 	/**
 	 * loginEmpresa
 	 */
