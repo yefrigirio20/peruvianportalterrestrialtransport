@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Cliente">
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILISABLE' ****************** -->
+    <!-- ******************************************************** -->
+     <sql id="selectClientesSinTag" >   
+          SELECT c.ID, c.NOMBRES, c.APELLIDOS, c.DIRECCION, 
+	             c.DNI, c.CUMPLEANOS, c.EMAIL, c.ESTADO,
+	             c.USUARIO, c.PASSWORD, c.TIPO
+	      FROM   CLIENTE c
+     </sql>	       
+        
+     <sql id="selectClientesConTag">   
+        SELECT c.ID          AS  "id", 
+               c.NOMBRES     AS  "nombres", 
+               c.APELLIDOS   AS  "apellidos", 
+               c.DIRECCION   AS  "direccion", 
+		       c.DNI         AS  "dni", 
+		       c.CUMPLEANOS  AS  "cumpleanos", 
+		       c.EMAIL       AS  "email", 
+		       c.ESTADO      AS  "estado", 
+		       c.USUARIO     AS  "usuario", 
+		       c.PASSWORD    AS  "password", 
+		       c.TIPO        AS  "tipo"
+		FROM   CLIENTE c 
+     </sql>	
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+    
+    <!-- FORMA #1: PARA HACER CONSULTAS, EN BASE A: 'resultMap' -->
+   	<resultMap id="atributosCliente" class="com.ttporg.pe.bean.Cliente">
+		<result property="id"         column="ID"  	      columnIndex="1"  />
+		<result property="nombres"    column="NOMBRES"    columnIndex="2"  />		
+		<result property="apellidos"  column="APELLIDOS"  columnIndex="3"  />
+		<result property="direccion"  column="DIRECCION"  columnIndex="4"  />
+		<result property="dni"        column="DNI"        columnIndex="5"  />
+		<result property="cumpleanos" column="CUMPLEANOS" columnIndex="6"  />
+		<result property="email"      column="EMAIL"      columnIndex="7"  />
+		<result property="estado"     column="ESTADO"     columnIndex="8"  />
+		<result property="usuario"    column="USUARIO"    columnIndex="9"  />
+		<result property="password"   column="PASSWORD"   columnIndex="10" />
+		<result property="tipo"       column="TIPO"       columnIndex="11" />				
+	</resultMap>
+   
+	<select id="getCliente" resultMap="atributosCliente" parameterClass="java.lang.Integer" >
+        <include refid="selectClientesSinTag" />
+		WHERE  c.ID = #id#
+    </select>
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="cliente" type="com.ttporg.pe.bean.Cliente" />
+	
+	<select id="getCliente2" resultClass="cliente" parameterClass="java.lang.Integer" >
+        <include refid="selectClientesConTag" />
+		WHERE  c.ID = #id#
+    </select>
+
+	<select id="getListaCliente" resultClass="cliente" parameterClass="java.lang.Integer" >
+        <include refid="selectClientesConTag" />
+    </select>
+ 
+	<insert id="insertCliente" parameterClass="com.ttporg.pe.bean.Cliente" >
+		INSERT INTO CLIENTE ( NOMBRES, APELLIDOS, DIRECCION, DNI, CUMPLEANOS, 
+	                          EMAIL, ESTADO, USUARIO, PASSWORD, TIPO )
+		                            
+		VALUES( #nombres#, #apellidos#, #direccion#, #dni#, #cumpleanos#,
+		        #email#, #estado#, #usuario#, #password#, #tipo# )
+	</insert>
+    
+	<update id="updateCliente" parameterClass="com.ttporg.pe.bean.Cliente" >
+		     UPDATE CLIENTE c SET 
+							c.NOMBRES    = #nombres#,
+							c.APELLIDOS  = #apellidos#,
+							c.DIRECCION  = #direccion#,
+							c.DNI        = #dni#,
+							c.CUMPLEANOS = #cumpleanos#,
+							c.EMAIL      = #email#,
+							c.ESTADO     = #estado#,
+							c.USUARIO    = #usuario#,
+							c.PASSWORD   = #password#,
+							c.TIPO       = #tipo#
+		      WHERE  c.ID = #id#
+	</update>
+   
+	<delete id="deleteCliente" parameterClass="java.util.Map">
+		DELETE FROM CLIENTE 
+		WHERE  ID = #codigoEliminacion# 
+	</delete>
+
+
+    <!-- ********************************************************* -->
+    <!-- *************** PROCESOS 'PERSONALIZADOS' *************** -->
+    <!-- ********************************************************* -->
+
+	<select id="getListaClientePorEstado" resultClass="cliente" parameterClass="java.lang.String" >
+        <include refid="selectClientesConTag" />
+		WHERE    c.TIPO LIKE #tipo#
+		ORDER BY c.NOMBRE 
+    </select>
+    
+	<select id="getListaClienteFiltroNombreApellido" resultClass="cliente" parameterClass="java.lang.String" >
+        <include refid="selectClientesConTag" />
+		WHERE    c.NOMBRES   LIKE #nombres#   AND 
+		         c.APELLIDOS LIKE #apellidos# 
+		ORDER BY c.NOMBRES 
+    </select>
+    
+	<select id="getListaNombreApellidoUsuario" resultClass="cliente" parameterClass="java.lang.String" >
+        SELECT   c.ID        AS  "id", 
+                 c.NOMBRES   AS  "nombres", 
+                 c.APELLIDOS AS  "apellidos"
+		FROM  CLIENTE c 
+		ORDER BY c.NOMBRES 
+    </select>
+    
+	<select id="getFiltrosClientes" resultClass="cliente" parameterClass="com.ttporg.pe.bean.Cliente" >
+        <include refid="selectClientesConTag" />				
+		
+		<dynamic prepend="WHERE" >		
+			<isNotNull prepend="AND" property="tipo" >
+			   c.TIPO LIKE #tipo#
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="id" >
+			   c.ID LIKE #id#
+			</isNotNull>
+	
+			<isNotNull prepend="AND" property="nombres" >
+			   c.NOMBRES LIKE #nombres#
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="apellidos" >
+			   c.APELLIDOS LIKE #apellidos#
+			</isNotNull>
+		</dynamic>
+		ORDER BY c.ID 						
+    </select>
+    
+	<select id="getLoginClientes" resultClass="cliente" parameterClass="com.ttporg.pe.bean.Cliente" >
+        <include refid="selectClientesConTag" />				
+		
+		<dynamic prepend="WHERE" >		
+			<isNotNull prepend="AND" property="usuario" >
+			   c.USUARIO LIKE #usuario#
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="password" >
+			   c.PASSWORD LIKE #password#
+			</isNotNull>
+		</dynamic>
+		ORDER BY c.NOMBRES 						
+    </select>    
+    
+ </sqlMap>
+

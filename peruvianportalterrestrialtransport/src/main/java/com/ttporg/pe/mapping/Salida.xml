@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Salida" >
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectSalidasSinTag">   
+		SELECT s.ID, s.DEPARTAMENTO_SALIDA, s.DEPARTAMENTO_DESTINO, s.SERVICIO_ID  
+		FROM   SALIDA s
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="salida" type="com.ttporg.pe.bean.Salida" />
+	
+	<select id="getSalida" resultClass="salida" parameterClass="java.lang.Integer" >
+        <include refid="selectSalidasSinTag" />
+		WHERE  s.ID = #id#
+    </select>
+
+	<select id="getListaSalida" resultClass="salida" >
+        <include refid="selectSalidasSinTag" />
+    </select>
+
+	<insert id="insertSalida" parameterClass="com.ttporg.pe.bean.Salida" >
+		INSERT INTO SALIDA( ID, DEPARTAMENTO_SALIDA, DEPARTAMENTO_DESTINO, SERVICIO_ID )
+		                            
+		VALUES( #id#, #departamentoSalida#, #departamentoDestino#, #servicio.id# )
+	</insert>
+    
+	<update id="updateSalida" parameterClass="com.ttporg.pe.bean.Salida" >
+		    UPDATE SALIDA s SET 
+			                s.DEPARTAMENTO_SALIDA  = #departamentoSalida#, 
+			                s.DEPARTAMENTO_DESTINO = #departamentoDestino#, 
+			                s.SERVICIO_ID          = #servicio.id#
+	        WHERE s.ID = #id#
+	</update>
+   
+	<delete id="deleteSalida" parameterClass="java.util.Map" >
+		DELETE FROM SALIDA 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+    
+ 
+ </sqlMap>
+

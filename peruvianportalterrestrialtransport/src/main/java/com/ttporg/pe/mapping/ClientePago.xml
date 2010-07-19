@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ClientePago" >
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectClientePagosSinTag">   
+		SELECT cp.ID, cp.CLIENTE_ID, cp.PAGO_ID  
+		FROM   CLIENTE_PAGO cp
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="clientePago" type="com.ttporg.pe.bean.ClientePago" />
+	
+	<select id="getClientePago" resultClass="clientePago" parameterClass="java.lang.Integer" >
+        <include refid="selectClientePagosSinTag" />
+		WHERE  cp.ID = #id#
+    </select>
+
+	<select id="getListaClientePago" resultClass="clientePago" >
+        <include refid="selectClientePagosSinTag" />
+    </select>
+
+	<insert id="insertClientePago" parameterClass="com.ttporg.pe.bean.ClientePago" >
+		INSERT INTO CLIENTE_PAGO( ID, CLIENTE_ID, PAGO_ID )
+		                            
+		VALUES( #id#, #cliente.id#, #pago.id# )
+	</insert>
+    
+	<update id="updateClientePago" parameterClass="com.ttporg.pe.bean.ClientePago" >
+		    UPDATE CLIENTE_PAGO cp SET 
+			                    cp.CLIENTE_ID = #cliente.id#, 
+			                    cp.PAGO_ID    = #pago.id#
+	        WHERE cp.ID = #id#
+	</update>
+   
+	<delete id="deleteClientePago" parameterClass="java.util.Map" >
+		DELETE FROM CLIENTE_PAGO 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+    
+ 
+ </sqlMap>
+

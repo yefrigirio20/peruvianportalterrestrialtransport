@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Calendario" >
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectCalendariosSinTag">   
+		SELECT c.ID, c.DURACION, c.FECHA_HORA_SALIDA, c.FECHA_HORA_LLEGADA, c.SALIDA_ID 
+		FROM   CALENDARIO c
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="calendario" type="com.ttporg.pe.bean.Calendario" />
+	
+	<select id="getCalendario" resultClass="calendario" parameterClass="java.lang.Integer" >
+        <include refid="selectCalendariosSinTag" />
+		WHERE  c.ID = #id#
+    </select>
+
+	<select id="getListaCalendario" resultClass="calendario" >
+        <include refid="selectCalendariosSinTag" />
+    </select>
+
+	<insert id="insertCalendario" parameterClass="com.ttporg.pe.bean.Calendario" >
+		INSERT INTO CALENDARIO( ID, DURACION, FECHA_HORA_SALIDA, FECHA_HORA_LLEGADA, SALIDA_ID )
+		                            
+		VALUES( #id#, #duracion#, #fechaHoraSalida#, #fechaHoraLlegada#, #salida.id# )
+	</insert>
+    
+	<update id="updateCalendario" parameterClass="com.ttporg.pe.bean.Calendario" >
+		    UPDATE CALENDARIO c SET 
+			                  c.DURACION           = #duracion#, 
+			                  c.FECHA_HORA_SALIDA  = #fechaHoraSalida#, 
+			                  c.FECHA_HORA_LLEGADA = #fechaHoraLlegada#,
+			                  c.SALIDA_ID          = #salida.id#
+	        WHERE c.ID = #id#
+	</update>
+   
+	<delete id="deleteCalendario" parameterClass="java.util.Map" >
+		DELETE FROM CALENDARIO 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+    
+ 
+ </sqlMap>
+

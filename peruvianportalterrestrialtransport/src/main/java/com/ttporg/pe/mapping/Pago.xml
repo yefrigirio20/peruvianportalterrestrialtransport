@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Pago" >
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectPagosSinTag">   
+		SELECT p.ID, p.NUM_TARJETA, p.TIPO_PAGO, p.FECHA_EXPIRACION 
+		FROM   PAGO p
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="pago" type="com.ttporg.pe.bean.Pago" />
+	
+	<select id="getPago" resultClass="pago" parameterClass="java.lang.Integer" >
+        <include refid="selectPagosSinTag" />
+		WHERE  p.ID = #id#
+    </select>
+
+	<select id="getListaPago" resultClass="pago" >
+        <include refid="selectPagosSinTag" />
+    </select>
+
+	<insert id="insertPago" parameterClass="com.ttporg.pe.bean.Pago" >
+		INSERT INTO PAGO( ID, TIPO_PAGO, NUM_TARJETA, FECHA_EXPIRACION )
+		                            
+		VALUES( #id#, #tipoPago#, #numTarjeta#, #fechaExpiracion# )
+	</insert>
+    
+	<update id="updatePago" parameterClass="com.ttporg.pe.bean.Pago" >
+		    UPDATE PAGO p SET 
+		                p.TIPO_PAGO        = #tipoPago#, 
+		                p.NUM_TARJETA      = #numTarjeta#,
+		                p.FECHA_EXPIRACION = #fechaExpiracion#
+	        WHERE p.ID = #id#
+	</update>
+   
+	<delete id="deletePago" parameterClass="java.util.Map" >
+		DELETE FROM PAGO 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+    
+ 
+ </sqlMap>
+

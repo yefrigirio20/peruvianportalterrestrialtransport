@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Agencia" >
+         
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectAgenciasSinTag">   
+		SELECT a.ID, a.DIRECCION, a.EMAIL, a.ESTADO, 
+		       a.NOMBRE, a.TELEFONO, a.EMPRESA_ID
+		FROM   AGENCIA a
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="agencia" type="com.ttporg.pe.bean.Agencia" />
+	
+	<select id="getAgencia" resultClass="agencia" parameterClass="java.lang.Integer" >
+        <include refid="selectAgenciasSinTag" />
+		WHERE  a.ID = #id#
+    </select>
+
+	<select id="getListaAgencia" resultClass="agencia" >
+        <include refid="selectAgenciasSinTag" />
+    </select>
+
+	<insert id="insertAgencia" parameterClass="com.ttporg.pe.bean.Agencia" >
+		INSERT INTO AGENCIA( NOMBRE, DIRECCION, EMAIL, TELEFONO, ESTADO, EMPRESA_ID )
+		                            
+		VALUES( #nombre#, #direccion#, #email#, #telefono#, #estado#, #empresa.id# )
+	</insert>
+    
+	<update id="updateAgencia" parameterClass="com.ttporg.pe.bean.Agencia" >
+		     UPDATE AGENCIA a SET 
+							a.NOMBRE     = #nombre#,
+							a.DIRECCION  = #direccion#,
+							a.EMAIL      = #email#,
+							a.TELEFONO   = #telefono#,
+							a.ESTADO     = #estado#,
+							a.EMPRESA_ID = #empresa.id#
+		      WHERE a.ID = #id#
+	</update>
+   
+	<delete id="deleteAgencia" parameterClass="java.util.Map">
+		DELETE FROM AGENCIA 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+  
+ </sqlMap>
+

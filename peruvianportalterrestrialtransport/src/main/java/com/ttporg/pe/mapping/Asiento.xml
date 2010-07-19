@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Asiento" >
+         
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectAsientosSinTag">   
+		SELECT a.ID, a.COLUMNA, a.FILA, a.ESTADO, a.VEHICULO_ID
+		FROM   ASIENTO a
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="asiento" type="com.ttporg.pe.bean.Asiento" />
+	
+	<select id="getAsiento" resultClass="asiento" parameterClass="java.lang.Integer" >
+        <include refid="selectAsientosSinTag" />
+		WHERE  a.ID = #id#
+    </select>
+
+	<select id="getListaAsiento" resultClass="asiento" >
+        <include refid="selectAsientosSinTag" />
+    </select>
+
+	<insert id="insertAsiento" parameterClass="com.ttporg.pe.bean.Asiento" >
+		INSERT INTO ASIENTO( COLUMNA, FILA, ESTADO, VEHICULO_ID )
+		                            
+		VALUES( #fila#, #columna#, #estado#, #vehiculo.id# )
+	</insert>
+    
+	<update id="updateAsiento" parameterClass="com.ttporg.pe.bean.Asiento" >
+		     UPDATE ASIENTO a SET 
+							a.COLUMNA     = #fila#,
+							a.FILA        = #columna#,
+							a.ESTADO      = #estado#,
+							a.VEHICULO_ID = #vehiculo.id#
+		     WHERE a.ID = #id#
+	</update>
+   
+	<delete id="deleteAsiento" parameterClass="java.util.Map">
+		DELETE FROM ASIENTO 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+  
+ </sqlMap>
+
