@@ -80,9 +80,9 @@ public class LoginMB extends BaseBean{
 				//------------------------------------------------------//
 				
     	    	 System.out.println( "BD EXISTE: " );
-	    	    
+ 
     	    	 //Validando ...
-    	    	 if( objClienteDB.getUsuario().equalsIgnoreCase( this.usuario )  &&
+    	    	 if( objClienteDB.getUsuario().equalsIgnoreCase(  this.usuario  ) &&
     	    		 objClienteDB.getPassword().equalsIgnoreCase( this.password ) ){
     	    		 
     				 //Setear Obj.Singleton en SESION.
