@@ -8,7 +8,7 @@
  <%@taglib uri="/struts-tags"                       prefix="s"    %>
  <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %> 
  
- <%@page import="com.ttporg.pe.bean.Usuario" %>
+ <%@page import="com.ttporg.pe.bean.Cliente" %>
  
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -147,7 +147,7 @@
 				         <td width="80%" colspan="2" > 
 				         
 	                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px;" >
-	     <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><label><fmt:message key="texto.label.filtro" />:</label> </legend>
+	                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><label><fmt:message key="texto.label.filtro" />:</label> </legend>
 	                   
 	                          <table width="100%" >
                                  
@@ -170,10 +170,25 @@
                                      <td width="10%" >&nbsp;</td>
                                      <td width="40%"><label><fmt:message key="texto.label.empresa" />:</label></td>
                                      <td width="40%" >
-                                       <select id="idChoEmpresa" name="choEmpresa" style="width:150px;" onchange="conexionServlet( this.form, 'cargarServTransporte' )" >
+                                       <select id="idChoEmpresa" name="choEmpresa" style="width:150px;" onchange="conexionServlet( this.form, 'cargarAgencia' )" >
                                            <c:if test="${listaEmpresa != null}" > 
 	  										    <c:forEach var="paramListaEmpresa" items="${listaEmpresa}" >
 	            								   <option value="${paramListaEmpresa.id}" ${paramListaEmpresa.id == codigoEmpresa ? 'selected' : ''}>${paramListaEmpresa.razonSocial}</option>  
+	                                            </c:forEach>
+                                           </c:if> 
+                                       </select>
+                                     </td>
+                                     <td width="10%" align="left" >&nbsp;</td>
+                                  </tr>
+                                  
+                                  <tr>
+                                     <td width="10%" >&nbsp;</td>
+                                     <td width="40%"><label><fmt:message key="texto.label.agencia" />:</label></td>
+                                     <td width="40%" >
+                                       <select id="idChoAgencia" name="choAgencia" style="width:150px;" onchange="conexionServlet( this.form, 'cargarServTransporte' )" >
+                                           <c:if test="${listaAgencia != null}" > 
+	  										    <c:forEach var="paramListaAgencia" items="${listaAgencia}" >
+	            								   <option value="${paramListaAgencia.id}" ${paramListaAgencia.id == codigoAgencia ? 'selected' : ''}>${paramListaAgencia.nombre}</option>  
 	                                            </c:forEach>
                                            </c:if> 
                                        </select>

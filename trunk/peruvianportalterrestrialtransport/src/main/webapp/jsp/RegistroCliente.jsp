@@ -8,7 +8,7 @@
  <%@taglib uri="/struts-tags"                       prefix="s"    %>
  <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %>  
   
- <%@ page import="com.ttporg.pe.bean.Usuario" %>  
+ <%@ page import="com.ttporg.pe.bean.Cliente" %>  
  
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -71,7 +71,7 @@
        
          <td width="15%" valign="top" height="100%" >  
          
-           <form id="idFrnXXX" >
+           <form id="idFrnMenu" >
               <jsp:include page="../include/Menu.jsp" flush="true" />
            </form> 
          </td>
@@ -244,7 +244,7 @@
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td>
-                      <button id="idBtnPagar" name="Pagar" style="width:100px; height:30px;" > <fmt:message key="texto.button.pagar" /> </button>
+                      <button id="idBtnPagar" name="Pagar" style="width:100px; height:30px;" > <fmt:message key="texto.button.guardar" /> </button>
                     </td>
                    <td>&nbsp;</td>
                    <td width="10%" >&nbsp;</td>
