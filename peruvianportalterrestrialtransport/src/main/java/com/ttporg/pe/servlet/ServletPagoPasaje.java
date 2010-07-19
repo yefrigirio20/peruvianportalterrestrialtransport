@@ -11,6 +11,7 @@ import com.ttporg.pe.bean.Asiento;
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.dto.BeanValidacionDto;
+import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilSingleton;
 
@@ -37,12 +38,18 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	private UtilSingleton     utilSingleton      = null;
 	
 	//Service ...
-	//private ClienteService    servicio           = null;
+	private ServiceFactory    servicio           = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = new UtilCalendario();
+	private UtilCalendario    utilCalendario     = null;
 	
 	private String            REDIRECCIONAMIENTO = "/jsp/PagoPasaje.jsp";		
+	
+	
+	{
+	 this.servicio       = new ServiceFactory();
+	 this.utilCalendario = new UtilCalendario();
+	}
 	
 	/**
 	 * service

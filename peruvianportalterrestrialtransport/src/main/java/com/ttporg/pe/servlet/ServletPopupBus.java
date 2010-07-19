@@ -1,19 +1,17 @@
 package com.ttporg.pe.servlet;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.ttporg.pe.bean.Asiento;
 import com.ttporg.pe.bean.Servicio;
 import com.ttporg.pe.bean.Vehiculo;
+import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilSingleton;
 
@@ -40,12 +38,18 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	private UtilSingleton     utilSingleton      = null;
 		
 	//Service ...
-	//private ClienteService    servicio         = null;
+	private ServiceFactory    servicio           = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = new UtilCalendario();
+	private UtilCalendario    utilCalendario     = null;
 	
 	private String            REDIRECCIONAMIENTO = "/jsp/PopupBus.jsp";
+	
+	
+	{
+	 this.servicio       = new ServiceFactory();
+	 this.utilCalendario = new UtilCalendario();
+	}
 	
 	/**
 	 * service

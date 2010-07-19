@@ -42,12 +42,18 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	private UtilSingleton     utilSingleton      = null;
 		
 	//Service ...
-	private ServiceFactory    servicio           = new ServiceFactory();
+	private ServiceFactory    servicio           = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = new UtilCalendario();
+	private UtilCalendario    utilCalendario     = null;
 	
 	private String            REDIRECCIONAMIENTO = "/jsp/BusquedaPasaje.jsp";		
+	
+	
+	{
+	 this.servicio       = new ServiceFactory();
+	 this.utilCalendario = new UtilCalendario();
+	}
 	
 	/**
 	 * service
