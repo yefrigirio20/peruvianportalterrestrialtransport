@@ -1,4 +1,5 @@
 package com.ttporg.pe.util;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.bean.Transaccion;
 import com.ttporg.pe.bean.Vehiculo;
 import com.ttporg.pe.test.MuestraTextoPDF;
-
 
 /**
  * @author Cesar Ricardo.
@@ -43,7 +43,7 @@ public class UtilGeneraBoletoViaje{
 	}
  
 	public void muestraBoletoViaje(){
-				
+			/*	
 		String tituloPDF = "...::: BOLETO DE VIAJE :::...";
  
 		UtilGeneraBoletoViaje pdf = new UtilGeneraBoletoViaje();
@@ -147,6 +147,6 @@ public class UtilGeneraBoletoViaje{
 		}
 		catch( Exception e ){
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
