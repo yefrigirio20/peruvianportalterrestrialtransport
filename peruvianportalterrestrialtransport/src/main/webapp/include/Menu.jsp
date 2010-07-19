@@ -5,7 +5,8 @@
  
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
  
-<fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
+
+<%@page import="com.ttporg.pe.bean.Cliente"%><fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
 
 <jsp:include page="../include/Estilos.jsp" flush="true" />
 
@@ -129,24 +130,22 @@ function seleccionarEstrella( msnParam ){
             </tr> 
          </table> 
          
-         <marquee bgcolor="#FFFFFF" width="50%" height="80" direction="up" scrolldelay="250" >      
+         <marquee bgcolor="#FFFFFF" width="50%" height="80" direction="up" scrolldelay="250" >   
+            
          <table width="100" border="0">
          
-              <tr> 
+             <tr> 
                 <td width="20"> </td>  
                 <td width="80"> </td>
-              </tr> 
+             </tr> 
               
-         <% 	     
-			//Obteniendo datos de 'Session'.
-			UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
-	     
-	        if( utilSingleton != null && 
-	            utilSingleton.getObjetoSingleton() != null && 
-	            utilSingleton.getObjetoSingleton().getCliente() != null  ){
-	     %>
+		     <% 	
+		        Cliente objClienteSesion = (Cliente)session.getAttribute( "objCliente" );
+	 
+		        if( objClienteSesion != null ){
+		     %>
               
-              <tr> 
+             <tr> 
                 <td width="20">   
                  <a href="<%=request.getContextPath()%>/jsp/BusquedaAgencia.jsp" style="cursor:hand" />
                    <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Empresas" width="20" height="19"  border="0" />
@@ -207,14 +206,9 @@ function seleccionarEstrella( msnParam ){
                     <td width="20"> </td>  
                     <td width="80"> </td>
                   </tr>                   
-         <% 	     
-			//Obteniendo datos de 'Session'.
-			UtilSingleton utilSingleton2 = UtilSingleton.getINSTANCIA_GUARDADA();
-	     
-	        if( utilSingleton2 != null && 
-	        	utilSingleton2.getObjetoSingleton() != null && 
-	        	utilSingleton2.getObjetoSingleton().getCliente() != null  ){
-	     %>
+		     <%  
+		        if( objClienteSesion != null ){
+		     %>
                   
                   <tr> 
                     <td width="20">                
