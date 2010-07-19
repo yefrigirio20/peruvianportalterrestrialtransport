@@ -1,6 +1,7 @@
 package com.ttporg.pe.servlet;
  
 import java.util.Date;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -9,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.dto.BeanValidacionDto;
-import com.ttporg.pe.servicio.ClienteService;
-import com.ttporg.pe.servicio.impl.ClienteServiceImpl;
+import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilSingleton;
   
@@ -37,15 +37,16 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	private UtilSingleton     utilSingleton  = null;
 	
 	//Service ...
-	private ClienteService    servicio       = null;
+	private ServiceFactory    servicio       = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario = new UtilCalendario();
+	private UtilCalendario    utilCalendario = null;
 	
 	private String REDIRECCIONAMIENTO        = "/jsp/RegistroCliente.jsp";	
-	
+		
 	{
-	 this.servicio = new ClienteServiceImpl();
+	 this.servicio       = new ServiceFactory();
+	 this.utilCalendario = new UtilCalendario();
 	}
 	
 	/**
@@ -153,7 +154,7 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	                                              null, email, dni, usuario, password, "USUARIO", "true" ); 
 	    	    
 	    	    //----------- Guardar en 'BASE DE DATOS'. -----------//
-	    	    boolean estado  = this.servicio.ingresarCliente( objCliente );
+	    	    boolean estado  = this.servicio.getClienteDAO().ingresarCliente( objCliente );
 	    	    System.out.println( "Estado INSERT: " + estado ); 
 	    	    //---------------------------------------------------//
 	    	    

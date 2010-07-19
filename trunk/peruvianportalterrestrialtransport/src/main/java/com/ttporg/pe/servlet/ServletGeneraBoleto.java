@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilGeneraBoletoViaje;
 import com.ttporg.pe.util.UtilSingleton;
@@ -33,12 +34,18 @@ public class ServletGeneraBoleto extends HttpServlet implements Servlet{
 	private UtilSingleton     utilSingleton      = null;
 	
 	//Service ...
-	//private ClienteService    servicio           = null;
+	private ServiceFactory    servicio           = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = new UtilCalendario();
+	private UtilCalendario    utilCalendario     = null;
 	
 	private String            REDIRECCIONAMIENTO = "/jsp/PagoPasaje.jsp";		
+	
+	
+	{
+	 this.servicio       = new ServiceFactory();
+	 this.utilCalendario = new UtilCalendario();
+	}
 	
 	/**
 	 * service
