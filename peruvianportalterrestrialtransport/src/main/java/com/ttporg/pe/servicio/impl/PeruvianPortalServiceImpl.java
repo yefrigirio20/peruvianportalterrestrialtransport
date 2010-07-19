@@ -2,7 +2,6 @@ package com.ttporg.pe.servicio.impl;
 
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.bean.Empresa;
-import com.ttporg.pe.bean.Usuario;
 import com.ttporg.pe.servicio.PeruvianPortalService;
 import com.ttporg.pe.servicio.ServiceFactory;
 
@@ -40,14 +39,5 @@ public class PeruvianPortalServiceImpl extends ServiceFactory implements Peruvia
 		Empresa objEmpresa = this.getEmpresaDAO().loginEmpresa2( usuario, password );
 		return  objEmpresa;
 	}
-
-	/**
-	 * loginUsuario
-	 * @param codigo
-	 */
-	public Usuario loginUsuario( Usuario usuario ){
-		Usuario objUsuario = this.getUsuarioDAO().loginUsuario( usuario );
-		return  objUsuario;
-	}
-	
+ 	
 }
