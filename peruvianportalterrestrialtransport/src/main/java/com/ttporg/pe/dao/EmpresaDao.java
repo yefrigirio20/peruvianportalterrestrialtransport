@@ -23,9 +23,9 @@ public interface EmpresaDao{
 	public Empresa obtenerObjetoEmpresa_x_codigo( int codigo );
 
 	/**
-	 * obtenerListaEmpresas_x_codigo
+	 * obtenerListaEmpresas
 	 */
-	public List<Empresa> obtenerListaEmpresas_x_codigo( int codigo );
+	public List<Empresa> obtenerListaEmpresas();
 
 	/**
 	 * eliminarEmpresa_x_codigo

@@ -141,18 +141,17 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	}
 
 	/**
-	 * obtenerListaEmpresas_x_codigo
-	 * @param codigo
+	 * obtenerListaEmpresas
 	 */
-	public List<Empresa> obtenerListaEmpresas_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerListaEmpresas_x_codigo' " );
+	public List<Empresa> obtenerListaEmpresas(){
+        System.out.println( "DENTRO DE 'obtenerListaEmpresas' " );
         
         List<Empresa> listaEmpresa = null;
         
         try{      
         	String nombReferMetodoMapeado = this.getObjetoNegocio( "getListaEmpresa" );
         	
-        	listaEmpresa = (List<Empresa>)getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, codigo );  
+        	listaEmpresa = (List<Empresa>)getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado );  
 		} 
         catch( Exception e ){
 			   e.printStackTrace();
