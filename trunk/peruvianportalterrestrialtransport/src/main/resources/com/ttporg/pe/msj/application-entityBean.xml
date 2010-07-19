@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>	
+	<!-- Bean de Nivel Idioma -->
+	<bean id="NivelIdioma" class="es.dagori.model.entity.NivelIdioma" singleton="false"></bean>
+	
+	<!-- Bean de Idioma -->
+	<bean id="Idioma" class="es.dagori.model.entity.Idioma" singleton="false"></bean>
+	
+	<!-- Bean de Categoria -->
+	<bean id="Categoria" class="es.dagori.model.entity.Categoria" singleton="false"></bean>
+	
+	<!-- Bean de Perfil Tecnologico -->
+	<bean id="PerfilTecnologico" class="es.dagori.model.entity.PerfilTecnologico" singleton="false"></bean>
+	
+	<!-- Bean de Perfil Academico -->
+	<bean id="PerfilAcademico" class="es.dagori.model.entity.PerfilAcademico" singleton="false"></bean>
+	
+	<!-- Bean de TipoDocumento -->
+	<bean id="TipoDocumento" class="es.dagori.model.entity.TipoDocumento" singleton="false"></bean>
+	
+	<!-- Bean de Persona -->
+	<bean id="Persona" class="es.dagori.model.entity.Persona" singleton="false">
+		<property name="tipoDocumento"><ref bean="TipoDocumento" /></property>
+	</bean>
+	
+	<!-- Bean de DetallePedido -->
+	<bean id="DetallePedido" class="es.dagori.model.entity.DetallePedido" singleton="false">
+		<property name="categoria"><ref bean="Categoria" /></property>
+		<property name="tipoPedido"><ref bean="TipoPedido" /></property>
+		<property name="perfilTecnologico"><ref bean="PerfilTecnologico" /></property>
+		<property name="pedido"><ref bean="Pedido" /></property>
+		<property name="unidadPago"><ref bean="UnidadPago" /></property>
+		<property name="tarifa"><ref bean="Tarifa" /></property>
+	</bean>
+	
+	<!-- Bean de FuenteReclutamiento -->
+	<bean id="FuenteReclutamiento" class="es.dagori.model.entity.FuenteReclutamiento" singleton="false"></bean>
+	
+	<!-- Bean de Resultado -->
+	<bean id="Resultado" class="es.dagori.model.entity.Resultado" singleton="false"></bean>
+	
+	<!-- Bean de Fase -->
+	<bean id="Fase" class="es.dagori.model.entity.Fase" singleton="false">
+		<property name="resultado"><ref bean="Resultado" /></property>
+	</bean>
+	
+	<!-- Bean de Postulacion -->
+	<bean id="Postulacion" class="es.dagori.model.entity.Postulacion" singleton="false">
+		<property name="detallePedido"><ref bean="DetallePedido" /></property>
+		<property name="fuenteReclutamiento"><ref bean="FuenteReclutamiento" /></property>
+		<property name="persona"><ref bean="Persona" /></property>
+	</bean>
+
+	<!-- Bean de UsuarioEmpresa -->
+	<bean id="UsuarioEmpresa" class="es.dagori.model.entity.UsuarioEmpresa" singleton="false">
+		<property name="empresa"><ref bean="Empresa" /></property>
+		<property name="usuario"><ref bean="Usuario" /></property>
+	</bean>
+	
+	
+	<!-- Bean de EstadoPedido -->
+	<bean id="EstadoPedido" class="es.dagori.model.entity.EstadoPedido" singleton="false"></bean>
+	
+	<!-- Bean de SelEmpresa -->
+	<bean id="Empresa" class="es.dagori.model.entity.Empresa" singleton="false"></bean>
+	
+	<!-- Bean de SelEMedioEvaluacion -->
+	<bean id="MedioEvaluacion" class="es.dagori.model.entity.MedioEvaluacion" singleton="false"></bean>
+	
+	<!-- Bean de SelEtapa -->
+	<bean id="Etapa" class="es.dagori.model.entity.Etapa" singleton="false"></bean>
+	
+	<!-- Bean de EtapaFase -->
+	<bean id="EtapaFase" class="es.dagori.model.entity.EtapaFase" singleton="false">
+		<property name="etapa"><ref bean="Etapa" /></property>
+	</bean>
+	
+	<!-- Bean de MotivoResultado -->
+	<bean id="MotivoResultado" class="es.dagori.model.entity.MotivoResultado" singleton="false">
+	<property name="resultado"><ref bean="Resultado" /></property>
+	</bean>
+	
+	
+	<!-- Bean de SelPedido -->
+	<bean id="Pedido" class="es.dagori.model.entity.Pedido" singleton="false">
+		<property name="estadoPedido"><ref bean="EstadoPedido" /></property>
+		<property name="empresa"><ref bean="Empresa" /></property>
+	</bean>
+	
+	<!-- Bean de TipoPedido -->
+	<bean id="TipoPedido" class="es.dagori.model.entity.TipoPedido" singleton="false"></bean>
+	
+	<!-- Bean de Rol -->
+	<bean id="Rol" class="es.dagori.model.entity.Rol" singleton="false"></bean>
+	
+	<!-- Bean de Usuario -->
+	<bean id="Usuario" class="es.dagori.model.entity.Usuario" singleton="false"></bean>
+	
+		<!-- Bean de Exp Laboral -->
+	<bean id="ExperienciaLaboral" class="es.dagori.model.entity.ExperienciaLaboral" singleton="false"></bean>
+	
+	
+	<!-- Bean de UsuarioRol -->
+	<bean id="UsuarioRol" class="es.dagori.model.entity.UsuarioRol" singleton="false">
+		<property name="rol"><ref bean="Rol" /></property>
+		<property name="usuario"><ref bean="Usuario" /></property>
+	</bean>
+	
+	<!-- Bean de UnidadPago -->
+	<bean id="UnidadPago" class="es.dagori.model.entity.UnidadPago" singleton="false">
+		
+	
+	</bean>
+	
+			<!-- Bean de Moneda -->
+	<bean id="Moneda" class="es.dagori.model.entity.Moneda" singleton="false"></bean>
+	
+	<!-- Bean de tarifa -->
+	<bean id="Tarifa" class="es.dagori.model.entity.Tarifa" singleton="false">
+		<property name="unidadPago"><ref bean="UnidadPago" /></property>
+		<property name="moneda"><ref bean="Moneda" /></property>
+		<property name="empresa"><ref bean="Empresa" /></property>
+		
+	</bean>
+	
+	
+		<!-- Bean de Variable Tarifa -->
+	<bean id="VariableTarifa" class="es.dagori.model.entity.VariableTarifa" singleton="false">
+		<property name="unidadPago"><ref bean="UnidadPago" /></property>
+		<property name="moneda"><ref bean="Moneda" /></property>
+		<property name="tarifa"><ref bean="Tarifa" /></property>
+	</bean>
+	
+	<!-- Bean de Valor Asociado -->
+	<bean id="ValorAsociado" class="es.dagori.model.entity.ValorAsociado" singleton="false">
+		<property name="detallePedido"><ref bean="DetallePedido" /></property>
+	</bean>
+	
+	<!-- Bean de Valor Asociado Postulacion -->
+	<bean id="ValorAsociadoPostulacion" class="es.dagori.model.entity.ValorAsociadoPostulacion" singleton="false">		
+	</bean>
+	
+	<!-- Bean PlantillaProceso -->
+	<bean id="PlantillaProceso" class="es.dagori.model.entity.PlantillaProceso" singleton="false">		
+	</bean>
+	
+	<!-- Bean de CategoriaPersona -->
+	<bean id="CategoriaPersona" class="es.dagori.model.entity.CategoriaPersona" singleton="false">
+		<property name="categoria"><ref bean="Categoria" /></property>
+	</bean>
+	
+	<!-- Bean de Perfil Persona -->
+	<bean id="PerfilPersona" class="es.dagori.model.entity.PerfilPersona" singleton="false">
+		<property name="perfilTecnologico"><ref bean="PerfilTecnologico" /></property>
+	</bean>
+	
+	<!-- Bean NIvel Conocimiento -->
+	<bean id="NivelConocimiento" class="es.dagori.model.entity.NivelConocimiento" singleton="false">
+				
+	</bean>
+	
+	
+</beans>
