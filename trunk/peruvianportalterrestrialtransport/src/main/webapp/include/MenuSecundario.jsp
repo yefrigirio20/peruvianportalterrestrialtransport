@@ -5,6 +5,7 @@
  
  <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
  
+ <%@ page import="com.ttporg.pe.bean.BaseBean"      %>
  <%@ page import="com.ttporg.pe.bean.Cliente"       %>
  <%@ page import="com.ttporg.pe.bean.BaseBean"      %>
  <%@ page import="com.ttporg.pe.util.UtilSingleton" %>
@@ -24,13 +25,10 @@
      <td>
 	    <center>
 	     
-	     <% 	     
-			//Obteniendo datos de 'Session'.
-			UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
-	     
-	        if( utilSingleton != null && 
-	            utilSingleton.getObjetoSingleton() != null && 
-	            utilSingleton.getObjetoSingleton().getCliente() != null  ){
+	     <% 	
+	        Cliente objClienteSesion = (Cliente)session.getAttribute( "objCliente" );
+ 
+	        if( objClienteSesion != null ){
 	     %>
 	     
 	     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje" style="cursor:hand; " />
