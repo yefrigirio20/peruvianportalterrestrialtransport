@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Transaccion" >
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectTransaccionsSinTag">   
+		SELECT t.ID, t.EMPRESA_ID, t.CLIENTE_ID, t.AGENCIA_ID, t.SERVICIO_ID,  
+		       t.SALIDA_ID, t.VEHICULO_ID, t.ASIENTO_ID, t.CLIENTE_PAGO_ID  
+		FROM   TRANSACCION t
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="transaccion" type="com.ttporg.pe.bean.Transaccion" />
+	
+	<select id="getTransaccion" resultClass="transaccion" parameterClass="java.lang.Integer" >
+        <include refid="selectTransaccionsSinTag" />
+		WHERE  t.ID = #id#
+    </select>
+
+	<select id="getListaTransaccion" resultClass="transaccion" >
+        <include refid="selectTransaccionsSinTag" />
+    </select>
+
+	<insert id="insertTransaccion" parameterClass="com.ttporg.pe.bean.Transaccion" >
+		INSERT INTO TRANSACCION( ID, EMPRESA_ID, CLIENTE_ID, AGENCIA_ID, SERVICIO_ID,
+		                         SALIDA_ID, VEHICULO_ID, ASIENTO_ID )
+		                            
+		VALUES( #id#, #empresa.id#, #cliente.id#, #agencia.id#, #servicio.id#, 
+		        #salida.id#, #vehiculo.id#, #asiento.id# )
+	</insert>
+    
+	<update id="updateTransaccion" parameterClass="com.ttporg.pe.bean.Transaccion" >
+		    UPDATE TRANSACCION t SET 
+			                   t.EMPRESA_ID      = #empresa.id#,
+			                   t.CLIENTE_ID      = #cliente.id#,
+			                   t.AGENCIA_ID      = #agencia.id#,
+			                   t.SERVICIO_ID     = #servicio.id#,
+			                   t.SALIDA_ID       = #salida.id#,
+			                   t.VEHICULO_ID     = #vehiculo.id#,
+			                   t.ASIENTO_ID      = #asiento.id# 
+	        WHERE t.ID = #id#
+	</update>
+   
+	<delete id="deleteTransaccion" parameterClass="java.util.Map" >
+		DELETE FROM TRANSACCION 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+    
+ 
+ </sqlMap>
+

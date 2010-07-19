@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Departamento" >
+        
+    <!-- ******************************************************** -->
+    <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
+    <!-- ******************************************************** -->  
+     <sql id="selectDepartamentosSinTag">   
+		SELECT d.ID, d.NOMBRE 
+		FROM   DEPARTAMENTO d
+     </sql>	       
+        
+    <!-- ******************************************************** -->
+    <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
+    <!-- ******************************************************** -->
+        
+    <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
+	<typeAlias alias="departamento" type="com.ttporg.pe.bean.Departamento" />
+	
+	<select id="getDepartamento" resultClass="departamento" parameterClass="java.lang.Integer" >
+        <include refid="selectDepartamentosSinTag" />
+		WHERE  d.ID = #id#
+    </select>
+
+	<select id="getListaDepartamento" resultClass="departamento" >
+        <include refid="selectDepartamentosSinTag" />
+    </select>
+
+	<insert id="insertDepartamento" parameterClass="com.ttporg.pe.bean.Departamento" >
+		INSERT INTO DEPARTAMENTO( ID, NOMBRE )
+		                            
+		VALUES( #id#, #nombre# )
+	</insert>
+    
+	<update id="updateDepartamento" parameterClass="com.ttporg.pe.bean.Departamento" >
+		    UPDATE DEPARTAMENTO d SET 
+				                d.NOMBRE = #nombre#
+	        WHERE d.ID = #id#
+	</update>
+   
+	<delete id="deleteDepartamento" parameterClass="java.util.Map" >
+		DELETE FROM DEPARTAMENTO 
+		WHERE  ID = #codigoEliminacion# 
+	</delete> 
+    
+ 
+ </sqlMap>
+

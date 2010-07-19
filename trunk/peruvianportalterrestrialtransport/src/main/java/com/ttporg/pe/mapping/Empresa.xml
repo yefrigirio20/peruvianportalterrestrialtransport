@@ -3,32 +3,26 @@
 PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="Empresa">
+<sqlMap namespace="Empresa" >
         
     <!-- ******************************************************** -->
     <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
     <!-- ******************************************************** -->
      <sql id="selectEmpresasSinTag">   
-          SELECT e.ID_EMP, e.RAZ_SOC_EMP, e.RUC_EMP, e.PAIS_EMP, 
-	             e.DEP_EMP, e.DIR_EMP, e.FONO_EMP, e.MAIL_EMP, e.USU_EMP, 
-	             e.PASS_EMP, e.COD_CRED_EMP, e.FEC_EXP_EMP, e.EST_EMP
+          SELECT e.ID, e.RAZON_SOCIAL, e.PAIS, e.RUC, 
+	             e.USUARIO, e.PASSWORD, e.ESTADO, e.DEPARTAMENTO_ID 
 	      FROM   EMPRESA e
      </sql>	       
         
      <sql id="selectEmpresasConTag">   
-        SELECT e.ID_EMP       AS  "id", 
-               e.RAZ_SOC_EMP  AS  "razonSocial", 
-               e.RUC_EMP      AS  "ruc", 
-               e.PAIS_EMP     AS  "pais", 
-		       e.DEP_EMP      AS  "departamento", 
-		       e.DIR_EMP      AS  "direccion", 
-		       e.FONO_EMP     AS  "telefono", 
-		       e.MAIL_EMP     AS  "email", 
-		       e.USU_EMP      AS  "usuario", 
-		       e.PASS_EMP     AS  "password", 
-		       e.COD_CRED_EMP AS  "tipo", 
-		       e.FEC_EXP_EMP  AS  "estado",
-		       e.EST_EMP      AS  "estado"
+        SELECT e.ID              AS "id", 
+               e.RAZON_SOCIAL    AS "razonSocial", 
+               e.PAIS            AS "pais", 
+               e.RUC             AS "ruc", 
+		       e.USUARIO         AS "usuario", 
+		       e.PASSWORD        AS "password", 
+		       e.ESTADO          AS "estado", 
+		       e.DEPARTAMENTO_ID AS "idDepartamento"
 		FROM   EMPRESA e 
      </sql>	
         
@@ -38,24 +32,19 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     
     <!-- FORMA #1: PARA HACER CONSULTAS, EN BASE A: 'resultMap' -->
    	<resultMap id="atributosEmpresa" class="com.ttporg.pe.bean.Empresa">
-		<result property="id"                     column="ID_EMP"  	    columnIndex="1"  />
-		<result property="razonSocial"            column="RAZ_SOC_EMP"  columnIndex="2"  />		
-		<result property="ruc"                    column="RUC_EMP"      columnIndex="3"  />
-		<result property="pais"                   column="PAIS_EMP"     columnIndex="4"  />
-		<result property="departamento"           column="DEP_EMP"      columnIndex="5"  />
-		<result property="direccion"              column="DIR_EMP"      columnIndex="6"  />
-		<result property="telefono"               column="FONO_EMP"     columnIndex="7"  />
-		<result property="email"                  column="MAIL_EMP"     columnIndex="8"  />
-		<result property="usuario"                column="USU_EMP"      columnIndex="9"  />
-		<result property="password"               column="PASS_EMP"     columnIndex="10" />
-		<result property="numTarjetaCredito"      column="COD_CRED_EMP" columnIndex="11" />
-		<result property="fechaExpiracionTarjeta" column="FEC_EXP_EMP"  columnIndex="12" />
-		<result property="estado"                 column="EST_EMP"      columnIndex="13" />				
+		<result property="id"              column="ID"  	        columnIndex="1" />
+		<result property="razonSocial"     column="RAZON_SOCIAL"    columnIndex="2" />
+		<result property="pais"            column="PAIS"            columnIndex="3" />
+		<result property="ruc"             column="RUC"             columnIndex="4" />
+		<result property="usuario"         column="USUARIO"         columnIndex="5" />
+		<result property="password"        column="PASSWORD"        columnIndex="6" />
+		<result property="estado"          column="ESTADO"          columnIndex="7" />
+		<result property="departamento.id" column="DEPARTAMENTO_ID" columnIndex="8" />			
 	</resultMap>
    
 	<select id="getEmpresa" resultMap="atributosEmpresa" parameterClass="java.lang.Integer" >
         <include refid="selectEmpresasSinTag" />
-		WHERE  e.ID_EMP = #id#
+		WHERE  e.ID = #id#
     </select>
         
     <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
@@ -63,42 +52,34 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	
 	<select id="getUsuario2" resultClass="empresa" parameterClass="java.lang.Integer" >
         <include refid="selectEmpresasConTag" />
-		WHERE  e.ID_EMP = #id#
+		WHERE  e.ID = #id#
     </select>
 
-	<select id="getListaEmpresa" resultClass="empresa" parameterClass="java.lang.Integer" >
+	<select id="getListaEmpresa" resultClass="empresa" >
         <include refid="selectEmpresasConTag" />
     </select>
 
 	<insert id="insertEmpresa" parameterClass="com.ttporg.pe.bean.Empresa" >
-		INSERT INTO EMPRESA ( RAZ_SOC_EMP, RUC_EMP, PAIS_EMP, DEP_EMP, DIR_EMP, 
-		                      FONO_EMP, MAIL_EMP, USU_EMP, PASS_EMP, 
-		                      COD_CRED_EMP, FEC_EXP_EMP, EST_EMP )
+		INSERT INTO EMPRESA ( RAZON_SOCIAL, PAIS, RUC, USUARIO, PASSWORD, ESTADO, DEPARTAMENTO_ID )
 		                            
-		VALUES( #razonSocial#, #ruc#, #pais#, #departamento#, #direccion#, #telefono#, #email#, #usuario#, 
-		        #password#, #numTarjetaCredito#, #fechaExpiracionTarjeta#, #estado# )
+		VALUES( #razonSocial#, #pais#, #ruc#, #usuario#, #estado#, #departamento.id# )
 	</insert>
     
 	<update id="updateEmpresa" parameterClass="com.ttporg.pe.bean.Empresa" >
 		     UPDATE EMPRESA e SET 
-								 e.RAZ_SOC_EMP  = #razonSocial#,
-								 e.RUC_EMP      = #ruc#,
-								 e.PAIS_EMP     = #pais#,
-								 e.DEP_EMP      = #departamento#,
-								 e.DIR_EMP      = #direccion#,
-								 e.FONO_EMP     = #telefono#,
-								 e.MAIL_EMP     = #email#,
-								 e.USU_EMP      = #usuario#,
-								 e.PASS_EMP     = #password#,
-								 e.COD_CRED_EMP = #numTarjetaCredito#,
-								 e.FEC_EXP_EMP  = #fechaExpiracionTarjeta#,
-								 e.EST_EMP      = #estado#
-		      WHERE e.ID_EMP = #id#
+								 e.RAZON_SOCIAL    = #razonSocial#,
+								 e.PAIS            = #pais#,
+								 e.RUC             = #ruc#,
+								 e.USUARIO         = #usuario#,
+								 e.PASSWORD        = #password#,
+								 e.ESTADO          = #estado#,
+								 e.DEPARTAMENTO_ID = #departamento.id#
+		      WHERE e.ID = #id#
 	</update>
    
-	<delete id="deleteEmpresa" parameterClass="java.util.Map">
+	<delete id="deleteEmpresa" parameterClass="java.util.Map" >
 		DELETE FROM EMPRESA 
-		WHERE  ID_EMP = #codigoEliminacion# 
+		WHERE  ID = #codigoEliminacion# 
 	</delete>
 
 
@@ -110,14 +91,14 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 		
 		<dynamic prepend="WHERE" >		
 			<isNotNull prepend="AND" property="usuario" >
-			   e.USU_EMP LIKE #usuario#
+			   e.USUARIO LIKE #usuario#
 			</isNotNull>
 			
 			<isNotNull prepend="AND" property="password" >
-			   e.PASS_EMP LIKE #password#
+			   e.PASSWORD LIKE #password#
 			</isNotNull>
 		</dynamic>
-		ORDER BY e.RAZ_SOC_EMP 						
+		ORDER BY e.RAZON_SOCIAL 						
     </select>    
     
  </sqlMap>
