@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.dto.BeanValidacionDto;
 import com.ttporg.pe.servicio.ClienteService;
+import com.ttporg.pe.servicio.impl.ClienteServiceImpl;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilSingleton;
   
@@ -43,11 +44,15 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	
 	private String REDIRECCIONAMIENTO        = "/jsp/RegistroCliente.jsp";	
 	
+	{
+	 this.servicio = new ClienteServiceImpl();
+	}
+	
 	/**
 	 * service
 	 * @param request
 	 * @param response
-	 */	
+	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
 	    System.out.println( "********* DENTRO DE service **********" ); 
  
@@ -74,7 +79,7 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     	    System.out.println( "FechaNacimiento: " + fechaNacimiento ); 
     	    System.out.println( "Direccion:       " + direccion       );
     	    System.out.println( "Email:           " + email           ); 
-    	    System.out.println( "Dni:              " + dni            );
+    	    System.out.println( "Dni:             " + dni             );
     	    System.out.println( "Usuario:         " + usuario         );
     	    System.out.println( "Password:        " + password        ); 
     	    System.out.println( "Conf.Password:   " + confirPassword  );
@@ -147,10 +152,17 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	    	    Cliente objCliente = new Cliente( 1, nombres, apellidos, cumpleanos, direccion, 
 	                                              null, email, dni, usuario, password, "USUARIO", "true" ); 
 	    	    
+	    	    //----------- Guardar en 'BASE DE DATOS'. -----------//
+	    	    boolean estado  = this.servicio.ingresarCliente( objCliente );
+	    	    System.out.println( "Estado INSERT: " + estado ); 
+	    	    //---------------------------------------------------//
+	    	    
 	    	    //------------- Guardar el 'SINGLETON'. -------------//
+	    	    /*	    	    
 	    	    this.utilSingleton = UtilSingleton.getInstancia();
 	    	    this.utilSingleton.setEstadoActivacion( true );
-	    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );	    	    
+	    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );	
+	    	    */    	    
 	    	    //---------------------------------------------------//    	    
     	    }
     	    

@@ -9,12 +9,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.ttporg.pe.bean.Agencia;
 import com.ttporg.pe.bean.Calendario;
 import com.ttporg.pe.bean.Departamento;
 import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.bean.Salida;
 import com.ttporg.pe.bean.Servicio;
+import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilSingleton;
 
@@ -39,10 +40,9 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	
 	//Singleton ...
 	private UtilSingleton     utilSingleton      = null;
-	
-	
+		
 	//Service ...
-	//private ClienteService    servicio           = null;
+	private ServiceFactory    servicio           = new ServiceFactory();
 	
 	//Utilitarios ...
 	private UtilCalendario    utilCalendario     = new UtilCalendario();
@@ -56,14 +56,16 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
 	    System.out.println( "********* DENTRO DE service **********" ); 
-	    
+	   
 	    List<Empresa>  listaEmpresa  = null;
+	    List<Agencia>  listaAgencia  = null;
 	    List<Servicio> listaServicio = null;
 	    List<Salida>   listaSalida   = null;
 	    
 	    try{
     	    String codigoDepartamento = request.getParameter( "choDepartamento" );
     	    String codigoEmpresa      = request.getParameter( "choEmpresa"      );
+    	    String codigoAgencia      = request.getParameter( "choAgencia"      );
     	    String opcion             = request.getParameter( "opcion"          );
     	    String opcion2            = request.getParameter( "opcion2"         );
     	    String codigoSalida       = request.getParameter( "codigoSalida"    );
@@ -77,17 +79,19 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    System.out.println( "opcion:             " + opcion  );
     	    System.out.println( "codigoDepartamento: " + codigoDepartamento ); 
     	    System.out.println( "codigoEmpresa:      " + codigoEmpresa      );
+    	    System.out.println( "codigoAgencia:      " + codigoAgencia      );
     	    System.out.println( "codigoSalida:       " + codigoSalida       );
     	    System.out.println( "nomCiudadOrigen:    " + nomCiudadOrigen    );
     	    System.out.println( "nomCiudadDestina:   " + nomCiudadDestina   );
     	    System.out.println( "" );
-    	    
-		    //BeanValidacionDto objValidacion      = new BeanValidacionDto();
-		    //boolean           estadoValidacion   = true;
-		    //String            MENSAJE_VALIDACION = " * Ingresar un valor en: ";
-		    
+ 		    
     	    //----------------------- DEPARTAMENTO -----------------------//
 	    	List<Departamento> listaDepartamento = new ArrayList<Departamento>();
+	    	
+	    	
+	    	listaDepartamento = this.servicio.getDepartamentoDAO().obtenerListaDepartamentos();
+	    	
+	    	System.out.println( "AQUI.....: " + listaDepartamento );
 	    	
 	    	Departamento departamento_01 = new Departamento();
 	    	departamento_01.setId(     1 );
@@ -140,6 +144,23 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 			    	listaEmpresa.add( empresa_03 );
 		    	}
 		    	//-------------------------------------------------------------//
+		    	
+		    	//------------------------- AGENCIA------------------------//
+		    	if( opcion.equalsIgnoreCase( "cargarAgencia" ) || opcion.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
+		    		listaAgencia = new ArrayList<Agencia>();
+		    		
+		    		Agencia agencia_01 = new Agencia();
+		    		agencia_01.setId(     1 );
+		    		agencia_01.setNombre( "SAN ISIDRO" );
+		    		
+		    		Agencia agencia_02 = new Agencia();
+		    		agencia_02.setId(     2 );
+		    		agencia_02.setNombre( "SAN BORJA" );
+		    		
+			    	//Agregando ...
+		    		listaAgencia.add( agencia_01 );
+		    		listaAgencia.add( agencia_02 );
+		    	}
 		    	
 	    	    //------------------------- SERVICIO --------------------------//
 		    	if( opcion.equalsIgnoreCase( "cargarServTransporte" ) || opcion.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
@@ -197,9 +218,9 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 		    		listaCalendario.add( calendario_A01 );
 		    		listaCalendario.add( calendario_A02 );
 		    		
-		    		salida_01.setListaCalendarioSalidas( listaCalendario );
+		    		//salida_01.setListaCalendarioSalidas( listaCalendario );
 		    		
-		    		salida_02.setListaCalendarioSalidas( listaCalendario );
+		    		//salida_02.setListaCalendarioSalidas( listaCalendario );
 		    		
 		    		
 		    		//Agregando a Lista de Salidas.
@@ -236,6 +257,7 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	    	request.setAttribute( "listaSalida",        listaSalida   );             //estadoValidacion ...
             request.setAttribute( "listaDepartamento",  listaDepartamento );         //estadoValidacion ...
             request.setAttribute( "listaEmpresa",       listaEmpresa  );             //estadoValidacion ...
+            request.setAttribute( "listaAgencia",       listaAgencia  );             //estadoValidacion ...            
             request.setAttribute( "listaServicio",      listaServicio );             //estadoValidacion ...
             
             request.setAttribute( "codigoDepartamento", codigoDepartamento );        //estadoValidacion ...        

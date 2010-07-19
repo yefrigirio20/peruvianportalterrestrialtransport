@@ -85,7 +85,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    
 		    	    Pago pago = new Pago();
 		    	    pago.setId( 1 );
-		    	    pago.setMontoPago(  Double.parseDouble( precio ) );
+		    	   // pago.setMontoPago(  Double.parseDouble( precio ) );
 		    	    pago.setTipoPago(   tipoPago );
 		    	    pago.setNumTarjeta( numeroTarjeta );
 		    	    
@@ -189,15 +189,15 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 			    	    
 			    	    System.out.println( "Nombre Cliente que Pago:: " + objCliente.getNombres() );
 			    	    
-			    	    Pago objPago = new Pago( 1, tipoPago, numeroTarjeta, 40, expiracion, objCliente );
+			    	   // Pago objPago = new Pago( 1, tipoPago, numeroTarjeta, 40, expiracion, objCliente );
 			    	    
-			    	    System.out.println( "objPago: " + objPago );
+			    	   // System.out.println( "objPago: " + objPago );
 		    	    	    	     
 			    	    //---------------- Guardar el 'SINGLETON'. ----------------//
 			    	    this.utilSingleton = UtilSingleton.getInstancia();
 			    	    this.utilSingleton.setEstadoActivacion( true );
 			    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
-			    	    this.utilSingleton.getObjetoSingleton().setPago(    objPago    );
+			    	  //  this.utilSingleton.getObjetoSingleton().setPago(    objPago    );
 			    	  //-----------------------------------------------------------//
 		    	    }		    	    
 	    	    }

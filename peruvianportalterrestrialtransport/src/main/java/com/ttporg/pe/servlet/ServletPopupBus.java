@@ -72,7 +72,7 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	    	objVehiculo.setTipo(   "SIMPLE" );
 	    	objVehiculo.setModelo( "MERCEDES BENZ" );
 	    	
-	    	objServicio.setVehiculo( objVehiculo );
+	    	//objServicio.setVehiculo( objVehiculo );
 	    	
 	    	List<Asiento> listaAsiento = new ArrayList<Asiento>();
 	    	
@@ -82,12 +82,12 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	    		 
 		    	 Asiento objAsiento = new Asiento();
 		    	 objAsiento.setId(     contador );
-		    	 objAsiento.setEstado( false );
+		    	// objAsiento.setEstado( false );
 		    		    		
 		    	 //Agregando ...
 		    	 listaAsiento.add( objAsiento );
 		    	
-		    	 objServicio.getVehiculo().setListaAsientos( listaAsiento );
+		    	 //objServicio.getVehiculo().setListaAsientos( listaAsiento );
 		    	 
 		    	 contador ++;
 	    	}	    	   	 
@@ -99,7 +99,7 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 		    	 
 		    	 if( (asiento.getId() == 5) || (asiento.getId() == 7) || (asiento.getId() == 9) || 
 		    	     (asiento.getId() == 13) || (asiento.getId() == 17) || (asiento.getId() == 11) ){
-		    		 asiento.setEstado( true );
+		    		 //asiento.setEstado( true );
 		    	 }
 		    }	
 	    
@@ -111,12 +111,12 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 			    	 Asiento asiento = listaAsiento.get( i );
 			    	 
 			    	 if( asiento.getId() == Integer.parseInt( idAsientoSeleccionado ) ){
-			    		 asiento.setEstado( true );
+			    		// asiento.setEstado( true );
 			    	 }
 			    }	
 	    	}
 	    	
-	    	request.setAttribute( "listaAsiento", objServicio.getVehiculo().getListaAsientos() );  //estadoValidacion ...
+	    	//request.setAttribute( "listaAsiento", objServicio.getVehiculo().getListaAsientos() );  //estadoValidacion ...
 	    	
 	        this.contexto    = this.getServletContext();
 	        this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );

@@ -1,16 +1,11 @@
 package com.ttporg.pe.servlet;
 
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ttporg.pe.bean.Asiento;
-import com.ttporg.pe.bean.Cliente;
-import com.ttporg.pe.bean.Pago;
-import com.ttporg.pe.dto.BeanValidacionDto;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilGeneraBoletoViaje;
 import com.ttporg.pe.util.UtilSingleton;
