@@ -86,13 +86,14 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    System.out.println( "" );
  		    
     	    //----------------------- DEPARTAMENTO -----------------------//
-	    	List<Departamento> listaDepartamento = new ArrayList<Departamento>();
+	    	List<Departamento> listaDepartamento = new ArrayList<Departamento>();	    	
 	    	
+	    	//-------------- Obtener 'BASE DE DATOS'. --------------//
+	    	listaDepartamento = this.servicio.getDepartamentoDAO().obtenerListaDepartamentos();	    	
+	    	System.out.println( "TAMANIO 'listaDepartamento': " + listaDepartamento.size() );
+	    	//------------------------------------------------------//
 	    	
-	    	listaDepartamento = this.servicio.getDepartamentoDAO().obtenerListaDepartamentos();
-	    	
-	    	System.out.println( "AQUI.....: " + listaDepartamento );
-	    	
+	    	/*
 	    	Departamento departamento_01 = new Departamento();
 	    	departamento_01.setId(     1 );
 	    	departamento_01.setNombre( "LIMA" );
@@ -114,6 +115,7 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	    	listaDepartamento.add( departamento_02 );
 	    	listaDepartamento.add( departamento_03 );
 	    	listaDepartamento.add( departamento_04 );
+	    	*/
 		    //-------------------------------------------------------------//
 	    	
 	    	//Validacion ...
