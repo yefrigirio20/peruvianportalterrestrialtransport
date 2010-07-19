@@ -5,11 +5,10 @@ import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_ERROR_02;
 import static com.ttporg.pe.util.Constantes.MENSAJE_AUTENTICACION_OK;
 import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Cliente;
-import com.ttporg.pe.servicio.EmpresaService;
-import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
+import com.ttporg.pe.servicio.ClienteService;
+import com.ttporg.pe.servicio.impl.ClienteServiceImpl;
 import com.ttporg.pe.servlet.LoggerBean;
 import com.ttporg.pe.util.UtilEncriptacion;
-import com.ttporg.pe.util.UtilSingleton;
 
 /**
  * @author Cesar Ricardo.
@@ -30,18 +29,18 @@ public class LoginMB extends BaseBean{
 	//Utilitarios ...
 	private UtilEncriptacion manejoEncriptacion = null; 
 	
-	//Service.
-	private EmpresaService servicio = null;
+	//Service ...
+	private ClienteService servicio  = null;
 	
 	//Generacion de Log.
-	private LoggerBean loggerBean   = null;
+	private LoggerBean    loggerBean = null;
 	
 	//Parametros de acceso 'GUI'.
 	private String	usuario;
 	private String	password;
 	 		
 	{
-	 this.servicio           = new EmpresaServiceImpl();	
+	 this.servicio           = new ClienteServiceImpl();	
 	 this.loggerBean         = new LoggerBean();
 	 this.manejoEncriptacion = new UtilEncriptacion(); 
 	}
@@ -74,76 +73,33 @@ public class LoginMB extends BaseBean{
 				objCliente.setUsuario(  this.usuario  );
 				//objCliente.setPassword( encrypPassword   );
 				objCliente.setPassword( this.password ); 
-								
-				//objCliente = this.servicio.loginEmpresa( objCliente );
 				
-	    	    //---------------- Obtener 'SINGLETON'. ----------------//
-				UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
-			 
-	    	    System.out.println( "Util Singleton: " + utilSingleton );
+				//-------------- Obtener 'BASE DE DATOS'. --------------//
+				Cliente objClienteDB = this.servicio.loginCliente( objCliente );
+				System.out.println( "objClienteDB: " + objClienteDB );
+				//------------------------------------------------------//
+				
+    	    	 System.out.println( "BD EXISTE: " );
 	    	    
-	    	    //Validacion ...
-	    	    if( (utilSingleton != null) && (utilSingleton.isEstadoActivacion() == true) ){
-	    	    	 Cliente objClienteSingleton = utilSingleton.getObjetoSingleton().getCliente();
-				
-	    	    	 System.out.println( "Singleton EXISTE: " );
-		    	    
-	    	    	 //Validando ...
-	    	    	 if( objClienteSingleton.getUsuario().equalsIgnoreCase( this.usuario )  &&
-	    	    		 objClienteSingleton.getPassword().equalsIgnoreCase( this.password ) ){
-	    	    		 
-	    				  //Setear Obj.Singleton en SESION.
-	    	    		  this.getObjSession().put( "objCliente", objClienteSingleton ); 
-	    	    		  
-	  					  addActionMessage( MENSAJE_AUTENTICACION_OK );
-						  estadoRetorno = SUCCESS;                           //Se reenvia a la interfaz siguiente.	
-	 				}
-	 				else{	
-	 					 addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
-	 					 estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
-	 				}	
-				}
-				else{
-					 addActionError( MENSAJE_AUTENTICACION_ERROR_02 );
-					 estadoRetorno = INPUT;
-				}
-	    	    
-
-				
-				//this.imprimeLog( "objCliente: " + objCliente );
-				
-				
-				
-				/*
-				if( objCliente != null ){
-										
-					//UtilSingleton utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();	 	    	    
-		    	    //System.out.println( "Util Singleton: " + utilSingleton );
-					
-	    	    	//System.out.println( "Usuario  s: " + utilSingleton.getObjetoSingleton().getCliente().getUsuario() );
-	    	    	//System.out.println( "Password s: " + utilSingleton.getObjetoSingleton().getCliente().getPassword() );
-					
-					//Seteando datos en 'Session'.
-					this.getObjSession().put( "objCliente", objCliente ); 
-										
-					//Obteniendo datos de 'Session'.
-					//objEmpresa = (Empresa)this.getObjSession().get( "objEmpresa" );
-					
-					addActionMessage( MENSAJE_AUTENTICACION_OK );
-					estadoRetorno = SUCCESS;                           //Se reenvia a la interfaz siguiente.	
-				}
-				else{	
-					 addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
-					 estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
-				}			
+    	    	 //Validando ...
+    	    	 if( objClienteDB.getUsuario().equalsIgnoreCase( this.usuario )  &&
+    	    		 objClienteDB.getPassword().equalsIgnoreCase( this.password ) ){
+    	    		 
+    				 //Setear Obj.Singleton en SESION.
+    	    		 this.getObjSession().put( "objCliente", objClienteDB ); 
+    	    		  
+  					 addActionMessage( MENSAJE_AUTENTICACION_OK );
+					 estadoRetorno = SUCCESS;                          //Se reenvia a la interfaz siguiente.	
+ 				}
+ 				else{	
+ 					 addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
+ 					 estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
+ 				}	
 			}
 			else{
 				 addActionError( MENSAJE_AUTENTICACION_ERROR_02 );
 				 estadoRetorno = INPUT;
-			
-			*/
-	    	    
-			}	    
+			}   
 		}
 		catch( Exception e ){
 			   addActionError( "Exception: " + e.getMessage() );     //Setea el mensaje de Error Personalizado.
