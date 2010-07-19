@@ -1,9 +1,5 @@
 package com.ttporg.pe.bean;
-
-import java.io.Serializable; 
-import java.util.ArrayList;
-import java.util.List;
-
+ 
 /**
  * @author Cesar Ricardo.
  * @clase: Agencia.java  
@@ -16,23 +12,20 @@ import java.util.List;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  */
-public class Agencia implements Serializable{
-
-	private static final long serialVersionUID = -4127216738393711236L; 
+public class Agencia{
 	
 	private Integer	    id;
     private String      nombre;
     private String      direccion;
     private String      telefono;
     private String      email;
-    private boolean     estado;
- 
-    //Objetos Relacionados.
-    private List<Servicio> listaServicios;
+    private String      estado;
+    
+    private Empresa     empresa;
     
     //Constructores ...
     public Agencia(){
-        this.listaServicios = new ArrayList<Servicio>();
+        this.empresa = new Empresa();
     }
 
     public String getDireccion() {
@@ -50,32 +43,24 @@ public class Agencia implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+        
+	public String getEstado(){
+		return estado;
+	}
+	
+	public void setEstado( String estado ){
+		this.estado = estado;
+	}
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
+    }   
 
-    public List<Servicio> getListaServicios() {
-        return listaServicios;
-    }
-
-    public void setListaServicios(List<Servicio> listaServicios) {
-        this.listaServicios = listaServicios;
-    }
-
-    public String getNombre() {
+	public String getNombre() {
         return nombre;
     }
 
@@ -89,6 +74,14 @@ public class Agencia implements Serializable{
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }    
-    
+    }
+	
+	public Empresa getEmpresa(){
+		return empresa;
+	}
+	
+	public void setEmpresa( Empresa empresa ){
+		this.empresa = empresa;
+	}    
+        
 }

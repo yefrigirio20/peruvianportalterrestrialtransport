@@ -1,9 +1,5 @@
 package com.ttporg.pe.bean;
-
-import java.io.Serializable; 
-import java.util.ArrayList;
-import java.util.List;
-
+ 
 /**
  * @author Cesar Ricardo.
  * @clase: Vehiculo.java  
@@ -16,9 +12,7 @@ import java.util.List;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  */
-public class Vehiculo implements Serializable{
- 
-	private static final long serialVersionUID = -7873497104356206374L;
+public class Vehiculo{
 	
 	private Integer	id;
     private String  nombre;
@@ -26,51 +20,51 @@ public class Vehiculo implements Serializable{
     private String  tipo;
     
     //Objetos Relacionados.
-     private List<Asiento> listaAsientos;
+     private Servicio servicio;
         
     //Constructores ...
     public Vehiculo(){
-       this.listaAsientos = new ArrayList<Asiento>();
+       this.servicio = new Servicio();
     }
+	
+	public Integer getId(){
+		return id;
+	}
+	
+	public void setId( Integer id ){
+		this.id = id;
+	}
+	
+	public String getNombre(){
+		return nombre;
+	}
+	
+	public void setNombre( String nombre ){
+		this.nombre = nombre;
+	}
+	
+	public String getModelo(){
+		return modelo;
+	}
+	
+	public void setModelo( String modelo ){
+		this.modelo = modelo;
+	}
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<Asiento> getListaAsientos() {
-        return listaAsientos;
-    }
-
-    public void setListaAsientos(List<Asiento> listaAsientos) {
-        this.listaAsientos = listaAsientos;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }   
-    
+	public String getTipo(){
+		return tipo;
+	}
+	
+	public void setTipo( String tipo ){
+		this.tipo = tipo;
+	}
+	
+	public Servicio getServicio(){
+		return servicio;
+	}
+	
+	public void setServicio( Servicio servicio ){
+		this.servicio = servicio;
+	}
+      
 }
