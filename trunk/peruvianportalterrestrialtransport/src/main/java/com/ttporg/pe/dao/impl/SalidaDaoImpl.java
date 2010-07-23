@@ -1,11 +1,14 @@
 package com.ttporg.pe.dao.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.ttporg.pe.bean.Salida;
 import com.ttporg.pe.dao.SalidaDao;
+import com.ttporg.pe.dto.DetalleAsientoDTO;
+import com.ttporg.pe.dto.DetallePasajeDTO;
 
 /**
  * @author Cesar Ricardo.
@@ -21,8 +24,10 @@ import com.ttporg.pe.dao.SalidaDao;
  */
 public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	
-	public static final String OBJETO_NEGOCIO = "Salida";
-
+	public static final String OBJETO_NEGOCIO  = "Salida";
+	public static final String OBJETO_NEGOCIO2 = "DetallePasajeDTO";
+	public static final String OBJETO_NEGOCIO3 = "DetalleAsientoDTO";
+	
 	/**
 	 * eliminarSalida_x_codigo
 	 * @param codigo
@@ -166,6 +171,94 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 		String nombObjNegocio = (OBJETO_NEGOCIO + "." + nombReferMetodoMapeado);
 		
 		return nombObjNegocio;
+	}
+
+	/**
+	 * getObjetoNegocio2
+	 * @param nombReferMetodoMapeado
+	 * @return
+	 */
+	private String getObjetoNegocio2( String nombReferMetodoMapeado ){
+		
+		String nombObjNegocio = (OBJETO_NEGOCIO2 + "." + nombReferMetodoMapeado);
+		
+		return nombObjNegocio;
+	}
+
+	/**
+	 * getObjetoNegocio3
+	 * @param nombReferMetodoMapeado
+	 * @return
+	 */
+	private String getObjetoNegocio3( String nombReferMetodoMapeado ){
+		
+		String nombObjNegocio = (OBJETO_NEGOCIO3 + "." + nombReferMetodoMapeado);
+		
+		return nombObjNegocio;
+	}	
+	
+	/**
+	 * obtenerListaDetallePasajeDTO
+	 * @param  idEmpresa
+	 * @param  idAgencia
+	 * @param  idServicio
+	 * @param  departamentoSalida
+	 * @param  departamentoDestino
+	 * @param  fechaHoraSalida
+	 * @return List<DetallePasajeDTO>
+	 */
+	public List<DetallePasajeDTO> obtenerListaDetallePasajeDTO( int idEmpresa, int idAgencia, int idServicio, 
+			                                                    String departamentoSalida, String departamentoDestino, 
+			                                                    Date fechaHoraSalida ){
+        System.out.println( "DENTRO DE 'obtenerListaDetallePasajeDTO' " );
+        
+        List<DetallePasajeDTO> listaDetallePasajeDTO = null;
+         
+        DetallePasajeDTO objDetallePasajeDTO = new DetallePasajeDTO();
+        
+        objDetallePasajeDTO.setIdEmpresa(           idEmpresa  );
+        objDetallePasajeDTO.setIdAgencia(           idAgencia  );
+        objDetallePasajeDTO.setIdServicio(          idServicio );
+        objDetallePasajeDTO.setDepartamentoSalida(  departamentoSalida  );
+        objDetallePasajeDTO.setDepartamentoDestino( departamentoDestino );
+        objDetallePasajeDTO.setFechaHoraSalida(     fechaHoraSalida     );
+                
+        try{      
+        	String nombReferMetodoMapeado = this.getObjetoNegocio2( "getListaDetallePasaje" );
+        	
+        	listaDetallePasajeDTO = (List<DetallePasajeDTO>)getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, objDetallePasajeDTO );  
+        } 
+        catch( Exception e ){
+			   e.printStackTrace();
+		}	
+ 
+        return listaDetallePasajeDTO;
+	}
+
+	/**
+	 * obtenerListaDetalleAsientoDTO
+	 **/
+	public List<DetalleAsientoDTO> obtenerListaDetalleAsientoDTO( int idServicio ){
+        System.out.println( "DENTRO DE 'obtenerListaDetalleAsientoDTO' " );
+        
+        List<DetalleAsientoDTO> listaDetalleAsientoDTO = null; 
+                 
+        try{      
+        	String nombReferMetodoMapeado = this.getObjetoNegocio3( "getListaDetalleAsiento2" );
+        	
+        	DetalleAsientoDTO objDetalleAsientoDTO = new DetalleAsientoDTO();
+        	
+        	objDetalleAsientoDTO.setIdServicio( idServicio );
+        	
+        	listaDetalleAsientoDTO = (List<DetalleAsientoDTO>)this.getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, objDetalleAsientoDTO );  
+            
+        	System.out.println( "listaDetalleAsientoDTO A> " + listaDetalleAsientoDTO.size() );
+         } 
+        catch( Exception e ){
+			   e.printStackTrace();
+		}	
+ 
+        return listaDetalleAsientoDTO;
 	}
  	
 }

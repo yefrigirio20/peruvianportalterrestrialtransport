@@ -12,7 +12,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 		SELECT s.ID, s.DEPARTAMENTO_SALIDA, s.DEPARTAMENTO_DESTINO, s.SERVICIO_ID  
 		FROM   SALIDA s
      </sql>	       
-        
+  
     <!-- ******************************************************** -->
     <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
     <!-- ******************************************************** -->
@@ -46,8 +46,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	<delete id="deleteSalida" parameterClass="java.util.Map" >
 		DELETE FROM SALIDA 
 		WHERE  ID = #codigoEliminacion# 
-	</delete> 
-    
+	</delete>          
  
  </sqlMap>
 

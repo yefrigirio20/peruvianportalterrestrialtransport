@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DetallePasajeDTO" >
+ 
+    <typeAlias alias="detallePasaje" type="com.ttporg.pe.dto.DetallePasajeDTO" />
+ 
+    <!-- FORMA #1: PARA HACER CONSULTAS, EN BASE A: 'resultMap' -->
+   	<resultMap id="atributosDetallePasaje" class="com.ttporg.pe.dto.DetallePasajeDTO" >
+		<result property="idEmpresa"           column="EMPRESA_ID"         columnIndex="1"  />		
+		<result property="idAgencia"           column="AGENCIA_ID"         columnIndex="2"  />
+		<result property="idServicio"          column="SERVICIO_ID"        columnIndex="3"  />
+		<result property="idSalida"            column="SALIDA_ID"          columnIndex="4"  />
+		<result property="idSCalendario"       column="CALENDARIO_ID"      columnIndex="5"  />
+		<result property="razonSocial"         column="RAZON_SOCIAL"       columnIndex="6"  />
+		<result property="nomAgencia"          column="NOM_AGENCIA"        columnIndex="7"  />
+		<result property="nomServicio"         column="NOM_SERVICIO"       columnIndex="8"  />
+		<result property="departamentoSalida"  column="DEPARTA_SALIDA"     columnIndex="9"  />
+		<result property="departamentoDestino" column="DEPARTA_DESTINO"    columnIndex="10" />			
+		<result property="fechaHoraSalida"     column="FECHA_HORA_SALIDA"  columnIndex="11" />
+		<result property="fechaHoraLlegada"    column="FECHA_HORA_LLEGADA" columnIndex="12" />
+	</resultMap>
+ 
+ 	<select id="getListaDetallePasaje" resultMap="atributosDetallePasaje" parameterClass="detallePasaje" > 		   
+ 		    <![CDATA[ 
+ 			SELECT e.ID                    AS 'EMPRESA_ID',  
+			       e.RAZON_SOCIAL          AS 'RAZON_SOCIAL', 
+			       a.ID                    AS 'AGENCIA_ID',   
+			       a.NOMBRE                AS 'NOM_AGENCIA',
+			       se.ID                   AS 'SERVICIO_ID', 
+			       se.NOMBRE               AS 'NOM_SERVICIO',
+			       sa.ID                   AS 'SALIDA_ID', 
+			       sa.DEPARTAMENTO_SALIDA  AS 'DEPARTA_SALIDA',
+			       sa.DEPARTAMENTO_DESTINO AS 'DEPARTA_DESTINO',
+			       c.ID                    AS 'CALENDARIO_ID',  
+			       c.FECHA_HORA_SALIDA     AS 'FECHA_HORA_SALIDA',    
+			       c.FECHA_HORA_LLEGADA    AS 'FECHA_HORA_LLEGADA'
+			FROM   EMPRESA e,  AGENCIA a, SERVICIO se, 
+			       SALIDA  sa, CALENDARIO c 
+			]]>       
+			<dynamic prepend="WHERE" >	 
+			       <![CDATA[ 
+			       e.ID  = a.EMPRESA_ID   AND
+			       a.ID  = se.AGENCIA_ID  AND
+			       se.ID = sa.SERVICIO_ID AND
+			       sa.ID = c.SALIDA_ID    AND           
+			       e.ID  = #idEmpresa#    AND
+			       a.ID  = #idAgencia#    AND
+			       se.ID = #idServicio#   AND
+			       sa.DEPARTAMENTO_SALIDA  = #departamentoSalida# AND 
+			       sa.DEPARTAMENTO_DESTINO = #departamentoDestino# 
+			       ]]>   
+			       
+			       <!-- <isNotNull prepend="AND" property="fechaHoraSalida" > 
+			         c.FECHA_HORA_SALIDA > '2010-07-10 12:00:00'
+			       </isNotNull> -->  			
+				   ORDER BY e.RAZON_SOCIAL 	
+			</dynamic>		 
+    </select>
+        
+ </sqlMap>
+

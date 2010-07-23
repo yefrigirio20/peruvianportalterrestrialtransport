@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DetalleAsientoDTO" >
+  
+    <typeAlias alias="detalleAsientoSalida" type="com.ttporg.pe.dto.DetalleAsientoDTO" />
+ 
+    <!-- FORMA #1: PARA HACER CONSULTAS, EN BASE A: 'resultMap' -->
+   	<resultMap id="atributosDetalleAsiento" class="com.ttporg.pe.dto.DetalleAsientoDTO" >
+		<result property="idVehiculo"      column="VEHICULO_ID"      columnIndex="1" />		
+		<result property="idServicio"      column="SERVICIO_ID"      columnIndex="2" />
+		<result property="idAsiento"       column="ASIENTO_ID"       columnIndex="3" />
+		<result property="modeloVehiculo"  column="MOD_VEHICULO"     columnIndex="4" />
+		<result property="nombVehiculo"    column="NOM_VEHICULO"     columnIndex="5" />
+		<result property="estadoAsiento"   column="ESTADO_VEHICULO"  columnIndex="6" />
+	</resultMap>
+ 
+ 	<select id="getListaDetalleAsiento2" resultMap="atributosDetalleAsiento" parameterClass="detalleAsientoSalida" > 		   
+ 		    <![CDATA[ 
+ 			SELECT v.ID           AS 'VEHICULO_ID',  
+			       v.MODELO       AS 'MOD_VEHICULO', 
+			       v.NOMBRE       AS 'NOM_VEHICULO',   
+			       v.SERVICIO_ID  AS 'SERVICIO_ID',
+			       a.ID           AS 'ASIENTO_ID', 
+			       a.ESTADO       AS 'ESTADO_VEHICULO'
+			FROM   VEHICULO v, ASIENTO a			 
+			]]>       
+			<dynamic prepend="WHERE" >	 			
+		       <![CDATA[ 
+                v.ID          = a.VEHICULO_ID  AND
+		        v.SERVICIO_ID = #idServicio# 
+		       ]]>   
+			
+			   ORDER BY a.ID 	
+			</dynamic>		 
+    </select>
+         
+ </sqlMap>
+
