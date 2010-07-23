@@ -1,6 +1,8 @@
 package com.ttporg.pe.bean;
 
+import java.util.Calendar;
 import java.util.Date;
+import com.ttporg.pe.util.UtilCalendario;
 
 /**
  * @author Cesar Ricardo.
@@ -28,6 +30,24 @@ public class Calendario{
     }
 
     public Integer getDuracion(){
+    	
+        UtilCalendario utilCalendario = new UtilCalendario();
+         
+        Calendar fecInicio = Calendar.getInstance();
+        Calendar fecFin    = Calendar.getInstance();
+ 
+        this.duracion = 0;
+        
+        if( (this.fechaHoraSalida != null) && (this.fechaHoraLlegada != null) ){
+           
+        	fecInicio.setTime( this.fechaHoraSalida  );
+        	fecFin.setTime(    this.fechaHoraLlegada );
+        	
+        	int duracionNew = utilCalendario.getHorasEntreDosFechas( fecInicio, fecFin );
+
+        	 this.duracion = duracionNew;  
+        }       
+        
         return duracion;
     }
 

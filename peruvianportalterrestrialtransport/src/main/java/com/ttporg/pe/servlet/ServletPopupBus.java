@@ -8,9 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ttporg.pe.bean.Asiento;
-import com.ttporg.pe.bean.Servicio;
-import com.ttporg.pe.bean.Vehiculo;
+import com.ttporg.pe.dto.DetalleAsientoDTO;
 import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilSingleton;
@@ -45,7 +43,6 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	
 	private String            REDIRECCIONAMIENTO = "/jsp/PopupBus.jsp";
 	
-	
 	{
 	 this.servicio       = new ServiceFactory();
 	 this.utilCalendario = new UtilCalendario();
@@ -59,68 +56,34 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
 	    System.out.println( "********* DENTRO DE service **********" ); 
         
-	    try{
-	    	String nombreServicio = request.getParameter( "nombreServicio" );	    	
-	    	String idAsientoSeleccionado      = request.getParameter( "idAsiento" );
-	    		    	
-	    	System.out.println( "nombreServicio: " + nombreServicio );	    	
-	    	System.out.println( "idAsiento:      " + idAsientoSeleccionado );
-	    		    	
-	    	Servicio objServicio = new Servicio();
-	    	
-	    	objServicio.setId(     1 );
-	    	objServicio.setNombre( nombreServicio );
-	    	
-	    	Vehiculo objVehiculo = new Vehiculo();
-	    	objVehiculo.setId(     1 );
-	    	objVehiculo.setTipo(   "SIMPLE" );
-	    	objVehiculo.setModelo( "MERCEDES BENZ" );
-	    	
-	    	//objServicio.setVehiculo( objVehiculo );
-	    	
-	    	List<Asiento> listaAsiento = new ArrayList<Asiento>();
-	    	
-	    	int contador = 1;
-	    	
-	    	for( int i=0; i<20; i++ ){
-	    		 
-		    	 Asiento objAsiento = new Asiento();
-		    	 objAsiento.setId(     contador );
-		    	// objAsiento.setEstado( false );
-		    		    		
-		    	 //Agregando ...
-		    	 listaAsiento.add( objAsiento );
-		    	
-		    	 //objServicio.getVehiculo().setListaAsientos( listaAsiento );
-		    	 
-		    	 contador ++;
-	    	}	    	   	 
-	    	
-	    	//SETEO HARDCODE... 
-	    	for( int i=0; i<listaAsiento.size(); i++ ){
-	
-		    	 Asiento asiento = listaAsiento.get( i );
-		    	 
-		    	 if( (asiento.getId() == 5) || (asiento.getId() == 7) || (asiento.getId() == 9) || 
-		    	     (asiento.getId() == 13) || (asiento.getId() == 17) || (asiento.getId() == 11) ){
-		    		 //asiento.setEstado( true );
-		    	 }
-		    }	
+	    List<DetalleAsientoDTO> listaDetalleAsientoDTO = null;
 	    
+	    try{
+	    	String idServicio            = request.getParameter( "idServicio" );	    	
+	    	String idAsientoSeleccionado = request.getParameter( "idAsiento"  );
 	    		    	
+	    	System.out.println( "idServicio: " + idServicio );	    	
+	    	System.out.println( "idAsiento:  " + idAsientoSeleccionado );
+
+	    	//-------------- Obtener 'BASE DE DATOS'. --------------//
+	    	listaDetalleAsientoDTO = new ArrayList<DetalleAsientoDTO>();
+	    	
+	    	listaDetalleAsientoDTO = this.servicio.getSalidaDAO().obtenerListaDetalleAsientoDTO( Integer.parseInt( idServicio ) );  
+	    	//------------------------------------------------------//
+	    	
 	    	//Validando ...
 	    	if( idAsientoSeleccionado != null ){
-		    	for( int i=0; i<listaAsiento.size(); i++ ){
+		    	for( int i=0; i<listaDetalleAsientoDTO.size(); i++ ){
  		
-			    	 Asiento asiento = listaAsiento.get( i );
+		    		DetalleAsientoDTO asiento = listaDetalleAsientoDTO.get( i );
 			    	 
-			    	 if( asiento.getId() == Integer.parseInt( idAsientoSeleccionado ) ){
-			    		// asiento.setEstado( true );
+			    	 if( asiento.getIdAsiento() == Integer.parseInt( idAsientoSeleccionado ) ){
+			    		 asiento.setEstadoAsiento( "TRUE" );
 			    	 }
-			    }	
+			    }				    
 	    	}
-	    	
-	    	//request.setAttribute( "listaAsiento", objServicio.getVehiculo().getListaAsientos() );  //estadoValidacion ...
+ 	    	
+	    	request.setAttribute( "listaDetalleAsientoDTO", listaDetalleAsientoDTO );  //estadoValidacion ...
 	    	
 	        this.contexto    = this.getServletContext();
 	        this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );

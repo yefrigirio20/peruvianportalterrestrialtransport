@@ -1,7 +1,10 @@
 package com.ttporg.pe.servicio.impl;
 
+import java.util.Date;
 import java.util.List;
 import com.ttporg.pe.bean.Salida;
+import com.ttporg.pe.dto.DetalleAsientoDTO;
+import com.ttporg.pe.dto.DetallePasajeDTO;
 import com.ttporg.pe.servicio.SalidaService;
 import com.ttporg.pe.servicio.ServiceFactory;
 
@@ -69,6 +72,35 @@ public class SalidaServiceImpl extends ServiceFactory implements SalidaService{
 	public Salida obtenerObjetoSalida_x_codigo( int codigo ){
 		Salida Salida = this.getSalidaDAO().obtenerObjetoSalida_x_codigo( codigo );
 		return Salida;
+	}
+
+	/**
+	 * obtenerListaDetallePasajeDTO
+	 * @param  idEmpresa
+	 * @param  idAgencia
+	 * @param  idServicio
+	 * @param  departamentoSalida
+	 * @param  departamentoDestino
+	 * @param  fechaHoraSalida
+	 * @return List<DetallePasajeDTO>
+	 */
+	public List<DetallePasajeDTO> obtenerListaDetallePasajeDTO( int idEmpresa,  int idAgencia, 
+													            int idServicio, String departamentoSalida, 
+													            String departamentoDestino, Date fechaHoraSalida ){
+		List<DetallePasajeDTO> listaDetallePasajeDTO = this.getSalidaDAO().obtenerListaDetallePasajeDTO( idEmpresa, idAgencia,
+				                                                                                         idServicio, departamentoSalida, 
+				                                                                                         departamentoDestino, fechaHoraSalida 
+				                                                                                        );
+		return listaDetallePasajeDTO;
+	} 
+	
+	/**
+	 * obtenerListaDetalleAsientoDTO
+	 * @param  idServicio
+	 **/
+	public List<DetalleAsientoDTO> obtenerListaDetalleAsientoDTO( int idServicio ){
+		List<DetalleAsientoDTO> listaDetalleAsientoDTO = this.getSalidaDAO().obtenerListaDetalleAsientoDTO( idServicio );
+		return listaDetalleAsientoDTO;
 	} 
 	
  }

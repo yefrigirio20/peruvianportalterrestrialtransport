@@ -79,9 +79,9 @@
 			 
 	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
 
-	         url = url + '?nombreServicio=' + 'PREMIUM'; 
+	         url = url + '?idServicio=' + parametro; 
 	         
-	         //alert( url );
+	         alert( url );
 	
 	 		 var newwindow = window.open( url, 'name','height=460, width=250, scrollbars=1, left=520, top=180' );
 			
@@ -157,7 +157,7 @@
                                      <td width="40%" >
                                          <select id="idChoDepartamento" name="choDepartamento" style="width:150px;" onchange="conexionServlet( this.form, 'cargarEmpresa' )" >  
   										    <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
-            								   <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.nombre}</option>  
+            								   <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.id} ${paramListaDepartamento.nombre}</option>  
                                             </c:forEach>
 					                     </select>
                                      </td>    
@@ -173,7 +173,7 @@
                                        <select id="idChoEmpresa" name="choEmpresa" style="width:150px;" onchange="conexionServlet( this.form, 'cargarAgencia' )" >
                                            <c:if test="${listaEmpresa != null}" > 
 	  										    <c:forEach var="paramListaEmpresa" items="${listaEmpresa}" >
-	            								   <option value="${paramListaEmpresa.id}" ${paramListaEmpresa.id == codigoEmpresa ? 'selected' : ''}>${paramListaEmpresa.razonSocial}</option>  
+	            								   <option value="${paramListaEmpresa.id}" ${paramListaEmpresa.id == codigoEmpresa ? 'selected' : ''}>${paramListaEmpresa.id} - ${paramListaEmpresa.razonSocial}</option>  
 	                                            </c:forEach>
                                            </c:if> 
                                        </select>
@@ -188,7 +188,7 @@
                                        <select id="idChoAgencia" name="choAgencia" style="width:150px;" onchange="conexionServlet( this.form, 'cargarServTransporte' )" >
                                            <c:if test="${listaAgencia != null}" > 
 	  										    <c:forEach var="paramListaAgencia" items="${listaAgencia}" >
-	            								   <option value="${paramListaAgencia.id}" ${paramListaAgencia.id == codigoAgencia ? 'selected' : ''}>${paramListaAgencia.nombre}</option>  
+	            								   <option value="${paramListaAgencia.id}" ${paramListaAgencia.id == codigoAgencia ? 'selected' : ''}>${paramListaAgencia.id} - ${paramListaAgencia.nombre}</option>  
 	                                            </c:forEach>
                                            </c:if> 
                                        </select>
@@ -203,7 +203,7 @@
                                        <select id="idChoServTransporte" name="choServTransporte" style="width:150px;">
                                            <c:if test="${listaServicio != null}" > 
 	                                           <c:forEach var="paramListaServicio" items="${listaServicio}" >
-	                                              <option value="${paramListaServicio.id}">${paramListaServicio.nombre}</option>                         
+	                                              <option value="${paramListaServicio.id}">${paramListaServicio.id} - ${paramListaServicio.nombre}</option>                         
 	                                           </c:forEach>
                                            </c:if> 
                                        </select>
@@ -274,7 +274,7 @@
                                      <td width="10%" >&nbsp;</td>
                                      <td><label><fmt:message key="texto.label.fecha" />:</label></td>
                                      <td>
-                                        <input type="text" id="txtIdFecha" name="txtFecha" /><img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" > 
+                                        <input type="text" id="txtIdFecha" name="fechaViaje" /><img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" > 
                                      </td>
                                      <td width="10%" >&nbsp;</td>
                                   </tr>
@@ -296,72 +296,57 @@
                        <td colspan="4" align="center" >        
                          
                          <c:if test="${listaCalendario == null}" > 
- 	                        <table border="0" width="60%" bgcolor="white" >
+ 	                        <table border="0" width="80%" bgcolor="white" >
 	                              
 	                                 <tr>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.orden" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Empresa</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Agencia</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Servicio</td>
 	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.origen" /></td>
 	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.destino" /></td>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.detalle" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.duracion" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Ver</td>
 	                                 </tr>
 	                                 
-	                                 <c:if test="${listaSalida != null}" > 
-		                                 <c:forEach var="objListaSalida" items="${listaSalida}" >                                 
+	                                 <c:if test="${listaDetallePasajeDTO != null}" > 
+		                                 <c:forEach var="objlistaDetallePasajeDTO" items="${listaDetallePasajeDTO}" >                                 
 			                                 <tr>
-			                                     <td style="text-align:center"><label>${objListaSalida.id}</label></td>
-			                                     <td style="text-align:center"><label>${objListaSalida.departamentoSalida}</label></td>
-			                                     <td style="text-align:center"><label>${objListaSalida.departamentoDestino}</label></td>
-					                                     
-			                                     <td style="text-align:center">   
-				                                     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?codigoSalida=${objListaSalida.id}&opcion=cargarListadoFiltrado&opcionLista=cargarListadoCalendario" 
-				                                        style="cursor:hand; " >                
-				                     <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" alt="Ver Asientos" width="20" height="19"  border="0" /> 
+			                                     <td style="text-align:center"><label>${objlistaDetallePasajeDTO.razonSocial} </label></td>
+			                                     <td style="text-align:center"><label>${objlistaDetallePasajeDTO.nomAgencia}</label></td>
+			                                     <td style="text-align:center"><label>${objlistaDetallePasajeDTO.nomServicio}</label></td>
+					                                  
+			                                     <td style="text-align:center">
+	                                                <fmt:formatDate value="${objlistaDetallePasajeDTO.fechaHoraSalida}" type="DATE" pattern="MM-dd-yyyy--hh:mm"/>
+	                                             </td>
+	                                             
+			                                     <td style="text-align:center">
+	                                                <fmt:formatDate value="${objlistaDetallePasajeDTO.fechaHoraLlegada}" type="DATE" pattern="MM-dd-yyyy--hh:mm"/>
+	                                             </td>
+	                                             
+			                                     <td style="text-align:center"><label> ${objlistaDetallePasajeDTO.duracion} </label></td> 
+				  					                                     
+			                                     <td style="text-align:center" >   
+				                                     <a href="javascript:conexionServletPopup( this.form, ${objlistaDetallePasajeDTO.idServicio} )" title="Ver Asientos" >                
+				                                        <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
 				                                     </a>
 			                                     </td>
+			                                     
 			                                 </tr>                                                                 
 		                               </c:forEach> 
 		                            </c:if>
-		                            
-		                            <c:if test="${listaSalida == null}" > 
+		                            <!--  
+		                            <c:if test="${listaDetallePasajeDTO == null}" > 
 		                               <tr>
 			                               <td colspan="7">
 			                                  <label>Realizar un busquea de pasajes ...</label>
 			                               </td>
 			                           </tr>    
-		                            </c:if>             
+		                            </c:if> 
+		                            -->            
 	                        </table>  
                         </c:if> 
-                            
-                        <c:if test="${listaCalendario != null}" >     
-                           <table border="0" width="60%" bgcolor="white" >
-                                     <tr>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.salida" /></td>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.llegada" /></td>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.duracion" /></td>
-                                         <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.ver" /></td>
-                                     </tr> 
-                                     
-	                                 <c:forEach var="objCalendario" items="${listaCalendario}" >                                 
-		                                 <tr>
-		                                     <td style="text-align:center">
-                                               <fmt:formatDate value="${objCalendario.fechaHoraSalida}" type="DATE" pattern="MM-dd-yyyy--hh:mm"/>
-                                             </td>
-		                                     <td style="text-align:center">
-                                             <fmt:formatDate value="${objCalendario.fechaHoraLlegada}" type="DATE" pattern="MM-dd-yyyy--hh:mm"/>
-                                             </td>
-		                                     <td style="text-align:center"><label>${objCalendario.duracion}</label></td> 
-			                                     
-		                                     <td style="text-align:center" >   
-			                                     <a href="javascript:conexionServletPopup( this.form )" title="Ver Asientos" >                
-			                                        <img src="<%=request.getContextPath()%>/imagenes/Buscar_01.gif" alt="Ver Asientos" width="20" height="19"  border="0" />
-			                                     </a>
-		                                     </td>
-		                                     
-		                                 </tr>                                                                 
-	                               </c:forEach> 	                                    
-                            </table>    
-                          </c:if>         
-                        </td>
+              
+                       </td>
                     </tr> 
                     
                   <tr>

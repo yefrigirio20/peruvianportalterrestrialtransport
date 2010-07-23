@@ -1,6 +1,8 @@
 package com.ttporg.pe.dto;
 
+import java.util.Calendar;
 import java.util.Date;
+import com.ttporg.pe.util.UtilCalendario;
 
 /**
  * @author Cesar Ricardo.
@@ -15,21 +17,81 @@ import java.util.Date;
  * @versión 1.0
  **/
 public class DetallePasajeDTO{
-	
-	private Integer  id;
+
+	private Integer  idEmpresa;
+	private Integer  idAgencia;
+	private Integer  idServicio;
+	private Integer  idSalida;
+	private Integer  idSCalendario;	
+    private String   razonSocial; 
+    private String   nomAgencia; 
+    private String   nomServicio;     
     private String   departamentoSalida; 
-    private String   departamentoDestino;
-    
+    private String   departamentoDestino;    
     private Date     fechaHoraSalida; 
     private Date     fechaHoraLlegada; 
     private Integer  duracion;   
  	
     //Constructor ...
-    public DetallePasajeDTO(){    	
+    public DetallePasajeDTO(){  
     }
+
+    public Integer getDuracion(){
+    	
+        UtilCalendario utilCalendario = new UtilCalendario();
+         
+        Calendar fecInicio = Calendar.getInstance();
+        Calendar fecFin    = Calendar.getInstance();
+ 
+        this.duracion = 0;
+        
+        if( (this.fechaHoraSalida != null) && (this.fechaHoraLlegada != null) ){
+           
+        	fecInicio.setTime( this.fechaHoraSalida  );
+        	fecFin.setTime(    this.fechaHoraLlegada );
+        	
+        	int duracionNew = utilCalendario.getHorasEntreDosFechas( fecInicio, fecFin );
+
+        	System.out.println( "fecInicio>  " + fecInicio.getTime() );
+        	System.out.println( "fecFin>     " + fecFin.getTime() );
+        	System.out.println( "diferencia> " + duracionNew ); 
+        	
+        	this.duracion = duracionNew;  
+        }       
+        
+        return duracion;
+    }
+    
+	public Integer getIdEmpresa(){
+		return idEmpresa;
+	}
 	
-	public Integer getId(){
-		return id;
+	public Integer getIdAgencia(){
+		return idAgencia;
+	}
+	
+	public Integer getIdServicio(){
+		return idServicio;
+	}
+	
+	public Integer getIdSalida(){
+		return idSalida;
+	}
+	
+	public Integer getIdSCalendario(){
+		return idSCalendario;
+	}
+	
+	public String getRazonSocial(){
+		return razonSocial;
+	}
+	
+	public String getNomAgencia(){
+		return nomAgencia;
+	}
+	
+	public String getNomServicio(){
+		return nomServicio;
 	}
 	
 	public String getDepartamentoSalida(){
@@ -47,13 +109,37 @@ public class DetallePasajeDTO{
 	public Date getFechaHoraLlegada(){
 		return fechaHoraLlegada;
 	}
+		
+	public void setIdEmpresa( Integer idEmpresa ){
+		this.idEmpresa = idEmpresa;
+	}
 
-	public Integer getDuracion(){
-		return duracion;
+	public void setIdAgencia( Integer idAgencia ){
+		this.idAgencia = idAgencia;
 	}
 	
-	public void setId( Integer id ){
-		this.id = id;
+	public void setIdServicio( Integer idServicio ){
+		this.idServicio = idServicio;
+	}
+	
+	public void setIdSalida( Integer idSalida ){
+		this.idSalida = idSalida;
+	}
+	
+	public void setIdSCalendario( Integer idSCalendario ){
+		this.idSCalendario = idSCalendario;
+	}
+	
+	public void setRazonSocial( String razonSocial ){
+		this.razonSocial = razonSocial;
+	}
+	
+	public void setNomAgencia( String nomAgencia ){
+		this.nomAgencia = nomAgencia;
+	}
+	
+	public void setNomServicio( String nomServicio ){
+		this.nomServicio = nomServicio;
 	}
 	
 	public void setDepartamentoSalida( String departamentoSalida ){
@@ -74,6 +160,6 @@ public class DetallePasajeDTO{
 	
 	public void setDuracion( Integer duracion ){
 		this.duracion = duracion;
-	}    
-        
-}
+	}
+ 	
+ }

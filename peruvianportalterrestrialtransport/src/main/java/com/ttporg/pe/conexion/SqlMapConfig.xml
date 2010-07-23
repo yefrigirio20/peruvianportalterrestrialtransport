@@ -25,6 +25,8 @@
 	<sqlMap resource="com/ttporg/pe/mapping/Pago.xml"         />	
 	<sqlMap resource="com/ttporg/pe/mapping/ClientePago.xml"  />
 	<sqlMap resource="com/ttporg/pe/mapping/Transaccion.xml"  />
+	<sqlMap resource="com/ttporg/pe/mapping/DetallePasajeDTO.xml" />
+	<sqlMap resource="com/ttporg/pe/mapping/DetalleAsientoDTO.xml" />
 	
 </sqlMapConfig>
 
