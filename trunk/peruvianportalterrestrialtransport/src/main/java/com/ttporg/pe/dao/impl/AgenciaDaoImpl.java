@@ -134,6 +134,26 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	}
 
 	/**
+	 * obtenerListaAgencias_x_empresa
+	 */
+	public List<Agencia> obtenerListaAgencias_x_empresa( int codigo ){
+        System.out.println( "DENTRO DE 'obtenerListaAgencias_x_empresa' " );
+        
+        List<Agencia> listaAgencia = null;
+        
+        try{      
+        	String nombReferMetodoMapeado = this.getObjetoNegocio( "getListaAgencia_x_empresa" );
+        	
+        	listaAgencia = (List<Agencia>)getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, codigo );  
+		} 
+        catch( Exception e ){
+			   e.printStackTrace();
+		}	
+ 
+        return listaAgencia;
+	}
+	
+	/**
 	 * obtenerObjetoAgencia_x_codigo
 	 * @param codigo
 	 */

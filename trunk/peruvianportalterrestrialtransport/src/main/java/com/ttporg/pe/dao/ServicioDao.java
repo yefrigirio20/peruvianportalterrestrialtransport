@@ -28,6 +28,11 @@ public interface ServicioDao{
 	public List<Servicio> obtenerListaServicios();
 
 	/**
+	 * obtenerListaServicios_x_agencia
+	 */
+	public List<Servicio> obtenerListaServicios_x_agencia( int codigo );	
+	
+	/**
 	 * eliminarServicio_x_codigo
 	 */
 	public boolean eliminarServicio_x_codigo( int codigo );

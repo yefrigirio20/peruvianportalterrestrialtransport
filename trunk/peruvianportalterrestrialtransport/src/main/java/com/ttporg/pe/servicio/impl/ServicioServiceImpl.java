@@ -62,6 +62,15 @@ public class ServicioServiceImpl extends ServiceFactory implements ServicioServi
 	}
 	
 	/**
+	 * obtenerListaServicios_x_agencia
+	 * @return List<Servicio>
+	 */
+	public List<Servicio> obtenerListaServicios_x_agencia( int codigo ){
+		List<Servicio> listaServicio = this.getServicioDAO().obtenerListaServicios_x_agencia( codigo );
+		return listaServicio;
+	}
+	
+	/**
 	 * obtenerObjetoServicio_x_codigo
 	 * @param  codigo
 	 * @return Servicio
@@ -69,6 +78,6 @@ public class ServicioServiceImpl extends ServiceFactory implements ServicioServi
 	public Servicio obtenerObjetoServicio_x_codigo( int codigo ){
 		Servicio Servicio = this.getServicioDAO().obtenerObjetoServicio_x_codigo( codigo );
 		return Servicio;
-	} 
+	}
 	
  }

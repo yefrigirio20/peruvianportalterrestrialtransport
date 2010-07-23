@@ -28,6 +28,11 @@ public interface AgenciaService{
 	public List<Agencia> obtenerListaAgencias();
 
 	/**
+	 * obtenerListaAgencias_x_empresa
+	 */
+	public List<Agencia> obtenerListaAgencias_x_empresa( int codigo );	
+	
+	/**
 	 * eliminarAgencia_x_codigo
 	 */
 	public boolean eliminarAgencia_x_codigo( int codigo );
