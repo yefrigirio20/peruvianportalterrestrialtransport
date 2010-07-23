@@ -43,7 +43,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	</resultMap>
    
 	<select id="getEmpresa" resultMap="atributosEmpresa" parameterClass="java.lang.Integer" >
-        <include refid="selectEmpresasConTag" />
+        <include refid="selectEmpresasSinTag" />
 		WHERE  e.ID = #id#
     </select>
         

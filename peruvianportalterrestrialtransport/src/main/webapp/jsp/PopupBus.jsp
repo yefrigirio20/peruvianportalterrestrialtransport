@@ -33,7 +33,7 @@
 	         //alert( url );
 
 	         var urlNew = url + '?idServicio=' + idServicio + '&idAsiento=' + idAsiento;
-	         alert( urlNew );
+	         //alert( urlNew );
 	         	
 	         myFrm.method = '' + 'POST';
 	         myFrm.action = urlNew; 		 		 
@@ -263,6 +263,10 @@
         <br> </br>
         
         <center>
+          <% 
+            contador = contador/2;
+          %>
+                  
           <strong>#<fmt:message key="texto.label.totalAsientos" />:</strong> <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;"/>
         </center>
         

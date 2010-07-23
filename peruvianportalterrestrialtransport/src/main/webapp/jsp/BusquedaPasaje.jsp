@@ -81,7 +81,7 @@
 
 	         url = url + '?idServicio=' + parametro; 
 	         
-	         alert( url );
+	         //alert( url );
 	
 	 		 var newwindow = window.open( url, 'name','height=460, width=250, scrollbars=1, left=520, top=180' );
 			
@@ -157,7 +157,7 @@
                                      <td width="40%" >
                                          <select id="idChoDepartamento" name="choDepartamento" style="width:150px;" onchange="conexionServlet( this.form, 'cargarEmpresa' )" >  
   										    <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
-            								   <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.id} ${paramListaDepartamento.nombre}</option>  
+            								   <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.id} - ${paramListaDepartamento.nombre}</option>  
                                             </c:forEach>
 					                     </select>
                                      </td>    

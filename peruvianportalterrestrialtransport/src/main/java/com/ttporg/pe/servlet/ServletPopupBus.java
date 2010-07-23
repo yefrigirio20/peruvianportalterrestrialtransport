@@ -8,6 +8,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.dto.DetalleAsientoDTO;
 import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
@@ -58,18 +61,25 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
         
 	    List<DetalleAsientoDTO> listaDetalleAsientoDTO = null;
 	    
+	    HttpSession session = request.getSession( true );
+	    
 	    try{
 	    	String idServicio            = request.getParameter( "idServicio" );	    	
 	    	String idAsientoSeleccionado = request.getParameter( "idAsiento"  );
 	    		    	
 	    	System.out.println( "idServicio: " + idServicio );	    	
 	    	System.out.println( "idAsiento:  " + idAsientoSeleccionado );
-
+	    	
 	    	//-------------- Obtener 'BASE DE DATOS'. --------------//
 	    	listaDetalleAsientoDTO = new ArrayList<DetalleAsientoDTO>();
 	    	
 	    	listaDetalleAsientoDTO = this.servicio.getSalidaDAO().obtenerListaDetalleAsientoDTO( Integer.parseInt( idServicio ) );  
 	    	//------------------------------------------------------//
+	    	
+	    	//SETEANDO EN SESION ...--------------------------
+	    	if( idAsientoSeleccionado != null ){	    		
+	    		session.setAttribute( "idAsientoSeleccionado", idAsientoSeleccionado ); 
+	    	}	    	
 	    	
 	    	//Validando ...
 	    	if( idAsientoSeleccionado != null ){

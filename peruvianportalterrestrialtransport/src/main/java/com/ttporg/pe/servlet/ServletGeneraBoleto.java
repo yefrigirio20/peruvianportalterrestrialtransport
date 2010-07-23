@@ -6,6 +6,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.ttporg.pe.bean.Cliente;
+import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilGeneraBoletoViaje;
@@ -57,8 +61,19 @@ public class ServletGeneraBoleto extends HttpServlet implements Servlet{
  
 		    
 		    try{
+		    	HttpSession session = request.getSession( true );
+		    	
+		    	//OBTENIENDO DE SESION ...
+				Cliente objCliente         = (Cliente)session.getValue( "objCliente" );  		    	
+				Pago    objPago            = (Pago)session.getValue(    "objPago" ); 
+    	    	String  codigoDepartamento = (String)session.getValue( "codigoDepartamento" ); 
+    	    	String  codigoEmpresa      = (String)session.getValue( "codigoEmpresa" ); 							
+    	    	String  codigoAgencia      = (String)session.getValue( "codigoAgencia" ); 
+    	    	String  codigoServicio     = (String)session.getValue( "codigoServicio" ); 	    	    		    	
+    	    	String  codigoAsiento      = (String)session.getValue( "idAsientoSeleccionado" ); 
+    	    	    	    	
 		    	UtilGeneraBoletoViaje generaBoleto = new UtilGeneraBoletoViaje();
-		    	generaBoleto.muestraBoletoViaje();
+		    	generaBoleto.muestraBoletoViaje( objCliente, objPago, codigoDepartamento, codigoEmpresa, codigoAgencia, codigoServicio, codigoAsiento );
 	            
 	            this.contexto    = this.getServletContext();
 	            this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );
