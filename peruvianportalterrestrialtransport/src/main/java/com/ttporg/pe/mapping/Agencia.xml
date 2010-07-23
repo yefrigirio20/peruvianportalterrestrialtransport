@@ -21,15 +21,15 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
 	<typeAlias alias="agencia" type="com.ttporg.pe.bean.Agencia" />
 	
-	<select id="getAgencia" resultClass="agencia" parameterClass="java.lang.Integer" >
-        <include refid="selectAgenciasSinTag" />
-		WHERE  a.ID = #id#
-    </select>
-
 	<select id="getListaAgencia" resultClass="agencia" >
         <include refid="selectAgenciasSinTag" />
-    </select>
+    </select>	
 
+	<select id="getListaAgencia_x_empresa" resultClass="agencia" parameterClass="java.lang.Integer" >
+        <include refid="selectAgenciasSinTag" />
+		WHERE  a.EMPRESA_ID = #empresa.id#
+    </select>
+    
 	<insert id="insertAgencia" parameterClass="com.ttporg.pe.bean.Agencia" >
 		INSERT INTO AGENCIA( NOMBRE, DIRECCION, EMAIL, TELEFONO, ESTADO, EMPRESA_ID )
 		                            

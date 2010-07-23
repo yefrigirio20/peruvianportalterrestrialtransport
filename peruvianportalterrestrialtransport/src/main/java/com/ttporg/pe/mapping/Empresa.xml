@@ -43,7 +43,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	</resultMap>
    
 	<select id="getEmpresa" resultMap="atributosEmpresa" parameterClass="java.lang.Integer" >
-        <include refid="selectEmpresasSinTag" />
+        <include refid="selectEmpresasConTag" />
 		WHERE  e.ID = #id#
     </select>
         
@@ -57,6 +57,11 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 
 	<select id="getListaEmpresa" resultClass="empresa" >
         <include refid="selectEmpresasConTag" />
+    </select>
+
+	<select id="getListaEmpresa_x_departamento" resultClass="empresa" parameterClass="java.lang.Integer" >
+        <include refid="selectEmpresasConTag" />
+		WHERE  e.DEPARTAMENTO_ID = #departamento.id#
     </select>
 
 	<insert id="insertEmpresa" parameterClass="com.ttporg.pe.bean.Empresa" >

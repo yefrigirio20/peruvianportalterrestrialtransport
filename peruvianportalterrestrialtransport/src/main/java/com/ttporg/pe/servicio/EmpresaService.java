@@ -28,6 +28,11 @@ public interface EmpresaService{
 	public List<Empresa> obtenerListaEmpresas();
 
 	/**
+	 * obtenerListaEmpresas_x_departamento
+	 */
+	public List<Empresa> obtenerListaEmpresas_x_departamento( int codigo );	
+	
+	/**
 	 * eliminarEmpresa_x_codigo
 	 */
 	public boolean eliminarEmpresa_x_codigo( int codigo );

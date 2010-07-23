@@ -62,6 +62,14 @@ public class AgenciaServiceImpl extends ServiceFactory implements AgenciaService
 	}
 	
 	/**
+	 * obtenerListaAgencias_x_empresa
+	 **/
+	public List<Agencia> obtenerListaAgencias_x_empresa( int codigo ){
+		List<Agencia> listaAgencia = this.getAgenciaDAO().obtenerListaAgencias_x_empresa( codigo );
+		return listaAgencia;
+	}
+	
+	/**
 	 * obtenerObjetoAgencia_x_codigo
 	 * @param  codigo
 	 * @return Agencia
@@ -69,6 +77,6 @@ public class AgenciaServiceImpl extends ServiceFactory implements AgenciaService
 	public Agencia obtenerObjetoAgencia_x_codigo( int codigo ){
 		Agencia Agencia = this.getAgenciaDAO().obtenerObjetoAgencia_x_codigo( codigo );
 		return Agencia;
-	} 
+	}
 	
  }

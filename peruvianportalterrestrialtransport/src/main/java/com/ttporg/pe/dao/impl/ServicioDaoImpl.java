@@ -134,6 +134,26 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 	}
 
 	/**
+	 * obtenerListaServicios_x_agencia
+	 */
+	public List<Servicio> obtenerListaServicios_x_agencia( int codigo ){
+        System.out.println( "DENTRO DE 'obtenerListaServicios_x_agencia' " );
+        
+        List<Servicio> listaServicio = null;
+        
+        try{      
+        	String nombReferMetodoMapeado = this.getObjetoNegocio( "getListaServicio_x_agencia" );
+        	
+        	listaServicio = (List<Servicio>)getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, codigo );  
+		} 
+        catch( Exception e ){
+			   e.printStackTrace();
+		}	
+ 
+        return listaServicio;
+	}
+	
+	/**
 	 * obtenerObjetoServicio_x_codigo
 	 * @param codigo
 	 */
