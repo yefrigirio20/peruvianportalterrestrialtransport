@@ -70,7 +70,7 @@
 	         //alert( url );
 	
 	         myFrm.method = '' + 'POST';
-	         myFrm.action = url + '?opcion=' + tipo; 		 		 
+	         myFrm.action = url + '?opcionProceso=' + tipo; 		 		 
 	         myFrm.submit();
 	    }  
 
@@ -216,6 +216,7 @@
                                      <td><label><fmt:message key="texto.label.ciudadOrigen" />:</label></td>
                                      <td>
                                        <select id="idChoCiudadOrigen" name="choCiudadOrigen" style="width:150px;">
+                                           <!-- 
                                            <option value="LIMA"  > LIMA </option> 
                                            <option value="ICA"  > ICA </option> 
                                            <option value="CHINCHA" > CHINCHA </option> 
@@ -231,6 +232,10 @@
                                            <option value="PUNO" > PUNO </option> 
                                            <option value="UCAYALI" > UCAYALI </option> 
                                            <option value="CHIMBOTE" > CHIMBOTE </option> 
+                                           -->
+                                           <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
+            								  <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.nombre}</option>  
+                                           </c:forEach>
                                        </select>
                                      </td>
                                      <td width="10%" >&nbsp;</td>
@@ -241,6 +246,7 @@
                                      <td><label><fmt:message key="texto.label.ciudadDestino" />:</label></td>
                                      <td>
                                        <select id="idChoCiudadDestino" name="choCiudadDestino" style="width:150px;">
+                                           <!-- 
                                            <option value="ICA"  > ICA </option> 
                                            <option value="CHINCHA"  > CHINCHA </option> 
                                            <option value="AYACUCHO"  > AYACUCHO </option> 
@@ -255,6 +261,10 @@
                                            <option value="PUNO" > PUNO </option> 
                                            <option value="UCAYALI" > UCAYALI </option> 
                                            <option value="CHIMBOTE" > CHIMBOTE </option> 
+                                           -->
+                                           <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
+            								  <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.nombre}</option>  
+                                           </c:forEach>
                                        </select>
                                      </td>
                                      <td width="10%" >&nbsp;</td>
@@ -303,7 +313,7 @@
 			                                     <td style="text-align:center"><label>${objListaSalida.departamentoDestino}</label></td>
 					                                     
 			                                     <td style="text-align:center">   
-				                                     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?codigoSalida=${objListaSalida.id}&opcion=cargarListadoFiltrado&opcion2=cargarListadoCalendario" 
+				                                     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?codigoSalida=${objListaSalida.id}&opcion=cargarListadoFiltrado&opcionLista=cargarListadoCalendario" 
 				                                        style="cursor:hand; " >                
 				                     <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" alt="Ver Asientos" width="20" height="19"  border="0" /> 
 				                                     </a>
