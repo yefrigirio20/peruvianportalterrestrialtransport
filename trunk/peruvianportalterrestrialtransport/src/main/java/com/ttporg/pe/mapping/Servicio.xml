@@ -20,7 +20,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
 	<typeAlias alias="servicio" type="com.ttporg.pe.bean.Servicio" />
 
-	<select id="getListaServicio" resultClass="servicio" >
+	<select id="getServicio" resultClass="servicio" >
         <include refid="selectServiciosSinTag" />
     </select>
     

@@ -9,6 +9,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.ttporg.pe.bean.Agencia;
 import com.ttporg.pe.bean.Departamento;
 import com.ttporg.pe.bean.Empresa;
@@ -98,7 +100,27 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    System.out.println( "codigoEmpresa:      " + codigoEmpresa      );
     	    System.out.println( "codigoAgencia:      " + codigoAgencia      );
     	    System.out.println( "codigoServicio:     " + codigoServicio     );    	    
-    	     		    
+    	    
+	    	HttpSession session = request.getSession( true );
+	    	
+	    	//SETEANDO EN SESION ...--------------------------
+	    	if( codigoDepartamento != null ){	    		
+	    		session.setAttribute( "codigoDepartamento", codigoDepartamento ); 
+	    	}
+	    	
+	    	if( codigoEmpresa != null ){	 	    		
+	    		session.setAttribute( "codigoEmpresa",  codigoEmpresa ); 
+	    	}
+	    	
+	    	if( codigoAgencia != null ){	 	    		
+	    		session.setAttribute( "codigoAgencia",  codigoAgencia ); 
+	    	}
+	    	
+	    	if( codigoServicio != null ){	 	    		
+	    		session.setAttribute( "codigoServicio",  codigoServicio ); 
+	    	}
+	    	//-------------------------------------------------
+    	        	    
     	    //----------------------- DEPARTAMENTO -----------------------//
 	    	listaDepartamento = new ArrayList<Departamento>();	
 	    	listaDepartamento = this.servicio.getDepartamentoDAO().obtenerListaDepartamentos();	

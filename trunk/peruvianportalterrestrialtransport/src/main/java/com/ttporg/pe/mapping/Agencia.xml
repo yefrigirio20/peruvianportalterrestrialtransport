@@ -21,7 +21,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     <!-- FORMA #2: PARA HACER CONSULTAS, EN BASE A: 'resultClass' -->
 	<typeAlias alias="agencia" type="com.ttporg.pe.bean.Agencia" />
 	
-	<select id="getListaAgencia" resultClass="agencia" >
+	<select id="getAgencia" resultClass="agencia" >
         <include refid="selectAgenciasSinTag" />
     </select>	
 

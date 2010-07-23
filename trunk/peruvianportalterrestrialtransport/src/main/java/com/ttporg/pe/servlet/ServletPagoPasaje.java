@@ -7,7 +7,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ttporg.pe.bean.Asiento;
+import javax.servlet.http.HttpSession;
+
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.dto.BeanValidacionDto;
@@ -70,7 +71,12 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    String precio          = request.getParameter( "txtPrecio" );
 	    	    
 	    	    String idAsientoSelec  = request.getParameter( "idAsiento"          );
-	    	     
+	    	    
+	    	    HttpSession session = request.getSession( true );
+	    	    
+    	    	String idServicio            = (String)session.getValue( "idServicio" ); 
+    	    	String idAsientoSeleccionado = (String)session.getValue( "idAsientoSeleccionado" ); 
+	    	    
 	    	    System.out.println( "" );
 	    	    System.out.println( "DATOS INGRESADOS DEL CLIENTE: "       );
 	    	    System.out.println( "------------------------------"       ); 
@@ -81,45 +87,51 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    System.out.println( "" );
 	    	    System.out.println( "idAsientoSelec:   " + idAsientoSelec       ); 
 	    	    
-	    	    if( idAsientoSelec != null ){
+	    	    if( idAsientoSeleccionado != null ){
 	    	    	
 		    	    //---------------- Guardar el 'SINGLETON'. ----------------//
-		    	    this.utilSingleton = UtilSingleton.getInstancia();
-		    	    this.utilSingleton.setEstadoActivacion( true );
+		    	    //this.utilSingleton = UtilSingleton.getInstancia();
+		    	    //this.utilSingleton.setEstadoActivacion( true );
 		    	    
-		    	    Asiento asiento = new Asiento();
-		    	    asiento.setId( Integer.parseInt( idAsientoSelec ) );
-		    	    
-		    	    Pago pago = new Pago();
-		    	    pago.setId( 1 );
-		    	   // pago.setMontoPago(  Double.parseDouble( precio ) );
-		    	    pago.setTipoPago(   tipoPago );
+		    	    //Asiento asiento = new Asiento();
+		    	    //asiento.setId( Integer.parseInt( idAsientoSelec ) );
+		    	     	    	    		    	    	
+		    	    Pago pago = new Pago();		    	    
+		    	    //pago.setMontoPago(  Double.parseDouble( precio ) );
+		    	    pago.setTipoPago(   tipoPago      );
 		    	    pago.setNumTarjeta( numeroTarjeta );
-		    	    
+		    	     
 		    	    //----------------------------------//
-		    	    String[] arrayCadena = fechaExpiracion.split( "-" );  //Fecha STRING a DATE.
-		    	    
-		    	    String anio = arrayCadena[ 0 ];
-		    	    String mes  = arrayCadena[ 1 ];
-		    	    String dia  = arrayCadena[ 2 ];
-		    	    
-		    	    System.out.println( "Anio: " + anio );
-		    	    System.out.println( "Mes:  " + mes  );
-		    	    System.out.println( "Dia:  " + dia  );
-		    	    
-		    	    Date xxx = this.utilCalendario.getFecha( Integer.parseInt( anio ), 
-		    	    		                                             Integer.parseInt( mes  ), 
-		    	    		                                             Integer.parseInt( dia  ) );
-		    	    //----------------------------------//
-		    	    
-		    	    pago.setFechaExpiracion( xxx );
-		    	    
+		    	    if( fechaExpiracion != null ){
+		    	    	
+		    	    	String[] arrayCadena = fechaExpiracion.split( "-" );  //Fecha STRING a DATE.
+		    	    	
+		    	    	String anio = arrayCadena[ 0 ];
+		    	    	String mes  = arrayCadena[ 1 ];
+		    	    	String dia  = arrayCadena[ 2 ];
+		    	    	
+		    	    	System.out.println( "Anio: " + anio );
+		    	    	System.out.println( "Mes:  " + mes  );
+		    	    	System.out.println( "Dia:  " + dia  );
+		    	    	
+		    	    	Date xxx = this.utilCalendario.getFecha( Integer.parseInt( anio ), 
+		    	    			Integer.parseInt( mes  ), 
+		    	    			Integer.parseInt( dia  ) );
+		    	    	//----------------------------------//
+		    	    	
+		    	    	pago.setFechaExpiracion( xxx );
+		    	    }
+		    	    		    	    
 		    	    //Asiento.
-		    	    this.utilSingleton.getObjetoSingleton().setAsiento( asiento );  
+		    	    //this.utilSingleton.getObjetoSingleton().setAsiento( asiento );  
 		    	    
 		    	    //Pago.
-		    	    this.utilSingleton.getObjetoSingleton().setPago( pago );
+		    	    //this.utilSingleton.getObjetoSingleton().setPago( pago );
 		    	    //------------------------------------------------------//
+		    	    
+		    	    this.servicio.getPagoDAO().ingresarPago( pago );
+		    	    
+		    	    session.setAttribute( "objPago", pago ); 
 	    	    }	    	    
 	    	    
 	    	    //------------- VALIDACION 'JSP' -------------//
@@ -184,29 +196,29 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    		                                        Integer.parseInt( dia  ) );
 		    	    
 		    	    //---------------- Obtener 'SINGLETON'. ----------------//
-		    	    this.utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
+		    	    //this.utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
 		    	    //------------------------------------------------------//
 		    	    
 		    	    System.out.println( "Util Singleton: " + this.utilSingleton );
 		    	    
 		    	    //Validacion ...
-		    	    if( (this.utilSingleton != null) && (this.utilSingleton.isEstadoActivacion() == true) ){
+		    	    //if( (this.utilSingleton != null) && (this.utilSingleton.isEstadoActivacion() == true) ){
 		    	    	
-			    	    Cliente objCliente = this.utilSingleton.getObjetoSingleton().getCliente();
+			    	    Cliente objCliente = (Cliente)session.getValue( "objCliente" );  //this.utilSingleton.getObjetoSingleton().getCliente();
 			    	    
-			    	    System.out.println( "Nombre Cliente que Pago:: " + objCliente.getNombres() );
+			    	    //System.out.println( "Nombre Cliente que Pago: " + objCliente.getNombres() );
 			    	    
-			    	   // Pago objPago = new Pago( 1, tipoPago, numeroTarjeta, 40, expiracion, objCliente );
+			    	    // Pago objPago = new Pago( 1, tipoPago, numeroTarjeta, 40, expiracion, objCliente );
 			    	    
-			    	   // System.out.println( "objPago: " + objPago );
+			    	    // System.out.println( "objPago: " + objPago );
 		    	    	    	     
 			    	    //---------------- Guardar el 'SINGLETON'. ----------------//
-			    	    this.utilSingleton = UtilSingleton.getInstancia();
-			    	    this.utilSingleton.setEstadoActivacion( true );
-			    	    this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
+			    	    //this.utilSingleton = UtilSingleton.getInstancia();
+			    	    //this.utilSingleton.setEstadoActivacion( true );
+			    	    //this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
 			    	  //  this.utilSingleton.getObjetoSingleton().setPago(    objPago    );
 			    	  //-----------------------------------------------------------//
-		    	    }		    	    
+		    	    //}		    	    
 	    	    }
 	    	    
 	            request.setAttribute( "estadoValidacion", estadoValidacion );  //estadoValidacion ...

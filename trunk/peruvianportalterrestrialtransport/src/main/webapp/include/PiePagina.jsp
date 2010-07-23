@@ -9,7 +9,7 @@
 
  <jsp:include page="../include/Estilos.jsp" flush="true" />
 
- <table width="100%" class="piePagina" >
+ <table width="100%" class="piePagina" bgcolor="#8FB2CB" >
    <tr>
      <td height="30" > 
 	  <center>            
