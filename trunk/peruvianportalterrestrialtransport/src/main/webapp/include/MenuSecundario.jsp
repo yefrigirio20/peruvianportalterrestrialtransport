@@ -32,14 +32,14 @@
 	     %>
 	     
 	     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje" style="cursor:hand; " />
-		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong><fmt:message key="texto.label.menuPrincipal.disponibilidadAsientos" /></strong></font>
+		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong><fmt:message key="texto.label.menuPrincipal.disponibilidadAsientos" /> </strong></font>
 	     </a>
 	     
           <%}
             else{
-            %>     
-               <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.menuPrincipal.registrarse" /> </font/> </strong>                 
-            <%}%>  
+          %>     
+            <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.menuPrincipal.registrarse" /> </font> </strong>                 
+          <%}%>  
 	     
 		</center> 
      </td>
@@ -59,6 +59,14 @@
 	     </a>
         </center>
      </td>  
+          
+    <td >
+	    <center>
+	     <a href="<%=request.getContextPath()%>/ServletCerrarSesion" style="cursor:hand;" />
+		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>&nbsp; &nbsp; <fmt:message key="texto.label.menuPrincipal.cerrarSesion" /> &nbsp; &nbsp;</strong></font>
+	     </a>
+        </center>
+     </td>    
           
    </tr>
    
