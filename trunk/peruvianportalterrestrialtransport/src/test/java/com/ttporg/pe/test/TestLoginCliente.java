@@ -4,11 +4,10 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import com.ttporg.pe.bean.Cliente;
-import com.ttporg.pe.servicio.ServiceFactory;
+import com.ttporg.pe.dao.ServiceFactory;
 import com.ttporg.pe.util.UtilEncriptacion;
  
 /**
- * TestLoginEmpresa
  * @author Cesar Ricardo.
  * @clase: TestLoginCliente.java  
  * @descripción descripción de la clase.
@@ -22,11 +21,12 @@ import com.ttporg.pe.util.UtilEncriptacion;
  **/
 public class TestLoginCliente{
 	
-	private UtilEncriptacion utilEncriptacion = null; 	 
-	private ServiceFactory   servicio         = null;
+	private static UtilEncriptacion encriptacion = new UtilEncriptacion(); 	
+	private static ServiceFactory   servicio     = null;
 	
 	{
-	 this.utilEncriptacion = new UtilEncriptacion();
+	 encriptacion = new UtilEncriptacion();
+	 servicio     = new ServiceFactory(); 
 	}
 	
 	/**
@@ -34,6 +34,7 @@ public class TestLoginCliente{
      * @param argumentos
      */
     public static void main( String[] argumentos ){
+    	
         //Permite mostrar el resultado del 'Test' en consola.
         org.junit.runner.JUnitCore.main( "com.ttporg.pe.test.TestLoginEmpresa" );
     }
