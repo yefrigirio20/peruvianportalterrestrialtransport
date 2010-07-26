@@ -30,17 +30,6 @@
 		<servlet-name>ServletGeneraBoleto</servlet-name>
 		<url-pattern>/ServletGeneraBoleto</url-pattern>
 	</servlet-mapping>
-    
-    
-	<servlet>
-		<servlet-name>ValidaServlet</servlet-name>
-		<servlet-class>com.ttporg.pe.servlet.ValidaServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>ValidaServlet</servlet-name>
-		<url-pattern>/ValidaServlet</url-pattern>
-	</servlet-mapping>
 		
 	<servlet>
 		<servlet-name>ServletBusquedaPasaje</servlet-name>
@@ -81,6 +70,18 @@
 		<servlet-name>ServletPagoPasaje</servlet-name>
 		<url-pattern>/ServletPagoPasaje</url-pattern>
 	</servlet-mapping>	
+	
+		
+	<servlet>
+		<servlet-name>ServletCerrarSesion</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletCerrarSesion</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletCerrarSesion</servlet-name>
+		<url-pattern>/ServletCerrarSesion</url-pattern>
+	</servlet-mapping>
+	
 	<!-- ***************************** --> 
 		
 	<filter>
