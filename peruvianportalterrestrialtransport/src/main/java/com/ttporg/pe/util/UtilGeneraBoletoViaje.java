@@ -16,7 +16,30 @@ import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.bean.Servicio;
 import com.ttporg.pe.bean.Transaccion;
 import com.ttporg.pe.bean.Vehiculo;
-import com.ttporg.pe.servicio.ServiceFactory;
+import com.ttporg.pe.dao.AgenciaDao;
+import com.ttporg.pe.dao.AsientoDao;
+import com.ttporg.pe.dao.CalendarioDao;
+import com.ttporg.pe.dao.ClienteDao;
+import com.ttporg.pe.dao.ClientePagoDao;
+import com.ttporg.pe.dao.DepartamentoDao;
+import com.ttporg.pe.dao.EmpresaDao;
+import com.ttporg.pe.dao.PagoDao;
+import com.ttporg.pe.dao.SalidaDao;
+import com.ttporg.pe.dao.ServicioDao;
+import com.ttporg.pe.dao.TransaccionDao;
+import com.ttporg.pe.dao.VehiculoDao;
+import com.ttporg.pe.dao.impl.AgenciaDaoImpl;
+import com.ttporg.pe.dao.impl.AsientoDaoImpl;
+import com.ttporg.pe.dao.impl.CalendarioDaoImpl;
+import com.ttporg.pe.dao.impl.ClienteDaoImpl;
+import com.ttporg.pe.dao.impl.ClientePagoDaoImpl;
+import com.ttporg.pe.dao.impl.DepartamentoDaoImpl;
+import com.ttporg.pe.dao.impl.EmpresaDaoImpl;
+import com.ttporg.pe.dao.impl.PagoDaoImpl;
+import com.ttporg.pe.dao.impl.SalidaDaoImpl;
+import com.ttporg.pe.dao.impl.ServicioDaoImpl;
+import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
+import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
 
 /**
  * @author Cesar Ricardo.
@@ -29,20 +52,71 @@ import com.ttporg.pe.servicio.ServiceFactory;
  * @fecha_de_creaci�n: dd-mm-yyyy.
  * @fecha_de_ultima_actualizaci�n: dd-mm-yyyy.
  * @versi�n 1.0
- */
+ **/
 public class UtilGeneraBoletoViaje{
 
-	private static final String	RUTA_PATH	= System.getProperty( "user.dir" );
-	private static final String	FICHERO		= "Reporte_2010.pdf";
+	private static final String	RUTA_PATH = System.getProperty( "user.dir" );
+	private static final String	FICHERO	  = "Reporte_2010.pdf";
  
-	//Service ...
-	private ServiceFactory servicio = null;
+	//Service ... 
+	//private ServiceFactory    servicio           = null;
 	
+	//Daos [SPRING] ...
+	private ClienteDao        clienteDAO         = null;
+	private EmpresaDao        empresaDAO         = null;	
+	private DepartamentoDao   departamentoDAO    = null;
+	private AgenciaDao        agenciaDAO         = null;		
+	private VehiculoDao       vehiculoDAO        = null;	
+	private ServicioDao       servicioDAO        = null;
+	private AsientoDao        asientoDAO         = null;
+	private SalidaDao         salidaDAO          = null;
+	private CalendarioDao     calendarioDAO      = null;
+	private PagoDao           pagoDAO            = null;
+	private ClientePagoDao    clientePagoDAO     = null;
+	private TransaccionDao    transaccionDAO     = null;
+	
+	//Utilitarios ...
+	private UtilCalendario    utilCalendario     = null;	
+		
 	{
-	 this.servicio = new ServiceFactory();
+	 //this.servicio     = new ServiceFactory();
+		
+	 this.clienteDAO      = new ClienteDaoImpl();
+	 this.empresaDAO      = new EmpresaDaoImpl();	
+	 this.departamentoDAO = new DepartamentoDaoImpl();
+	 this.agenciaDAO      = new AgenciaDaoImpl();		
+	 this.vehiculoDAO     = new VehiculoDaoImpl();	
+	 this.servicioDAO     = new ServicioDaoImpl();
+	 this.asientoDAO      = new AsientoDaoImpl();
+	 this.salidaDAO       = new SalidaDaoImpl();
+	 this.calendarioDAO   = new CalendarioDaoImpl();
+	 this.pagoDAO         = new PagoDaoImpl();
+	 this.clientePagoDAO  = new ClientePagoDaoImpl();
+	 this.transaccionDAO  = new TransaccionDaoImpl();
+ 
+	 this.utilCalendario  = new UtilCalendario();
 	}
 	
-    /**
+	//Constructor ...
+    public UtilGeneraBoletoViaje( ClienteDao clienteDAO, EmpresaDao empresaDAO, DepartamentoDao departamentoDAO, 
+    		                      AgenciaDao agenciaDAO, VehiculoDao vehiculoDAO, ServicioDao servicioDAO, 
+    		                      AsientoDao asientoDAO, SalidaDao salidaDAO, CalendarioDao calendarioDAO, 
+    		                      PagoDao pagoDAO, ClientePagoDao clientePagoDAO, TransaccionDao transaccionDAO ){
+    	 this.clienteDAO      = clienteDAO;
+	   	 this.empresaDAO      = empresaDAO;	
+		 this.departamentoDAO = departamentoDAO;
+		 this.agenciaDAO      = agenciaDAO;		
+		 this.vehiculoDAO     = vehiculoDAO;	
+		 this.servicioDAO     = servicioDAO;
+		 this.asientoDAO      = asientoDAO;
+		 this.salidaDAO       = salidaDAO;
+		 this.calendarioDAO   = calendarioDAO;
+		 this.pagoDAO         = pagoDAO;
+		 this.clientePagoDAO  = clientePagoDAO;
+		 this.transaccionDAO  = transaccionDAO;
+	}
+
+	/**
      * muestraBoletoViaje
      * @param objCliente
      * @param objPago
@@ -55,15 +129,12 @@ public class UtilGeneraBoletoViaje{
 			                        String codigoAsiento ){
 			 	
 		String tituloPDF = "...::: BOLETO DE VIAJE :::...";
- 
-		UtilGeneraBoletoViaje pdf = new UtilGeneraBoletoViaje();
 				
-		Departamento objDepartamento = (Departamento)this.servicio.getDepartamentoDAO().obtenerObjetoDepartamento_x_codigo( Integer.parseInt( codigoDepartamento ) );
-		Empresa      objEmpresa      = (Empresa)this.servicio.getEmpresaDAO().obtenerObjetoEmpresa_x_codigo(   Integer.parseInt( codigoEmpresa ) );
-		//Agencia      objAgencia      = (Agencia)this.servicio.getAgenciaDAO().obtenerObjetoAgencia_x_codigo(   Integer.parseInt( codigoAgencia ) );
-		//Servicio     objServicio     = (Servicio)this.servicio.getServicioDAO().obtenerObjetoServicio_x_codigo( Integer.parseInt( codigoServicio ) );
-		Asiento      objAsiento      = (Asiento)this.servicio.getAsientoDAO().obtenerObjetoAsiento_x_codigo( Integer.parseInt( codigoAsiento ) );
-
+		Departamento objDepartamento = (Departamento)this.departamentoDAO.obtenerObjetoDepartamento_x_codigo( Integer.parseInt( codigoDepartamento ) );
+		Empresa      objEmpresa      = (Empresa)this.empresaDAO.obtenerObjetoEmpresa_x_codigo(   Integer.parseInt( codigoEmpresa ) );
+		//Agencia      objAgencia      = (Agencia)this.agenciaDAO.obtenerObjetoAgencia_x_codigo(   Integer.parseInt( codigoAgencia ) );
+		//Servicio     objServicio     = (Servicio)this.servicioDAO.obtenerObjetoServicio_x_codigo( Integer.parseInt( codigoServicio ) );
+		Asiento      objAsiento      = (Asiento)this.asientoDAO.obtenerObjetoAsiento_x_codigo( Integer.parseInt( codigoAsiento ) );
 		
 		System.out.println( "objDepartamento: " + objDepartamento );
 		System.out.println( "objEmpresa:      " + objEmpresa  );
@@ -94,7 +165,9 @@ public class UtilGeneraBoletoViaje{
 		objTransaccion.setSalida(    null  );
 		objTransaccion.setVehiculo(  objVehiculo );
 		objTransaccion.setAsiento(   objAsiento  );
-         
+		
+		//APLICAR GUARDAR EN BD EL OBJETO.
+		
 		//String tituloPDF = "Comprobante Pago";
 		String textPDF = "Nombre de Cliente : " + objTransaccion.getCliente().getNombres() + " " + objTransaccion.getCliente().getApellidos() + 
 		"\n" + "Empresa Transporte   : " + objTransaccion.getEmpresa().getRazonSocial() + 

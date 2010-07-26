@@ -299,13 +299,13 @@
  	                        <table border="0" width="80%" bgcolor="white" >
 	                              
 	                                 <tr>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Empresa</td>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Agencia</td>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Servicio</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.empresa" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.agencia" /></td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.servicio" /></td>
 	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.origen" /></td>
 	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.destino" /></td>
 	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.duracion" /></td>
-	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center">Ver</td>
+	                                     <td bgcolor="#0066FF" style="color:#D7D7D7;text-align:center"><fmt:message key="texto.label.ver" /></td>
 	                                 </tr>
 	                                 
 	                                 <c:if test="${listaDetallePasajeDTO != null}" > 
@@ -334,17 +334,8 @@
 			                                 </tr>                                                                 
 		                               </c:forEach> 
 		                            </c:if>
-		                            <!--  
-		                            <c:if test="${listaDetallePasajeDTO == null}" > 
-		                               <tr>
-			                               <td colspan="7">
-			                                  <label>Realizar un busquea de pasajes ...</label>
-			                               </td>
-			                           </tr>    
-		                            </c:if> 
-		                            -->            
-	                        </table>  
-                        </c:if> 
+                            </table>  
+                         </c:if> 
               
                        </td>
                     </tr> 
@@ -365,14 +356,14 @@
                                      
 				  </table>
         
-   <!-- TABLA #3 -->
-   <table width="100%" height="28" border="0">
-       <tr>
-         <td width="100%" height="22" colspan="4" id="panelPie" >
-             <jsp:include page="../include/PiePagina.jsp" flush="false"/>   
-         </td>
-       </tr>   
-    </table>  
+	   <!-- TABLA #3 -->
+	   <table width="100%" height="28" border="0">
+	       <tr>
+	         <td width="100%" height="22" colspan="4" id="panelPie" >
+	             <jsp:include page="../include/PiePagina.jsp" flush="false"/>   
+	         </td>
+	       </tr>   
+	    </table>  
 		   		   
 	</form> 
 	  

@@ -1,34 +1,59 @@
 package com.ttporg.pe.action;
 
- import java.io.IOException;
- import java.util.Properties;
- import java.util.Vector;
- import javax.activation.DataHandler;
- import javax.activation.FileDataSource;
- import javax.mail.Address; 
- import javax.mail.Authenticator;
- import javax.mail.BodyPart;
- import javax.mail.Message;
- import javax.mail.MessagingException;
- import javax.mail.PasswordAuthentication;
- import javax.mail.Session;
- import javax.mail.Transport;
- import javax.mail.internet.AddressException;
- import javax.mail.internet.InternetAddress;
- import javax.mail.internet.MimeBodyPart;
- import javax.mail.internet.MimeMessage;
- import javax.mail.internet.MimeMultipart;
- import javax.servlet.ServletException;
- import javax.servlet.http.HttpServlet;
- import javax.servlet.http.HttpServletRequest;
- import javax.servlet.http.HttpServletResponse;
- import org.apache.commons.lang.StringUtils;
-
+import java.io.IOException;
+import java.util.Properties;
+import java.util.Vector;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.Address; 
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import com.ttporg.pe.bean.BaseBean;
+import com.ttporg.pe.dao.AgenciaDao;
+import com.ttporg.pe.dao.AsientoDao;
+import com.ttporg.pe.dao.CalendarioDao;
+import com.ttporg.pe.dao.ClienteDao;
+import com.ttporg.pe.dao.ClientePagoDao;
+import com.ttporg.pe.dao.DepartamentoDao;
+import com.ttporg.pe.dao.EmpresaDao;
+import com.ttporg.pe.dao.PagoDao;
+import com.ttporg.pe.dao.SalidaDao;
+import com.ttporg.pe.dao.ServicioDao;
+import com.ttporg.pe.dao.TransaccionDao;
+import com.ttporg.pe.dao.VehiculoDao;
+import com.ttporg.pe.dao.impl.AgenciaDaoImpl;
+import com.ttporg.pe.dao.impl.AsientoDaoImpl;
+import com.ttporg.pe.dao.impl.CalendarioDaoImpl;
+import com.ttporg.pe.dao.impl.ClienteDaoImpl;
+import com.ttporg.pe.dao.impl.ClientePagoDaoImpl;
+import com.ttporg.pe.dao.impl.DepartamentoDaoImpl;
+import com.ttporg.pe.dao.impl.EmpresaDaoImpl;
+import com.ttporg.pe.dao.impl.PagoDaoImpl;
+import com.ttporg.pe.dao.impl.SalidaDaoImpl;
+import com.ttporg.pe.dao.impl.ServicioDaoImpl;
+import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
+import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
 import com.ttporg.pe.dto.BeanParametrosEmailDto;
- import com.ttporg.pe.servicio.EmpresaService;
- import com.ttporg.pe.servicio.impl.EmpresaServiceImpl;
-import com.ttporg.pe.servlet.LoggerBean; 
- 
+import com.ttporg.pe.util.UtilCalendario;
+  
 /**
  * @author Cesar Ricardo.
  * @clase: EnviarEmailMB.java  
@@ -40,51 +65,82 @@ import com.ttporg.pe.servlet.LoggerBean;
  * @fecha_de_creación: dd-mm-yyyy.
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
- */
+ **/
  public class EnviarEmailMB extends HttpServlet{
 	
 	private static final long serialVersionUID = 5940034219102598271L;
 
-	private	 BeanParametrosEmailDto  objEMAIL 	       =  null;
-	private	 Properties 		  props 	       =  null;
-	private  String               Confirmacion     =  "";
-	private  int                  totalEMAILs      =  0;	
-	private  String               PaginaSiguiente  =  "/jsp/interfaces/Confirmacion.jsp";    /** PAGINA SIGUIENTE **/
+	private	 BeanParametrosEmailDto objEMAIL 	    =  null;
+	private	 Properties 		    props 	        =  null;
+	private  String                 Confirmacion    =  "";
+	private  int                    totalEMAILs     =  0;	
+	private  String                 PaginaSiguiente =  "/jsp/interfaces/Confirmacion.jsp";    /** PAGINA SIGUIENTE **/
 	
-	private  String               FROM;
-	private  String               TO;
-	private  String               CC;
-	private  String               BCC;
-	private  String               MENSAJE;
-	private  String               SUBJECT;
-	private  int                  COPIAS;
-	private  String               content_type;
-	private  String               NombreArchivo;
-	private  String               CodigoAleatorio;
+	private  String                 FROM;
+	private  String                 TO;
+	private  String                 CC;
+	private  String                 BCC;
+	private  String                 MENSAJE;
+	private  String                 SUBJECT;
+	private  int                    COPIAS;
+	private  String                 content_type;
+	private  String                 NombreArchivo;
+	private  String                 CodigoAleatorio;
+
+	private  BeanParametrosEmailDto  paramEmail  = null;
+		
+	//Daos [SPRING] ...
+	private ClienteDao        clienteDAO         = null;
+	private EmpresaDao        empresaDAO         = null;	
+	private DepartamentoDao   departamentoDAO    = null;
+	private AgenciaDao        agenciaDAO         = null;		
+	private VehiculoDao       vehiculoDAO        = null;	
+	private ServicioDao       servicioDAO        = null;
+	private AsientoDao        asientoDAO         = null;
+	private SalidaDao         salidaDAO          = null;
+	private CalendarioDao     calendarioDAO      = null;
+	private PagoDao           pagoDAO            = null;
+	private ClientePagoDao    clientePagoDAO     = null;
+	private TransaccionDao    transaccionDAO     = null;
 	
-	private  EmpresaService       servicio   = null;
-	private  BeanParametrosEmailDto  paramEmail = null;
-	
-	//Generacion de Log.
-	private LoggerBean loggerBean   = null;
-	
+	//Utilitarios ...
+	private UtilCalendario    utilCalendario     = null;
+	private BaseBean          beanBase           = null;
+  
 	{
-	 this.servicio           = new EmpresaServiceImpl();	
-	 this.loggerBean         = new LoggerBean();
-	 this.paramEmail         = new BeanParametrosEmailDto();
+	 //this.servicio     = new ServiceFactory();
+		
+	 this.clienteDAO      = new ClienteDaoImpl();
+	 this.empresaDAO      = new EmpresaDaoImpl();	
+	 this.departamentoDAO = new DepartamentoDaoImpl();
+	 this.agenciaDAO      = new AgenciaDaoImpl();		
+	 this.vehiculoDAO     = new VehiculoDaoImpl();	
+	 this.servicioDAO     = new ServicioDaoImpl();
+	 this.asientoDAO      = new AsientoDaoImpl();
+	 this.salidaDAO       = new SalidaDaoImpl();
+	 this.calendarioDAO   = new CalendarioDaoImpl();
+	 this.pagoDAO         = new PagoDaoImpl();
+	 this.clientePagoDAO  = new ClientePagoDaoImpl();
+	 this.transaccionDAO  = new TransaccionDaoImpl();
+ 
+	 this.paramEmail      = new BeanParametrosEmailDto();
+	 this.beanBase        = new BaseBean();
 	}
 	
 	public void EnviarEMAIL() throws ServletException, IOException{
-		System.out.println("DENTRO DE: 'EnviarEMAIL'");
-		PROCESAR();
+		this.imprimeLog("DENTRO DE: 'EnviarEMAIL'");
+		this.procesar(); 
+		
+		//INICIALIZANDO 'DAOs'...
+		this.inicializaDAOs();	
 	}
 	
 	public void service( HttpServletRequest request, HttpServletResponse response )throws ServletException, IOException{ 
 	
-		System.out.println("DENTRO DE: 'EnviarEmail_HTML_Adjunto'");
+		this.imprimeLog("DENTRO DE: 'EnviarEmail_HTML_Adjunto'");
 		
-		System.out.println("Nombre Clase #1: " + this.getClass().getName().toString() );
-		System.out.println("Nombre Clase #2: " + this.getClass().getSimpleName().toString() );
+		this.imprimeLog("Nombre Clase #1: " + this.getClass().getName().toString() );
+		this.imprimeLog("Nombre Clase #2: " + this.getClass().getSimpleName().toString() );
 		
 		this.FROM             =  request.getParameter("FROM");
 		this.TO               =  request.getParameter("TO");
@@ -142,7 +198,7 @@ import com.ttporg.pe.servlet.LoggerBean;
 			   "</BODY>       "  +
 			"</HTML>          "; 
 				
-		System.out.println("EL 'MENSAJE_HTML' ES: " + MENSAJE_HTML );
+		this.imprimeLog("EL 'MENSAJE_HTML' ES: " + MENSAJE_HTML );
 
 		objParametrosEMAIL.setContentType("text/html");
 		objParametrosEMAIL.setEsperarCommandQuit(true);
@@ -253,7 +309,7 @@ import com.ttporg.pe.servlet.LoggerBean;
 			this.totalEMAILs += objParametrosEMAIL.getVectorEmailsReceptores().size();     //CONTADOR EMAILs ENVIADOS
 		}
 		
-		this.PROCESAR();   //MANDA A PROCEAR!!!
+		this.procesar();   //MANDA A PROCEAR!!!
 				
 		EnviarEmailMB ENVIADOR = new EnviarEmailMB();  //REFERENCIA A LA MISMA CLASE
 		
@@ -264,32 +320,32 @@ import com.ttporg.pe.servlet.LoggerBean;
 		}
 		catch( ServletException e ){
 			 MENSAJE = e.getMessage();
-		     System.out.println("EL ERROR ES: " + MENSAJE );
+		     this.imprimeLog("EL ERROR ES: " + MENSAJE );
 		     e.printStackTrace();
 		} 
 		catch( IOException e ){
 			 MENSAJE = e.getMessage();
-		     System.out.println("EL ERROR ES: " + MENSAJE );
+		     this.imprimeLog("EL ERROR ES: " + MENSAJE );
 		     e.printStackTrace();
 		}
 		catch( Exception e ){
 			 MENSAJE = e.getMessage();
-		     System.out.println("EL ERROR ES: " + MENSAJE );
+		     this.imprimeLog("EL ERROR ES: " + MENSAJE );
 		     e.printStackTrace();
 		}
 		
 		//VALIDANDO MENSAJE
 		if( MENSAJE == null ){
 			Confirmacion = "PROBLEMS TO SEND THE MESSAGE.";
-			System.out.println("" + Confirmacion );
+			this.imprimeLog("" + Confirmacion );
 		}
 		else{
 			Confirmacion = "THE MESSAGE HAVE BEEN SENT.";
-			System.out.println("" + Confirmacion );
+			this.imprimeLog("" + Confirmacion );
 		}
 				
-		System.out.println("totalEMAILs: " + this.totalEMAILs );  
-		System.out.println("COPIAS: "      + this.COPIAS ); 
+		this.imprimeLog("totalEMAILs: " + this.totalEMAILs );  
+		this.imprimeLog("COPIAS: "      + this.COPIAS ); 
 		
 		request.setAttribute( "Confirmacion" , Confirmacion );
 		request.setAttribute( "Emails" ,       String.valueOf(this.totalEMAILs) );
@@ -299,7 +355,10 @@ import com.ttporg.pe.servlet.LoggerBean;
 		getServletContext().getRequestDispatcher( this.PaginaSiguiente ).forward( request, response );
 	}
 		
-	private void PROCESAR(){				   
+	/**
+	 * procesar
+	 **/
+	private void procesar(){				   
 		
 		if( this.objEMAIL != null){
 			
@@ -334,9 +393,9 @@ import com.ttporg.pe.servlet.LoggerBean;
 				MENSAJE.setText(    this.objEMAIL.getCuerpoMensaje() );
 				//MENSAJE.setFrom (new InternetAddress( this.objEMAIL.getCUENTA_EMAIL_ENVIADOR()) );   //YA NO NECESITA...
 				
-				System.out.println( "" );
-				System.out.println("EMAILs ENVIADOS:" );
-				System.out.println( "***************" );
+				this.imprimeLog( "" );
+				this.imprimeLog("EMAILs ENVIADOS:" );
+				this.imprimeLog( "***************" );
 				
 				if( !(objEMAIL.getCuentaEmailDestinatario().equals("")) ){
 					MENSAJE.addRecipients( Message.RecipientType.TO, getARREGLO_DIRECCION( this.objEMAIL.getVectorEmailsReceptores(), this.objEMAIL.getCopia() ));	
@@ -350,14 +409,14 @@ import com.ttporg.pe.servlet.LoggerBean;
 					MENSAJE.addRecipients( Message.RecipientType.BCC, getARREGLO_DIRECCION( this.objEMAIL.getVectorEmailsReceptores_BCC(), this.objEMAIL.getCopia() ));	
 				}
 				
-				System.out.println( "*************" );
-				System.out.println( "" );
+				this.imprimeLog( "*************" );
+				this.imprimeLog( "" );
 				
 				//SE ESTABLE EL TIPO DE MENSAJE
 				content_type = this.objEMAIL.getContentType();
 						
 				if( (content_type != null) && (this.content_type.equals("")) ){
-					System.out.println("SI EL CONTENT TYPE ES != NULL & '': " + content_type );
+					this.imprimeLog("SI EL CONTENT TYPE ES != NULL & '': " + content_type );
 				}
 			
 				/**** SI NO HAY ADJUNTO ****/
@@ -376,12 +435,12 @@ import com.ttporg.pe.servlet.LoggerBean;
 				Transport.send( MENSAJE );    //MANDA EL EMAIL
 			}
 			catch( Exception e ){
-				System.out.println("EL ERROR ES: " + e.getMessage() );
+				this.imprimeLog("EL ERROR ES: " + e.getMessage() );
 				e.printStackTrace();
 			}
 		}
 		else{
-			System.out.println("EL 'objEMAIL' ES: NULL" );
+			this.imprimeLog("EL 'objEMAIL' ES: NULL" );
 		}
 	}
 	
@@ -398,16 +457,16 @@ import com.ttporg.pe.servlet.LoggerBean;
 					InternetAddress Internet_Address = new InternetAddress( (String)VectorDireccionesEmail.elementAt(i) );
 					VectorEmails.addElement( Internet_Address );
 	
-					System.out.println("Email enviado: " + Internet_Address.getAddress().toString() );
+					this.imprimeLog("Email enviado: " + Internet_Address.getAddress().toString() );
 				}
 				catch( AddressException e ){
-					System.out.println("NO SE AGREGO EL 'Internet_Address' " );
+					this.imprimeLog("NO SE AGREGO EL 'Internet_Address' " );
 					e.printStackTrace();
 				}			
 			}
 		}
 		
-		System.out.println("Total de Copias Enviada a cada 'EMAIL': " + COPIAS );
+		this.imprimeLog("Total de Copias Enviada a cada 'EMAIL': " + COPIAS );
 		
 		ArregloEmail = new Address[VectorEmails.size()]; //INICIALIZA EL ARREGLO CON EL TAMAÑO DEL VECTOR
 		
@@ -452,25 +511,77 @@ import com.ttporg.pe.servlet.LoggerBean;
 	/***********************************************/ 	
 	
 	private void imprimir( BeanParametrosEmailDto objEMAIL ){		
-		System.out.println( " ");
-		System.out.println( "PARAMETROS DE ENVIO DEL EMAIL");
-		System.out.println( "-----------------------------");
-		System.out.println( "EMAIL REMITENTE: "         +  objEMAIL.getCuentaEmailRemitente() );
-		System.out.println( "EMAIL DESTINATARIO: "      +  objEMAIL.getDireccion() );
-		System.out.println( "PUERO SERVIDOR: "          +  objEMAIL.getPuerto() );
-		System.out.println( "CONEXION SEGURA: "         +  objEMAIL.isRequiereConexionSegura() );
-		System.out.println( "AUTENTICACION: "           +  objEMAIL.isRequiereAuthenticacion() );
-		System.out.println( "MODO DEPURACION: "         +  objEMAIL.isModoDebug()  );
-		System.out.println( "PROTOCOLO: "               +  objEMAIL.getProtocolo() );
-		System.out.println( "ID: "                      +  objEMAIL.getUsuario()   );
-		System.out.println( "PASSWORD: "                +  objEMAIL.getPassword()  );
-		System.out.println( "MENSAJE: "                 +  objEMAIL.getAsuntoMensaje() );
-		System.out.println( "EMAIL DESTINATARIO: "      +  objEMAIL.getCuentaEmailDestinatario()     );
-		System.out.println( "EMAIL DESTINATARIO CC: "   +  objEMAIL.getCuentaEmailDestinatario_Cc()  );
-		System.out.println( "EMAIL DESTINATARIO BCC: "  +  objEMAIL.getCuentaEmailDestinatario_Bcc() );
-		System.out.println( "NOMBRE ADJUNTO: "          +  objEMAIL.getUbicacionAdjunto() );
-		System.out.println( "CODIGO ALEATORIO: "        +  objEMAIL.getCodigoAleatorio() );
-		System.out.println( " ");
+		this.imprimeLog( " ");
+		this.imprimeLog( "PARAMETROS DE ENVIO DEL EMAIL");
+		this.imprimeLog( "-----------------------------");
+		this.imprimeLog( "EMAIL REMITENTE: "         +  objEMAIL.getCuentaEmailRemitente() );
+		this.imprimeLog( "EMAIL DESTINATARIO: "      +  objEMAIL.getDireccion() );
+		this.imprimeLog( "PUERO SERVIDOR: "          +  objEMAIL.getPuerto() );
+		this.imprimeLog( "CONEXION SEGURA: "         +  objEMAIL.isRequiereConexionSegura() );
+		this.imprimeLog( "AUTENTICACION: "           +  objEMAIL.isRequiereAuthenticacion() );
+		this.imprimeLog( "MODO DEPURACION: "         +  objEMAIL.isModoDebug()  );
+		this.imprimeLog( "PROTOCOLO: "               +  objEMAIL.getProtocolo() );
+		this.imprimeLog( "ID: "                      +  objEMAIL.getUsuario()   );
+		this.imprimeLog( "PASSWORD: "                +  objEMAIL.getPassword()  );
+		this.imprimeLog( "MENSAJE: "                 +  objEMAIL.getAsuntoMensaje() );
+		this.imprimeLog( "EMAIL DESTINATARIO: "      +  objEMAIL.getCuentaEmailDestinatario()     );
+		this.imprimeLog( "EMAIL DESTINATARIO CC: "   +  objEMAIL.getCuentaEmailDestinatario_Cc()  );
+		this.imprimeLog( "EMAIL DESTINATARIO BCC: "  +  objEMAIL.getCuentaEmailDestinatario_Bcc() );
+		this.imprimeLog( "NOMBRE ADJUNTO: "          +  objEMAIL.getUbicacionAdjunto() );
+		this.imprimeLog( "CODIGO ALEATORIO: "        +  objEMAIL.getCodigoAleatorio() );
+		this.imprimeLog( " ");
+	}
+	
+	/**
+	 * inicializaDAOs
+	 **/
+	public void inicializaDAOs(){
+		
+		//OBTENER [ServletContext] USANDO [STRUTs 2]: 'ServletActionContext.getServletContext()'.
+		//OBTENER [ServletContext] USANDO [SERVLETs]: 'this.getServletContext()'.
+		ServletContext servletContext = this.getServletContext();	
+		this.imprimeLog( "=====> servletContext: " + servletContext );
+				 
+		WebApplicationContext contexto = WebApplicationContextUtils.getRequiredWebApplicationContext( servletContext );
+		this.imprimeLog( "=====> contexto: " + contexto );
+		
+		this.imprimeLog( "****************** OBTENIENDO 'DAOS' [INICIO] ******************" );
+
+		this.clienteDAO      = (ClienteDaoImpl)contexto.getBean(      "clienteDao"      ); 
+		this.empresaDAO      = (EmpresaDaoImpl)contexto.getBean(      "empresaDao"      );
+		this.departamentoDAO = (DepartamentoDaoImpl)contexto.getBean( "departamentoDao" );
+		this.agenciaDAO      = (AgenciaDaoImpl)contexto.getBean(      "agenciaDao"      );	
+		this.vehiculoDAO     = (VehiculoDaoImpl)contexto.getBean(     "vehiculoDao"     );
+		this.servicioDAO     = (ServicioDaoImpl)contexto.getBean(     "servicioDao"     );
+		this.asientoDAO      = (AsientoDaoImpl)contexto.getBean(      "asientoDao"      );
+		this.salidaDAO       = (SalidaDaoImpl)contexto.getBean(       "salidaDao"       );
+		this.calendarioDAO   = (CalendarioDaoImpl)contexto.getBean(   "calendarioDao"   );
+		this.pagoDAO         = (PagoDaoImpl)contexto.getBean(         "pagoDao"         );
+		this.clientePagoDAO  = (ClientePagoDaoImpl)contexto.getBean(  "clientePagoDao"  );
+		this.transaccionDAO  = (TransaccionDaoImpl)contexto.getBean(  "transaccionDao"  );
+		
+		this.imprimeLog( "====> [clienteDAO]:      " + this.clienteDAO      );
+		this.imprimeLog( "====> [empresaDAO]:      " + this.empresaDAO      );
+		this.imprimeLog( "====> [departamentoDAO]: " + this.departamentoDAO );
+		this.imprimeLog( "====> [agenciaDAO]:      " + this.agenciaDAO      );
+		this.imprimeLog( "====> [vehiculoDAO]:     " + this.vehiculoDAO     );
+		this.imprimeLog( "====> [servicioDAO]:     " + this.servicioDAO     );
+		this.imprimeLog( "====> [asientoDAO]:      " + this.asientoDAO      );
+		this.imprimeLog( "====> [salidaDAO]:       " + this.salidaDAO       );
+		this.imprimeLog( "====> [calendarioDAO]:   " + this.calendarioDAO   );
+		this.imprimeLog( "====> [pagoDAO]:         " + this.pagoDAO         );
+		this.imprimeLog( "====> [clientePagoDAO]:  " + this.clientePagoDAO  );
+		this.imprimeLog( "====> [transaccionDAO]:  " + this.transaccionDAO  );
+		
+		this.imprimeLog( "******************* OBTENIENDO 'DAOS' [FIN] *******************" );
+	}	
+	
+	/**
+	 * imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
 	}
 	
   } 

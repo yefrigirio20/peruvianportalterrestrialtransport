@@ -3,6 +3,7 @@ package com.ttporg.pe.bean;
 import java.util.Map;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.ttporg.pe.servlet.LoggerBean;
 
 /**
  * @author Cesar Ricardo.
@@ -31,6 +32,9 @@ public class BaseBean extends ActionSupport{
 	private Map<String, Object> objApplication = null;
 	private Map<String, Object> objSession     = null;
 	private Map<String, Object> objRequest     = null;
+		
+	//Generacion de Log.
+	private LoggerBean loggerBean = null;	
 	
 	//Constructor ...
 	public BaseBean(){		
@@ -39,6 +43,17 @@ public class BaseBean extends ActionSupport{
 	/***********************************************************************************/
 	/*********************** IMPORTANTE: OBJETOS 'ActionContext' ***********************/
 	/***********************************************************************************/
+	
+	/**
+	 * imprimeLog
+	 * @param mensaje
+	 * @param nombreClase
+	 **/
+	public void imprimeLog( String mensaje, String nombreClase ){
+		
+		this.loggerBean = new LoggerBean( nombreClase  ); //Envia el nombre de la ubicacion de la clase al LOGs..	
+		this.loggerBean.getLoggerLog4j().info( mensaje );
+	}
 	
 	public Map<String, Object> getObjAtribute(){
 		if( this.objAtribute == null ){			
@@ -79,6 +94,7 @@ public class BaseBean extends ActionSupport{
 	public void setObjApplication( Map<String, Object> objApplication ){
 		this.objApplication = objApplication;
 	}
+	
 	public void setObjSession( Map<String, Object> objSession ){
 		this.objSession = objSession;
 	}

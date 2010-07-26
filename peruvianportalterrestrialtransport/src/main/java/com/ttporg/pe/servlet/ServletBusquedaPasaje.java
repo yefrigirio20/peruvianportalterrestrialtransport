@@ -5,18 +5,45 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.ttporg.pe.bean.Agencia;
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Departamento;
 import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.bean.Servicio;
+import com.ttporg.pe.dao.AgenciaDao;
+import com.ttporg.pe.dao.AsientoDao;
+import com.ttporg.pe.dao.CalendarioDao;
+import com.ttporg.pe.dao.ClienteDao;
+import com.ttporg.pe.dao.ClientePagoDao;
+import com.ttporg.pe.dao.DepartamentoDao;
+import com.ttporg.pe.dao.EmpresaDao;
+import com.ttporg.pe.dao.PagoDao;
+import com.ttporg.pe.dao.SalidaDao;
+import com.ttporg.pe.dao.ServicioDao;
+import com.ttporg.pe.dao.TransaccionDao;
+import com.ttporg.pe.dao.VehiculoDao;
+import com.ttporg.pe.dao.impl.AgenciaDaoImpl;
+import com.ttporg.pe.dao.impl.AsientoDaoImpl;
+import com.ttporg.pe.dao.impl.CalendarioDaoImpl;
+import com.ttporg.pe.dao.impl.ClienteDaoImpl;
+import com.ttporg.pe.dao.impl.ClientePagoDaoImpl;
+import com.ttporg.pe.dao.impl.DepartamentoDaoImpl;
+import com.ttporg.pe.dao.impl.EmpresaDaoImpl;
+import com.ttporg.pe.dao.impl.PagoDaoImpl;
+import com.ttporg.pe.dao.impl.SalidaDaoImpl;
+import com.ttporg.pe.dao.impl.ServicioDaoImpl;
+import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
+import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
 import com.ttporg.pe.dto.DetallePasajeDTO;
-import com.ttporg.pe.servicio.ServiceFactory;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilSingleton;
 
@@ -43,16 +70,84 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	private UtilSingleton     utilSingleton      = null;
 		
 	//Service ...
-	private ServiceFactory    servicio           = null;
+	//private ServiceFactory    servicio           = null;
 	
+	//Daos [SPRING] ...
+	private ClienteDao        clienteDAO         = null;
+	private EmpresaDao        empresaDAO         = null;	
+	private DepartamentoDao   departamentoDAO    = null;
+	private AgenciaDao        agenciaDAO         = null;		
+	private VehiculoDao       vehiculoDAO        = null;	
+	private ServicioDao       servicioDAO        = null;
+	private AsientoDao        asientoDAO         = null;
+	private SalidaDao         salidaDAO          = null;
+	private CalendarioDao     calendarioDAO      = null;
+	private PagoDao           pagoDAO            = null;
+	private ClientePagoDao    clientePagoDAO     = null;
+	private TransaccionDao    transaccionDAO     = null;
+ 	
 	//Utilitarios ...
 	private UtilCalendario    utilCalendario     = null;
+	private BaseBean          beanBase           = null;
 	
 	private String            REDIRECCIONAMIENTO = "/jsp/BusquedaPasaje.jsp";		
 		
 	{
-	 this.servicio       = new ServiceFactory();
-	 this.utilCalendario = new UtilCalendario();
+	 //this.servicio     = new ServiceFactory();
+		
+	 this.clienteDAO      = new ClienteDaoImpl();
+	 this.empresaDAO      = new EmpresaDaoImpl();	
+	 this.departamentoDAO = new DepartamentoDaoImpl();
+	 this.agenciaDAO      = new AgenciaDaoImpl();		
+	 this.vehiculoDAO     = new VehiculoDaoImpl();	
+	 this.servicioDAO     = new ServicioDaoImpl();
+	 this.asientoDAO      = new AsientoDaoImpl();
+	 this.salidaDAO       = new SalidaDaoImpl();
+	 this.calendarioDAO   = new CalendarioDaoImpl();
+	 this.pagoDAO         = new PagoDaoImpl();
+	 this.clientePagoDAO  = new ClientePagoDaoImpl();
+	 this.transaccionDAO  = new TransaccionDaoImpl();
+ 
+	 this.utilCalendario  = new UtilCalendario();	 
+	 this.beanBase        = new BaseBean();
+	}
+		
+	@Override
+	public void init( ServletConfig configuracion ){
+		this.imprimeLog( "********* DENTRO DE 'init( ServletConfig config )' **********" );
+	    
+		try{
+			super.init( configuracion );
+			
+			String servletName = (String)configuracion.getServletName();			 
+			this.imprimeLog( "ServletName: " + servletName );
+		 
+	        this.acceso_InitParam();
+	        this.acceso_ContextParam(); 
+		} 
+	    catch( ServletException e ){
+			   e.printStackTrace();
+		}
+	}
+
+	/**
+	 * acceso_InitParam
+	 */
+	public void acceso_InitParam(){
+		this.imprimeLog( "********** DENTRO DE 'acceso_InitParam' **********" );
+		
+		ServletConfig servletConfig = this.getServletConfig();		
+		this.imprimeLog( "=====> ServletConfig: " + servletConfig );
+	}
+	
+	/**
+	 * acceso_ContextParam
+	 **/
+	public void acceso_ContextParam(){
+		 this.imprimeLog( "********** DENTRO DE 'acceso_ContextParam' **********" );
+		
+		 //INICIALIZANDO 'DAOs'...
+		 this.inicializaDAOs();	
 	}
 	
 	/**
@@ -61,15 +156,15 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	 * @param response
 	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
-	    System.out.println( "********* DENTRO DE service **********" ); 
+		this.imprimeLog( "********* DENTRO DE service **********" ); 
 	   
 	    List<Departamento> listaDepartamento = null;
 	    List<Empresa>      listaEmpresa      = null;
 	    List<Agencia>      listaAgencia      = null;
 	    List<Servicio>     listaServicio     = null;
 	    
-	    List<DetallePasajeDTO>  listaDetallePasajeDTO  = null;
-	    Departamento            objDepartamento   = null;
+	    List<DetallePasajeDTO>  listaDetallePasajeDTO = null;
+	    Departamento            objDepartamento       = null;
 	    	
 	    try{
     	    String codigoDepartamento = request.getParameter( "choDepartamento"   );
@@ -90,16 +185,16 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    String nomCiudadOrigen    = "";
     	    String nomCiudadDestina   = "";
     	    
-    	    System.out.println( "" );
-    	    System.out.println( "DATOS INGRESADOS DEL CLIENTE: " );
-    	    System.out.println( "------------------------------" ); 
-    	    System.out.println( "opcionProceso:      " + opcionProceso      );
-    	    System.out.println( "opcionLista:        " + opcionLista        );
-    	    System.out.println( "" );
-    	    System.out.println( "codigoDepartamento: " + codigoDepartamento ); 
-    	    System.out.println( "codigoEmpresa:      " + codigoEmpresa      );
-    	    System.out.println( "codigoAgencia:      " + codigoAgencia      );
-    	    System.out.println( "codigoServicio:     " + codigoServicio     );    	    
+    	    this.imprimeLog( "" );
+    	    this.imprimeLog( "DATOS INGRESADOS DEL CLIENTE: " );
+    	    this.imprimeLog( "------------------------------" ); 
+    	    this.imprimeLog( "opcionProceso:      " + opcionProceso      );
+    	    this.imprimeLog( "opcionLista:        " + opcionLista        );
+    	    this.imprimeLog( "" );
+    	    this.imprimeLog( "codigoDepartamento: " + codigoDepartamento ); 
+    	    this.imprimeLog( "codigoEmpresa:      " + codigoEmpresa      );
+    	    this.imprimeLog( "codigoAgencia:      " + codigoAgencia      );
+    	    this.imprimeLog( "codigoServicio:     " + codigoServicio     );    	    
     	    
 	    	HttpSession session = request.getSession( true );
 	    	
@@ -123,25 +218,27 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	        	    
     	    //----------------------- DEPARTAMENTO -----------------------//
 	    	listaDepartamento = new ArrayList<Departamento>();	
-	    	listaDepartamento = this.servicio.getDepartamentoDAO().obtenerListaDepartamentos();	
+	    	
+	    	listaDepartamento = this.departamentoDAO.obtenerListaDepartamentos();
+	    	this.imprimeLog("listaDepartamento SIZE: " + listaDepartamento.size() );
 	    	
 	    	//-------------- Obtener 'BASE DE DATOS'. --------------//
 	    	if( idCiudadOrigen != null ){	    		
-	    		objDepartamento  = this.servicio.getDepartamentoDAO().obtenerObjetoDepartamento_x_codigo( Integer.parseInt( idCiudadOrigen ) );  
+	    		objDepartamento  = this.departamentoDAO.obtenerObjetoDepartamento_x_codigo( Integer.parseInt( idCiudadOrigen ) );  
 	    		nomCiudadOrigen  = objDepartamento.getNombre();
 	    	}
 	    	
 	    	if( idCiudadDestina != null ){	    		
-	    		objDepartamento  = this.servicio.getDepartamentoDAO().obtenerObjetoDepartamento_x_codigo( Integer.parseInt( idCiudadDestina ) );  
+	    		objDepartamento  = this.departamentoDAO.obtenerObjetoDepartamento_x_codigo( Integer.parseInt( idCiudadDestina ) );  
 	    		nomCiudadDestina = objDepartamento.getNombre();
 	    	}
 	    	
-	    	System.out.println( "nomCiudadOrigen:    " + nomCiudadOrigen    );
-	    	System.out.println( "nomCiudadDestina:   " + nomCiudadDestina   );
-    	    System.out.println( "fechaViaje:         " + fechaViaje         );    	    
-    	    System.out.println( "" );
+	    	this.imprimeLog( "nomCiudadOrigen:    " + nomCiudadOrigen    );
+	    	this.imprimeLog( "nomCiudadDestina:   " + nomCiudadDestina   );
+    	    this.imprimeLog( "fechaViaje:         " + fechaViaje         );    	    
+    	    this.imprimeLog( "" );
     	    
-	    	System.out.println( "TAMANIO 'listaDepartamento': " + listaDepartamento.size() );
+	    	this.imprimeLog( "TAMANIO 'listaDepartamento': " + listaDepartamento.size() );
 	    	//------------------------------------------------------//
 
 		    //-------------------------------------------------------------//
@@ -156,8 +253,7 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 		    	    opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){		    			    		
 		    		
 			    	listaEmpresa = new ArrayList<Empresa>();
-			    	
-			    	listaEmpresa = this.servicio.getEmpresaDAO().obtenerListaEmpresas_x_departamento( Integer.parseInt( codigoDepartamento ) ); //FILTRAR ...
+			    	listaEmpresa = this.empresaDAO.obtenerListaEmpresas_x_departamento( Integer.parseInt( codigoDepartamento ) ); //FILTRAR ...
 		    	}
 		    	//-------------------------------------------------------------//
 		    	
@@ -166,22 +262,21 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 		    		opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) ||
 		    	    opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
 		    		
-		    		listaAgencia = new ArrayList<Agencia>();
 		    		
-		    		listaAgencia = this.servicio.getAgenciaDAO().obtenerListaAgencias_x_empresa( Integer.parseInt( codigoEmpresa ) ); //FILTRAR ...
-		    		
-		    		System.out.println( "listaAgencia: " + listaAgencia.size() );
-		    		System.out.println( "listaAgencia[0]: " + listaAgencia.get( 0 ).getId() );
-		    		System.out.println( "listaAgencia[1]: " + listaAgencia.get( 1 ).getId() );
+		    		if( codigoEmpresa != null ){		    			
+		    			listaAgencia = new ArrayList<Agencia>();
+		    			listaAgencia = this.agenciaDAO.obtenerListaAgencias_x_empresa( Integer.parseInt( codigoEmpresa ) ); //FILTRAR ...
+		    		}		    		
 		    	}
 		    	
 	    	    //------------------------- SERVICIO --------------------------//
 		    	if( opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) || 
 		    		opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
 		    		
-			    	listaServicio = new ArrayList<Servicio>();			    	
-		    		
-			    	listaServicio = this.servicio.getServicioDAO().obtenerListaServicios_x_agencia( Integer.parseInt( codigoAgencia ) ); //FILTRAR ...
+		    		if( codigoEmpresa != null ){		    			
+		    			listaServicio = new ArrayList<Servicio>();			    			    		
+		    			listaServicio = this.servicioDAO.obtenerListaServicios_x_agencia( Integer.parseInt( codigoAgencia ) ); //FILTRAR ...
+		    		}
 		    	}
 			    //--------------------------------------------------------------//
 		    	
@@ -189,15 +284,15 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 		    	if( opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
 		    		listaDetallePasajeDTO = new ArrayList<DetallePasajeDTO>();	    		
 		    		
-		    		listaDetallePasajeDTO = this.servicio.getSalidaDAO().obtenerListaDetallePasajeDTO( Integer.parseInt( codigoEmpresa  ), 
-																			    				       Integer.parseInt( codigoAgencia  ), 
-																			    					   Integer.parseInt( codigoServicio ), 
-		    				                                                                           nomCiudadOrigen,  
-		    				                                                                           nomCiudadDestina, 
-		    				                                                                           new Date() );  //FILTRAR ...
-		    		
-		    		//System.out.println( "TAMANIO [listaDetallePasajeDTO]: " + listaDetallePasajeDTO.size()  );		    		
-		            System.out.println( "SI ENTRO ...!!!" );            
+		    		if( (codigoEmpresa != null) && (codigoAgencia != null) && (codigoServicio != null) ){
+		    			
+		    			listaDetallePasajeDTO = this.salidaDAO.obtenerListaDetallePasajeDTO( Integer.parseInt( codigoEmpresa  ), 
+																	    					 Integer.parseInt( codigoAgencia  ), 
+																	    					 Integer.parseInt( codigoServicio ), 
+																	    					 nomCiudadOrigen,  
+																	    					 nomCiudadDestina, 
+																	    					 new Date() );  //FILTRAR ...    		
+		    		}        
 		    	}
 		    	//--------------------------------------------------------------//
 	    	}
@@ -222,4 +317,57 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 			   e.printStackTrace();
 		}	    
 	 }  
+	 
+	/**
+	 * inicializaDAOs
+	 **/
+	public void inicializaDAOs(){
+		
+		//OBTENER [ServletContext] USANDO [STRUTs 2]: 'ServletActionContext.getServletContext()'.
+		//OBTENER [ServletContext] USANDO [SERVLETs]: 'this.getServletContext()'.
+		ServletContext servletContext = this.getServletContext();	
+		this.imprimeLog( "=====> servletContext: " + servletContext );
+				 
+		WebApplicationContext contexto = WebApplicationContextUtils.getRequiredWebApplicationContext( servletContext );
+		this.imprimeLog( "=====> contexto: " + contexto );
+		
+		this.imprimeLog( "****************** OBTENIENDO 'DAOS' [INICIO] ******************" );
+
+		this.clienteDAO      = (ClienteDaoImpl)contexto.getBean(      "clienteDao"      ); 
+		this.empresaDAO      = (EmpresaDaoImpl)contexto.getBean(      "empresaDao"      );
+		this.departamentoDAO = (DepartamentoDaoImpl)contexto.getBean( "departamentoDao" );
+		this.agenciaDAO      = (AgenciaDaoImpl)contexto.getBean(      "agenciaDao"      );	
+		this.vehiculoDAO     = (VehiculoDaoImpl)contexto.getBean(     "vehiculoDao"     );
+		this.servicioDAO     = (ServicioDaoImpl)contexto.getBean(     "servicioDao"     );
+		this.asientoDAO      = (AsientoDaoImpl)contexto.getBean(      "asientoDao"      );
+		this.salidaDAO       = (SalidaDaoImpl)contexto.getBean(       "salidaDao"       );
+		this.calendarioDAO   = (CalendarioDaoImpl)contexto.getBean(   "calendarioDao"   );
+		this.pagoDAO         = (PagoDaoImpl)contexto.getBean(         "pagoDao"         );
+		this.clientePagoDAO  = (ClientePagoDaoImpl)contexto.getBean(  "clientePagoDao"  );
+		this.transaccionDAO  = (TransaccionDaoImpl)contexto.getBean(  "transaccionDao"  );
+		
+		this.imprimeLog( "====> [clienteDAO]:      " + this.clienteDAO      );
+		this.imprimeLog( "====> [empresaDAO]:      " + this.empresaDAO      );
+		this.imprimeLog( "====> [departamentoDAO]: " + this.departamentoDAO );
+		this.imprimeLog( "====> [agenciaDAO]:      " + this.agenciaDAO      );
+		this.imprimeLog( "====> [vehiculoDAO]:     " + this.vehiculoDAO     );
+		this.imprimeLog( "====> [servicioDAO]:     " + this.servicioDAO     );
+		this.imprimeLog( "====> [asientoDAO]:      " + this.asientoDAO      );
+		this.imprimeLog( "====> [salidaDAO]:       " + this.salidaDAO       );
+		this.imprimeLog( "==+=> [calendarioDAO]:   " + this.calendarioDAO   );
+		this.imprimeLog( "====> [pagoDAO]:         " + this.pagoDAO         );
+		this.imprimeLog( "====> [clientePagoDAO]:  " + this.clientePagoDAO  );
+		this.imprimeLog( "====> [transaccionDAO]:  " + this.transaccionDAO  );
+		
+		this.imprimeLog( "******************* OBTENIENDO 'DAOS' [FIN] *******************" );
+	}
+	
+	/**
+	 * imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }
