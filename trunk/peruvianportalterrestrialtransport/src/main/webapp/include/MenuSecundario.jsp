@@ -66,7 +66,7 @@
 		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>&nbsp; &nbsp; <fmt:message key="texto.label.menuPrincipal.cerrarSesion" /> &nbsp; &nbsp;</strong></font>
 	     </a>
         </center>
-     </td>    
+     </td>       
           
    </tr>
    

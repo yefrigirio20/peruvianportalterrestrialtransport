@@ -221,21 +221,7 @@ function seleccionarEstrella( msnParam ){
                           <font size="2" face="Arial" class="textoMenu" ><fmt:message key="texto.label.menu.informacion" /></font> 
                        </a>             
                     </td>
-                  </tr>
-                  
-                  <tr> 
-                    <td width="20">
-                         <a href="<%=request.getContextPath()%>/jsp/Informes.jsp" style="cursor:hand" />
-                           <img src="<%=request.getContextPath()%>/imagenes/Seleccion.gif" alt="Buses" width="20" height="19"  border="0" />
-                         </a>
-                    </td>  
-                    <td width="80">
-                       <a href="<%=request.getContextPath()%>/jsp/BusquedaBuses.jsp" style="cursor:hand" />
-                          <font size="2" face="Arial" class="textoMenu" ><fmt:message key="texto.label.menu.informacion" /></font> 
-                       </a>            
-                    </td>
-                  </tr>
-                  
+                  </tr>                     
              <%}
 	           else{
                %>     
