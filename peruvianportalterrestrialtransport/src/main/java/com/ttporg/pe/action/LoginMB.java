@@ -51,30 +51,28 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class LoginMB extends BaseBean{
 
 	private static final long serialVersionUID = -9082650078047288321L;
-		
-	//Utilitarios ...
-	private UtilEncriptacion manejoEncriptacion = null; 
 	
 	//Service ...
 	//private ClienteService servicio  = null;
 		
 	//Daos [SPRING] ...
-	private ClienteDao      clienteDAO      = null;
-	private EmpresaDao      empresaDAO      = null;	
-	private DepartamentoDao departamentoDAO = null;
-	private AgenciaDao      agenciaDAO      = null;		
-	private VehiculoDao     vehiculoDAO     = null;	
-	private ServicioDao     servicioDAO     = null;
-	private AsientoDao      asientoDAO      = null;
-	private SalidaDao       salidaDAO       = null;
-	private CalendarioDao   calendarioDAO   = null;
-	private PagoDao         pagoDAO         = null;
-	private ClientePagoDao  clientePagoDAO  = null;
-	private TransaccionDao  transaccionDAO  = null;
+	private ClienteDao       clienteDAO       = null;
+	private EmpresaDao       empresaDAO       = null;	
+	private DepartamentoDao  departamentoDAO  = null;
+	private AgenciaDao       agenciaDAO       = null;		
+	private VehiculoDao      vehiculoDAO      = null;	
+	private ServicioDao      servicioDAO      = null;
+	private AsientoDao       asientoDAO       = null;
+	private SalidaDao        salidaDAO        = null;
+	private CalendarioDao    calendarioDAO    = null;
+	private PagoDao          pagoDAO          = null;
+	private ClientePagoDao   clientePagoDAO   = null;
+	private TransaccionDao   transaccionDAO   = null;
  	
 	//Utilitarios ...
-	private UtilCalendario  utilCalendario  = null;
-	private BaseBean        beanBase        = null;
+	private UtilCalendario   utilCalendario   = null;
+	private UtilEncriptacion utilEncriptacion = null; 
+	private BaseBean         beanBase         = null;
 	
 	//Parametros de acceso 'GUI'.
 	private String	usuario;
@@ -83,22 +81,22 @@ public class LoginMB extends BaseBean{
 	{
 	 //this.servicio         = new ServiceFactory();
 		
-	 this.clienteDAO         = new ClienteDaoImpl();
-	 this.empresaDAO         = new EmpresaDaoImpl();	
-	 this.departamentoDAO    = new DepartamentoDaoImpl();
-	 this.agenciaDAO         = new AgenciaDaoImpl();		
-	 this.vehiculoDAO        = new VehiculoDaoImpl();	
-	 this.servicioDAO        = new ServicioDaoImpl();
-	 this.asientoDAO         = new AsientoDaoImpl();
-	 this.salidaDAO          = new SalidaDaoImpl();
-	 this.calendarioDAO      = new CalendarioDaoImpl();
-	 this.pagoDAO            = new PagoDaoImpl();
-	 this.clientePagoDAO     = new ClientePagoDaoImpl();
-	 this.transaccionDAO     = new TransaccionDaoImpl();
+	 this.clienteDAO       = new ClienteDaoImpl();
+	 this.empresaDAO       = new EmpresaDaoImpl();	
+	 this.departamentoDAO  = new DepartamentoDaoImpl();
+	 this.agenciaDAO       = new AgenciaDaoImpl();		
+	 this.vehiculoDAO      = new VehiculoDaoImpl();	
+	 this.servicioDAO      = new ServicioDaoImpl();
+	 this.asientoDAO       = new AsientoDaoImpl();
+	 this.salidaDAO        = new SalidaDaoImpl();
+	 this.calendarioDAO    = new CalendarioDaoImpl();
+	 this.pagoDAO          = new PagoDaoImpl();
+	 this.clientePagoDAO   = new ClientePagoDaoImpl();
+	 this.transaccionDAO   = new TransaccionDaoImpl();
  
-	 this.manejoEncriptacion = new UtilEncriptacion(); 
-	 this.utilCalendario     = new UtilCalendario();	 
-	 this.beanBase           = new BaseBean();
+	 this.utilEncriptacion = new UtilEncriptacion(); 
+	 this.utilCalendario   = new UtilCalendario();	 
+	 this.beanBase         = new BaseBean();
 	}
  	
 	/**
@@ -126,12 +124,17 @@ public class LoginMB extends BaseBean{
 			if( (estadoUsuario == true) && (estadoPassword == true) ){
 				
 				Cliente objCliente = new Cliente();
-
-				//String encrypPassword = this.manejoEncriptacion.encriptarCIPHER( this.getPassword().toUpperCase() );
+ 
+				String cadenaEncriptada    = this.utilEncriptacion.encriptarCIPHER(    this.password    );
+				String cadenaDesencriptada = this.utilEncriptacion.desencriptarCIPHER( cadenaEncriptada );
+				
+	    		System.out.println( "cadena Original:     " + this.password );
+	    		System.out.println( "cadenaEncriptada:    " + cadenaEncriptada );
+	    		System.out.println( "cadenaDesencriptada: " + cadenaDesencriptada );
 				
 				objCliente.setUsuario(  this.usuario  );
-				//objCliente.setPassword( encrypPassword   );
-				objCliente.setPassword( this.password ); 
+				objCliente.setPassword( cadenaEncriptada );
+				//objCliente.setPassword( this.password ); 
 				
 				//-------------- Obtener 'BASE DE DATOS'. --------------//
 				Cliente objClienteDB = this.clienteDAO.loginCliente( objCliente );
@@ -139,10 +142,10 @@ public class LoginMB extends BaseBean{
 				//------------------------------------------------------//
 				
     	    	 this.imprimeLog( "BD EXISTE: " );
- 
+    	    	 
     	    	 //Validando ...
     	    	 if( objClienteDB.getUsuario().equalsIgnoreCase(  this.usuario  ) &&
-    	    		 objClienteDB.getPassword().equalsIgnoreCase( this.password ) ){
+    	    		 objClienteDB.getPassword().equalsIgnoreCase( cadenaEncriptada ) ){
     	    		 
     				 //Setear Obj.Singleton en SESION.
                      this.getObjSession().put( "objCliente", objClienteDB ); 
