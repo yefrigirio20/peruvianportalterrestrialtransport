@@ -31,6 +31,7 @@
 		<url-pattern>/ServletGeneraBoleto</url-pattern>
 	</servlet-mapping>
 		
+		
 	<servlet>
 		<servlet-name>ServletBusquedaPasaje</servlet-name>
 		<servlet-class>com.ttporg.pe.servlet.ServletBusquedaPasaje</servlet-class>
@@ -40,6 +41,7 @@
 		<servlet-name>ServletBusquedaPasaje</servlet-name>
 		<url-pattern>/ServletBusquedaPasaje</url-pattern>
 	</servlet-mapping>	
+	
 	
 	<servlet>
 		<servlet-name>ServletPopupBus</servlet-name>
@@ -51,6 +53,7 @@
 		<url-pattern>/ServletPopupBus</url-pattern>
 	</servlet-mapping>		
 	
+	
 	<servlet>
 		<servlet-name>ServletRegistroCliente</servlet-name>
 		<servlet-class>com.ttporg.pe.servlet.ServletRegistroCliente</servlet-class>
@@ -60,6 +63,7 @@
 		<servlet-name>ServletRegistroCliente</servlet-name>
 		<url-pattern>/ServletRegistroCliente</url-pattern>
 	</servlet-mapping>	
+	
 	
 	<servlet>
 		<servlet-name>ServletPagoPasaje</servlet-name>
