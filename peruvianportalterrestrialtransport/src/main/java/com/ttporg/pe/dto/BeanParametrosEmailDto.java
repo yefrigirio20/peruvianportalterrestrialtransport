@@ -6,7 +6,7 @@ import javax.mail.internet.MimeMultipart;
 
  /**
   * @author Cesar Ricardo.
-  * @clase: BeanParametrosEmail.java  
+  * @clase: BeanParametrosEmailDto.java  
   * @descripción descripción de la clase.
   * @author_web: http://frameworksjava2008.blogspot.com
                  http://viviendoconjavaynomoririntentandolo.blogspot.com
@@ -20,36 +20,49 @@ import javax.mail.internet.MimeMultipart;
  
 	private static final long serialVersionUID = -3234147478034925761L;
 	
-	private  int    		id 					           =   0;
-	private  String 		usuario 					   =   "";
-	private  String 		password 					   =   "";	
-	private  String 		cuentaEmailRemitente           =   "";
-	private  String 		cuentaEmailDestinatario        =   "";
-	private  String 		cuentaEmailDestinatario_Cc     =   "";
-	private  String 		cuentaEmailDestinatario_Bcc    =   "";	
-	private  String 		direccion                	   =   "";
-	private  String 		protocolo				       =   "";
-	private  String 		puerto                         =   "";
-	private  String 		asuntoMensaje 				   =   "";
-	private  String 		cuerpoMensaje 				   =   "";
-	private  int 			copia       				   =   0;
-	private  String 		contentType 				   =   "";
-	private  boolean 		requiereAuthenticacion 		   =   false;
-	private  boolean 		requiereConexionSegura 		   =   false;
-	private  boolean		modoDebug 					   =   false;
-	private  boolean 		esperarCommandQuit 			   =   false;	
-	private  Vector<String> vectorEmailsReceptores   	   =   null;
-	private  Vector<String> vectorEmailsReceptores_CC	   =   null;
-	private  Vector<String> vectorEmailsReceptores_BCC	   =   null;
-	
-	private  String 		ubicacionAdjunto			   =   "";
-	private  String 		codigoAleatorio  			   =   "";
-	private  MimeMultipart  objMultiParte	               =   null;
+	private  int    		id 					        = 0;
+	private  String 		usuario 					= "";
+	private  String 		password 					= "";	
+	private  String 		cuentaEmailRemitente        = "";
+	private  String 		cuentaEmailDestinatario     = "";
+	private  String 		cuentaEmailDestinatario_Cc  = "";
+	private  String 		cuentaEmailDestinatario_Bcc = "";	
+	private  String 		direccion                	= "";
+	private  String 		servidor        		    = "";
+	private  String 		protocolo				    = "";
+	private  String 		puerto                      = "";
+	private  String 		asuntoMensaje 				= "";
+	private  String 		cuerpoMensaje 				= "";
+	private  String 		nombreAdjunto    		    = "";
+	private  int 			copia       				= 0;
+	private  String 		contentType 				= "";
+	private  boolean 		requiereAuthenticacion 		= false;
+	private  boolean 		requiereConexionSegura 		= false;
+	private  Vector<String> vectorEmailsReceptores   	= null;
+	private  Vector<String> vectorEmailsReceptores_CC	= null;
+	private  Vector<String> vectorEmailsReceptores_BCC	= null;
+	private  MimeMultipart  objMultiParte	            = null;
  
 	//Constructores ... 
 	public BeanParametrosEmailDto(){		
 	}
+		
+	public String getNombreAdjunto(){
+		return nombreAdjunto;
+	}
 	
+	public void setNombreAdjunto( String nombreAdjunto ){
+		this.nombreAdjunto = nombreAdjunto;
+	}
+
+	public String getServidor(){
+		return servidor;
+	}
+	
+	public void setServidor( String servidor ){
+		this.servidor = servidor;
+	}
+
 	public int getId(){
 		return id;
 	}
@@ -178,22 +191,6 @@ import javax.mail.internet.MimeMultipart;
 		this.requiereConexionSegura = requiereConexionSegura;
 	}
 	
-	public boolean isModoDebug(){
-		return modoDebug;
-	}
-	
-	public void setModoDebug( boolean modoDebug ){
-		this.modoDebug = modoDebug;
-	}
-	
-	public boolean isEsperarCommandQuit(){
-		return esperarCommandQuit;
-	}
-	
-	public void setEsperarCommandQuit( boolean esperarCommandQuit ){
-		this.esperarCommandQuit = esperarCommandQuit;
-	}
-	
 	public Vector<String> getVectorEmailsReceptores(){
 		return vectorEmailsReceptores;
 	}
@@ -216,22 +213,6 @@ import javax.mail.internet.MimeMultipart;
 	
 	public void setVectorEmailsReceptores_BCC( Vector<String> vectorEmailsReceptores_BCC ){
 		this.vectorEmailsReceptores_BCC = vectorEmailsReceptores_BCC;
-	}
-	
-	public String getUbicacionAdjunto(){
-		return ubicacionAdjunto;
-	}
-	
-	public void setUbicacionAdjunto( String ubicacionAdjunto ){
-		this.ubicacionAdjunto = ubicacionAdjunto;
-	}
-	
-	public String getCodigoAleatorio(){
-		return codigoAleatorio;
-	}
-	
-	public void setCodigoAleatorio( String codigoAleatorio ){
-		this.codigoAleatorio = codigoAleatorio;
 	}
 	
 	public MimeMultipart getObjMultiParte(){
