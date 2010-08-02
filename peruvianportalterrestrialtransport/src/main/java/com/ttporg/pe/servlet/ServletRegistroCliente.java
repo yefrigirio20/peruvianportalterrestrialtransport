@@ -343,7 +343,7 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 		this.imprimeLog( "====> [servicioDAO]:     " + this.servicioDAO     );
 		this.imprimeLog( "====> [asientoDAO]:      " + this.asientoDAO      );
 		this.imprimeLog( "====> [salidaDAO]:       " + this.salidaDAO       );
-		this.imprimeLog( "==+=> [calendarioDAO]:   " + this.calendarioDAO   );
+		this.imprimeLog( "====> [calendarioDAO]:   " + this.calendarioDAO   );
 		this.imprimeLog( "====> [pagoDAO]:         " + this.pagoDAO         );
 		this.imprimeLog( "====> [clientePagoDAO]:  " + this.clientePagoDAO  );
 		this.imprimeLog( "====> [transaccionDAO]:  " + this.transaccionDAO  );
