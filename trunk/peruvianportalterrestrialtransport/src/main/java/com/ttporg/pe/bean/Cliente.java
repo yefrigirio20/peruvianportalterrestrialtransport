@@ -50,6 +50,22 @@ public class Cliente{
         this.estado     = estado;
     }
 	
+    public Cliente( String nombres, String apellidos, Date cumpleanos, String direccion, 
+		            String foto, String email, String dni, String usuario, String password,  
+		            String tipo, String estado ){
+		super();
+		this.nombres    = nombres;
+		this.apellidos  = apellidos;
+		this.cumpleanos = cumpleanos;
+		this.direccion  = direccion;
+		this.email      = email;
+		this.usuario    = usuario;
+		this.dni        = dni;  
+		this.password   = password;
+		this.tipo       = tipo;
+		this.estado     = estado;
+	}
+    
 	public Integer getId(){
 		return id;
 	}
