@@ -21,7 +21,7 @@ public class TestFechas{
 	/**
 	 * @param args
 	 */
-	public static void main( String[] args ){
+	public static void main( String[] argumentos ){
 
 		UtilCalendario utilCalendario = new UtilCalendario();
 		
