@@ -136,10 +136,10 @@ public class UtilEncriptacion implements Serializable{
 				/**------- DESENCRIPTANDO DATOS -------**/	
 				/**------------------------------------**/ 
 				System.out.println( "" );
-				datoExistente_01 = manejoEncriptacion.comparaDatoEncriptadoSHA1( datoOriginal, datoEncriptado_01 );
+				datoExistente_01 = manejoEncriptacion.comparaDatoEncriptadoSHA1( datoEncriptado_01, datoOriginal );
 				System.out.println( "Dato Comparado Existente 'SHA1': " + datoExistente_01 );
 				
-				datoExistente_02 = manejoEncriptacion. comparaDatoEncriptadoMD5( datoOriginal, datoEncriptado_02 );
+				datoExistente_02 = manejoEncriptacion.comparaDatoEncriptadoMD5( datoOriginal, datoEncriptado_02 );
 				System.out.println( "Dato Comparado Existente 'MD5': " + datoExistente_02 );
 				
 				//datoDesencriptado_03 = manejoEncriptacion.desencriptarBASE64( datoEncriptado_03 );
@@ -194,8 +194,8 @@ public class UtilEncriptacion implements Serializable{
 	  /**
 	   * comparaDatoEncriptadoSHA1 Verifica si una cadena sin encriptar (cadenaSiEncriptada), es igual 
 	   *                           que una cadena encriptada (cadenaNoEncriptada).
-	   * @param  cadenaSiEncriptada 
 	   * @param  cadenaNoEncriptada 
+	   * @param  cadenaSiEncriptada 
 	   * @return boolean
 	   */
 	  public boolean comparaDatoEncriptadoSHA1( String cadenaSiEncriptada, String cadenaNoEncriptada ){
@@ -204,7 +204,7 @@ public class UtilEncriptacion implements Serializable{
 	    
 	    if( cadenaNoEncriptada != null ){
     	
-	        String encriptado = this.encriptaDatoSHA1( cadenaSiEncriptada, this.getCadenaEncriptadaReducidaSHA1( cadenaNoEncriptada ) );
+	        String encriptado = this.encriptaDatoSHA1( cadenaNoEncriptada, this.getCadenaEncriptadaReducidaSHA1( cadenaSiEncriptada ) );
 	        
 	        if( cadenaNoEncriptada.equals( encriptado ) ){
 	            resultado = true;
