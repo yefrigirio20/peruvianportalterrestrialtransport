@@ -55,7 +55,7 @@ public class TestEncriptacionSHA1{
     		System.out.println( "estadoEncriptacion:    " + estadoEncriptacion );
       		
     		//Test resultara OK, si la desencriptacion 'SHA1' funciona.
-    		Assert.assertTrue( false );     		
+    		Assert.assertTrue( "Estado Encriptacion: ", estadoEncriptacion );     		
     	}
     	catch( Exception e ){
 			   e.printStackTrace();

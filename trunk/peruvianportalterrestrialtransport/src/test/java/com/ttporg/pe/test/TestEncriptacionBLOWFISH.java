@@ -39,7 +39,7 @@ public class TestEncriptacionBLOWFISH{
     }
 
     @Test
-    @Ignore
+    /*@Ignore*/
 	public void testLoginEmpresa(){
 		
     	try{

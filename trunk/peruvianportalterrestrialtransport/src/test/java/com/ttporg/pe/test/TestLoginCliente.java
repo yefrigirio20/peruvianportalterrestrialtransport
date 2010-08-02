@@ -21,7 +21,7 @@ import com.ttporg.pe.util.UtilEncriptacion;
  **/
 public class TestLoginCliente{
 	
-	private static UtilEncriptacion encriptacion = new UtilEncriptacion(); 	
+	private static UtilEncriptacion encriptacion = null; 	
 	private static ServiceFactory   servicio     = null;
 	
 	{
@@ -32,11 +32,11 @@ public class TestLoginCliente{
 	/**
      * main
      * @param argumentos
-     */
+     **/
     public static void main( String[] argumentos ){
     	
         //Permite mostrar el resultado del 'Test' en consola.
-        org.junit.runner.JUnitCore.main( "com.ttporg.pe.test.TestLoginEmpresa" );
+        org.junit.runner.JUnitCore.main( "com.ttporg.pe.test.TestLoginCliente" );
     }
 
     @Test
@@ -44,29 +44,16 @@ public class TestLoginCliente{
 	public void testLoginEmpresa(){
 		
     	try{
-    		this.servicio = new ServiceFactory();
-    		
-    		String cadena = "";
+    		servicio = new ServiceFactory();
     		
     		Cliente objCliente =  new Cliente(); 
     		objCliente.setUsuario(  "RGUERRA" );
-    		//empresa.setPassword( "SqrAquYuou8=" );    //Password 'ENCRIPTADO' y guardado en la 'BD'.
-    		objCliente.setPassword( "ADMIN" );
+    		objCliente.setPassword( "SqrAquYuou8=" );    //Password 'ENCRIPTADO' y guardado en la 'BD'.
     		
-    		objCliente = this.servicio.getClienteDAO().loginCliente( objCliente );
+    		objCliente = servicio.getClienteDAO().loginCliente( objCliente );
     		
     		System.out.println( "Cliente: " + objCliente );
-    		
-    		//----------------------------------------------------------//
-    		/*
-    		cadena = this.utilEncriptacion.encriptarCIPHER( "ADMIN" );	 //ADMIN = SqrAquYuou8=	
-    		System.out.println( "CADENA ENCRIPTADA: " + cadena );
-    		
-    		cadena = this.utilEncriptacion.desencriptarCIPHER( cadena );
-    		System.out.println( "CADENA DESENCRIPTADA: " + cadena );
-    		*/
-    		//----------------------------------------------------------//
-    		
+ 
     		//Test ok si el servicio responde un objeto cargado de la DB.
     		Assert.assertNotNull( "OBJETO DEVUELTO: ", objCliente  );    		
     	}
