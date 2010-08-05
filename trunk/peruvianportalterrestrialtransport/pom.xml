@@ -170,6 +170,14 @@
 		    </dependency>
 			***** API: QUARZ (FIN) ***** -->		
 	    
+			<!-- ***** API: AJAXTAGS (INICIO) ***** -->
+			<dependency>
+				<groupId>org.ajaxtags</groupId>
+				<artifactId>ajaxtags</artifactId>
+				<version>1.1.5</version>
+			</dependency>
+			<!-- ***** API: AJAXTAGS (FIN) ***** -->
+	    
 			<!-- ***** API: JAVAMAIL (INICIO) ***** -->
 			<dependency>
 				<groupId>javax.activation</groupId>
