@@ -55,7 +55,7 @@
 	         var url = "<%=request.getContextPath()%>/ServletGeneraBoleto";
 	         //alert( url );
 
-	         var urlNew = url; /*+ '?idAsiento=' + idAsiento;*/
+	         var urlNew = url '?estadoPopup=TRUE';
 	         //alert( urlNew );
 	         	
 	         myFrm.method = '' + 'POST';
@@ -88,7 +88,7 @@
          <!-- INCLUDE PRINCIPAL -->
          <td width="85%" valign="top" > 
   
-           <form id="idFrnPagoPasaje" name="frnPagoPasaje" method="post" action="<%=request.getContextPath()%>/ServletPagoPasaje" >
+           <form id="idFrnPagoPasaje" name="frnPagoPasaje" method="post" action="<%=request.getContextPath()%>/ServletPagoPasaje?estadoPopup=TRUE" >
                       
             <table width="80%" border="0" align="center" cellpadding="0" cellspacing="2" >
                 <tr>
@@ -122,7 +122,8 @@
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" > 
- 
+    
+                   <c:if test="${estadoPopup == 'TRUE'}" >  
                      <c:if test="${objValidacion.mensajesNOK != null}" >  
 			 	        <table width="40%" >
 				            <c:forEach var="paramObjeto" items="${objValidacion.mensajesNOK}">
@@ -137,6 +138,7 @@
 				        </table>
 				        <br></br>
                      </c:if> 
+                   </c:if>
                      
                    </td>
                    <td width="10%" >&nbsp;</td>
@@ -147,7 +149,7 @@
                    <td width="10%" >&nbsp;</td>
                    <td width="80%" colspan="2" > 
                       <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px; width:400" >
-			             <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" > <fmt:message key="texto.label.pago" />: </legend>  
+			             <legend accesskey='I' style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" > <fmt:message key="texto.label.pago" />: </legend>  
                    
                           <table width="100%" > 
                           

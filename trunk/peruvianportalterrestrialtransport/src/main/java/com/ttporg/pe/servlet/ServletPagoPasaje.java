@@ -90,7 +90,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	private String            REDIRECCIONAMIENTO = "/jsp/PagoPasaje.jsp";		
 	
 	{
-	 //this.servicio     = new ServiceFactory();
+	 //this.servicio      = new ServiceFactory();
 		
 	 this.clienteDAO      = new ClienteDaoImpl();
 	 this.empresaDAO      = new EmpresaDaoImpl();	
@@ -151,7 +151,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	 * service
 	 * @param request
 	 * @param response
-	 */	
+	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
 		    this.getServletContext().log( "********* DENTRO DE service **********" ); 
 		    
@@ -163,9 +163,9 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    String tipoPago        = request.getParameter( "choTipoPago"        );
 	    	    String numeroTarjeta   = request.getParameter( "txtNumeroTarjeta"   );
 	    	    String fechaExpiracion = request.getParameter( "txtFechaExpiracion" );
-	    	    String precio          = request.getParameter( "txtPrecio" );
+	    	    String precio          = request.getParameter( "txtPrecio" );	    	    
 	    	    
-	    	    String idAsientoSelec  = request.getParameter( "idAsiento"          );
+	    	    String estadoPopup     = request.getParameter( "estadoPopup" );	  
 	    	    
 	    	    HttpSession session = request.getSession( true );
 	    	    
@@ -180,9 +180,11 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    this.imprimeLog( "Fecha Expiracion: " + fechaExpiracion ); 
 	    	    this.imprimeLog( "Precio:           " + precio ); 
 	    	    this.imprimeLog( "" );
-	    	    this.imprimeLog( "idAsientoSelec:   " + idAsientoSelec       ); 
+	    	    this.imprimeLog( "idAsientoSeleccionado: " + idAsientoSeleccionado  ); 
+	    	    this.imprimeLog( "estadoPopup:           " + estadoPopup ); 
+	    	    this.imprimeLog( "" );
 	    	    
-	    	    if( idAsientoSeleccionado != null ){
+	    	    if( (idAsientoSeleccionado != null) && (estadoPopup.equalsIgnoreCase( "TRUE" ) ) ){
 	    	    	
 		    	    //---------------- Guardar el 'SINGLETON'. ----------------//
 		    	    //this.utilSingleton = UtilSingleton.getInstancia();
@@ -197,7 +199,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    pago.setNumTarjeta( numeroTarjeta );
 		    	     
 		    	    //----------------------------------//
-		    	    if( fechaExpiracion != null ){
+		    	    if( (fechaExpiracion != null) && !(fechaExpiracion.equals( "" )) ){
 		    	    	
 		    	    	String[] arrayCadena = fechaExpiracion.split( "-" );  //Fecha STRING a DATE.
 		    	    	
@@ -209,12 +211,12 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    	this.imprimeLog( "Mes:  " + mes  );
 		    	    	this.imprimeLog( "Dia:  " + dia  );
 		    	    	
-		    	    	Date xxx = this.utilCalendario.getFecha( Integer.parseInt( anio ), 
-										    	    			 Integer.parseInt( mes  ), 
-										    	    			 Integer.parseInt( dia  ) );
+		    	    	Date fecha = this.utilCalendario.getFecha( Integer.parseInt( anio ), 
+										    	    			   Integer.parseInt( mes  ), 
+										    	    			   Integer.parseInt( dia  ) );
 		    	    	//----------------------------------//
 		    	    	
-		    	    	pago.setFechaExpiracion( xxx );
+		    	    	pago.setFechaExpiracion( fecha );
 		    	    }
 		    	    		    	    
 		    	    //Asiento.
@@ -316,6 +318,8 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    //}		    	    
 	    	    }
 	    	    
+	    	    
+	            request.setAttribute( "estadoPopup",      estadoPopup      );  //estadoPopup ...
 	            request.setAttribute( "estadoValidacion", estadoValidacion );  //estadoValidacion ...
 	            request.setAttribute( "objValidacion",    objValidacion    );  //Objeto Validacion ...
 	            

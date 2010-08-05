@@ -44,10 +44,10 @@
 			 //alert( "**** DENTRO DE 'conexionCompraBoleto' ****" );	 
 			 
 	         var url = "<%=request.getContextPath()%>/ServletPagoPasaje";
-	         //alert( url );
+	         alert( url );
              
-	         var urlNew = url + '?idAsiento=' + idAsiento;
-	         //alert( urlNew );
+	         var urlNew = url + '?idAsientoSeleccionado=' + idAsiento + '&estadoPopup=FALSE';
+	         alert( urlNew );
 			 	
 	         myFrm.method = '' + 'POST';
 	         myFrm.action = urlNew; 		 		 
@@ -279,7 +279,7 @@
 	                 <tr>
 	                   <td width="10%" >&nbsp;</td>
 	                   <td width="90%" colspan="2" align="center" >                                      
-	                       <a onclick="opener.location=('<%=request.getContextPath()%>/ServletPagoPasaje'); self.close();" style="cursor:pointer">
+	                       <a onclick="opener.location=('<%=request.getContextPath()%>/ServletPagoPasaje?estadoPopup=FALSE'); self.close();" style="cursor:pointer">
 	                          <strong> <font style="color:#FFF; background:#F00; border:thin; border-color:#000; " > &nbsp;&nbsp;&nbsp; <fmt:message key="texto.label.comprarPasaje" /> &nbsp;&nbsp;&nbsp; </font> </strong>
 	                       </a>
 	                   </td>

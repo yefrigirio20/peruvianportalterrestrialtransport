@@ -10,8 +10,6 @@
  
  <%@ page import="com.ttporg.pe.bean.Cliente" %> 
  
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
- 
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  
  <head>
@@ -43,13 +41,61 @@
 			  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
 			   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
 			}
+	</script>	
+	
+	<script type="text/javascript">
+	
+	 var vAJAX;
+	
+	 function RecuperaResidencia( myFrm ){
+	    alert( "DENTRO DE 'RecuperaResidencia' " );
+	 
+	    var vPERSONA = "java"; //document.all.INGRESO_DATOS.value;     //OBTENEMOS EL Id DE LA PERSONA
+	    
+	    alert("LA PERSONA ES: " + vPERSONA);
+	    
+		//CREAMOS EL CONTROL 'XMLHttpRequest', SEGÚN EL NAVEGADOR UTILIZADO: 
+		if( window.XMLHttpRequest ){
+			vAJAX = new XMLHttpRequest();                      //SI NO ES 'INTERNET EXPLORER'
+		}
+		else{
+			vAJAX = new ActiveXObject( "Microsoft.XMLHTTP" );  //SI ES 'INTERNET EXPLORER'
+	    }
+		
+		//ALMACENAMOS EN EL CONTROL, LA FUNCION QUE INVOCARA CUANDO LA PETICION CAMBIE DE ESTADO	
+		vAJAX.onreadystatechange = funcionCallback;        //IMPORTANTE LOS LLAMADOS A LOS METODOS SE HACEN SIN PONER '()'
+	    
+		//ENVIAMOS LA PETICION...
+		vAJAX.open( "GET", "<%=request.getContextPath()%>/ServletAjax?PERSONA=" + vPERSONA , true );
+		vAJAX.send( "" );
+	 }
+	
+	 function funcionCallback(){
+	
+		//COMPROBAMOS SI LA PETICION SE HA COMPROBADO:  (TIENE QUE COINCIDIR CON EL ESTADO #4)
+		if( vAJAX.readyState == 4 ){
+		
+			//COMPROBAMOS SI LA RESPUESTA HA SIDO CORRECTA:  (TIENE QUE COINCIDIR CON 'HTTP 200')
+			if( vAJAX.status == 200 ){
+				//ESCRIBIMOS EL RESULTADO DE LA PAGINA 'HTML' MEDIANTE 'DHTML'
+				document.all.IMPRIMIR.innerHTML = "<STRONG><FONT COLOR='RED'>" + vAJAX.responseText + "</FONT></STRONG>";	
+			}
+			else{
+			     //alert("NO SE PUDO EN: 'vAJAX.status == 200' ");
+			}
+		}
+		else{
+			     //alert("NO SE PUDO EN: 'vAJAX.readyState == 4' ");
+		}
+	 }
 	</script>
+	
  </head>
 
  <body style="margin:0px;" onload="MM_preloadImages('<%=request.getContextPath()%>/imagenes/Paisaje_02.png','<%=request.getContextPath()%>/imagenes/Paisaje_05.png'), detectarControlesEnabledDisabled()"> 
-  
+      
   <form id="idHome" name="frmHome" >
-  
+   
    <!-- TABLA #1 -->
  <table width="100%" height="28" border="0" >
       <tr valign="top" >
@@ -80,6 +126,14 @@
 					  <tr>
 					    <td align="center" colspan="4" >
 			             <center>
+			             
+			            <!--  AJAX
+						<input type="text"   id="INGRESO_DATOS" size="77" name="INGRESO_DATOS" />
+						<input type="button" value="Consultar" onclick="RecuperaResidencia()"  />
+					  
+					     AQUI: <span id="IMPRIMIR"></span>  --> 
+					     <!--PARA QUE SE VISUALICE AQUI EL 'DISTRITO' -->  
+	             		 	                   			             
 			                <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloBienvenida" /> </font>  
 			             </center>       
 				        </td>       
@@ -163,7 +217,7 @@
    <!-- TABLA #3 -->
    <table width="100%" height="28" border="0">
        <tr>
-         <td width="100%" height="22" colspan="4" id=LeftPane>
+         <td width='100%' height='22"' colspan='4' id='leftPane' >
              <jsp:include page="../include/PiePagina.jsp" flush="false"/>   
          </td>
        </tr>   
