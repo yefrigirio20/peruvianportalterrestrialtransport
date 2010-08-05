@@ -44,7 +44,7 @@
 		</center> 
      </td>
 
-     <td >
+     <td>
 	    <center>
 	     <a href="<%=request.getContextPath()%>/jsp/RegistroCliente.jsp" style="cursor:hand;" />
 		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>&nbsp; &nbsp; <fmt:message key="texto.label.menuPrincipal.registro" /> &nbsp; &nbsp;</strong></font>
@@ -52,22 +52,22 @@
 		</center> 
      </td> 
          
-    <td >
+     <td>
 	    <center>
 	     <a href="<%=request.getContextPath()%>/login.action" style="cursor:hand;" />
 		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>&nbsp; &nbsp; <fmt:message key="texto.label.menuPrincipal.login" /> &nbsp; &nbsp;</strong></font>
 	     </a>
         </center>
      </td>  
-          
-    <td >
+      
+     <td>
 	    <center>
 	     <a href="<%=request.getContextPath()%>/ServletCerrarSesion" style="cursor:hand;" />
 		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong>&nbsp; &nbsp; <fmt:message key="texto.label.menuPrincipal.cerrarSesion" /> &nbsp; &nbsp;</strong></font>
 	     </a>
         </center>
-     </td>       
-          
+      </td>        
+        
    </tr>
    
  </table>

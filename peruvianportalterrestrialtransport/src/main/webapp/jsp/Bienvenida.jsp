@@ -23,7 +23,8 @@
 		dojo.event.topic.subscribe("/beforeSelect", function(event, tab, tabContainer){
 		    event.cancel = true;
 		});
-	</script>     
+	</script>    
+	 
  </head>
 
  <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
@@ -46,8 +47,8 @@
          </td>
 
          <!-- INCLUDE PRINCIPAL -->
-         <td width="85%" valign="top">   
- 
+         <td width="85%" valign="top" >  
+  
              <table width="90%" border="0" align="center" cellpadding="0" cellspacing="2" >
 			      <tr>
 				     <td width="80%" colspan="3" > 

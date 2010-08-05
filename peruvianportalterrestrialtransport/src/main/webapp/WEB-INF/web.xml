@@ -86,6 +86,17 @@
 		<url-pattern>/ServletCerrarSesion</url-pattern>
 	</servlet-mapping>
 	
+	
+	<servlet>
+		<servlet-name>ServletAjax</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletAjax</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletAjax</servlet-name>
+		<url-pattern>/ServletAjax</url-pattern>
+	</servlet-mapping>
+	
 	<!-- ***************************** --> 
 		
 	<filter>
