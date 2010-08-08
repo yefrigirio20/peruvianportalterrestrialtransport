@@ -120,7 +120,7 @@ public class ServletAjax extends BaseAjaxServlet{
 	 * @param response
 	 **/
 	public String getXmlContent( HttpServletRequest request, HttpServletResponse response ){			   
-		   System.out.println( "**** DENTRO DE 'ServletAjax', (extends BaseAjaxServlet) **** " );	
+		   this.imprimeLog( "**** DENTRO DE 'ServletAjax', (extends BaseAjaxServlet) **** " );	
 		   
 		   String mensajeRespuesta = new String( "" ); 
 
@@ -154,27 +154,27 @@ public class ServletAjax extends BaseAjaxServlet{
 		
 		if( parametro.equals( "Jesus Hernandez" ) ){
 			cadena = "GUADALAJARA";
-	   	    System.out.println( "SELECCIONO: GUADALAJARA" );
+	   	    this.imprimeLog( "SELECCIONO: GUADALAJARA" );
 		}
 		else if( parametro.equals("Ricardo Guerra") ){
 			cadena = "CHORRILLOS";
-	   	    System.out.println( "SELECCIONO: CHORRILLOS" );
+	   	    this.imprimeLog( "SELECCIONO: CHORRILLOS" );
 		}
 		else if( parametro.equals("Felipe Sebastiani") ){
 			cadena = "UNIVERSITARIA";
-	   	    System.out.println( "SELECCIONO: UNIVERSITARIA" );
+	   	    this.imprimeLog( "SELECCIONO: UNIVERSITARIA" );
 		}
 		else if( parametro.equals("Maria Arnaiz") ){
 			cadena = "CALLAO";
-	   	    System.out.println( "SELECCIONO: CALLAO" );
+	   	    this.imprimeLog( "SELECCIONO: CALLAO" );
 		}
 		else if( parametro.equals("Cathy Cotrina") ){
 			cadena = "LOS OLIVOS";
-	   	    System.out.println( "SELECCIONO: LOS OLIVOS" );
+	   	    this.imprimeLog( "SELECCIONO: LOS OLIVOS" );
 		}		
 		else{
 			cadena = "PERSONA DESCONOCIDA!!!!";  
-	   	    System.out.println( "SELECCIONO: PERSONA DESCONOCIDA!!!!" );
+	   	    this.imprimeLog( "SELECCIONO: PERSONA DESCONOCIDA!!!!" );
 		}	
 		
 		return cadena;
