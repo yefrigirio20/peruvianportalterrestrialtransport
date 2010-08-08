@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Departamento;
 import com.ttporg.pe.dao.DepartamentoDao;
 
@@ -23,6 +25,12 @@ public class DepartamentoDaoImpl extends SqlMapClientDaoSupport implements Depar
 	
 	public static final String OBJETO_NEGOCIO = "Departamento";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarDepartamento_x_codigo
 	 * @param codigo

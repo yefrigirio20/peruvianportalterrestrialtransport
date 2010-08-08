@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.ttporg.pe.bean.Asiento;
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.dao.AsientoDao;
 
 /**
@@ -23,12 +24,18 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
 	
 	public static final String OBJETO_NEGOCIO = "Asiento";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarAsiento_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarAsiento_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarAsiento_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarAsiento_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +47,7 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaAsientos ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +69,7 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
 	 * @param empresa
 	 */
 	public boolean ingresarAsiento( Asiento asiento ){
-        System.out.println( "DENTRO DE 'ingresarAsiento' " );
+        this.imprimeLog( "DENTRO DE 'ingresarAsiento' " );
         
 		boolean mensaje = false;	
 		
@@ -86,7 +93,7 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
 	 * @param Asiento
 	 */
 	public boolean modificarAsiento( Asiento asiento ){
-        System.out.println( "DENTRO DE 'modificarAsiento' " );
+        this.imprimeLog( "DENTRO DE 'modificarAsiento' " );
 		
 		boolean mensaje = false;					
 
@@ -95,7 +102,7 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, asiento );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -117,7 +124,7 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
 	 * @param codigo
 	 */
 	public List<Asiento> obtenerListaAsientos(){
-        System.out.println( "DENTRO DE 'obtenerListaAsientos' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaAsientos' " );
         
         List<Asiento> listaAsiento = null;
         
@@ -138,7 +145,7 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
 	 * @param codigo
 	 */
 	public Asiento obtenerObjetoAsiento_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoAsiento_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoAsiento_x_codigo' " );
 		
         Asiento Asiento = null; 
         
@@ -147,7 +154,7 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
  
         	Asiento = (Asiento)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Asiento: " + Asiento ); 
+        	this.imprimeLog( "Asiento: " + Asiento ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -167,5 +174,13 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
 		
 		return nombObjNegocio;
 	}
- 	
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }
