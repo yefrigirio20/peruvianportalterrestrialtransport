@@ -22,13 +22,13 @@
      
     <!-- ********** SERVLETS ********** -->  
     <servlet>
-		<servlet-name>ServletGeneraBoleto</servlet-name>
-		<servlet-class>com.ttporg.pe.servlet.ServletGeneraBoleto</servlet-class>
+		<servlet-name>ServletGenerarBoletoPago</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletGenerarBoletoPago</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>ServletGeneraBoleto</servlet-name>
-		<url-pattern>/ServletGeneraBoleto</url-pattern>
+		<servlet-name>ServletGenerarBoletoPago</servlet-name>
+		<url-pattern>/ServletGenerarBoletoPago</url-pattern>
 	</servlet-mapping>
 		
 		
@@ -66,13 +66,13 @@
 	
 	
 	<servlet>
-		<servlet-name>ServletPagoPasaje</servlet-name>
-		<servlet-class>com.ttporg.pe.servlet.ServletPagoPasaje</servlet-class>
+		<servlet-name>ServletPagarPasaje</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletPagarPasaje</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>ServletPagoPasaje</servlet-name>
-		<url-pattern>/ServletPagoPasaje</url-pattern>
+		<servlet-name>ServletPagarPasaje</servlet-name>
+		<url-pattern>/ServletPagarPasaje</url-pattern>
 	</servlet-mapping>	
 	
 		

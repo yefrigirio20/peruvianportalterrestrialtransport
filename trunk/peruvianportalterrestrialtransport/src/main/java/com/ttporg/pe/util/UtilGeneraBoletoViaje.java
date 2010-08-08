@@ -3,16 +3,20 @@ package com.ttporg.pe.util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.ttporg.pe.bean.Agencia;
 import com.ttporg.pe.bean.Asiento;
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.bean.Departamento;
 import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.bean.Pago;
+import com.ttporg.pe.bean.Salida;
 import com.ttporg.pe.bean.Servicio;
 import com.ttporg.pe.bean.Transaccion;
 import com.ttporg.pe.bean.Vehiculo;
@@ -76,7 +80,8 @@ public class UtilGeneraBoletoViaje{
 	private TransaccionDao    transaccionDAO     = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = null;	
+	private UtilCalendario    utilCalendario     = null;
+	private BaseBean          beanBase           = null;	
 		
 	{
 	 //this.servicio     = new ServiceFactory();
@@ -95,6 +100,7 @@ public class UtilGeneraBoletoViaje{
 	 this.transaccionDAO  = new TransaccionDaoImpl();
  
 	 this.utilCalendario  = new UtilCalendario();
+	 this.beanBase        = new BaseBean();
 	}
 	
 	//Constructor ...
@@ -102,6 +108,7 @@ public class UtilGeneraBoletoViaje{
     		                      AgenciaDao agenciaDAO, VehiculoDao vehiculoDAO, ServicioDao servicioDAO, 
     		                      AsientoDao asientoDAO, SalidaDao salidaDAO, CalendarioDao calendarioDAO, 
     		                      PagoDao pagoDAO, ClientePagoDao clientePagoDAO, TransaccionDao transaccionDAO ){
+    	
     	 this.clienteDAO      = clienteDAO;
 	   	 this.empresaDAO      = empresaDAO;	
 		 this.departamentoDAO = departamentoDAO;
@@ -127,56 +134,62 @@ public class UtilGeneraBoletoViaje{
 			                        String codigoDepartamento, String codigoEmpresa,
 			                        String codigoAgencia,      String codigoServicio, 
 			                        String codigoAsiento ){
-			 	
+		
+		this.imprimeLog( "********* DENTRO DE [muestraBoletoViaje] **********" ); 
+		
 		String tituloPDF = "...::: BOLETO DE VIAJE :::...";
 				
-		Departamento objDepartamento = (Departamento)this.departamentoDAO.obtenerObjetoDepartamento_x_codigo( Integer.parseInt( codigoDepartamento ) );
-		Empresa      objEmpresa      = (Empresa)this.empresaDAO.obtenerObjetoEmpresa_x_codigo(   Integer.parseInt( codigoEmpresa ) );
-		//Agencia      objAgencia      = (Agencia)this.agenciaDAO.obtenerObjetoAgencia_x_codigo(   Integer.parseInt( codigoAgencia ) );
-		//Servicio     objServicio     = (Servicio)this.servicioDAO.obtenerObjetoServicio_x_codigo( Integer.parseInt( codigoServicio ) );
-		Asiento      objAsiento      = (Asiento)this.asientoDAO.obtenerObjetoAsiento_x_codigo( Integer.parseInt( codigoAsiento ) );
+		Departamento   objDepartamento = (Departamento)this.departamentoDAO.obtenerObjetoDepartamento_x_codigo( Integer.parseInt( codigoDepartamento ) );
+		Empresa        objEmpresa      = (Empresa)this.empresaDAO.obtenerObjetoEmpresa_x_codigo(        Integer.parseInt( codigoEmpresa  ) );
+		Agencia        objAgencia      = (Agencia)this.agenciaDAO.obtenerObjetoAgencia_x_codigo(        Integer.parseInt( codigoAgencia  ) );
+		Servicio       objServicio     = (Servicio)this.servicioDAO.obtenerObjetoServicio_x_codigo(     Integer.parseInt( codigoServicio ) );		
+		Asiento        objAsiento      = (Asiento)this.asientoDAO.obtenerObjetoAsiento_x_codigo(        Integer.parseInt( codigoAsiento  ) );		
+		List<Vehiculo> objVehiculo     = (List<Vehiculo>)this.vehiculoDAO.obtenerListaVehiculo_x_idServicio( Integer.parseInt( codigoServicio ) );
+		List<Salida>   objSalida       = (List<Salida>)this.salidaDAO.obtenerListaSalida_x_idServicio(       Integer.parseInt( codigoServicio ) );
 		
 		System.out.println( "objDepartamento: " + objDepartamento );
 		System.out.println( "objEmpresa:      " + objEmpresa  );
-		System.out.println( "objAsiento:      " + objAsiento  );
-		
-		//Seteando datos en 'Session'.
-		Transaccion objTransaccion = new Transaccion();
- 		
-		Vehiculo objVehiculo = new Vehiculo();
-		objVehiculo.setNombre( "VOLVO"  );
-		objVehiculo.setTipo(   "1 PISO" );
-		
-		Agencia objAgencia = new Agencia();
-		objAgencia.setId( Integer.parseInt( codigoAgencia ) );
-		
-		Servicio objServicio = new Servicio();
-		objServicio.setId( Integer.parseInt( codigoServicio ) );
-		
 		System.out.println( "objAgencia:      " + objAgencia  );
 		System.out.println( "objServicio:     " + objServicio );
+		System.out.println( "objAsiento:      " + objAsiento  );
+		System.out.println( "objVehiculo:     " + objVehiculo.get( 0 ) );
+		System.out.println( "objSalida:       " + objSalida.get(   0 ) );
 		
+		//Seteando datos para la 'TRANSACCION'.
+		Transaccion objTransaccion = new Transaccion();
+ 		
 		objTransaccion.setId( 1 );
 		objTransaccion.getEmpresa().setDepartamento( objDepartamento );
 		objTransaccion.setEmpresa(   objEmpresa  );
 		objTransaccion.setCliente(   objCliente  );
 		objTransaccion.setAgencia(   objAgencia  );
 		objTransaccion.setServicio(  objServicio );
-		objTransaccion.setSalida(    null  );
-		objTransaccion.setVehiculo(  objVehiculo );
+		objTransaccion.setSalida(    objSalida.get( 0 )   );
+		objTransaccion.setVehiculo(  objVehiculo.get( 0 ) );
 		objTransaccion.setAsiento(   objAsiento  );
 		
 		//APLICAR GUARDAR EN BD EL OBJETO.
-		
-		//String tituloPDF = "Comprobante Pago";
 		String textPDF = "Nombre de Cliente : " + objTransaccion.getCliente().getNombres() + " " + objTransaccion.getCliente().getApellidos() + 
-		"\n" + "Empresa Transporte   : " + objTransaccion.getEmpresa().getRazonSocial() + 
-		" Nombre Empresa: " + objTransaccion.getEmpresa().getRazonSocial() + "\n" + "\n" + "Lugar de salida      : Lima                     Lugar de Destino    : Puno " + "\n" + 
-		"Fecha y hora salida  : 2010-06-30 06:00 a.m.    Duracion Estimada   : 20hras." + "\n" + "Tipo Vehiculo        : " + 
-		objTransaccion.getVehiculo().getNombre() + " - " + objTransaccion.getVehiculo().getTipo() + "  Nro. Asiento : " + 
-		objTransaccion.getAsiento().getId() + "\n" + "\n" + "\n" /*+ "Nro. Tarjeta " + objTransaccion.get.getNumTarjeta() */ + 
-		" Pago Total : " + 45;
+		"\n" + 
+		" Nombre Empresa:    " + objTransaccion.getEmpresa().getRazonSocial() + "\n" + "\n" + 
+		"Lugar de salida     : Lima                  " + "\n" +
+		"Lugar de Destino    : Cajamarca "             + "\n" + 
+		"Fecha y hora salida : 2010-06-30 06:00 a.m. " + "\n" +
+		"Duracion Estimada   : 20hras."                + "\n" + 
+		"Tipo Vehiculo       : "                       + "\n" + 
+		objTransaccion.getVehiculo().getNombre() + " - " + objTransaccion.getVehiculo().getTipo() + "\n" + 
+		"Nro. Asiento : " + objTransaccion.getAsiento().getId() + "\n" + "\n" 
+		/*+ "Nro. Tarjeta " + objTransaccion.getNumTarjeta() */ + 
+		"Pago Total : S/" + 45;
 		 
+		//Guarda en BD la transaccion.
+		Boolean  objEstadoTransaccion = (Boolean)this.transaccionDAO.ingresarTransaccion( objTransaccion );
+		System.out.println( "objEstadoTransaccion: " + objEstadoTransaccion );
+				
+		//Modificando Asiendo en BD. (FALTA MOFICAR EN BD EL ASIENTO)
+		//objAsiento.set		
+		//this.asientoDAO.modificarAsiento( asiento );
+		
 		//GUI		
 		int ancho = 800;
 		int alto  = 600;
@@ -207,10 +220,10 @@ public class UtilGeneraBoletoViaje{
 			archivoSalida = new File( rutaFichero );
 		}
 		catch( IOException e ){
-			e.printStackTrace();
+			   e.printStackTrace();
 		}
 		catch( Exception e ){
-			e.printStackTrace();
+			   e.printStackTrace();
 		}
 		finally{
 			if( objDocumento != null ){
@@ -226,6 +239,18 @@ public class UtilGeneraBoletoViaje{
 		catch( Exception e ){
 			e.printStackTrace();
 		} 
+		
+		
+		Transaccion  objTransaccionA  = (Transaccion)this.transaccionDAO.obtenerObjetoTransaccion_x_codigo( 1 );
+		System.out.println( "objTransaccionA: " + objTransaccionA );
+	}
+	
+	/**
+	 * imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
 	}
 	
 }

@@ -1,8 +1,8 @@
-package com.ttporg.pe.servlet;
+package com.ttporg.pe.util;
 
 /**
  * @author: Ricardo Guerra.
- * @clase: LoggerBean.java  
+ * @clase: UtilLogger.java  
  * @descripción: clase que muestra el manejo de los logs de salida.
  * @author_web:  http://frameworksjava2008.blogspot.com - http://viviendoconjavaynomoririntentandolo.blogspot.com 
  * @author_email: cesarricardo_guerra19@hotmail.com.
@@ -10,14 +10,14 @@ package com.ttporg.pe.servlet;
  * @fecha_de_ultima_actualización: 23-07-2009.
  * @versión: 1.0
  **/
-public class LoggerBean{
+public class UtilLogger{
 
    private static org.apache.log4j.Logger loggerLog4j = null;
    
    private String nombreClase;
    
    //Constructor.   
-   public LoggerBean( String nombreClase ){	   
+   public UtilLogger( String nombreClase ){	   
 	   this.nombreClase = nombreClase;
 	   
 	   loggerLog4j   = org.apache.log4j.Logger.getLogger( this.nombreClase );  
@@ -25,7 +25,7 @@ public class LoggerBean{
    
    public static void main( String[] args ){
 
-   	    LoggerBean imprimerLogger = new LoggerBean( "" );
+   	    UtilLogger imprimerLogger = new UtilLogger( "" );
    	 
    	    imprimerLogger.manejoLog4jLogger();
    	}

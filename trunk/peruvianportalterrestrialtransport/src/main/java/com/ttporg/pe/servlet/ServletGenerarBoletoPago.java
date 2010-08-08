@@ -11,12 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import com.ttporg.pe.bean.Asiento;
 import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Cliente;
-import com.ttporg.pe.bean.Departamento;
-import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.dao.AgenciaDao;
 import com.ttporg.pe.dao.AsientoDao;
@@ -27,7 +23,6 @@ import com.ttporg.pe.dao.DepartamentoDao;
 import com.ttporg.pe.dao.EmpresaDao;
 import com.ttporg.pe.dao.PagoDao;
 import com.ttporg.pe.dao.SalidaDao;
-import com.ttporg.pe.dao.ServiceFactory;
 import com.ttporg.pe.dao.ServicioDao;
 import com.ttporg.pe.dao.TransaccionDao;
 import com.ttporg.pe.dao.VehiculoDao;
@@ -45,7 +40,6 @@ import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
 import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilGeneraBoletoViaje;
-import com.ttporg.pe.util.UtilSingleton;
 
 /**
  * @author Cesar Ricardo.
@@ -58,19 +52,19 @@ import com.ttporg.pe.util.UtilSingleton;
  * @fecha_de_creación: dd-mm-yyyy.
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
- */
-public class ServletGeneraBoleto extends HttpServlet implements Servlet{
- 
-	private static final long serialVersionUID   = 7462872182111077306L;
+ **/
+public class ServletGenerarBoletoPago extends HttpServlet implements Servlet{
 
+	private static final long serialVersionUID	 = 1353422387237978869L;
+	
 	private ServletContext    contexto           = null;
 	private RequestDispatcher despachador        = null;
 	
 	//Singleton ...
-	private UtilSingleton     utilSingleton      = null;
+	//private UtilSingleton     utilSingleton    = null;
 	
 	//Service ...
-	private ServiceFactory    servicio           = null;
+	//private ServiceFactory    servicio         = null;
 	
 	//Daos [SPRING] ...
 	private ClienteDao        clienteDAO         = null;
@@ -90,7 +84,7 @@ public class ServletGeneraBoleto extends HttpServlet implements Servlet{
 	private UtilCalendario    utilCalendario     = null;
 	private BaseBean          beanBase           = null;
 	
-	private String            REDIRECCIONAMIENTO = "/jsp/PagoPasaje.jsp";		
+	private static String     REDIRECCIONAMIENTO = "/jsp/PagoPasaje.jsp";		
 	
 	{
 	 //this.servicio     = new ServiceFactory();
@@ -112,7 +106,10 @@ public class ServletGeneraBoleto extends HttpServlet implements Servlet{
 	 this.beanBase        = new BaseBean();
 	}
 	
-	@Override
+	/**
+	 * init
+	 * @param configuracion
+	 **/
 	public void init( ServletConfig configuracion ){
 		this.imprimeLog( "********* DENTRO DE 'init( ServletConfig config )' **********" ); 
 	    
@@ -132,7 +129,7 @@ public class ServletGeneraBoleto extends HttpServlet implements Servlet{
 
 	/**
 	 * acceso_InitParam
-	 */
+	 **/
 	public void acceso_InitParam(){
 		this.imprimeLog( "********** DENTRO DE 'acceso_InitParam' **********" );
 		
@@ -154,9 +151,9 @@ public class ServletGeneraBoleto extends HttpServlet implements Servlet{
 	 * service
 	 * @param request
 	 * @param response
-	 */	
+	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
-		    this.getServletContext().log( "********* DENTRO DE service **********" ); 
+		    this.imprimeLog( "********* DENTRO DE service [ServletGeneraBoleto] **********" ); 
  		    
 		    try{
 		    	HttpSession session = request.getSession( true );
@@ -164,17 +161,34 @@ public class ServletGeneraBoleto extends HttpServlet implements Servlet{
 		    	//OBTENIENDO DE SESION ...
 				Cliente objCliente         = (Cliente)session.getValue( "objCliente" );  		    	
 				Pago    objPago            = (Pago)session.getValue(    "objPago" ); 
-    	    	String  codigoDepartamento = (String)session.getValue( "codigoDepartamento" ); 
-    	    	String  codigoEmpresa      = (String)session.getValue( "codigoEmpresa" ); 							
-    	    	String  codigoAgencia      = (String)session.getValue( "codigoAgencia" ); 
-    	    	String  codigoServicio     = (String)session.getValue( "codigoServicio" ); 	    	    		    	
-    	    	String  codigoAsiento      = (String)session.getValue( "idAsientoSeleccionado" ); 
-    	    	    	
-		    	UtilGeneraBoletoViaje generaBoleto = new UtilGeneraBoletoViaje( this.clienteDAO,    this.empresaDAO,  this.departamentoDAO, this.agenciaDAO,
-		    			                                                        this.vehiculoDAO,   this.servicioDAO, this.asientoDAO,      this.salidaDAO,
-		    			                                                        this.calendarioDAO, this.pagoDAO,     this.clientePagoDAO,  this.transaccionDAO );  
-		    	generaBoleto.muestraBoletoViaje( objCliente, objPago, codigoDepartamento, codigoEmpresa, 
-		    			                         codigoAgencia, codigoServicio, codigoAsiento );
+    	    	String  codigoDepartamento = (String)session.getValue(  "codigoDepartamento" ); 
+    	    	String  codigoEmpresa      = (String)session.getValue(  "codigoEmpresa" ); 							
+    	    	String  codigoAgencia      = (String)session.getValue(  "codigoAgencia" ); 
+    	    	String  codigoServicio     = (String)session.getValue(  "codigoServicio" ); 	    	    		    	
+    	    	String  codigoAsiento      = (String)session.getValue(  "idAsientoSeleccionado" ); 
+    	    	  
+    	    	this.imprimeLog( "" );
+    	    	this.imprimeLog( "OBTENIENDO DATO DE MEMORIA");
+    	    	this.imprimeLog( "-------------------------" );
+    	    	this.imprimeLog( "objCliente:         " + objCliente     );
+    	    	this.imprimeLog( "objPago:            " + objPago        );
+    	    	this.imprimeLog( "codigoDepartamento: " + codigoDepartamento );
+    	    	this.imprimeLog( "codigoEmpresa:      " + codigoEmpresa  );
+    	    	this.imprimeLog( "codigoAgencia:      " + codigoAgencia  );
+    	    	this.imprimeLog( "codigoServicio:     " + codigoServicio );
+    	    	this.imprimeLog( "codigoAsiento:      " + codigoAsiento  );
+    	    	this.imprimeLog( "" );
+    	    	
+    	    	//Carga los Servicios.
+		    	UtilGeneraBoletoViaje utilGeneraBoleto = new UtilGeneraBoletoViaje( this.clienteDAO,    this.empresaDAO,  this.departamentoDAO, this.agenciaDAO,
+		    			                                                            this.vehiculoDAO,   this.servicioDAO, this.asientoDAO,      this.salidaDAO,
+		    			                                                            this.calendarioDAO, this.pagoDAO,     this.clientePagoDAO,  this.transaccionDAO );  
+		    	
+		    	this.imprimeLog( "Obj.utilGeneraBoleto: " + utilGeneraBoleto );
+		    	
+		    	//Genera Boleto.
+		    	utilGeneraBoleto.muestraBoletoViaje( objCliente, objPago, codigoDepartamento, codigoEmpresa, 
+		    			                             codigoAgencia, codigoServicio, codigoAsiento );
 	            
 	            this.contexto    = this.getServletContext();
 	            this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );

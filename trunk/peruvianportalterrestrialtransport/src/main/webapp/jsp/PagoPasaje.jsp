@@ -33,37 +33,6 @@
 	 <!-- FUNCIONES PARA EL CALENDARIO -->
 	 <script type="text/javascript" src="<%=request.getContextPath()%>/js/calendario/calendar-setup.js"> </script>     
      
-	 <script type="text/javascript">
-	    function catcalc( cal ){
-	        var date = cal.date;
-	        var time = date.getTime()
-	        // use the _other_ field
-	        var field = document.getElementById("f_calcdate");
-	        if (field == cal.params.inputField){
-	            field = document.getElementById("f_date_a");
-	            time -= Date.WEEK; // substract one week
-	        } else {
-	            time += Date.WEEK; // add one week
-	        }
-	        var date2 = new Date(time);
-	        field.value = date2.print("%Y-%m-%d %H:%M");
-	    } 
-
-	    function conexionGenerarBoleto( myFrm ){              
-			 //alert( "**** DENTRO DE 'conexionServlet' ****" );	 
-			 
-	         var url = "<%=request.getContextPath()%>/ServletGeneraBoleto";
-	         //alert( url );
-
-	         var urlNew = url '?estadoPopup=TRUE';
-	         //alert( urlNew );
-	         	
-	         myFrm.method = '' + 'POST';
-	         myFrm.action = urlNew; 		 		 
-	         myFrm.submit();
-	    } 
-	</script>    
-     
  </head>
 
  <body style="margin:0px;" onload="detectarControlesEnabledDisabled()" > 
@@ -82,13 +51,13 @@
        <tr valign="top" >
        
          <td width="15%" valign="top" height="100%">
-            <jsp:include page="../include/Menu.jsp" flush="true"/>
+            <jsp:include page="../include/Menu.jsp" flush="true" />
          </td>
 
          <!-- INCLUDE PRINCIPAL -->
          <td width="85%" valign="top" > 
   
-           <form id="idFrnPagoPasaje" name="frnPagoPasaje" method="post" action="<%=request.getContextPath()%>/ServletPagoPasaje?estadoPopup=TRUE" >
+           <form id="idFrnPagoPasaje" name="frnPagoPasaje" method="post" action="<%=request.getContextPath()%>/ServletPagarPasaje?estadoPopup=TRUE" >
                       
             <table width="80%" border="0" align="center" cellpadding="0" cellspacing="2" >
                 <tr>
@@ -157,7 +126,7 @@
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" ><strong><font color="#FF0000" size="2" ><fmt:message key="texto.label.precio" /> (s/):</font></strong></td>
                                <td width="40%" > 
-                                  <input type="text" id="txtIdPrecio" value="45" name="txtPrecio" style=" width : 33px; background-color: #C7C7C7"/>
+                                  <input type="text" id="txtIdPrecio" value="45" name="txtPrecio" readonly="true" style=" width : 33px; background-color: #C7C7C7"/>
                                </td>
                                <td width="10%" align="left" >&nbsp;</td>
                              </tr>
@@ -182,7 +151,7 @@
                              <tr>
                                <td width="10%" >&nbsp;</td>
                                <td width="40%" ><label><fmt:message key="texto.label.fechaExpiracion" />:</label><strong><font color="#FF0000" size="+1" >*</font></strong></td>
-                               <td width="40%" ><input type="text" id="txtIdFechaExpiracion" name="txtFechaExpiracion" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" /> </td>
+                               <td width="40%" ><input type="text" id="txtIdFechaExpiracion" name="txtFechaExpiracion" readonly="true" /> <img src="<%=request.getContextPath()%>/imagenes/Calendario.jpg" id="idLlamarObjetoCalendario" style="cursor:pointer; border:0" /> </td>
                                <td width="10%" align="left" >&nbsp;</td>
                              </tr>
                           </table> 
@@ -219,8 +188,9 @@
                  <tr>
                    <td width="10%" >&nbsp;</td>
                    <td>&nbsp;</td>
-                   <td align="right">                    
-                      <button id="idBtnPagar" type="submit" name="Pagar" style="width:100px; height:30px;" > <fmt:message key="texto.button.pagar" /> </button>
+                   <td align="right">  
+                      <input type="submit" style="width:100px; height:30px;" id="idBtnPagar"
+                             onclick="conexionPagarBoleto( this.form )" value="Pagar" ></input>                                       
                    </td>
                    <td width="10%" > 
                    </td>
@@ -234,12 +204,6 @@
 	                   </a>
                    </td>
                    <td width="45%" align="right" >                       
-                   <c:if test="${estadoValidacion == true}" > 
-						 <button type="submit" id="idBtnGenerarBoleto" name="btnGenerarBoleto" style="width:100px; height:30px;background:#F00;color:#CCC" 
-						         onclick="javascript:conexionGenerarBoleto( this.form )" > 
-						         <fmt:message key="texto.button.generarBoleto" /> 
-						 </button> 
-                      </c:if> 
                    </td>
                    <td width="10%" >&nbsp;</td>
                  </tr>

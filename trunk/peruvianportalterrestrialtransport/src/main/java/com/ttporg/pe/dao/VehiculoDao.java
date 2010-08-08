@@ -23,6 +23,11 @@ public interface VehiculoDao{
 	public Vehiculo obtenerObjetoVehiculo_x_codigo( int codigo );
 
 	/**
+	 * obtenerListaVehiculo_x_idServicio
+	 */
+	public List<Vehiculo> obtenerListaVehiculo_x_idServicio( int codigo );	
+	
+	/**
 	 * obtenerListaVehiculos
 	 */
 	public List<Vehiculo> obtenerListaVehiculos();

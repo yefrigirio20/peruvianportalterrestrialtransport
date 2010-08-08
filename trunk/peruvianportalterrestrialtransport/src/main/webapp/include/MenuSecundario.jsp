@@ -31,7 +31,7 @@
 	        if( objClienteSesion != null ){
 	     %>
 	     
-	     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje" style="cursor:hand; " />
+	     <a href="<%=request.getContextPath()%>/ServletBusquedaPasaje?estado=INICIO" style="cursor:hand; " />
 		   <font size="2" face="Arial" class="textoMenuPrincipal" ><strong><fmt:message key="texto.label.menuPrincipal.disponibilidadAsientos" /> </strong></font>
 	     </a>
 	     

@@ -3,7 +3,7 @@ package com.ttporg.pe.bean;
 import java.util.Map;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.ttporg.pe.servlet.LoggerBean;
+import com.ttporg.pe.util.UtilLogger;
 
 /**
  * @author Cesar Ricardo.
@@ -34,7 +34,7 @@ public class BaseBean extends ActionSupport{
 	private Map<String, Object> objRequest     = null;
 		
 	//Generacion de Log.
-	private LoggerBean loggerBean = null;	
+	private UtilLogger loggerBean = null;	
 	
 	//Constructor ...
 	public BaseBean(){		
@@ -51,8 +51,8 @@ public class BaseBean extends ActionSupport{
 	 **/
 	public void imprimeLog( String mensaje, String nombreClase ){
 		
-		this.loggerBean = new LoggerBean( nombreClase  ); //Envia el nombre de la ubicacion de la clase al LOGs..	
-		this.loggerBean.getLoggerLog4j().info( mensaje );
+		this.loggerBean = new UtilLogger( nombreClase  );  //Envia el nombre de la ubicacion de la clase al LOGs..	
+		this.loggerBean.getLoggerLog4j().debug( mensaje );
 	}
 	
 	public Map<String, Object> getObjAtribute(){

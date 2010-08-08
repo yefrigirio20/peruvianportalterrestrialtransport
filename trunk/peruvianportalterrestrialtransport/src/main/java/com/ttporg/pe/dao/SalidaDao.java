@@ -26,6 +26,11 @@ public interface SalidaDao{
 	public Salida obtenerObjetoSalida_x_codigo( int codigo );
 
 	/**
+	 * obtenerListaSalida_x_idServicio
+	 */
+	public List<Salida> obtenerListaSalida_x_idServicio( int codigo );
+		
+	/**
 	 * obtenerListaSalidas
 	 */
 	public List<Salida> obtenerListaSalidas();

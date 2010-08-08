@@ -50,30 +50,70 @@
 	        }
 	        var date2 = new Date(time);
 	        field.value = date2.print("%Y-%m-%d %H:%M");
-	  }     
-
-	  function PopupBus( url ){
-
-		var newwindow = window.open( url, 'name','height=460, width=250, scrollbars=1, left=520, top=180' );
-		
-		if( window.focus ){ 
-		    newwindow.focus()
-		}
-		
-		return false;
-	   } 
-	   
+	   }     
+ 	   
 	   function conexionServlet( myFrm, tipo ){              
 			 //alert( "**** DENTRO DE 'conexionServlet' ****" );	 
 			 
 	         var url = "<%=request.getContextPath()%>/ServletBusquedaPasaje";
-	         //alert( url );
-	
-	         myFrm.method = '' + 'POST';
-	         myFrm.action = url + '?opcionProceso=' + tipo; 		 		 
-	         myFrm.submit();
+	         
+	         url = url + '?opcionProceso=' + tipo; 
+	         	 
+   	         //alert( url );
+   	     	
+   	         myFrm.method = '' + 'POST';
+   	         myFrm.action = url; 	 		 
+   	         myFrm.submit();           
 	    }  
 
+	   function conexionServletConsultar( myFrm, tipo ){              
+			   //alert( "**** DENTRO DE 'conexionServletConsultar' ****" );	 
+			 
+	           var url = "<%=request.getContextPath()%>/ServletBusquedaPasaje";
+	         
+	           url = url + '?opcionProceso=' + tipo; 
+	         
+		       var departamento = myFrm.idChoDepartamento.selectedIndex;         
+		       var fecha        = myFrm.txtIdFecha.value;   
+		       var empresa      = myFrm.idChoEmpresa.selectedIndex;
+		       var agencia      = myFrm.idChoAgencia.selectedIndex;
+		       var servicio     = myFrm.idChoServTransporte.selectedIndex;
+		       var ciuOrigen    = myFrm.idChoCiudadOrigen.selectedIndex;
+		       var ciuDestino   = myFrm.idChoCiudadDestino.selectedIndex;
+		       
+		       alert( "Obj.departamento: " + departamento );
+		       alert( "Obj.fecha:        " + fecha );
+		       alert( "Obj.empresa: " + empresa );
+		       alert( "Obj.agencia: " + agencia );
+		       alert( "Obj.servicio: " + servicio );
+		       alert( "Obj.ciuOrigen: " + ciuOrigen );
+		       alert( "Obj.ciuDestino: " + ciuDestino );
+               				
+		       if( departamento == '0' || departamento == '-1' ){
+		      	   alert( "Seleccionar un Departamento por favor." );
+		       }
+		       else if( empresa == '0' || empresa == '-1' ){
+		      	        alert( "Ingresar una Empresa por favor." );
+		       }
+		       else if( agencia == '0' || agencia == '-1' ){
+		      	        alert( "Ingresar una Agencia por favor." );
+		       }
+		       else if( servicio == '0' || servicio == '-1' ){
+		      	        alert( "Ingresar una Ciudad de Origen por favor." );
+		       }  
+		       else if( ciuDestino == '0' || ciuDestino == '-1' ){
+		      	        alert( "Ingresar una Ciudad de Destino por favor." );
+		       }
+		       else if( fecha == '' ){
+		      	        alert( "Ingresar una Fecha por favor." );
+		       }  
+		       else{
+		   	        myFrm.method = '' + 'POST';
+		   	        myFrm.action = url; 	 		 
+		   	        myFrm.submit();    
+		       }
+	    }  
+	    
 	   function conexionServletPopup( myFrm, parametro ){              
 			 //alert( "**** DENTRO DE 'conexionServletPopup' ****" );	 
 			 
@@ -83,15 +123,11 @@
 	         
 	         //alert( url );
 	
-	 		 var newwindow = window.open( url, 'name','height=460, width=250, scrollbars=1, left=520, top=180' );
+	 		 var newwindow = window.open( url, 'name','height=580 width=450, scrollbars=1, left=520, top=50' );
 			
 			 if( window.focus ){ 
 			     newwindow.focus()
 			 }
-	
-	         //myFrm.method = '' + 'POST';
-	         //myFrm.action = url + '?opcion=' + parametro; 		 		 
-	         //myFrm.submit();
 	    } 
 	  </script>
  </head>
@@ -146,6 +182,22 @@
 					     <td width="10%" >&nbsp;</td>
 				         <td width="80%" colspan="2" > 
 				         
+				         <c:if test="${estado != 'INICIO'}" > 		         			 
+		                       
+					 	        <table width="40%" >
+						            <c:forEach var="paramObjeto" items="${objValidacion.mensajesNOK}">
+						
+						               <tr> <td> <span class="mensajeTextoError" > ${paramObjeto} </span> </td> </tr>
+						
+						            </c:forEach>
+						            
+							        <c:if test="${estadoValidacion == true}" > 					        
+								        <strong><span class="mensajeTextoError" > ${objValidacion.mensajeOK} </span> </strong>	
+							        </c:if>  
+						        </table>
+						        <br></br>
+		                  </c:if>                 			         
+				         
 	                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px;" >
 	                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><label><fmt:message key="texto.label.filtro" />:</label> </legend>
 	                   
@@ -156,7 +208,8 @@
                                      <td width="40%"><label><fmt:message key="texto.label.departamento" />:</label></td>
                                      <td width="40%" >
                                          <select id="idChoDepartamento" name="choDepartamento" style="width:150px;" onchange="conexionServlet( this.form, 'cargarEmpresa' )" >  
-  										    <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
+  										    <option value="0" > Seleccionar </option>
+  										    <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >  										       
             								   <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.id} - ${paramListaDepartamento.nombre}</option>  
                                             </c:forEach>
 					                     </select>
@@ -233,8 +286,9 @@
                                            <option value="UCAYALI" > UCAYALI </option> 
                                            <option value="CHIMBOTE" > CHIMBOTE </option> 
                                            -->
-                                           <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
-            								  <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.nombre}</option>  
+                                           <option value="0" > Seleccionar </option>                                           
+                                           <c:forEach var="paramListaDepartamentoOrigen" items="${listaDepartaOrigen}" >                                              
+            								  <option value="${paramListaDepartamentoOrigen.id}">${paramListaDepartamentoOrigen.nombre}</option>  
                                            </c:forEach>
                                        </select>
                                      </td>
@@ -262,8 +316,9 @@
                                            <option value="UCAYALI" > UCAYALI </option> 
                                            <option value="CHIMBOTE" > CHIMBOTE </option> 
                                            -->
-                                           <c:forEach var="paramListaDepartamento" items="${listaDepartamento}" >
-            								  <option value="${paramListaDepartamento.id}" ${paramListaDepartamento.id == codigoDepartamento ? 'selected' : ''}>${paramListaDepartamento.nombre}</option>  
+                                           <option value="0" > Seleccionar </option>
+                                           <c:forEach var="paramListaDepartamentoDestino" items="${listaDepartaDestino}" >
+            								  <option value="${paramListaDepartamentoDestino.id}">${paramListaDepartamentoDestino.nombre}</option> 
                                            </c:forEach>
                                        </select>
                                      </td>

@@ -43,9 +43,8 @@ import com.ttporg.pe.dao.impl.SalidaDaoImpl;
 import com.ttporg.pe.dao.impl.ServicioDaoImpl;
 import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
 import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
+import com.ttporg.pe.dto.BeanValidacionDto;
 import com.ttporg.pe.dto.DetallePasajeDTO;
-import com.ttporg.pe.util.UtilCalendario;
-import com.ttporg.pe.util.UtilSingleton;
 
 /**
  * @author Cesar Ricardo.
@@ -67,10 +66,10 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	private RequestDispatcher despachador        = null;
 	
 	//Singleton ...
-	private UtilSingleton     utilSingleton      = null;
+	//private UtilSingleton     utilSingleton    = null;
 		
 	//Service ...
-	//private ServiceFactory    servicio           = null;
+	//private ServiceFactory    servicio         = null;
 	
 	//Daos [SPRING] ...
 	private ClienteDao        clienteDAO         = null;
@@ -87,10 +86,9 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	private TransaccionDao    transaccionDAO     = null;
  	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = null;
 	private BaseBean          beanBase           = null;
 	
-	private String            REDIRECCIONAMIENTO = "/jsp/BusquedaPasaje.jsp";		
+	private static String     REDIRECCIONAMIENTO = "/jsp/BusquedaPasaje.jsp";		
 		
 	{
 	 //this.servicio     = new ServiceFactory();
@@ -107,12 +105,14 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	 this.pagoDAO         = new PagoDaoImpl();
 	 this.clientePagoDAO  = new ClientePagoDaoImpl();
 	 this.transaccionDAO  = new TransaccionDaoImpl();
- 
-	 this.utilCalendario  = new UtilCalendario();	 
+ 	 
 	 this.beanBase        = new BaseBean();
 	}
 		
-	@Override
+	/**
+	 * init
+	 * @param configuracion
+	 **/
 	public void init( ServletConfig configuracion ){
 		this.imprimeLog( "********* DENTRO DE 'init( ServletConfig config )' **********" );
 	    
@@ -132,7 +132,7 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 
 	/**
 	 * acceso_InitParam
-	 */
+	 **/
 	public void acceso_InitParam(){
 		this.imprimeLog( "********** DENTRO DE 'acceso_InitParam' **********" );
 		
@@ -166,6 +166,13 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	    List<DetallePasajeDTO>  listaDetallePasajeDTO = null;
 	    Departamento            objDepartamento       = null;
 	    	
+	    BeanValidacionDto objValidacion      = new BeanValidacionDto();	  
+	    
+	    String            MSJ_VALIDACION_INS = " * Ingresar un valor en: ";
+	    String            MSJ_VALIDACION_CST = " * Selecciona un valor en: ";
+	    
+	    boolean           estadoValidacion   = true;
+	    
 	    try{
     	    String codigoDepartamento = request.getParameter( "choDepartamento"   );
     	    String codigoEmpresa      = request.getParameter( "choEmpresa"        );
@@ -179,8 +186,8 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    
     	    String opcionProceso      = request.getParameter( "opcionProceso"     );
     	    String opcionLista        = request.getParameter( "opcionLista"       );
-    	    
-    	    String codigoSalida       = request.getParameter( "codigoSalida"      );	  
+     	    
+    	    String estado             = request.getParameter( "estado"            );
     	    
     	    String nomCiudadOrigen    = "";
     	    String nomCiudadDestina   = "";
@@ -194,41 +201,82 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
     	    this.imprimeLog( "codigoDepartamento: " + codigoDepartamento ); 
     	    this.imprimeLog( "codigoEmpresa:      " + codigoEmpresa      );
     	    this.imprimeLog( "codigoAgencia:      " + codigoAgencia      );
-    	    this.imprimeLog( "codigoServicio:     " + codigoServicio     );    	    
+    	    this.imprimeLog( "codigoServicio:     " + codigoServicio     );
+    	    this.imprimeLog( "estado:             " + estado             );
+    	    this.imprimeLog( "" );
     	    
 	    	HttpSession session = request.getSession( true );
 	    	
 	    	//SETEANDO EN SESION ...--------------------------
-	    	if( codigoDepartamento != null ){	    		
-	    		session.setAttribute( "codigoDepartamento", codigoDepartamento ); 
+	    	if( (codigoDepartamento != null) && !(codigoDepartamento.equals( "0" )) ){	    		
+	    		session.setAttribute( "codigoDepartamento", codigoDepartamento ); 	
+	    		
+	    		objValidacion.setMensajeOK( "TRUE" );
+	    	}
+	    	else{
+	    		objValidacion.getMensajesNOK().add( MSJ_VALIDACION_CST + "[Departamento]" );
+	    		estadoValidacion = false;	
+	    		objValidacion.setMensajeOK( "FALSE" );
 	    	}
 	    	
-	    	if( codigoEmpresa != null ){	 	    		
+	    	if( (codigoEmpresa != null) && !(codigoEmpresa.equals( "0" )) ){	 	    		
 	    		session.setAttribute( "codigoEmpresa",  codigoEmpresa ); 
+	    		
+	    		objValidacion.setMensajeOK( "TRUE" );
+	    	}
+	    	else{
+    		    objValidacion.getMensajesNOK().add( MSJ_VALIDACION_CST + "[Empresa]" );
+	    		estadoValidacion = false;	
+	    		objValidacion.setMensajeOK( "FALSE" );
 	    	}
 	    	
-	    	if( codigoAgencia != null ){	 	    		
+	    	if( (codigoAgencia != null) && !(codigoAgencia.equals( "0" )) ){	 	    		
 	    		session.setAttribute( "codigoAgencia",  codigoAgencia ); 
+	    		
+	    		objValidacion.setMensajeOK( "TRUE" );
+	    	}
+	    	else{
+    		    objValidacion.getMensajesNOK().add( MSJ_VALIDACION_CST + "[Agencia]" );
+	    		estadoValidacion = false;	
+	    		objValidacion.setMensajeOK( "FALSE" );
 	    	}
 	    	
-	    	if( codigoServicio != null ){	 	    		
+	    	if( (codigoServicio != null) && !(codigoServicio.equals( "0" )) ){	 	    		
 	    		session.setAttribute( "codigoServicio",  codigoServicio ); 
+	    		
+	    		objValidacion.setMensajeOK( "TRUE" );
 	    	}
+	    	else{
+    		    objValidacion.getMensajesNOK().add( MSJ_VALIDACION_CST + "[Servicio]" );
+	    		estadoValidacion = false;	
+	    		objValidacion.setMensajeOK( "FALSE" );
+	    	}
+	    	
+	    	if( (fechaViaje != null) && !(fechaViaje.equals( "" )) ){	 	    		
+	    		session.setAttribute( "fechaViaje",  fechaViaje );   
+	    		
+	    		objValidacion.setMensajeOK( "TRUE" );
+	    	}
+	    	else{
+    		    objValidacion.getMensajesNOK().add( MSJ_VALIDACION_INS + "[Fecha]" );
+	    		estadoValidacion = false;	
+	    		objValidacion.setMensajeOK( "FALSE" );
+	    	}
+	    	
 	    	//-------------------------------------------------
     	        	    
     	    //----------------------- DEPARTAMENTO -----------------------//
 	    	listaDepartamento = new ArrayList<Departamento>();	
 	    	
 	    	listaDepartamento = this.departamentoDAO.obtenerListaDepartamentos();
-	    	this.imprimeLog("listaDepartamento SIZE: " + listaDepartamento.size() );
 	    	
 	    	//-------------- Obtener 'BASE DE DATOS'. --------------//
-	    	if( idCiudadOrigen != null ){	    		
+	    	if( (idCiudadOrigen != null) && !(idCiudadOrigen.equals( "0" )) ){	    		
 	    		objDepartamento  = this.departamentoDAO.obtenerObjetoDepartamento_x_codigo( Integer.parseInt( idCiudadOrigen ) );  
 	    		nomCiudadOrigen  = objDepartamento.getNombre();
 	    	}
 	    	
-	    	if( idCiudadDestina != null ){	    		
+	    	if( (idCiudadDestina != null) && !(idCiudadDestina.equals( "0" )) ){	    		
 	    		objDepartamento  = this.departamentoDAO.obtenerObjetoDepartamento_x_codigo( Integer.parseInt( idCiudadDestina ) );  
 	    		nomCiudadDestina = objDepartamento.getNombre();
 	    	}
@@ -237,71 +285,88 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 	    	this.imprimeLog( "nomCiudadDestina:   " + nomCiudadDestina   );
     	    this.imprimeLog( "fechaViaje:         " + fechaViaje         );    	    
     	    this.imprimeLog( "" );
-    	    
-	    	this.imprimeLog( "TAMANIO 'listaDepartamento': " + listaDepartamento.size() );
 	    	//------------------------------------------------------//
 
 		    //-------------------------------------------------------------//
 	    	
 	    	//Validacion ...
 	    	if( opcionProceso != null ){
-	    		
-	    	    //-------------------------- EMPRESA --------------------------//
-		    	if( opcionProceso.equalsIgnoreCase( "cargarEmpresa" )        || 
-		    		opcionProceso.equalsIgnoreCase( "cargarAgencia" )        || 		    			
-		    	    opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) || 
-		    	    opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){		    			    		
-		    		
-			    	listaEmpresa = new ArrayList<Empresa>();
-			    	listaEmpresa = this.empresaDAO.obtenerListaEmpresas_x_departamento( Integer.parseInt( codigoDepartamento ) ); //FILTRAR ...
-		    	}
-		    	//-------------------------------------------------------------//
-		    	
-		    	//------------------------- AGENCIA------------------------//
-		    	if( opcionProceso.equalsIgnoreCase( "cargarAgencia" )        || 
-		    		opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) ||
-		    	    opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
-		    		
-		    		
-		    		if( codigoEmpresa != null ){		    			
-		    			listaAgencia = new ArrayList<Agencia>();
-		    			listaAgencia = this.agenciaDAO.obtenerListaAgencias_x_empresa( Integer.parseInt( codigoEmpresa ) ); //FILTRAR ...
-		    		}		    		
-		    	}
-		    	
-	    	    //------------------------- SERVICIO --------------------------//
-		    	if( opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) || 
-		    		opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
-		    		
-		    		if( codigoEmpresa != null ){		    			
-		    			listaServicio = new ArrayList<Servicio>();			    			    		
-		    			listaServicio = this.servicioDAO.obtenerListaServicios_x_agencia( Integer.parseInt( codigoAgencia ) ); //FILTRAR ...
-		    		}
-		    	}
-			    //--------------------------------------------------------------//
-		    	
-	    	    //------------------------- SALIDAS ----------------------------//
-		    	if( opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
-		    		listaDetallePasajeDTO = new ArrayList<DetallePasajeDTO>();	    		
-		    		
-		    		if( (codigoEmpresa != null) && (codigoAgencia != null) && (codigoServicio != null) ){
-		    			
-		    			listaDetallePasajeDTO = this.salidaDAO.obtenerListaDetallePasajeDTO( Integer.parseInt( codigoEmpresa  ), 
-																	    					 Integer.parseInt( codigoAgencia  ), 
-																	    					 Integer.parseInt( codigoServicio ), 
-																	    					 nomCiudadOrigen,  
-																	    					 nomCiudadDestina, 
-																	    					 new Date() );  //FILTRAR ...    		
-		    		}        
-		    	}
-		    	//--------------------------------------------------------------//
+	    	    	
+			    	    //-------------------------- EMPRESA --------------------------//
+				    	if( opcionProceso.equalsIgnoreCase( "cargarEmpresa" )        || 
+				    		opcionProceso.equalsIgnoreCase( "cargarAgencia" )        || 		    			
+				    	    opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) || 
+				    	    opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){		    			    		
+				    		
+					    	listaEmpresa = new ArrayList<Empresa>();
+					    	
+					    	listaEmpresa = this.empresaDAO.obtenerListaEmpresas_x_departamento( Integer.parseInt( codigoDepartamento ) ); //FILTRAR ...
+				    	}
+				    	//-------------------------------------------------------------//
+				    	
+				    	//------------------------- AGENCIA------------------------//
+				    	if( opcionProceso.equalsIgnoreCase( "cargarAgencia" )        || 
+				    		opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) ||
+				    	    opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
+				    		
+				    		
+				    		if( codigoEmpresa != null ){		    			
+				    			listaAgencia = new ArrayList<Agencia>();
+				    			listaAgencia = this.agenciaDAO.obtenerListaAgencias_x_empresa( Integer.parseInt( codigoEmpresa ) ); //FILTRAR ...
+				    		}		    		
+				    	}
+				    	
+			    	    //------------------------- SERVICIO --------------------------//
+				    	if( opcionProceso.equalsIgnoreCase( "cargarServTransporte" ) || 
+				    		opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
+				    		
+				    		if( codigoEmpresa != null ){		    			
+				    			listaServicio = new ArrayList<Servicio>();			    			    		
+				    			listaServicio = this.servicioDAO.obtenerListaServicios_x_agencia( Integer.parseInt( codigoAgencia ) ); //FILTRAR ...
+				    		}
+				    	}
+					    //--------------------------------------------------------------//
+				    	
+			    		
+	    	    //Validacion ...
+	    	    if( estadoValidacion == true ){
+	    	    	objValidacion.setMensajeOK( "Proceso Exitoso" ); 
+	    	    	
+			    	    //------------------------- SALIDAS ----------------------------//
+				    	if( opcionProceso.equalsIgnoreCase( "cargarListadoFiltrado" ) ){
+				    		listaDetallePasajeDTO = new ArrayList<DetallePasajeDTO>();	    		
+				    		
+				    		if( (codigoEmpresa != null) && (codigoAgencia != null) && (codigoServicio != null) ){
+				    			
+				    			listaDetallePasajeDTO = this.salidaDAO.obtenerListaDetallePasajeDTO( Integer.parseInt( codigoEmpresa  ), 
+																			    					 Integer.parseInt( codigoAgencia  ), 
+																			    					 Integer.parseInt( codigoServicio ), 
+																			    					 nomCiudadOrigen,  
+																			    					 nomCiudadDestina, 
+																			    					 new Date() );  //FILTRAR ...    		
+				    		}        
+				    	}
+				    	//--------------------------------------------------------------//
+	    	    }
 	    	}
+			    	
+	    	System.out.println( "totalErrores: " + objValidacion.getMensajesNOK().size() );
+	    	
+	    	
+            request.setAttribute( "estadoValidacion", estadoValidacion );  //estadoValidacion ...
+            request.setAttribute( "objValidacion",    objValidacion    );  //Objeto Validacion ...            
+            request.setAttribute( "totalErrores",     objValidacion.getMensajesNOK().size() );  //Objeto Validacion ...
+            request.setAttribute( "estado",           estado );  //Objeto Validacion ...
+            
 	    	
 	    	request.setAttribute( "codigoDepartamento", codigoDepartamento );        //estadoValidacion ... (PARA QUE SE QUEDE SELECCIONADO EN EL COMBO).       
 	    	request.setAttribute( "codigoEmpresa",      codigoEmpresa );             //estadoValidacion ... (PARA QUE SE QUEDE SELECCIONADO EN EL COMBO).     
 	    	request.setAttribute( "codigoAgencia",      codigoAgencia );             //estadoValidacion ... (PARA QUE SE QUEDE SELECCIONADO EN EL COMBO).  
 	    	
             request.setAttribute( "listaDepartamento",  listaDepartamento );         //estadoValidacion ...
+            request.setAttribute( "listaDepartaOrigen", listaDepartamento );         //estadoValidacion ...
+            request.setAttribute( "listaDepartaDestino",listaDepartamento );         //estadoValidacion ...
+            
             request.setAttribute( "listaEmpresa",       listaEmpresa  );             //estadoValidacion ...
             request.setAttribute( "listaAgencia",       listaAgencia  );             //estadoValidacion ...            
             request.setAttribute( "listaServicio",      listaServicio );             //estadoValidacion ...

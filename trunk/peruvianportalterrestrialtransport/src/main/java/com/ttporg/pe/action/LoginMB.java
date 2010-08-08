@@ -30,7 +30,6 @@ import com.ttporg.pe.dao.impl.SalidaDaoImpl;
 import com.ttporg.pe.dao.impl.ServicioDaoImpl;
 import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
 import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
-import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilEncriptacion;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.web.context.WebApplicationContext;
@@ -70,7 +69,6 @@ public class LoginMB extends BaseBean{
 	private TransaccionDao   transaccionDAO   = null;
  	
 	//Utilitarios ...
-	private UtilCalendario   utilCalendario   = null;
 	private UtilEncriptacion utilEncriptacion = null; 
 	private BaseBean         beanBase         = null;
 	
@@ -95,13 +93,12 @@ public class LoginMB extends BaseBean{
 	 this.transaccionDAO   = new TransaccionDaoImpl();
  
 	 this.utilEncriptacion = new UtilEncriptacion(); 
-	 this.utilCalendario   = new UtilCalendario();	 
 	 this.beanBase         = new BaseBean();
 	}
  	
 	/**
 	 * execute
-	 */
+	 **/
 	public String execute(){
 		this.imprimeLog( "******  execute() *********" );
 		
@@ -128,27 +125,25 @@ public class LoginMB extends BaseBean{
 				String cadenaEncriptada    = this.utilEncriptacion.encriptarCIPHER(    this.password    );
 				String cadenaDesencriptada = this.utilEncriptacion.desencriptarCIPHER( cadenaEncriptada );
 				
-	    		System.out.println( "cadena Original:     " + this.password );
-	    		System.out.println( "cadenaEncriptada:    " + cadenaEncriptada );
-	    		System.out.println( "cadenaDesencriptada: " + cadenaDesencriptada );
+				this.imprimeLog( "Cadena Original:      " + this.password       );
+				this.imprimeLog( "Cadena Encriptada:    " + cadenaEncriptada    );
+				this.imprimeLog( "Cadena Desencriptada: " + cadenaDesencriptada );
 				
 				objCliente.setUsuario(  this.usuario  );
 				objCliente.setPassword( cadenaEncriptada );
 				//objCliente.setPassword( this.password ); 
-				
+				 
 				//-------------- Obtener 'BASE DE DATOS'. --------------//
-				Cliente objClienteDB = this.clienteDAO.loginCliente( objCliente );
-				this.imprimeLog( "objClienteDB: " + objClienteDB );
+				Cliente objClienteBD = this.clienteDAO.loginCliente( objCliente );
+				this.imprimeLog( "objClienteDB: " + objClienteBD );
 				//------------------------------------------------------//
-				
-    	    	 this.imprimeLog( "BD EXISTE: " );
     	    	 
     	    	 //Validando ...
-    	    	 if( objClienteDB.getUsuario().equalsIgnoreCase(  this.usuario  ) &&
-    	    		 objClienteDB.getPassword().equalsIgnoreCase( cadenaEncriptada ) ){
+    	    	 if( objClienteBD.getUsuario().equalsIgnoreCase(  this.usuario  ) &&
+    	    		 objClienteBD.getPassword().equalsIgnoreCase( cadenaEncriptada ) ){
     	    		 
     				 //Setear Obj.Singleton en SESION.
-                     this.getObjSession().put( "objCliente", objClienteDB ); 
+                     this.getObjSession().put( "objCliente", objClienteBD ); 
     	    		  
   					 addActionMessage( MENSAJE_AUTENTICACION_OK );
 					 estadoRetorno = SUCCESS;                          //Se reenvia a la interfaz siguiente.	

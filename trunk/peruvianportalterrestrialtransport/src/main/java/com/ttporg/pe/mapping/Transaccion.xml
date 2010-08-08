@@ -7,10 +7,10 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
         
     <!-- ******************************************************** -->
     <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
-    <!-- ******************************************************** -->  
+    <!-- ******************************************************** -->      
      <sql id="selectTransaccionsSinTag">   
 		SELECT t.ID, t.EMPRESA_ID, t.CLIENTE_ID, t.AGENCIA_ID, t.SERVICIO_ID,  
-		       t.SALIDA_ID, t.VEHICULO_ID, t.ASIENTO_ID, t.CLIENTE_PAGO_ID  
+		       t.SALIDA_ID, t.VEHICULO_ID, t.ASIENTO_ID   
 		FROM   TRANSACCION t
      </sql>	       
         
@@ -29,12 +29,12 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	<select id="getListaTransaccion" resultClass="transaccion" >
         <include refid="selectTransaccionsSinTag" />
     </select>
-
+	
 	<insert id="insertTransaccion" parameterClass="com.ttporg.pe.bean.Transaccion" >
-		INSERT INTO TRANSACCION( ID, EMPRESA_ID, CLIENTE_ID, AGENCIA_ID, SERVICIO_ID,
+		INSERT INTO TRANSACCION( EMPRESA_ID, CLIENTE_ID, AGENCIA_ID, SERVICIO_ID,
 		                         SALIDA_ID, VEHICULO_ID, ASIENTO_ID )
 		                            
-		VALUES( #id#, #empresa.id#, #cliente.id#, #agencia.id#, #servicio.id#, 
+		VALUES( #empresa.id#, #cliente.id#, #agencia.id#, #servicio.id#, 
 		        #salida.id#, #vehiculo.id#, #asiento.id# )
 	</insert>
     
@@ -54,7 +54,6 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 		DELETE FROM TRANSACCION 
 		WHERE  ID = #codigoEliminacion# 
 	</delete> 
-    
- 
+     
  </sqlMap>
 
