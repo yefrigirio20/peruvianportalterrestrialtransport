@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.ttporg.pe.bean.Agencia;
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.dao.AgenciaDao;
 
 /**
@@ -23,12 +24,18 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	
 	public static final String OBJETO_NEGOCIO = "Agencia";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarAgencia_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarAgencia_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarAgencia_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarAgencia_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +47,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaAgencias ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +69,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	 * @param empresa
 	 */
 	public boolean ingresarAgencia( Agencia agencia ){
-        System.out.println( "DENTRO DE 'ingresarAgencia' " );
+        this.imprimeLog( "DENTRO DE 'ingresarAgencia' " );
         
 		boolean mensaje = false;	
 		
@@ -86,7 +93,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	 * @param Agencia
 	 */
 	public boolean modificarAgencia( Agencia agencia ){
-        System.out.println( "DENTRO DE 'modificarAgencia' " );
+        this.imprimeLog( "DENTRO DE 'modificarAgencia' " );
 		
 		boolean mensaje = false;					
 
@@ -95,7 +102,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, agencia );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -117,7 +124,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	 * @param codigo
 	 */
 	public List<Agencia> obtenerListaAgencias(){
-        System.out.println( "DENTRO DE 'obtenerListaAgencias' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaAgencias' " );
         
         List<Agencia> listaAgencia = null;
         
@@ -137,7 +144,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	 * obtenerListaAgencias_x_codigo
 	 **/
 	public List<Agencia> obtenerListaAgencias_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerListaAgencias_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaAgencias_x_codigo' " );
         
         List<Agencia> listaAgencia = null;
         
@@ -157,7 +164,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	 * obtenerListaAgencias_x_empresa
 	 **/
 	public List<Agencia> obtenerListaAgencias_x_empresa( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerListaAgencias_x_empresa' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaAgencias_x_empresa' " );
         
         List<Agencia> listaAgencia = null;
         
@@ -178,7 +185,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 	 * @param codigo
 	 */
 	public Agencia obtenerObjetoAgencia_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoAgencia_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoAgencia_x_codigo' " );
 		
         Agencia Agencia = null; 
         
@@ -187,7 +194,7 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
  
         	Agencia = (Agencia)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Agencia: " + Agencia ); 
+        	this.imprimeLog( "Agencia: " + Agencia ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -208,4 +215,12 @@ public class AgenciaDaoImpl extends SqlMapClientDaoSupport implements AgenciaDao
 		return nombObjNegocio;
 	}
  	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }

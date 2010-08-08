@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Pago;
 import com.ttporg.pe.dao.PagoDao;
 
@@ -23,12 +25,18 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
 	
 	public static final String OBJETO_NEGOCIO = "Pago";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarPago_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarPago_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarPago_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarPago_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +48,7 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaPagos ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +70,7 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
 	 * @param empresa
 	 */
 	public boolean ingresarPago( Pago pago ){
-        System.out.println( "DENTRO DE 'ingresarPago' " );
+        this.imprimeLog( "DENTRO DE 'ingresarPago' " );
         
 		boolean mensaje = false;	
 		
@@ -86,7 +94,7 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
 	 * @param Pago
 	 */
 	public boolean modificarPago( Pago pago ){
-        System.out.println( "DENTRO DE 'modificarPago' " );
+        this.imprimeLog( "DENTRO DE 'modificarPago' " );
 		
 		boolean mensaje = false;					
 
@@ -95,7 +103,7 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, pago );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -117,7 +125,7 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
 	 * @param codigo
 	 */
 	public List<Pago> obtenerListaPagos(){
-        System.out.println( "DENTRO DE 'obtenerListaPagos' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaPagos' " );
         
         List<Pago> listaPago = null;
         
@@ -138,7 +146,7 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
 	 * @param codigo
 	 */
 	public Pago obtenerObjetoPago_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoPago_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoPago_x_codigo' " );
 		
         Pago Pago = null; 
         
@@ -147,7 +155,7 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
  
         	Pago = (Pago)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Pago: " + Pago ); 
+        	this.imprimeLog( "Pago: " + Pago ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -167,5 +175,13 @@ public class PagoDaoImpl extends SqlMapClientDaoSupport implements PagoDao{
 		
 		return nombObjNegocio;
 	}
- 	
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }

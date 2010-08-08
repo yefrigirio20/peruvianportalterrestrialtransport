@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Salida;
 import com.ttporg.pe.dao.SalidaDao;
 import com.ttporg.pe.dto.DetalleAsientoDTO;
@@ -27,13 +29,19 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	public static final String OBJETO_NEGOCIO  = "Salida";
 	public static final String OBJETO_NEGOCIO2 = "DetallePasajeDTO";
 	public static final String OBJETO_NEGOCIO3 = "DetalleAsientoDTO";
+
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
 	
 	/**
 	 * eliminarSalida_x_codigo
 	 * @param codigo
 	 **/
 	public boolean eliminarSalida_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarSalida_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarSalida_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -45,7 +53,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaSalidas ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -67,7 +75,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	 * @param empresa
 	 */
 	public boolean ingresarSalida( Salida Salida ){
-        System.out.println( "DENTRO DE 'ingresarSalida' " );
+        this.imprimeLog( "DENTRO DE 'ingresarSalida' " );
         
 		boolean mensaje = false;	
 		
@@ -91,7 +99,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	 * @param Salida
 	 */
 	public boolean modificarSalida( Salida Salida ){
-        System.out.println( "DENTRO DE 'modificarSalida' " );
+        this.imprimeLog( "DENTRO DE 'modificarSalida' " );
 		
 		boolean mensaje = false;					
 
@@ -100,7 +108,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, Salida );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -122,7 +130,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	 * @param codigo
 	 */
 	public List<Salida> obtenerListaSalidas(){
-        System.out.println( "DENTRO DE 'obtenerListaSalidas' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaSalidas' " );
         
         List<Salida> listaSalida = null;
         
@@ -143,7 +151,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	 * @param codigo
 	 **/
 	public Salida obtenerObjetoSalida_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoSalida_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoSalida_x_codigo' " );
 		
         Salida salida = null; 
         
@@ -152,7 +160,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
  
         	salida = (Salida)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Salida: " + salida ); 
+        	this.imprimeLog( "Salida: " + salida ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -166,7 +174,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	 * @param codigo
 	 **/
 	public List<Salida> obtenerListaSalida_x_idServicio( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerListaSalida_x_idServicio' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaSalida_x_idServicio' " );
 		
         List<Salida> listaSalida = null;
         
@@ -231,7 +239,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	public List<DetallePasajeDTO> obtenerListaDetallePasajeDTO( int idEmpresa, int idAgencia, int idServicio, 
 			                                                    String departamentoSalida, String departamentoDestino, 
 			                                                    Date fechaHoraSalida ){
-        System.out.println( "DENTRO DE 'obtenerListaDetallePasajeDTO' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaDetallePasajeDTO' " );
         
         List<DetallePasajeDTO> listaDetallePasajeDTO = null;
          
@@ -261,7 +269,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	 * @param idServicio
 	 **/
 	public List<DetalleAsientoDTO> obtenerListaDetalleAsientoDTO( int idServicio ){
-        System.out.println( "DENTRO DE 'obtenerListaDetalleAsientoDTO' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaDetalleAsientoDTO' " );
         
         List<DetalleAsientoDTO> listaDetalleAsientoDTO = null; 
                  
@@ -274,7 +282,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
         	
         	listaDetalleAsientoDTO = (List<DetalleAsientoDTO>)this.getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, objDetalleAsientoDTO );  
             
-        	System.out.println( "listaDetalleAsientoDTO A: " + listaDetalleAsientoDTO.size() );
+        	this.imprimeLog( "listaDetalleAsientoDTO A: " + listaDetalleAsientoDTO.size() );
         } 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -282,5 +290,13 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
  
         return listaDetalleAsientoDTO;
 	}
- 	
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }

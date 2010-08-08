@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Cliente;
 import com.ttporg.pe.dao.ClienteDao;
 
@@ -23,6 +25,12 @@ public class ClienteDaoImpl extends SqlMapClientDaoSupport implements ClienteDao
 	
 	public static final String OBJETO_NEGOCIO = "Cliente";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarCliente_x_codigo
 	 * @param codigo

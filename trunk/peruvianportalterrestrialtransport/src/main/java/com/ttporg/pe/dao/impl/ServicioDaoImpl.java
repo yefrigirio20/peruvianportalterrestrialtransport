@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Servicio;
 import com.ttporg.pe.dao.ServicioDao;
 
@@ -23,12 +25,18 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 	
 	public static final String OBJETO_NEGOCIO = "Servicio";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarServicio_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarServicio_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarServicio_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarServicio_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +48,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaServicios ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +70,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 	 * @param empresa
 	 */
 	public boolean ingresarServicio( Servicio servicio ){
-        System.out.println( "DENTRO DE 'ingresarServicio' " );
+        this.imprimeLog( "DENTRO DE 'ingresarServicio' " );
         
 		boolean mensaje = false;	
 		
@@ -86,7 +94,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 	 * @param Servicio
 	 */
 	public boolean modificarServicio( Servicio servicio ){
-        System.out.println( "DENTRO DE 'modificarServicio' " );
+        this.imprimeLog( "DENTRO DE 'modificarServicio' " );
 		
 		boolean mensaje = false;					
 
@@ -95,7 +103,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, servicio );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -117,7 +125,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 	 * @param codigo
 	 */
 	public List<Servicio> obtenerListaServicios(){
-        System.out.println( "DENTRO DE 'obtenerListaServicios' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaServicios' " );
         
         List<Servicio> listaServicio = null;
         
@@ -137,7 +145,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 	 * obtenerListaServicios_x_agencia
 	 */
 	public List<Servicio> obtenerListaServicios_x_agencia( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerListaServicios_x_agencia' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaServicios_x_agencia' " );
         
         List<Servicio> listaServicio = null;
         
@@ -158,7 +166,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 	 * @param codigo
 	 */
 	public Servicio obtenerObjetoServicio_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoServicio_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoServicio_x_codigo' " );
 		
         Servicio Servicio = null; 
         
@@ -167,7 +175,7 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
  
         	Servicio = (Servicio)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Servicio: " + Servicio ); 
+        	this.imprimeLog( "Servicio: " + Servicio ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -187,5 +195,13 @@ public class ServicioDaoImpl extends SqlMapClientDaoSupport implements ServicioD
 		
 		return nombObjNegocio;
 	}
- 	
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }

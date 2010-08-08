@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Calendario;
 import com.ttporg.pe.dao.CalendarioDao;
 
@@ -23,12 +25,18 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
 	
 	public static final String OBJETO_NEGOCIO = "Calendario";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarCalendario_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarCalendario_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarCalendario_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarCalendario_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +48,7 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaCalendarios ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +70,7 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
 	 * @param empresa
 	 */
 	public boolean ingresarCalendario( Calendario calendario ){
-        System.out.println( "DENTRO DE 'ingresarCalendario' " );
+        this.imprimeLog( "DENTRO DE 'ingresarCalendario' " );
         
 		boolean mensaje = false;	
 		
@@ -86,7 +94,7 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
 	 * @param Calendario
 	 */
 	public boolean modificarCalendario( Calendario calendario ){
-        System.out.println( "DENTRO DE 'modificarCalendario' " );
+        this.imprimeLog( "DENTRO DE 'modificarCalendario' " );
 		
 		boolean mensaje = false;					
 
@@ -95,7 +103,7 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, calendario );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -117,7 +125,7 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
 	 * @param codigo
 	 */
 	public List<Calendario> obtenerListaCalendarios(){
-        System.out.println( "DENTRO DE 'obtenerListaCalendarios' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaCalendarios' " );
         
         List<Calendario> listaCalendario = null;
         
@@ -138,7 +146,7 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
 	 * @param codigo
 	 */
 	public Calendario obtenerObjetoCalendario_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoCalendario_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoCalendario_x_codigo' " );
 		
         Calendario calendario = null; 
         
@@ -147,7 +155,7 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
  
         	calendario = (Calendario)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Calendario: " + calendario ); 
+        	this.imprimeLog( "Calendario: " + calendario ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -167,5 +175,13 @@ public class CalendarioDaoImpl extends SqlMapClientDaoSupport implements Calenda
 		
 		return nombObjNegocio;
 	}
- 	
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }

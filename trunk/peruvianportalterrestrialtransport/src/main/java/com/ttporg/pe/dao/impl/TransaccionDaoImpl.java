@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Transaccion;
 import com.ttporg.pe.dao.TransaccionDao;
 
@@ -23,12 +25,18 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
 	
 	public static final String OBJETO_NEGOCIO = "Transaccion";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarTransaccion_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarTransaccion_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarTransaccion_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarTransaccion_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +48,7 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaTransaccions ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +70,7 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
 	 * @param empresa
 	 */
 	public boolean ingresarTransaccion( Transaccion transaccion ){
-        System.out.println( "DENTRO DE 'ingresarTransaccion' " );
+        this.imprimeLog( "DENTRO DE 'ingresarTransaccion' " );
         
 		boolean mensaje = false;	
 		
@@ -86,7 +94,7 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
 	 * @param Transaccion
 	 */
 	public boolean modificarTransaccion( Transaccion Transaccion ){
-        System.out.println( "DENTRO DE 'modificarTransaccion' " );
+        this.imprimeLog( "DENTRO DE 'modificarTransaccion' " );
 		
 		boolean mensaje = false;					
 
@@ -95,7 +103,7 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, Transaccion );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -117,7 +125,7 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
 	 * @param codigo
 	 */
 	public List<Transaccion> obtenerListaTransaccions(){
-        System.out.println( "DENTRO DE 'obtenerListaTransaccions' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaTransaccions' " );
         
         List<Transaccion> listaTransaccion = null;
         
@@ -138,7 +146,7 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
 	 * @param codigo
 	 */
 	public Transaccion obtenerObjetoTransaccion_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoTransaccion_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoTransaccion_x_codigo' " );
 		
         Transaccion Transaccion = null; 
         
@@ -147,7 +155,7 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
  
         	Transaccion = (Transaccion)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Transaccion: " + Transaccion ); 
+        	this.imprimeLog( "Transaccion: " + Transaccion ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -167,5 +175,13 @@ public class TransaccionDaoImpl extends SqlMapClientDaoSupport implements Transa
 		
 		return nombObjNegocio;
 	}
- 	
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }

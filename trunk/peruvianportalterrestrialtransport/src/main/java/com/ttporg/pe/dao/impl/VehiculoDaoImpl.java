@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Vehiculo;
 import com.ttporg.pe.dao.VehiculoDao;
 
@@ -23,12 +25,18 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 	
 	public static final String OBJETO_NEGOCIO = "Vehiculo";
 
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarVehiculo_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarVehiculo_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarVehiculo_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarVehiculo_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +48,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaVehiculos ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +70,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 	 * @param empresa
 	 */
 	public boolean ingresarVehiculo( Vehiculo Vehiculo ){
-        System.out.println( "DENTRO DE 'ingresarVehiculo' " );
+        this.imprimeLog( "DENTRO DE 'ingresarVehiculo' " );
         
 		boolean mensaje = false;	
 		
@@ -86,7 +94,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 	 * @param Vehiculo
 	 */
 	public boolean modificarVehiculo( Vehiculo Vehiculo ){
-        System.out.println( "DENTRO DE 'modificarVehiculo' " );
+        this.imprimeLog( "DENTRO DE 'modificarVehiculo' " );
 		
 		boolean mensaje = false;					
 
@@ -95,7 +103,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, Vehiculo );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -117,7 +125,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 	 * @param codigo
 	 */
 	public List<Vehiculo> obtenerListaVehiculos(){
-        System.out.println( "DENTRO DE 'obtenerListaVehiculos' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaVehiculos' " );
         
         List<Vehiculo> listaVehiculo = null;
         
@@ -138,7 +146,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 	 * @param codigo
 	 **/
 	public Vehiculo obtenerObjetoVehiculo_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoVehiculo_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoVehiculo_x_codigo' " );
 		
         Vehiculo Vehiculo = null; 
         
@@ -147,7 +155,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
  
         	Vehiculo = (Vehiculo)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Vehiculo: " + Vehiculo ); 
+        	this.imprimeLog( "Vehiculo: " + Vehiculo ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -161,7 +169,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 	 * @param codigo
 	 **/
 	public List<Vehiculo> obtenerListaVehiculo_x_idServicio( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerListaVehiculo_x_idServicio' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaVehiculo_x_idServicio' " );
 		
         List<Vehiculo> listaVehiculo = null;
         
@@ -188,5 +196,14 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 		
 		return nombObjNegocio;
 	}
- 	
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }
+

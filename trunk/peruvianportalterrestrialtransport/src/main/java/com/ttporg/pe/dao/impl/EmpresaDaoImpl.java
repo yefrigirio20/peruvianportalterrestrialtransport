@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.dao.EmpresaDao;
 
@@ -22,13 +24,19 @@ import com.ttporg.pe.dao.EmpresaDao;
 public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao{
 	
 	public static final String OBJETO_NEGOCIO = "Empresa";
- 
+
+	private BaseBean  beanBase = null;
+	
+	{
+	 this.beanBase = new BaseBean();
+	}
+	
 	/**
 	 * eliminarEmpresa_x_codigo
 	 * @param codigo
 	 */
 	public boolean eliminarEmpresa_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'eliminarEmpresa_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'eliminarEmpresa_x_codigo' " );
         
 		boolean mensaje = false;	
 				
@@ -40,7 +48,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
  
             int estadoEliminacion = getSqlMapClientTemplate().delete( nombReferMetodoMapeado, mapaEmpresas ); 
             
-        	System.out.println( "EstadoEliminacion: " + estadoEliminacion ); 
+        	this.imprimeLog( "EstadoEliminacion: " + estadoEliminacion ); 
 			
         	if( estadoEliminacion == 1 ){
         		mensaje = true;	
@@ -62,7 +70,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	 * @param empresa
 	 */
 	public boolean ingresarEmpresa( Empresa empresa ){
-        System.out.println( "DENTRO DE 'ingresarEmpresa' " );
+        this.imprimeLog( "DENTRO DE 'ingresarEmpresa' " );
         
 		boolean mensaje = false;	
 		
@@ -71,7 +79,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
         	
             Empresa objEmpresa = (Empresa)getSqlMapClientTemplate().insert( nombReferMetodoMapeado, empresa );  
             
-        	System.out.println( "objEmpresa: " + objEmpresa ); 
+        	this.imprimeLog( "objEmpresa: " + objEmpresa ); 
 			
         	if( objEmpresa != null ){
         		mensaje = true;	
@@ -93,7 +101,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	 * @param empresa
 	 */
 	public Empresa loginEmpresa( Empresa empresa ){
-        System.out.println( "DENTRO DE 'loginUsuario' " );
+        this.imprimeLog( "DENTRO DE 'loginUsuario' " );
         
         Empresa objEmpresa = null;
               
@@ -114,7 +122,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	 * @param empresa
 	 */
 	public boolean modificarEmpresa( Empresa empresa ){
-        System.out.println( "DENTRO DE 'modificarEmpresa' " );
+        this.imprimeLog( "DENTRO DE 'modificarEmpresa' " );
 		
 		boolean mensaje = false;					
 
@@ -123,7 +131,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
         	
             Integer estadoGuardar = (Integer)getSqlMapClientTemplate().update( nombReferMetodoMapeado, empresa );  
             
-        	System.out.println( "Estado Guardar: " + estadoGuardar ); 
+        	this.imprimeLog( "Estado Guardar: " + estadoGuardar ); 
 			
         	if( estadoGuardar == 1 ){
         		mensaje = true;	
@@ -144,7 +152,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	 * obtenerListaEmpresas
 	 */
 	public List<Empresa> obtenerListaEmpresas(){
-        System.out.println( "DENTRO DE 'obtenerListaEmpresas' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaEmpresas' " );
         
         List<Empresa> listaEmpresa = null;
         
@@ -164,7 +172,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
      * obtenerListaEmpresas_x_departamento
      */
 	public List<Empresa> obtenerListaEmpresas_x_departamento( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerListaEmpresas_x_departamento' " );
+        this.imprimeLog( "DENTRO DE 'obtenerListaEmpresas_x_departamento' " );
         
         List<Empresa> listaEmpresa = null;
         
@@ -185,7 +193,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	 * @param codigo
 	 */
 	public Empresa obtenerObjetoEmpresa_x_codigo( int codigo ){
-        System.out.println( "DENTRO DE 'obtenerObjetoEmpresa_x_codigo' " );
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoEmpresa_x_codigo' " );
 		
         Empresa empresa = null;
         
@@ -194,7 +202,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
  
         	empresa = (Empresa)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
              
-        	System.out.println( "Empresa: " + empresa ); 
+        	this.imprimeLog( "Empresa: " + empresa ); 
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
@@ -220,7 +228,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	 */
 	public Empresa loginEmpresa2( String usuario, String password ){
  
-	        System.out.println( "DENTRO DE 'loginUsuario' " );
+	        this.imprimeLog( "DENTRO DE 'loginUsuario' " );
 	        
 	        Empresa objEmpresa = new Empresa(); 
 	        
@@ -237,6 +245,15 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 			}
 	        
 	        return objEmpresa;
-		}
-
+	}
+	
+	/**
+	 * this.imprimeLog
+	 * @param mensaje
+	 **/
+	public void imprimeLog( String mensaje ){ 
+		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
+	}
+	
 }
+
