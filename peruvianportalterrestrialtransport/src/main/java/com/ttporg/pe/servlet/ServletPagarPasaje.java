@@ -42,6 +42,7 @@ import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
 import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
 import com.ttporg.pe.dto.BeanValidacionDto;
 import com.ttporg.pe.util.UtilCalendario;
+import com.ttporg.pe.util.UtilGeneraBoletoViaje;
 import com.ttporg.pe.util.UtilSingleton;
 
 /**
@@ -55,8 +56,8 @@ import com.ttporg.pe.util.UtilSingleton;
  * @fecha_de_creación: dd-mm-yyyy.
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
- */
-public class ServletPagoPasaje extends HttpServlet implements Servlet{
+ **/
+public class ServletPagarPasaje extends HttpServlet implements Servlet{
  
 	private static final long serialVersionUID   = 7462872182111077306L;
 
@@ -67,7 +68,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	private UtilSingleton     utilSingleton      = null;
 	
 	//Service ...
-	//private ServiceFactory    servicio           = null;
+	//private ServiceFactory    servicio         = null;
 	
 	//Daos [SPRING] ...
 	private ClienteDao        clienteDAO         = null;
@@ -87,7 +88,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	private UtilCalendario    utilCalendario     = null;
 	private BaseBean          beanBase           = null;
 	
-	private String            REDIRECCIONAMIENTO = "/jsp/PagoPasaje.jsp";		
+	private static String     REDIRECCIONAMIENTO = "/jsp/PagoPasaje.jsp";		
 	
 	{
 	 //this.servicio      = new ServiceFactory();
@@ -109,7 +110,10 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	 this.beanBase        = new BaseBean();
 	}
  
-	@Override
+	/**
+	 * init
+	 * @param configuracion
+	 **/
 	public void init( ServletConfig configuracion ){
 		this.imprimeLog( "********* DENTRO DE 'init( ServletConfig config )' **********" ); 
 	    
@@ -129,7 +133,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 
 	/**
 	 * acceso_InitParam
-	 */
+	 **/
 	public void acceso_InitParam(){
 		this.imprimeLog( "********** DENTRO DE 'acceso_InitParam' **********" );
 		
@@ -153,7 +157,7 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	 * @param response
 	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
-		    this.getServletContext().log( "********* DENTRO DE service **********" ); 
+		    this.imprimeLog( "********* DENTRO DE service [ServletPagoPasaje] **********" ); 
 		    
 		    BeanValidacionDto objValidacion      = new BeanValidacionDto();
 		    boolean           estadoValidacion   = true;
@@ -180,25 +184,17 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 	    	    this.imprimeLog( "Fecha Expiracion: " + fechaExpiracion ); 
 	    	    this.imprimeLog( "Precio:           " + precio ); 
 	    	    this.imprimeLog( "" );
+	    	    this.imprimeLog( "idServicio:            " + idServicio  ); 
 	    	    this.imprimeLog( "idAsientoSeleccionado: " + idAsientoSeleccionado  ); 
 	    	    this.imprimeLog( "estadoPopup:           " + estadoPopup ); 
 	    	    this.imprimeLog( "" );
 	    	    
 	    	    if( (idAsientoSeleccionado != null) && (estadoPopup.equalsIgnoreCase( "TRUE" ) ) ){
-	    	    	
-		    	    //---------------- Guardar el 'SINGLETON'. ----------------//
-		    	    //this.utilSingleton = UtilSingleton.getInstancia();
-		    	    //this.utilSingleton.setEstadoActivacion( true );
-		    	    
-		    	    //Asiento asiento = new Asiento();
-		    	    //asiento.setId( Integer.parseInt( idAsientoSelec ) );
-		    	     	    	    		    	    	
+ 		    	     	    	    		    	    	
 		    	    Pago pago = new Pago();		    	    
-		    	    //pago.setMontoPago(  Double.parseDouble( precio ) );
 		    	    pago.setTipoPago(   tipoPago      );
 		    	    pago.setNumTarjeta( numeroTarjeta );
-		    	     
-		    	    //----------------------------------//
+
 		    	    if( (fechaExpiracion != null) && !(fechaExpiracion.equals( "" )) ){
 		    	    	
 		    	    	String[] arrayCadena = fechaExpiracion.split( "-" );  //Fecha STRING a DATE.
@@ -213,19 +209,11 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    	
 		    	    	Date fecha = this.utilCalendario.getFecha( Integer.parseInt( anio ), 
 										    	    			   Integer.parseInt( mes  ), 
-										    	    			   Integer.parseInt( dia  ) );
-		    	    	//----------------------------------//
-		    	    	
+										    	    			   Integer.parseInt( dia  ) );		    	    	
 		    	    	pago.setFechaExpiracion( fecha );
 		    	    }
-		    	    		    	    
-		    	    //Asiento.
-		    	    //this.utilSingleton.getObjetoSingleton().setAsiento( asiento );  
-		    	    
-		    	    //Pago.
-		    	    //this.utilSingleton.getObjetoSingleton().setPago( pago );
-		    	    //------------------------------------------------------//
-		    	    
+				    
+		    	    //Se INGRESA el pago en la BD.
 		    	    this.pagoDAO.ingresarPago( pago );
 		    	    
 		    	    session.setAttribute( "objPago", pago ); 
@@ -292,33 +280,16 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    	    		                                        Integer.parseInt( mes  ), 
 		    	    		                                        Integer.parseInt( dia  ) );
 		    	    
-		    	    //---------------- Obtener 'SINGLETON'. ----------------//
-		    	    //this.utilSingleton = UtilSingleton.getINSTANCIA_GUARDADA();
-		    	    //------------------------------------------------------//
-		    	    
 		    	    this.imprimeLog( "Util Singleton: " + this.utilSingleton );
-		    	    
-		    	    //Validacion ...
-		    	    //if( (this.utilSingleton != null) && (this.utilSingleton.isEstadoActivacion() == true) ){
-		    	    	
-			    	    Cliente objCliente = (Cliente)session.getValue( "objCliente" );  //this.utilSingleton.getObjetoSingleton().getCliente();
-			    	    
-			    	    //this.imprimeLog( "Nombre Cliente que Pago: " + objCliente.getNombres() );
-			    	    
-			    	    // Pago objPago = new Pago( 1, tipoPago, numeroTarjeta, 40, expiracion, objCliente );
-			    	    
-			    	    // this.imprimeLog( "objPago: " + objPago );
-		    	    	    	     
-			    	    //---------------- Guardar el 'SINGLETON'. ----------------//
-			    	    //this.utilSingleton = UtilSingleton.getInstancia();
-			    	    //this.utilSingleton.setEstadoActivacion( true );
-			    	    //this.utilSingleton.getObjetoSingleton().setCliente( objCliente );
-			    	  //  this.utilSingleton.getObjetoSingleton().setPago(    objPago    );
-			    	  //-----------------------------------------------------------//
-		    	    //}		    	    
+
+			    	Cliente objCliente = (Cliente)session.getValue( "objCliente" );
+			    	
+		            
+		            //-------------- Generacion de Boleto. --------------//
+		            this.generaBoleto( request );
+		            //---------------------------------------------------//
 	    	    }
-	    	    
-	    	    
+	    	    	    	    
 	            request.setAttribute( "estadoPopup",      estadoPopup      );  //estadoPopup ...
 	            request.setAttribute( "estadoValidacion", estadoValidacion );  //estadoValidacion ...
 	            request.setAttribute( "objValidacion",    objValidacion    );  //Objeto Validacion ...
@@ -331,7 +302,45 @@ public class ServletPagoPasaje extends HttpServlet implements Servlet{
 		    catch( Exception e ){
 				   e.printStackTrace();
 			}
-	 }  
+	}  
+	
+	 /**
+	  * generaBoleto
+	  * @param request
+	  **/
+	public void generaBoleto(  HttpServletRequest request ){
+	    this.imprimeLog( "********* DENTRO DE [generaBoleto] **********" ); 
+	    
+    	HttpSession session = request.getSession( true );
+    	
+    	//OBTENIENDO DE SESION ...
+		Cliente objCliente         = (Cliente)session.getValue( "objCliente" );  		    	
+		Pago    objPago            = (Pago)session.getValue(    "objPago" ); 
+    	String  codigoDepartamento = (String)session.getValue(  "codigoDepartamento" ); 
+    	String  codigoEmpresa      = (String)session.getValue(  "codigoEmpresa" ); 							
+    	String  codigoAgencia      = (String)session.getValue(  "codigoAgencia" ); 
+    	String  codigoServicio     = (String)session.getValue(  "codigoServicio" ); 	    	    		    	
+    	String  codigoAsiento      = (String)session.getValue(  "idAsientoSeleccionado" ); 
+    	  
+    	this.imprimeLog( "" );
+    	this.imprimeLog( "OBTENIENDO DATO DE MEMORIA");
+    	this.imprimeLog( "-------------------------" );
+    	this.imprimeLog( "objCliente:         " + objCliente     );
+    	this.imprimeLog( "objPago:            " + objPago        );
+    	this.imprimeLog( "codigoDepartamento: " + codigoDepartamento );
+    	this.imprimeLog( "codigoEmpresa:      " + codigoEmpresa  );
+    	this.imprimeLog( "codigoAgencia:      " + codigoAgencia  );
+    	this.imprimeLog( "codigoServicio:     " + codigoServicio );
+    	this.imprimeLog( "codigoAsiento:      " + codigoAsiento  );
+    	this.imprimeLog( "" );
+    	
+    	UtilGeneraBoletoViaje utilGeneraBoleto = new UtilGeneraBoletoViaje( this.clienteDAO,    this.empresaDAO,  this.departamentoDAO, this.agenciaDAO,
+    			                                                            this.vehiculoDAO,   this.servicioDAO, this.asientoDAO,      this.salidaDAO,
+    			                                                            this.calendarioDAO, this.pagoDAO,     this.clientePagoDAO,  this.transaccionDAO );  
+    	
+    	utilGeneraBoleto.muestraBoletoViaje( objCliente, objPago, codigoDepartamento, codigoEmpresa, 
+    			                             codigoAgencia, codigoServicio, codigoAsiento );	
+	} 
 	 
 	/**
 	 * inicializaDAOs

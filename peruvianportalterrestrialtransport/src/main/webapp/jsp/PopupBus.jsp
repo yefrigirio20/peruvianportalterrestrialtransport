@@ -3,10 +3,9 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>  
- 
- <%@taglib uri="/struts-tags"                       prefix="s"   %>
- <%@taglib uri="/struts-dojo-tags"                  prefix="sx"  %>  
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>   
+ <%@ taglib uri="/struts-tags"                      prefix="s"   %>
+ <%@ taglib uri="/struts-dojo-tags"                 prefix="sx"  %>  
 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -19,7 +18,8 @@
      
      <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" /> 
      
-     <script type="text/javascript"> 
+     <script type="text/javascript" > 
+	 
 	    function centrarPopup(){ 
 		    eje_x = (screen.width-document.body.clientWidth)   / 2; 
 		    eje_y = (screen.height-document.body.clientHeight) / 2; 
@@ -38,21 +38,8 @@
 	         myFrm.method = '' + 'POST';
 	         myFrm.action = urlNew; 		 		 
 	         myFrm.submit();
-	    } 
-
-	    function conexionCompraBoleto( myFrm, idAsiento ){              
-			 //alert( "**** DENTRO DE 'conexionCompraBoleto' ****" );	 
-			 
-	         var url = "<%=request.getContextPath()%>/ServletPagoPasaje";
-	         alert( url );
-             
-	         var urlNew = url + '?idAsientoSeleccionado=' + idAsiento + '&estadoPopup=FALSE';
-	         alert( urlNew );
-			 	
-	         myFrm.method = '' + 'POST';
-	         myFrm.action = urlNew; 		 		 
-	         myFrm.submit();
-	    } 
+	    }  
+		
     </script>
  
 </head>
@@ -65,11 +52,14 @@
     <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloVerificaAsiento" /> </font>
   </center> 
    
-  <!--   
-  <center>
-       <table border="0" background="<%=request.getContextPath()%>/images/BusPopup.jpg" >
+  <br> </br>
+  <br> </br>
+   
+  <!-- PLANTILLA 
+
+       <table border="0" >
             <tr>
-                <td colspan="3" >&nbsp;  </td>
+                <td colspan="3" >&nbsp; </td>
             </tr>
             <tr>
                 <td>
@@ -182,68 +172,172 @@
         </table>
         
         <br> </br>
-       -->
-        
-        <br> </br>
+        PLANTILLA --> 
         
         <% int contador = 0; %>
-       
+        
+        <!-- GRAFICO BUS --> 
         <c:if test="${listaDetalleAsientoDTO != null}" > 
           <center>
-            <table border="0" width="80%" >                    
-                        
-                 <c:forEach var="objListaXXX" items="${listaDetalleAsientoDTO}" >                                 
-	                  <tr>   
-	                      
-	                      <% 
-	                      System.out.println( "contador: " + contador );
-	                      
-	                      if( contador < 20 ){ 
-	                      
-	                      if( contador < 10 ){ 
-	                    	  System.out.println( "opcion #1: " );
-	                      %>	                      
-	                        <td style="text-align:center" bgcolor="#999999" >     
-	                	                      
-	                          <c:if test="${objListaXXX.estadoAsiento == 'FALSE'}" >
-	                          	 <input type="button" name="    " value="  ${objListaXXX.idAsiento}  " 
-	                          	        style="background:#060;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaXXX.idServicio}, ${objListaXXX.idAsiento} )" />
-	                          </c:if>
-	                          
-	                          <c:if test="${objListaXXX.estadoAsiento == 'TRUE'}" >
-	                          	 <input type="button" name="    " value="  ${objListaXXX.idAsiento}  " 
-	                          	        style="background:#900;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaXXX.idServicio}, ${objListaXXX.idAsiento} )" />
-	                          </c:if>                     
-	                      	</td>
-	                      <%}
-	                      if( contador > 10 ){ 	                    	  
-	                    	  System.out.println( "opcion #2: " );
-	                      %>	
-	                        <td style="text-align:center"  bgcolor="#CDCDCD">   
-	       	                                   	                       	                      
-	                          <c:if test="${objListaXXX.estadoAsiento == 'FALSE'}" >
-	                          	 <input type="button" name="    " value="  ${objListaXXX.idAsiento}  " 
-	                          	        style="background:#060;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaXXX.idServicio}, ${objListaXXX.idAsiento} )" />
-	                          </c:if>
-	                          
-	                          <c:if test="${objListaXXX.estadoAsiento == 'TRUE'}" >
-	                          	 <input type="button" name="    " value="  ${objListaXXX.idAsiento}  "    
-	                          	        style="background:#900;color:#CCC" onclick="javascript:conexionServlet( this.form, ${objListaXXX.idServicio}, ${objListaXXX.idAsiento} )" />
-	                          </c:if>                     
-	                      	</td>	
-	                      	                          
-	                      <%}
-	                      }%>  
-	                      
-	                      <% contador ++; %>                
-	                  </tr>                                                                 
-                  </c:forEach> 	                                    
-             </table>   
-             </center>
-         </c:if>         
-       
+            <table border="0" width="70%" bgcolor="#003300" >
+               <tr>
+                <td> 
+                  <table border="0" width="100%" bgcolor="black" > 
+                       <tr> 
+                            <td>
+                                <center> 
+                                    <font size="3" style="color:white; border:thin; border-color:#000; " > 
+                                          <strong> &nbsp; &nbsp; &nbsp; A &nbsp; &nbsp; &nbsp; </strong>
+                                    </font> 
+                                </center>                              
+                            </td>
+                            
+                            <td> 
+                                 <center> 
+                                    <font size="3" style="color:white; border:thin; border-color:#000; " > 
+                                          <strong> &nbsp; &nbsp; &nbsp; B &nbsp; &nbsp; &nbsp; </strong> 
+                                    </font> 
+                                </center>  
+                            </td>
+                            
+                            <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+                            
+                            <td> 
+                                <center> 
+                                    <font size="3" style="color:white; border:thin; border-color:#000; size:4" > 
+                                         <strong> &nbsp; &nbsp; &nbsp; C &nbsp; &nbsp; &nbsp; </strong> 
+                                    </font> 
+                                </center>  
+                            </td>
+                            
+                            <td> 
+                                <center> 
+                                    <font size="3" style="color:white; border:thin; border-color:#000; " > 
+                                        <strong> &nbsp; &nbsp; &nbsp; D &nbsp; &nbsp; &nbsp; </strong> 
+                                    </font> 
+                                </center>  
+                            </td>
+                       </tr> 
+                   </table>
+                   
+                 </td>
+               </tr>
+            
+               <tr>
+                <td>   
+                    <table border="0" width="100%" bgcolor="white" >    
+                         <tr> 
+                            <td colspan="2" bgcolor="#003300" >
+                                <center> 
+                                    <font style="color:#FFF; border:thin; border-color:#000; " > 
+                                        <strong> &nbsp; &nbsp; &nbsp; &nbsp; CHOFER &nbsp; &nbsp; &nbsp; &nbsp; </strong> 
+                                    </font> 
+                                </center>  
+                            </td>
+                            <td colspan="3" > &nbsp;&nbsp; </td>
+                         </tr>    
+                                
+                         <c:forEach var="objListaPopup" items="${listaDetalleAsientoDTO}" >                                 
+                              <tr>   
+                                  <% 
+                                   //System.out.println( "contador: " + contador );
+                                  %>	
+                                                          
+                                  <td style="text-align:center" bgcolor="white" >  		                      
+                                         
+                                      <c:if test="${objListaPopup.estado_A == 'FALSE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
+                                                style="background:#060; color:#CCC;cursor:pointer" 
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA} )" />
+                                      </c:if>
+                                      
+                                      <c:if test="${objListaPopup.estado_A == 'TRUE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
+                                                style="background:#BB0000; color:#CCC;cursor:pointer" 
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA} )" />   
+                                      </c:if>                                     
+                                  </td>   
+                                  
+                                  <td style="text-align:center" bgcolor="white" >  		                      
+                                         
+                                      <c:if test="${objListaPopup.estado_B == 'FALSE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
+                                                style="background:#060; color:#CCC;cursor:pointer" 
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB} )" />
+                                      </c:if>
+                                      
+                                      <c:if test="${objListaPopup.estado_B == 'TRUE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
+                                                style="background:#BB0000;color:#CCC;cursor:pointer" 
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB} )" />
+                                      </c:if> 
+                                   
+                                  </td> 
+                                  
+                                  <td style="text-align:center" bgcolor="white" > 
+                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                  </td> 
+                                  
+                                  <td style="text-align:center" bgcolor="white" >  	                      
+                                         
+                                      <c:if test="${objListaPopup.estado_C == 'FALSE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
+                                                style="background:#060;color:#CCC;cursor:pointer" 
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC} )" />
+                                      </c:if>
+                                      
+                                      <c:if test="${objListaPopup.estado_C == 'TRUE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
+                                                style="background:#BB0000;color:#CCC;cursor:pointer" 
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC} )" />
+                                      </c:if> 
+                                    
+                                  </td> 
+                                  
+                                  <td style="text-align:center" bgcolor="white" >  	                      
+                                         
+                                      <c:if test="${objListaPopup.estado_D == 'FALSE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
+                                                style="background:#060;color:#CCC;cursor:pointer" 
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD} )" />
+                                      </c:if>
+                                      
+                                      <c:if test="${objListaPopup.estado_D == 'TRUE'}" >
+                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
+                                                style="background:#BB0000;color:#CCC;cursor:pointer" 
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD} )" />
+                                      </c:if> 
+                                    
+                                  </td>                     
+                                  
+                                  <% contador ++; %>                
+                              </tr>   	                                                                                
+                          </c:forEach> 
+                          
+                         <tr>
+                            <td colspan="3"> &nbsp;&nbsp; </td>
+                            <td colspan="2" bgcolor="#0066FF" >
+                                <center> 
+                                    <font style="color:#FFF; border:thin; border-color:#000; " > 
+                                          &nbsp; &nbsp; &nbsp; &nbsp; BAÑO &nbsp; &nbsp; &nbsp; &nbsp;
+                                    </font> 
+                                </center>  
+                            </td>
+                         </tr>   
+                                                                
+                      </table>   
+                      
+                </td>
+             </tr>   
+                                                    
+          </table>     
+         </center>
+       </c:if>         
+       <!-- GRAFICO BUS --> 
+         
        <br> </br>
-       
+       <br> </br>
+         
        <center>  
 	       <table width="70%">
 	            <tr>
@@ -253,7 +347,7 @@
 	                </td> 
 	                
 	                 <td>
-	                    <input type="button" name="    " value="    " style="background:#900" />
+	                    <input type="button" name="    " value="    " style="background:#BB0000" />
 	                    <font face="Arial" size="2" color="#900" > <fmt:message key="texto.label.ocupado" /> </font>
 	                </td> 
 	            </tr>
@@ -264,13 +358,13 @@
         
         <center>
           <% 
-            contador = contador/2;
+            contador = (contador * 4);
           %>
                   
-          <strong>#<fmt:message key="texto.label.totalAsientos" />:</strong> <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;"/>
+          <strong>#<fmt:message key="texto.label.totalAsientos" />:</strong> 
+          <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;" />
         </center>
         
-        <br> </br>
         <br> </br>
         <br> </br>
         
@@ -279,8 +373,13 @@
 	                 <tr>
 	                   <td width="10%" >&nbsp;</td>
 	                   <td width="90%" colspan="2" align="center" >                                      
-	                       <a onclick="opener.location=('<%=request.getContextPath()%>/ServletPagoPasaje?estadoPopup=FALSE'); self.close();" style="cursor:pointer">
-	                          <strong> <font style="color:#FFF; background:#F00; border:thin; border-color:#000; " > &nbsp;&nbsp;&nbsp; <fmt:message key="texto.label.comprarPasaje" /> &nbsp;&nbsp;&nbsp; </font> </strong>
+	                       <a onclick="opener.location=('<%=request.getContextPath()%>/ServletPagarPasaje?estadoPopup=FALSE'); self.close();" 
+                              style="cursor:pointer">
+	                          <strong> 
+                                  <font style="color:#FFF; background:#BB0000; border:thin; border-color:#000; " > 
+                                        &nbsp;&nbsp;&nbsp; <fmt:message key="texto.label.comprarPasaje" /> &nbsp;&nbsp;&nbsp; 
+                                  </font> 
+                              </strong>
 	                       </a>
 	                   </td>
 	                   <td width="10%" >&nbsp;
@@ -291,8 +390,6 @@
         
         <br> </br>
         <br> </br>
-        
-    </center>
     
     </form>
     

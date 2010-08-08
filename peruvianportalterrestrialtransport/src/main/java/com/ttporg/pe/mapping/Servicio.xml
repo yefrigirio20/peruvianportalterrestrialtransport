@@ -22,6 +22,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 
 	<select id="getServicio" resultClass="servicio" >
         <include refid="selectServiciosSinTag" />
+        WHERE  s.ID = #id#
     </select>
     
 	<select id="getListaServicio_x_agencia" resultClass="servicio" parameterClass="java.lang.Integer" >

@@ -8,8 +8,12 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     <!-- ******************************************************** -->
     <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
     <!-- ******************************************************** -->  
+     
      <sql id="selectAsientosSinTag">   
-		SELECT a.ID, a.COLUMNA, a.FILA, a.ESTADO, a.VEHICULO_ID
+		SELECT a.ID, 
+		       a.COLUMNA_A, a.COLUMNA_B, a.COLUMNA_C, a.COLUMNA_D, 
+		       a.ESTADO_CA, a.ESTADO_CB, a.ESTADO_CC, a.ESTADO_CD, 
+		       a.ESTADO, a.VEHICULO_ID
 		FROM   ASIENTO a
      </sql>	       
         
@@ -30,15 +34,21 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     </select>
 
 	<insert id="insertAsiento" parameterClass="com.ttporg.pe.bean.Asiento" >
-		INSERT INTO ASIENTO( COLUMNA, FILA, ESTADO, VEHICULO_ID )
+		INSERT INTO ASIENTO( COLUMNA_A, COLUMNA_B, COLUMNA_C, COLUMNA_D, ESTADO_CA, ESTADO_CB, ESTADO_CC, ESTADO_CD, ESTADO, VEHICULO_ID )
 		                            
-		VALUES( #fila#, #columna#, #estado#, #vehiculo.id# )
+		VALUES( #columna_A#, #columna_B#, #columna_C#, #columna_D#, #estado_A#, #estado_B#, #estado_C#, #estado_D#, #estado#, #vehiculo.id# )
 	</insert>
     
 	<update id="updateAsiento" parameterClass="com.ttporg.pe.bean.Asiento" >
 		     UPDATE ASIENTO a SET 
-							a.COLUMNA     = #fila#,
-							a.FILA        = #columna#,
+							a.COLUMNA_A   = #columna_A#,
+							a.COLUMNA_B   = #columna_B#,
+							a.COLUMNA_C   = #columna_C#,
+							a.COLUMNA_D   = #columna_D#,
+							a.ESTADO_CA   = #estado_A#,
+							a.ESTADO_CB   = #estado_B#,
+							a.ESTADO_CC   = #estado_C#,
+							a.ESTADO_CD   = #estado_D#,
 							a.ESTADO      = #estado#,
 							a.VEHICULO_ID = #vehiculo.id#
 		     WHERE a.ID = #id#

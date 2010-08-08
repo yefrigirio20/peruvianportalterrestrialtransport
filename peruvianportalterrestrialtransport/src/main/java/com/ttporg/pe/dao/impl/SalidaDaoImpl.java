@@ -31,7 +31,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	/**
 	 * eliminarSalida_x_codigo
 	 * @param codigo
-	 */
+	 **/
 	public boolean eliminarSalida_x_codigo( int codigo ){
         System.out.println( "DENTRO DE 'eliminarSalida_x_codigo' " );
         
@@ -141,7 +141,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 	/**
 	 * obtenerObjetoSalida_x_codigo
 	 * @param codigo
-	 */
+	 **/
 	public Salida obtenerObjetoSalida_x_codigo( int codigo ){
         System.out.println( "DENTRO DE 'obtenerObjetoSalida_x_codigo' " );
 		
@@ -160,6 +160,27 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 
         return salida;	
 	}	
+
+	/**
+	 * obtenerListaSalida_x_idServicio
+	 * @param codigo
+	 **/
+	public List<Salida> obtenerListaSalida_x_idServicio( int codigo ){
+        System.out.println( "DENTRO DE 'obtenerListaSalida_x_idServicio' " );
+		
+        List<Salida> listaSalida = null;
+        
+        try{
+        	String nombReferMetodoMapeado = this.getObjetoNegocio( "getListaSalida_x_idServicio" );
+ 
+        	listaSalida = (List<Salida>)getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, codigo );   //FORMA #2
+ 		} 
+        catch( Exception e ){
+			   e.printStackTrace();
+		}	
+
+        return listaSalida;	
+	}		
 	
 	/**
 	 * getObjetoNegocio
@@ -237,6 +258,7 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
 
 	/**
 	 * obtenerListaDetalleAsientoDTO
+	 * @param idServicio
 	 **/
 	public List<DetalleAsientoDTO> obtenerListaDetalleAsientoDTO( int idServicio ){
         System.out.println( "DENTRO DE 'obtenerListaDetalleAsientoDTO' " );
@@ -252,8 +274,8 @@ public class SalidaDaoImpl extends SqlMapClientDaoSupport implements SalidaDao{
         	
         	listaDetalleAsientoDTO = (List<DetalleAsientoDTO>)this.getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, objDetalleAsientoDTO );  
             
-        	System.out.println( "listaDetalleAsientoDTO A> " + listaDetalleAsientoDTO.size() );
-         } 
+        	System.out.println( "listaDetalleAsientoDTO A: " + listaDetalleAsientoDTO.size() );
+        } 
         catch( Exception e ){
 			   e.printStackTrace();
 		}	

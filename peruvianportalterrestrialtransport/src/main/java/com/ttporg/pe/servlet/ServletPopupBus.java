@@ -39,8 +39,6 @@ import com.ttporg.pe.dao.impl.ServicioDaoImpl;
 import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
 import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
 import com.ttporg.pe.dto.DetalleAsientoDTO;
-import com.ttporg.pe.util.UtilCalendario;
-import com.ttporg.pe.util.UtilSingleton;
 
 /**
  * @author Cesar Ricardo.
@@ -53,7 +51,7 @@ import com.ttporg.pe.util.UtilSingleton;
  * @fecha_de_creación: dd-mm-yyyy.
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
- */
+ **/
 public class ServletPopupBus extends HttpServlet implements Servlet{
  
 	private static final long serialVersionUID = 918161070629297916L;
@@ -62,10 +60,10 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	private RequestDispatcher despachador        = null;
 	
 	//Singleton ...
-	private UtilSingleton     utilSingleton      = null;
+	//private UtilSingleton     utilSingleton    = null;
 		
 	//Service ...
-	//private ServiceFactory    servicio           = null;
+	//private ServiceFactory    servicio         = null;
 	
 	//Daos [SPRING] ...
 	private ClienteDao        clienteDAO         = null;
@@ -82,10 +80,9 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	private TransaccionDao    transaccionDAO     = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = null;
-	private BaseBean          beanBase           = null;
+    private BaseBean          beanBase           = null;
 	
-	private String            REDIRECCIONAMIENTO = "/jsp/PopupBus.jsp";
+	private static String     REDIRECCIONAMIENTO = "/jsp/PopupBus.jsp";
 	
 	{
 	 //this.servicio     = new ServiceFactory();
@@ -103,11 +100,13 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	 this.clientePagoDAO  = new ClientePagoDaoImpl();
 	 this.transaccionDAO  = new TransaccionDaoImpl();
  
-	 this.utilCalendario  = new UtilCalendario();
 	 this.beanBase        = new BaseBean();
 	}
  
-	@Override
+	/**
+	 * init
+	 * @param configuracion
+	 **/
 	public void init( ServletConfig configuracion ){
 		this.imprimeLog( "********* DENTRO DE 'init( ServletConfig config )' **********" ); 
 	    
@@ -127,7 +126,7 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 
 	/**
 	 * acceso_InitParam
-	 */
+	 **/
 	public void acceso_InitParam(){
 		this.imprimeLog( "********** DENTRO DE 'acceso_InitParam' **********" );
 		
@@ -151,7 +150,7 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	 * @param response
 	 */	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
-		 this.getServletContext().log( "********* DENTRO DE service **********" ); 
+		this.imprimeLog( "********* DENTRO DE service **********" ); 
         
 	    List<DetalleAsientoDTO> listaDetalleAsientoDTO = null;
 	    
@@ -172,6 +171,7 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	    	
 	    	//SETEANDO EN SESION ...--------------------------
 	    	if( idAsientoSeleccionado != null ){	    		
+	    		session.setAttribute( "idServicio",            idServicio ); 
 	    		session.setAttribute( "idAsientoSeleccionado", idAsientoSeleccionado ); 
 	    	}	    	
 	    	
@@ -179,20 +179,89 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	    	if( idAsientoSeleccionado != null ){
 		    	for( int i=0; i<listaDetalleAsientoDTO.size(); i++ ){
  		
-		    		DetalleAsientoDTO asiento = listaDetalleAsientoDTO.get( i );
+		    		 DetalleAsientoDTO asiento = listaDetalleAsientoDTO.get( i );
 			    	 
-			    	 if( asiento.getIdAsiento() == Integer.parseInt( idAsientoSeleccionado ) ){
-			    		 asiento.setEstadoAsiento( "TRUE" );
+			    	 if( ( (asiento.getColumnaAsientoA() ).equals( idAsientoSeleccionado )) && 
+			    	     (asiento.getEstado_A().equalsIgnoreCase( "FALSE" )) ){
+			    		
+			    		 asiento.setEstado_A( "TRUE" );
+			    		 
+				    	  this.imprimeLog( "# FILA:                " + (asiento.getIdAsiento() ) );
+			    		  this.imprimeLog( "idAsientoSeleccionado: " + idAsientoSeleccionado );
+			    		  this.imprimeLog( "Id ColumnaA: " + asiento.getColumnaAsientoA() + " " +
+								    	   "Id ColumnaB: " + asiento.getColumnaAsientoB() + " " +
+								    	   "Id ColumnaC: " + asiento.getColumnaAsientoC() + " " +
+								    	   "Id ColumnaD: " + asiento.getColumnaAsientoD()  );
+			    		  this.imprimeLog( "EstadoA:     " + asiento.getEstado_A() + " " +
+								    	   "EstadoB:     " + asiento.getEstado_B() + " " +
+								    	   "EstadoC:     " + asiento.getEstado_C() + " " +
+								    	   "EstadoD:     " + asiento.getEstado_D()  );
+			    		  this.imprimeLog( "" ); 
+					      break;
+			    	 }			    	
+			    	 else if( ( (asiento.getColumnaAsientoB() ).equals( idAsientoSeleccionado )) && 
+				    	      (asiento.getEstado_B().equalsIgnoreCase( "FALSE" )) ){
+			    		      
+			    		      asiento.setEstado_B( "TRUE" ); 
+			    		      
+					    	  this.imprimeLog( "# FILA:                " + (asiento.getIdAsiento() ) );
+				    		  this.imprimeLog( "idAsientoSeleccionado: " + idAsientoSeleccionado );
+				    		  this.imprimeLog( "Id ColumnaA: " + asiento.getColumnaAsientoA() + " " +
+									    	   "Id ColumnaB: " + asiento.getColumnaAsientoB() + " " +
+									    	   "Id ColumnaC: " + asiento.getColumnaAsientoC() + " " +
+									    	   "Id ColumnaD: " + asiento.getColumnaAsientoD()  );
+				    		  this.imprimeLog( "EstadoA:     " + asiento.getEstado_A() + " " +
+									    	   "EstadoB:     " + asiento.getEstado_B() + " " +
+									    	   "EstadoC:     " + asiento.getEstado_C() + " " +
+									    	   "EstadoD:     " + asiento.getEstado_D()  );
+				    		  this.imprimeLog( "" ); 
+						      break;
+			    	 }
+			    	 else if( ( (asiento.getColumnaAsientoC() ).equals( idAsientoSeleccionado )) &&
+				    	      (asiento.getEstado_C().equalsIgnoreCase( "FALSE" )) ){		    		 
+		    		           
+			    		      asiento.setEstado_C( "TRUE" ); 
+			    		      
+					    	  this.imprimeLog( "# FILA:                " + (asiento.getIdAsiento() ) );
+				    		  this.imprimeLog( "idAsientoSeleccionado: " + idAsientoSeleccionado );
+				    		  this.imprimeLog( "Id ColumnaA: " + asiento.getColumnaAsientoA() + " " +
+									    	   "Id ColumnaB: " + asiento.getColumnaAsientoB() + " " +
+									    	   "Id ColumnaC: " + asiento.getColumnaAsientoC() + " " +
+									    	   "Id ColumnaD: " + asiento.getColumnaAsientoD()  );
+				    		  this.imprimeLog( "EstadoA:     " + asiento.getEstado_A() + " " +
+									    	   "EstadoB:     " + asiento.getEstado_B() + " " +
+									    	   "EstadoC:     " + asiento.getEstado_C() + " " +
+									    	   "EstadoD:     " + asiento.getEstado_D()  );
+				    		  this.imprimeLog( "" ); 
+						      break;
+			    	 }
+			    	 else if( ( (asiento.getColumnaAsientoD() ).equals( idAsientoSeleccionado )) &&
+				    	      (asiento.getEstado_D().equalsIgnoreCase( "FALSE" )) ){
+			    		      
+			    		      asiento.setEstado_D( "TRUE" ); 
+			    		      
+					    	  this.imprimeLog( "# FILA:                " + (asiento.getIdAsiento() ) );
+				    		  this.imprimeLog( "idAsientoSeleccionado: " + idAsientoSeleccionado );
+				    		  this.imprimeLog( "Id ColumnaA: " + asiento.getColumnaAsientoA() + " " +
+									    	   "Id ColumnaB: " + asiento.getColumnaAsientoB() + " " +
+									    	   "Id ColumnaC: " + asiento.getColumnaAsientoC() + " " +
+									    	   "Id ColumnaD: " + asiento.getColumnaAsientoD()  );
+				    		  this.imprimeLog( "EstadoA:     " + asiento.getEstado_A() + " " +
+									    	   "EstadoB:     " + asiento.getEstado_B() + " " +
+									    	   "EstadoC:     " + asiento.getEstado_C() + " " +
+									    	   "EstadoD:     " + asiento.getEstado_D()  );
+				    		  this.imprimeLog( "" ); 
+						      break;
 			    	 }
 			    }				    
 	    	}
- 	    	
+  	    	 	    	
 	    	request.setAttribute( "listaDetalleAsientoDTO", listaDetalleAsientoDTO );  //estadoValidacion ...
 	    	
 	        this.contexto    = this.getServletContext();
 	        this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );
 	        
-	        this.despachador.forward( request, response );                           //Redirecciona con los parametros seteados.	  
+	        this.despachador.forward( request, response );                             //Redirecciona con los parametros seteados.	  
 	    } 
 	    catch( Exception e ){
 			   e.printStackTrace();
@@ -235,7 +304,7 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 		this.imprimeLog( "====> [servicioDAO]:     " + this.servicioDAO     );
 		this.imprimeLog( "====> [asientoDAO]:      " + this.asientoDAO      );
 		this.imprimeLog( "====> [salidaDAO]:       " + this.salidaDAO       );
-		this.imprimeLog( "==+=> [calendarioDAO]:   " + this.calendarioDAO   );
+		this.imprimeLog( "====> [calendarioDAO]:   " + this.calendarioDAO   );
 		this.imprimeLog( "====> [pagoDAO]:         " + this.pagoDAO         );
 		this.imprimeLog( "====> [clientePagoDAO]:  " + this.clientePagoDAO  );
 		this.imprimeLog( "====> [transaccionDAO]:  " + this.transaccionDAO  );

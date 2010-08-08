@@ -28,9 +28,15 @@ public interface AgenciaDao{
 	public List<Agencia> obtenerListaAgencias();
 
 	/**
+	 * obtenerListaAgencias_x_codigo
+	 */
+	public List<Agencia> obtenerListaAgencias_x_codigo( int codigo );	
+	
+	/**
 	 * obtenerListaAgencias_x_empresa
 	 */
 	public List<Agencia> obtenerListaAgencias_x_empresa( int codigo );	
+		
 	
 	/**
 	 * eliminarAgencia_x_codigo

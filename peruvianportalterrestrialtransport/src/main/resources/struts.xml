@@ -17,11 +17,10 @@
 			<result name="success" type="dispatcher" >jsp/Bienvenida.jsp</result>
 		</action>
 
-	    <!-- ***** PROCESO #Servlet_Header_Request ***** -->
-		<action name="Servlet_Header_Request" class="com.ttporg.pe.action.Servlet_Header_Request" method="validarUsuario" >	 
+	    <!-- ***** PROCESO: ClienteServletMB ***** -->
+		<action name="ClienteServletMB" class="com.ttporg.pe.action.ClienteServletMB" method="validarUsuario" > 	 
 		    <result name="success" type="dispatcher" >jsp/Login.jsp</result>
-		</action>		
-	    <!-- ***** PROCESO #02 ***** -->	    	    		
+		</action>		 	    		
 		
 	</package>
 

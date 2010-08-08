@@ -51,17 +51,13 @@ public class DetallePasajeDTO{
         	fecFin.setTime(    this.fechaHoraLlegada );
         	
         	int duracionNew = utilCalendario.getHorasEntreDosFechas( fecInicio, fecFin );
-
-        	System.out.println( "fecInicio>  " + fecInicio.getTime() );
-        	System.out.println( "fecFin>     " + fecFin.getTime() );
-        	System.out.println( "diferencia> " + duracionNew ); 
-        	
+         	
         	this.duracion = duracionNew;  
         }       
         
         return duracion;
     }
-    
+     
 	public Integer getIdEmpresa(){
 		return idEmpresa;
 	}

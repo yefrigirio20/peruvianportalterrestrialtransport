@@ -23,12 +23,18 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	
 	<select id="getAgencia" resultClass="agencia" >
         <include refid="selectAgenciasSinTag" />
+        WHERE  a.ID = #id#
     </select>	
 
 	<select id="getListaAgencia_x_empresa" resultClass="agencia" parameterClass="java.lang.Integer" >
         <include refid="selectAgenciasSinTag" />
 		WHERE  a.EMPRESA_ID = #empresa.id#
     </select>
+    
+	<select id="getListaAgencia_x_codigo" resultClass="agencia" parameterClass="java.lang.Integer" >
+        <include refid="selectAgenciasSinTag" />
+		WHERE  a.ID = #id#
+    </select>    
     
 	<insert id="insertAgencia" parameterClass="com.ttporg.pe.bean.Agencia" >
 		INSERT INTO AGENCIA( NOMBRE, DIRECCION, EMAIL, TELEFONO, ESTADO, EMPRESA_ID )

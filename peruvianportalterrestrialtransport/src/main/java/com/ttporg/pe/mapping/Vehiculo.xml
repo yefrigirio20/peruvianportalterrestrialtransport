@@ -25,6 +25,11 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 		WHERE  v.ID = #id#
     </select>
 
+	<select id="getListaVehiculo_x_idServicio" resultClass="vehiculo" parameterClass="java.lang.Integer" >
+        <include refid="selectVehiculosSinTag" />
+		WHERE  v.SERVICIO_ID = #servicio.id#
+    </select>
+
 	<select id="getListaVehiculo" resultClass="vehiculo" >
         <include refid="selectVehiculosSinTag" />
     </select>

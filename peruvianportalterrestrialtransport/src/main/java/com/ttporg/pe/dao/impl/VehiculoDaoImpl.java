@@ -136,7 +136,7 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 	/**
 	 * obtenerObjetoVehiculo_x_codigo
 	 * @param codigo
-	 */
+	 **/
 	public Vehiculo obtenerObjetoVehiculo_x_codigo( int codigo ){
         System.out.println( "DENTRO DE 'obtenerObjetoVehiculo_x_codigo' " );
 		
@@ -155,6 +155,27 @@ public class VehiculoDaoImpl extends SqlMapClientDaoSupport implements VehiculoD
 
         return Vehiculo;	
 	}	
+	
+	/**
+	 * obtenerListaVehiculo_x_idServicio
+	 * @param codigo
+	 **/
+	public List<Vehiculo> obtenerListaVehiculo_x_idServicio( int codigo ){
+        System.out.println( "DENTRO DE 'obtenerListaVehiculo_x_idServicio' " );
+		
+        List<Vehiculo> listaVehiculo = null;
+        
+        try{
+        	String nombReferMetodoMapeado = this.getObjetoNegocio( "getListaVehiculo_x_idServicio" );
+ 
+        	listaVehiculo = (List<Vehiculo>)getSqlMapClientTemplate().queryForList( nombReferMetodoMapeado, codigo );   //FORMA #2
+ 		} 
+        catch( Exception e ){
+			   e.printStackTrace();
+		}	
+
+        return listaVehiculo;	
+	}		
 	
 	/**
 	 * getObjetoNegocio

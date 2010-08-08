@@ -42,7 +42,6 @@ import com.ttporg.pe.dto.BeanValidacionDto;
 import com.ttporg.pe.util.UtilCalendario;
 import com.ttporg.pe.util.UtilEmail;
 import com.ttporg.pe.util.UtilEncriptacion;
-import com.ttporg.pe.util.UtilSingleton;
   
 /**
  * @author Cesar Ricardo.
@@ -55,43 +54,41 @@ import com.ttporg.pe.util.UtilSingleton;
  * @fecha_de_creación: dd-mm-yyyy.
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
- */
+ **/
 public class ServletRegistroCliente extends HttpServlet implements Servlet{
  
 	private static final long serialVersionUID = 509943115648134836L;
 
-	private ServletContext    contexto         = null;
-	private RequestDispatcher despachador      = null;
-	
-	private static final String SERVLET_EMAIL  = "/ServletEnviarEmail";
-	
+	private ServletContext    contexto           = null;
+	private RequestDispatcher despachador        = null;
+ 
 	//Singleton ...
-	private UtilSingleton     utilSingleton    = null;
+	//private UtilSingleton     utilSingleton    = null;
 	
-	//Service ...
-	//private ServiceFactory    servicio       = null;
+	//Service ... 
+	//private ServiceFactory    servicio         = null;
 	
 	//Daos [SPRING] ...
-	private ClienteDao        clienteDAO       = null;
-	private EmpresaDao        empresaDAO       = null;	
-	private DepartamentoDao   departamentoDAO  = null;
-	private AgenciaDao        agenciaDAO       = null;		
-	private VehiculoDao       vehiculoDAO      = null;	
-	private ServicioDao       servicioDAO      = null;
-	private AsientoDao        asientoDAO       = null;
-	private SalidaDao         salidaDAO        = null;
-	private CalendarioDao     calendarioDAO    = null;
-	private PagoDao           pagoDAO          = null;
-	private ClientePagoDao    clientePagoDAO   = null;
-	private TransaccionDao    transaccionDAO   = null;
+	private ClienteDao        clienteDAO         = null;
+	private EmpresaDao        empresaDAO         = null;	
+	private DepartamentoDao   departamentoDAO    = null;
+	private AgenciaDao        agenciaDAO         = null;		
+	private VehiculoDao       vehiculoDAO        = null;	
+	private ServicioDao       servicioDAO        = null;
+	private AsientoDao        asientoDAO         = null;
+	private SalidaDao         salidaDAO          = null;
+	private CalendarioDao     calendarioDAO      = null;
+	private PagoDao           pagoDAO            = null;
+	private ClientePagoDao    clientePagoDAO     = null;
+	private TransaccionDao    transaccionDAO     = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario   = null;
-	private UtilEmail         utilEmail        = null; 
-	private UtilEncriptacion  utilEncriptacion = null;
-	private BaseBean          beanBase         = null;
+	private UtilCalendario    utilCalendario     = null;
+	private UtilEmail         utilEmail          = null; 
+	private UtilEncriptacion  utilEncriptacion   = null;
+	private BaseBean          beanBase           = null;
 	
-	private String REDIRECCIONAMIENTO          = "/jsp/RegistroCliente.jsp";	
+	private static String     REDIRECCIONAMIENTO = "/jsp/RegistroCliente.jsp";	
 	
 	{
 	 //this.servicio       = new ServiceFactory();
@@ -115,7 +112,10 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	 this.beanBase         = new BaseBean();
 	}
  
-	@Override
+	/**
+	 * init
+	 * @param configuracion
+	 **/
 	public void init( ServletConfig configuracion ){
 		this.imprimeLog( "********* DENTRO DE 'init( ServletConfig config )' **********" ); 
 	    
@@ -135,7 +135,7 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 
 	/**
 	 * acceso_InitParam
-	 */
+	 **/
 	public void acceso_InitParam(){
 		this.imprimeLog( "********** DENTRO DE 'acceso_InitParam' **********" );
 		
@@ -159,7 +159,7 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
 	 * @param response
 	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
-		 this.getServletContext().log( "********* DENTRO DE service **********" ); 
+	    this.imprimeLog( "********* DENTRO DE service **********" ); 
  
 	    BeanValidacionDto objValidacion      = new BeanValidacionDto();
 	    boolean           estadoValidacion   = true;
@@ -271,14 +271,14 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     	    
 	    	    beanEmailDto.setUsuario(   "cesarricardo.guerra19@gmail.com" );
 	    	    beanEmailDto.setPassword(  "41816133" );
-	    	    beanEmailDto.setCuentaEmailRemitente(        "cesarricardo.guerra19@gmail.com" );
-	    	    beanEmailDto.setCuentaEmailDestinatario(     email );
+	    	    beanEmailDto.setCuentaEmailRemitente(    "cesarricardo.guerra19@gmail.com" );
+	    	    beanEmailDto.setCuentaEmailDestinatario( email );
 	    	    beanEmailDto.setCuentaEmailDestinatario_Cc(  "u201000125@upc.edu.pe"   );
 	    	    beanEmailDto.setCuentaEmailDestinatario_Bcc( "i220051@cibertec.edu.pe" );
 	    	    beanEmailDto.setServidor(  "smtp.gmail.com" );
 	    	    beanEmailDto.setPuerto(    "587" );	    	    
 	    	    beanEmailDto.setProtocolo( "smtp" );
-	    	    beanEmailDto.setContentType( "text/html" );
+	    	    beanEmailDto.setContentType(   "text/html" );
 	    	    beanEmailDto.setNombreAdjunto( "PublicidaEmail.jpg" );
 	    	    beanEmailDto.setAsuntoMensaje( "peruvianportalterrestrialtransport [Publicidad]" );
 	    	    beanEmailDto.setCuerpoMensaje( " Bienvenido Sr(a): <font color='red'> " + nombres + " " + apellidos + "</font>, su registro en el portal" + saltoLinea +

@@ -23,7 +23,7 @@ import com.ttporg.pe.bean.BaseBean;
  */
 public class ServletCerrarSesion extends HttpServlet implements Servlet{
  
-	private static final long serialVersionUID = 918161070629297916L;
+	private static final long serialVersionUID = 918161038759297916L;
 
 	private ServletContext    contexto           = null;
 	private RequestDispatcher despachador        = null;
@@ -31,7 +31,7 @@ public class ServletCerrarSesion extends HttpServlet implements Servlet{
 	//Utilitarios ...
 	private BaseBean          beanBase           = null;
 	
-	private String            REDIRECCIONAMIENTO = "/login.action";
+	private static String     REDIRECCIONAMIENTO = "/login.action";
 	
 	{
 	 this.beanBase = new BaseBean();
@@ -41,14 +41,14 @@ public class ServletCerrarSesion extends HttpServlet implements Servlet{
 	 * service
 	 * @param request
 	 * @param response
-	 */	
+	 **/	
 	 public void service( HttpServletRequest request, HttpServletResponse response ){ 
 		this.imprimeLog( "********* DENTRO DE service **********" ); 
   	    
 	    HttpSession session = request.getSession( true );
 	    
 	    try{ 
-	    	session.invalidate(); //Elimina la sesion ...
+	    	session.invalidate();  //Elimina la sesion ...
 	    	
 	        this.contexto    = this.getServletContext();
 	        this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );

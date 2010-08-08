@@ -6,25 +6,41 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 <sqlMap namespace="DetalleAsientoDTO" >
   
     <typeAlias alias="detalleAsientoSalida" type="com.ttporg.pe.dto.DetalleAsientoDTO" />
- 
+  
     <!-- FORMA #1: PARA HACER CONSULTAS, EN BASE A: 'resultMap' -->
    	<resultMap id="atributosDetalleAsiento" class="com.ttporg.pe.dto.DetalleAsientoDTO" >
-		<result property="idVehiculo"      column="VEHICULO_ID"      columnIndex="1" />		
-		<result property="idServicio"      column="SERVICIO_ID"      columnIndex="2" />
-		<result property="idAsiento"       column="ASIENTO_ID"       columnIndex="3" />
-		<result property="modeloVehiculo"  column="MOD_VEHICULO"     columnIndex="4" />
-		<result property="nombVehiculo"    column="NOM_VEHICULO"     columnIndex="5" />
-		<result property="estadoAsiento"   column="ESTADO_VEHICULO"  columnIndex="6" />
+		<result property="idAsiento"        column="ASIENTO_ID"        columnIndex="1"  />		
+		<result property="idVehiculo"       column="VEHICULO_ID"       columnIndex="2"  />
+		<result property="idServicio"       column="SERVICIO_ID"       columnIndex="3"  />
+		<result property="modeloVehiculo"   column="MOD_VEHICULO"      columnIndex="4"  />
+		<result property="nombVehiculo"     column="NOM_VEHICULO"      columnIndex="5"  />		
+		<result property="columnaAsientoA"  column="COLUMNA_ASIENTO_A" columnIndex="6"  />
+		<result property="columnaAsientoB"  column="COLUMNA_ASIENTO_B" columnIndex="7"  />
+		<result property="columnaAsientoC"  column="COLUMNA_ASIENTO_C" columnIndex="8"  />
+		<result property="columnaAsientoD"  column="COLUMNA_ASIENTO_D" columnIndex="9"  />		
+		<result property="estado_A"         column="ESTADO_CA"         columnIndex="10"  />
+		<result property="estado_B"         column="ESTADO_CB"         columnIndex="11"  />
+		<result property="estado_C"         column="ESTADO_CC"         columnIndex="12"  />
+		<result property="estado_D"         column="ESTADO_CD"         columnIndex="13"  />			
+		<result property="estado"           column="ESTADO_VEHICULO"   columnIndex="14" />	
 	</resultMap>
  
  	<select id="getListaDetalleAsiento2" resultMap="atributosDetalleAsiento" parameterClass="detalleAsientoSalida" > 		   
  		    <![CDATA[ 
- 			SELECT v.ID           AS 'VEHICULO_ID',  
-			       v.MODELO       AS 'MOD_VEHICULO', 
-			       v.NOMBRE       AS 'NOM_VEHICULO',   
-			       v.SERVICIO_ID  AS 'SERVICIO_ID',
-			       a.ID           AS 'ASIENTO_ID', 
-			       a.ESTADO       AS 'ESTADO_VEHICULO'
+			SELECT v.ID          AS 'VEHICULO_ID',
+			       v.SERVICIO_ID AS 'SERVICIO_ID', 
+			       v.MODELO      AS 'MOD_VEHICULO', 			
+			       v.NOMBRE      AS 'NOM_VEHICULO', 
+			       a.ID          AS 'ASIENTO_ID',		       
+			       a.COLUMNA_A   AS 'COLUMNA_ASIENTO_A', 
+			       a.COLUMNA_B   AS 'COLUMNA_ASIENTO_B', 
+			       a.COLUMNA_C   AS 'COLUMNA_ASIENTO_C', 
+			       a.COLUMNA_D   AS 'COLUMNA_ASIENTO_D',			       
+			       a.ESTADO_CA   AS 'ESTADO_CA', 
+			       a.ESTADO_CB   AS 'ESTADO_CB', 
+			       a.ESTADO_CC   AS 'ESTADO_CC', 
+			       a.ESTADO_CD   AS 'ESTADO_CD',			       
+			       a.ESTADO      AS 'ESTADO_VEHICULO'
 			FROM   VEHICULO v, ASIENTO a			 
 			]]>       
 			<dynamic prepend="WHERE" >	 			

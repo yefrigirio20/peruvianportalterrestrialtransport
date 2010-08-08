@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * @author Cesar Ricardo.
- * @clase: LoginMB.java  
+ * @clase: ClienteServletMB.java  
  * @descripción descripción de la clase.
  * @author_web: http://frameworksjava2008.blogspot.com
                 http://viviendoconjavaynomoririntentandolo.blogspot.com
@@ -23,14 +23,13 @@ import com.opensymphony.xwork2.ActionSupport;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  */
-public class Servlet_Header_Request extends ActionSupport implements ServletResponseAware, ServletRequestAware{
+public class ClienteServletMB extends ActionSupport implements ServletResponseAware, ServletRequestAware{
 
 	private static final long serialVersionUID = -9082650078047288321L;
 	
 	private HttpServletRequest  request;    
 	private HttpServletResponse response;
-	
-	
+		
 	private String	usuario;
 	private String	password;
 	
@@ -39,12 +38,12 @@ public class Servlet_Header_Request extends ActionSupport implements ServletResp
 	private String  ERROR   = "error";
 	private String  INPUT   = "input";
  	
-	   //String U = request.getParameter("param_01");
-	   //String P = request.getParameter("param_02");   
+	private static String     REDIRECCIONAMIENTO = "/jsp/Home.jsp";	   
 	
 	/**
 	 * execute
-	 */
+	 **/
+	
 	/*
 	public String execute(){
 		
@@ -97,11 +96,9 @@ public class Servlet_Header_Request extends ActionSupport implements ServletResp
 	        
 	        ActionContext ctx = ActionContext.getContext();
 	        System.out.println( "ctx: " + ctx );
-	        
-			String SERVLET_VALIDATOR = "/jsp/Home.jsp";
 		 	
 			contexto    = (ServletContext)ctx.getContext();  
-			despachador = contexto.getRequestDispatcher( SERVLET_VALIDATOR );  
+			despachador = contexto.getRequestDispatcher( REDIRECCIONAMIENTO );  
 	        
 		    //despachador.forward( request, response ); 
 		    
@@ -114,13 +111,11 @@ public class Servlet_Header_Request extends ActionSupport implements ServletResp
 	
 	   public String validarUsuario() throws ServletException, IOException{
 	       System.out.println( "DENTRO DE 'validarUsuario'" );  
-	         
-	       String SERVLET_VALIDATOR = "/jsp/Home.jsp";
 	       
 	       //System.out.println( "REQUEST:  " + this.getServletRequest()  );
 	       //System.out.println( "RESPONSE: " + this.getServletResponse() );
 	      
-	       //request.getRequestDispatcher( SERVLET_VALIDATOR ).forward(request, response);
+	       //request.getRequestDispatcher( SERVLET_VALIDATOR ).forward( request, response );
 		   
 		   return SUCCESS;
 	   }
@@ -130,7 +125,7 @@ public class Servlet_Header_Request extends ActionSupport implements ServletResp
 	 * getValidaDatosInput
 	 * @param  valorParam
 	 * @return boolean
-	 */
+	 **/
 	private boolean getValidaDatosInput( String valorParam ){
 		
 		boolean estadoRetorno = false;
@@ -145,21 +140,18 @@ public class Servlet_Header_Request extends ActionSupport implements ServletResp
 		return estadoRetorno;
 	}
 
-	public void setServletRequest(HttpServletRequest arg0) {       
-	this.request = request;    
+	public void setServletRequest( HttpServletRequest request ){       
+	   this.request = request;    
 	}
 	   
-
-	public void setServletResponse(HttpServletResponse arg0) {       
-	this.response = response;    
+	public void setServletResponse( HttpServletResponse response ){       
+	   this.response = response;    
 	}
 	   
-
 	public HttpServletRequest getServletRequest(){       
 	   return request;    
 	}
 	   
-
 	public HttpServletResponse getServletResponse(){       
 	    return response;    
 	}
