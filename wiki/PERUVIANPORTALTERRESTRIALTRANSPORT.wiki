@@ -35,7 +35,7 @@ Este proceso consiste en la generación del comprobante de pago (boleto) del ser
 
 == II. TECNOLOGÍAS APLICADAS: ==
 
-El proyecto Web desarrollado posee una arquitectura robusta  que integra diferentes tecnologías para cada capa de la aplicación, apoyándose en diferentes APIS OpenSource .  Además, esta respaldada de un motor de datos MYSQL 5.0.5. Las tecnologías utilizadas en la integración son las siguientes: <br> <br> 
+El proyecto Web desarrollado posee una arquitectura robusta  que integra diferentes tecnologías para cada capa de la aplicación, apoyándose en diferentes APIS OpenSource Además, esta respaldada de un motor de datos MYSQL 5.0.5. Las tecnologías utilizadas en la integración son las siguientes: <br> <br> 
  
  *   SPRING 2.5.3 <br>
  *   IBATIS 2.1.6.589 <br>
