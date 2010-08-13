@@ -20,8 +20,8 @@ El proceso consiste en la búsqueda de pasajes disponibles para su respectiva co
 -	Empresa. <br>
 -	Agencia. <br>
 -	Servicio. <br>
--	Cuidad de Origen. <br>
--	Cuidad de Destino. <br>
+-	Ciudad de Origen. <br>
+-	Ciudad de Destino. <br>
 -	Fecha de Salida. <br><br>
 
 *1.4	Pago de Pasajes* <br>
