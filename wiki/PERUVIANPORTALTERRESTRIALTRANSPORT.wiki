@@ -1,5 +1,5 @@
-#summary One-sentence summary of this page.
 #labels JAVAMAN,PERUVIANPORTALTERRESTRIALTRANSPORT
+#Ven con nosotros y te brindaremos toda la información que quieras y más ..!!
 
 == INTRODUCCION ==
 
@@ -70,6 +70,6 @@ Este proceso consiste en la generación del comprobante de pago (boleto) del ser
  *   NETBEANS 6.9 <br> <br>
 
 
-== VII. DESCARGA: ==
+== VII. DESCARGA 'SVN': ==
 
  *  http://peruvianportalterrestrialtransport.googlecode.com/svn/trunk/peruvianportalterrestrialtransport <br> <br>
