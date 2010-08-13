@@ -8,7 +8,7 @@ El portal de empresas de transporte terrestre brinda información detallada sobr
 
 = Details =
 
-*I.  DESCRIPCIÓN DE PROCESOS DE NEGOCIO:*
+*I.  DESCRIPCIÓN DE PROCESOS DE NEGOCIO:* <br><br>
 *1.1	  Registro del Cliente  *
 Este proceso consiste en registrar la información de los clientes de las empresas de transporte, generándoles un usuario y password con el cual podrán acceder a los servicios ofrecidos. Además, se les enviará automáticamente una confirmación de la ficha de registro a su email personal.
 
