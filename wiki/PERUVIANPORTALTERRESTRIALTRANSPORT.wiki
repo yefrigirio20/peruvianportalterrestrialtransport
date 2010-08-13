@@ -8,16 +8,15 @@ El portal de empresas de transporte terrestre brinda información detallada sobr
 
 = Details =
 
-*I.  DESCRIPCIÓN DE PROCESOS DE NEGOCIO:* <br><br>
-*1.1	  Registro del Cliente  *
-Este proceso consiste en registrar la información de los clientes de las empresas de transporte, generándoles un usuario y password con el cual podrán acceder a los servicios ofrecidos. Además, se les enviará automáticamente una confirmación de la ficha de registro a su email personal.
+*I.  DESCRIPCIÓN DE PROCESOS DE NEGOCIO:* <br> <br>
 
+*1.1	  Registro del Cliente  * <br>
+Este proceso consiste en registrar la información de los clientes de las empresas de transporte, generándoles un usuario y password con el cual podrán acceder a los servicios ofrecidos. Además, se les enviará automáticamente una confirmación de la ficha de registro a su email personal.<br> <br>
 
-*1.2	  Autenticación:*
-En este proceso, el usuario realiza el logueo al portal,  para acceder a los servicios brindados por él. 
+*1.2	  Autenticación:* <br>
+En este proceso, el usuario realiza el logueo al portal,  para acceder a los servicios brindados por él.  <br> <br>
 
-
-*1.3	Búsqueda de Pasajes*
+*1.3	Búsqueda de Pasajes* <br>
 El proceso consiste en la búsqueda de pasajes disponibles para su respectiva compra según los filtros que se detallan a continuación: 
 •	Departamento. 
 •	Empresa. 
@@ -25,14 +24,12 @@ El proceso consiste en la búsqueda de pasajes disponibles para su respectiva co
 •	Servicio
 •	Cuidad de Origen
 •	Cuidad de Destino. 
-•	Fecha de Salida.
+•	Fecha de Salida. <br><br>
 
-
-*1.4	Pago de Pasajes*
+*1.4	Pago de Pasajes* <br>
 Este proceso consiste en la realización del pago del pasaje seleccionado por el usuario. El pago se realizará a través del mismo portal, en el que se tendrá que ingresar los siguientes datos: 
-•	Numero de Cuenta
-•	Fecha de Expiración de la Tarjeta de Crédito 
+•	Numero de Cuenta.
+•	Fecha de Expiración de la Tarjeta de Crédito. <br> <br> 
 
-
-*1.5	 Generación de Boleto*
- Este proceso consiste en la generación del comprobante de pago (boleto) del servicio que el usuario compró. En este boleto se detallará todo los datos resaltantes de los procesos previos realizados y se  generará luego de culminar el proceso de pago. El comprobante se mostrará en archivo .pdf.
+*1.5	 Generación de Boleto* <br>
+Este proceso consiste en la generación del comprobante de pago (boleto) del servicio que el usuario compró. En este boleto se detallará todo los datos resaltantes de los procesos previos realizados y se  generará luego de culminar el proceso de pago. El comprobante se mostrará en archivo .pdf. <br> <br>
