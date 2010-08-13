@@ -26,8 +26,30 @@ El proceso consiste en la búsqueda de pasajes disponibles para su respectiva co
 
 *1.4	Pago de Pasajes* <br>
 Este proceso consiste en la realización del pago del pasaje seleccionado por el usuario. El pago se realizará a través del mismo portal, en el que se tendrá que ingresar los siguientes datos: 
- * - *	Numero de Cuenta. <br>
- * - *	Fecha de Expiración de la Tarjeta de Crédito. <br> <br> 
+ * 	Numero de Cuenta. <br>
+ * 	Fecha de Expiración de la Tarjeta de Crédito. <br> <br> 
 
 *1.5	 Generación de Boleto* <br>
 Este proceso consiste en la generación del comprobante de pago (boleto) del servicio que el usuario compró. En este boleto se detallará todo los datos resaltantes de los procesos previos realizados y se  generará luego de culminar el proceso de pago. El comprobante se mostrará en archivo .pdf. <br> <br>
+
+= II. TECNOLOGÍAS APLICADAS = <br> <br>
+
+ *   SPRING 2.5.3 <br>
+ *   IBATIS 2.1.6.589 <br>
+ *   JSP 2.0 <br>
+ *   XHTML 1.0 <br>
+ *   JSTL 1.1.2 <br>
+ *   STRUTS 2.0.5 <br>
+ *   LOG4J 1.2.14 <br>
+ *   JAVAMAIL 1.4 <br>
+ *   ITEXT 5.0.2 <br>
+ *   AJAXTAGS 1.3 <br>
+ *   CRYPTIX 3.2 <br>
+ *   JUNIT 4.5 <br>
+ *   AXIS 1.4 <br>
+ *   JSP:INCLUDE <br>
+ *   SERVLET 2.5 <br>
+ *   JQUERY <br> 
+ *   MAVEN 2.0.9 <br>
+ *   FLASH CS5 <br>
+ *   CSS <br>
