@@ -52,3 +52,18 @@ Este proceso consiste en la generación del comprobante de pago (boleto) del ser
  *   MAVEN 2.0.9 <br>
  *   FLASH CS5 <br>
  *   CSS <br>
+
+= IV. MOTOR DE DATOS: =
+
+ *   MYSQL 5.0.5
+
+
+= V. CONTENEDOR DE SERVLETS: =
+
+ *   APACHE TOMCAT v6.0
+
+
+= VI. IDE: =
+
+ *   JBOSS DEVELOPER STUDIO 2.0
+ *   NETBEANS 6.9 
