@@ -5,7 +5,7 @@
 
 El portal de empresas de transporte terrestre brinda información detallada sobre los diferentes servicios que ofrecen diversas empresas de transporte registradas en él. Este portal permitirá a nuestros clientes mostrar información actualizada sobre búsquedas de pasajes, venta y compra de boletos de viaje, además de ofrecer información general sobre promociones, entre otros. De este modo, las compañías de transporte administrarán el flujo de información y el flujo de venta que ofrecen a sus clientes finales. <br> <br> 
 
-= I. DESCRIPCIÓN DE PROCESOS DE NEGOCIO: =
+== I. DESCRIPCIÓN DE PROCESOS DE NEGOCIO: ==
 
 *1.1	  Registro del Cliente  * <br>
 Este proceso consiste en registrar la información de los clientes de las empresas de transporte, generándoles un usuario y password con el cual podrán acceder a los servicios ofrecidos. Además, se les enviará automáticamente una confirmación de la ficha de registro a su email personal. <br> <br>
@@ -31,7 +31,7 @@ Este proceso consiste en la realización del pago del pasaje seleccionado por el
 *1.5	 Generación de Boleto* <br>
 Este proceso consiste en la generación del comprobante de pago (boleto) del servicio que el usuario compró. En este boleto se detallará todo los datos resaltantes de los procesos previos realizados y se  generará luego de culminar el proceso de pago. El comprobante se mostrará en archivo .pdf. <br> <br>
 
-= II. TECNOLOGÍAS APLICADAS: =
+== II. TECNOLOGÍAS APLICADAS: ==
 
  *   SPRING 2.5.3 <br>
  *   IBATIS 2.1.6.589 <br>
@@ -53,17 +53,17 @@ Este proceso consiste en la generación del comprobante de pago (boleto) del ser
  *   FLASH CS5 <br>
  *   CSS <br>
 
-= IV. MOTOR DE DATOS: =
+== IV. MOTOR DE DATOS: ==
 
- *   MYSQL 5.0.5
-
-
-= V. CONTENEDOR DE SERVLETS: =
-
- *   APACHE TOMCAT v6.0
+ *   MYSQL 5.0.5 <br> <br>
 
 
-= VI. IDE: =
+== V. CONTENEDOR DE SERVLETS: ==
 
- *   JBOSS DEVELOPER STUDIO 2.0
- *   NETBEANS 6.9 
+ *   APACHE TOMCAT v6.0 <br> <br>
+
+
+== VI. IDE: ==
+
+ *   JBOSS DEVELOPER STUDIO 2.0 <br>
+ *   NETBEANS 6.9 <br> <br>
