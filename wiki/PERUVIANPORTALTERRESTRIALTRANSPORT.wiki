@@ -51,7 +51,8 @@ Este proceso consiste en la generación del comprobante de pago (boleto) del ser
  *   JQUERY <br> 
  *   MAVEN 2.0.9 <br>
  *   FLASH CS5 <br>
- *   CSS <br>
+ *   CSS <br> <br>
+
 
 == IV. MOTOR DE DATOS: ==
 
@@ -67,3 +68,8 @@ Este proceso consiste en la generación del comprobante de pago (boleto) del ser
 
  *   JBOSS DEVELOPER STUDIO 2.0 <br>
  *   NETBEANS 6.9 <br> <br>
+
+
+== VII. DESCARGA: ==
+
+ *  http://peruvianportalterrestrialtransport.googlecode.com/svn/trunk/peruvianportalterrestrialtransport <br> <br>
