@@ -2,7 +2,6 @@
 _ Ven con nosotros y te brindaremos toda la información que quieras y más ..!! _
 
 <br>
-<br>
 
 == INTRODUCCION ==
 
@@ -28,7 +27,7 @@ El proceso consiste en la búsqueda de pasajes disponibles para su respectiva co
 
 *1.4	Pago de Pasajes* <br>
 Este proceso consiste en la realización del pago del pasaje seleccionado por el usuario. El pago se realizará a través del mismo portal, en el que se tendrá que ingresar los siguientes datos: 
- * 	Numero de Cuenta. <br>
+ * 	Número de Cuenta. <br>
  * 	Fecha de Expiración de la Tarjeta de Crédito. <br> <br> 
 
 *1.5	 Generación de Boleto* <br>
