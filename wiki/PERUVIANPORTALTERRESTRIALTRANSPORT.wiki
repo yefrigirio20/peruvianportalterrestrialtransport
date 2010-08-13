@@ -1,14 +1,12 @@
 #summary One-sentence summary of this page.
 #labels JAVAMAN,PERUVIANPORTALTERRESTRIALTRANSPORT
 
-= Introduction =
+= INTRODUCCION =
 
 El portal de empresas de transporte terrestre brinda información detallada sobre los diferentes servicios que ofrecen diversas empresas de transporte registradas en él. Este portal permitirá a nuestros clientes mostrar información actualizada sobre búsquedas de pasajes, venta y compra de boletos de viaje, además de ofrecer información general sobre promociones, entre otros. De este modo, las compañías de transporte administrarán el flujo de información y el flujo de venta que ofrecen a sus clientes finales. 
 
 
-= Details =
-
-*I.  DESCRIPCIÓN DE PROCESOS DE NEGOCIO:* <br> <br>
+= *I.  DESCRIPCIÓN DE PROCESOS DE NEGOCIO:* = <br> <br>
 
 *1.1	  Registro del Cliente  * <br>
 Este proceso consiste en registrar la información de los clientes de las empresas de transporte, generándoles un usuario y password con el cual podrán acceder a los servicios ofrecidos. Además, se les enviará automáticamente una confirmación de la ficha de registro a su email personal.<br> <br>
@@ -18,13 +16,13 @@ En este proceso, el usuario realiza el logueo al portal,  para acceder a los ser
 
 *1.3	Búsqueda de Pasajes* <br>
 El proceso consiste en la búsqueda de pasajes disponibles para su respectiva compra según los filtros que se detallan a continuación: 
-•	Departamento. 
-•	Empresa. 
-•	Agencia
-•	Servicio
-•	Cuidad de Origen
-•	Cuidad de Destino. 
-•	Fecha de Salida. <br><br>
+*	Departamento. 
+*	Empresa. 
+*	Agencia
+*	Servicio
+*	Cuidad de Origen
+*	Cuidad de Destino. 
+*	Fecha de Salida. <br><br>
 
 *1.4	Pago de Pasajes* <br>
 Este proceso consiste en la realización del pago del pasaje seleccionado por el usuario. El pago se realizará a través del mismo portal, en el que se tendrá que ingresar los siguientes datos: 
