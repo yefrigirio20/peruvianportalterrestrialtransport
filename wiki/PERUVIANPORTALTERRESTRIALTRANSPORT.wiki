@@ -15,18 +15,18 @@ Este proceso consiste en registrar la información de los clientes de las empres
 En este proceso, el usuario realiza el logueo al portal,  para acceder a los servicios brindados por él.  <br> <br>
 
 *1.3	Búsqueda de Pasajes* <br>
-El proceso consiste en la búsqueda de pasajes disponibles para su respectiva compra según los filtros que se detallan a continuación: 
-#	Departamento. 
-#	Empresa. 
-#	Agencia
-#	Servicio
-#	Cuidad de Origen
-#	Cuidad de Destino. 
-#	Fecha de Salida. <br><br>
+El proceso consiste en la búsqueda de pasajes disponibles para su respectiva compra según los filtros que se detallan a continuación: <br>
+-	Departamento.  <br>
+-	Empresa. <br>
+-	Agencia. <br>
+-	Servicio. <br>
+-	Cuidad de Origen. <br>
+-	Cuidad de Destino. <br>
+-	Fecha de Salida. <br><br>
 
 *1.4	Pago de Pasajes* <br>
 Este proceso consiste en la realización del pago del pasaje seleccionado por el usuario. El pago se realizará a través del mismo portal, en el que se tendrá que ingresar los siguientes datos: 
-•	Numero de Cuenta.
+•	Numero de Cuenta. <br>
 •	Fecha de Expiración de la Tarjeta de Crédito. <br> <br> 
 
 *1.5	 Generación de Boleto* <br>
