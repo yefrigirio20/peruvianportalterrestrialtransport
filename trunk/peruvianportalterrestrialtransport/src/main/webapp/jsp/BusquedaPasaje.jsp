@@ -112,7 +112,7 @@
 		   	        myFrm.action = url; 	 		 
 		   	        myFrm.submit();    
 		       }
-	    }  
+	   }  
 	    
 	   function conexionServletPopup( myFrm, parametro ){              
 			 //alert( "**** DENTRO DE 'conexionServletPopup' ****" );	 
@@ -123,7 +123,7 @@
 	         
 	         //alert( url );
 	
-	 		 var newwindow = window.open( url, 'name','height=570 width=420, scrollbars=1, left=520, top=50' );
+	 		 var newwindow = window.open( url, 'name','height=500 width=400, scrollbars=1, left=500, top=50' );
 			
 			 if( window.focus ){ 
 			     newwindow.focus()

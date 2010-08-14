@@ -7,8 +7,6 @@
  <%@ taglib uri="/struts-tags"                      prefix="s"   %>
  <%@ taglib uri="/struts-dojo-tags"                 prefix="sx"  %>  
 
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  
  <head>
@@ -27,7 +25,7 @@
 	    }  
 
 	    function conexionServlet( myFrm, idFila, idServicio, idAsiento, txtFila ){              
-			 alert( "**** DENTRO DE 'conexionServlet' ****" );	 
+			 //alert( "**** DENTRO DE 'conexionServlet' ****" );	 
 			 
 	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
 	         //alert( url );
@@ -39,7 +37,49 @@
 	         myFrm.action = urlNew; 		 		 
 	         myFrm.submit();
 	    }  
+ 
+		 var vAJAX;
+			
+		 function conexionAjaxServlet( myFrm, idAsiento ){
+			//alert( "**** DENTRO DE 'conexionAjaxServlet' ****" );	
+
+			//alert( "idAsiento: " + idAsiento );
+		    
+			//CREAMOS EL CONTROL 'XMLHttpRequest', SEGÚN EL NAVEGADOR UTILIZADO: 
+			if( window.XMLHttpRequest ){
+				vAJAX = new XMLHttpRequest();                      //SI NO ES 'INTERNET EXPLORER'
+			}
+			else{
+				vAJAX = new ActiveXObject( "Microsoft.XMLHTTP" );  //SI ES 'INTERNET EXPLORER'
+		    }
+			
+			//ALMACENAMOS EN EL CONTROL, LA FUNCION QUE INVOCARA CUANDO LA PETICION CAMBIE DE ESTADO	
+			vAJAX.onreadystatechange = funcionCallback;        //IMPORTANTE LOS LLAMADOS A LOS METODOS SE HACEN SIN PONER '()'
+		    
+			//ENVIAMOS LA PETICION...
+			vAJAX.open( "GET", "<%=request.getContextPath()%>/ServletPopupAjax?idAsiento=" + idAsiento , true );
+			vAJAX.send( "" );
+		 }
 		
+		 function funcionCallback(){
+		
+			//COMPROBAMOS SI LA PETICION SE HA COMPROBADO:  (TIENE QUE COINCIDIR CON EL ESTADO #4)
+			if( vAJAX.readyState == 4 ){
+			
+				//COMPROBAMOS SI LA RESPUESTA HA SIDO CORRECTA:  (TIENE QUE COINCIDIR CON 'HTTP 200')
+				if( vAJAX.status == 200 ){
+					//ESCRIBIMOS EL RESULTADO DE LA PAGINA 'HTML' MEDIANTE 'DHTML'
+					document.all.IMPRIMIR.innerHTML = "<STRONG><FONT COLOR='RED'>" + vAJAX.responseText + "</FONT></STRONG>";	
+				}
+				else{
+				     //alert("NO SE PUDO EN: 'vAJAX.status == 200' ");
+				}
+			}
+			else{
+				     //alert("NO SE PUDO EN: 'vAJAX.readyState == 4' ");
+			}
+		 }
+	    		
     </script>
  
 </head>
@@ -184,7 +224,7 @@
                 <td> 
                   <table border="0" width="100%" bgcolor="black" > 
                        <tr> 
-                            <td>
+                            <td> 
                                 <center> 
                                     <font size="3" style="color:white; border:thin; border-color:#000; " > 
                                           <strong> &nbsp; &nbsp; &nbsp; A &nbsp; &nbsp; &nbsp; </strong>
@@ -248,13 +288,15 @@
                                       <c:if test="${objListaPopup.estado_A == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
                                                 style="background:#060; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" />
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" 
+                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoA} )" />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_A == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
                                                 style="background:#BB0000; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" />   
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" 
+                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoA} )" />  
                                       </c:if>                                     
                                   </td>   
                                   
@@ -263,13 +305,15 @@
                                       <c:if test="${objListaPopup.estado_B == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
                                                 style="background:#060; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" />
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" 
+                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoB} )" />  
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_B == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
                                                 style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" />
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" 
+                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoB} )" />
                                       </c:if> 
                                    
                                   </td> 
@@ -283,13 +327,15 @@
                                       <c:if test="${objListaPopup.estado_C == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
                                                 style="background:#060;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" 
+                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoC} )" />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_C == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
                                                 style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" 
+                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoC} )" />
                                       </c:if> 
                                     
                                   </td> 
@@ -299,13 +345,15 @@
                                       <c:if test="${objListaPopup.estado_D == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
                                                 style="background:#060;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" 
+                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoD} )" />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_D == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
                                                 style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" 
+                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoD} )" />
                                       </c:if> 
                                     
                                   </td>                     
@@ -330,12 +378,20 @@
                 </td>
              </tr>   
                                                     
-          </table>     
+          </table> 
+          
+          <table>
+            <tr>  
+              <td>
+                <span id="IMPRIMIR" ></span>
+              </td>
+            </tr>            
+          </table>
+              
          </center>
        </c:if>         
        <!-- GRAFICO BUS --> 
          
-       <br> </br>
        <br> </br>
          
        <center>  

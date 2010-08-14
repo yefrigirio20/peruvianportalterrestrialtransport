@@ -33,13 +33,11 @@ import com.ttporg.pe.dao.impl.SalidaDaoImpl;
 import com.ttporg.pe.dao.impl.ServicioDaoImpl;
 import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
 import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
-import com.ttporg.pe.util.UtilCalendario;
-import com.ttporg.pe.util.UtilEmail;
-import com.ttporg.pe.util.UtilEncriptacion;
+import com.ttporg.pe.dto.DetallePopupDTO;
 
 /**
  * @author Cesar Ricardo.
- * @clase: ServletAjax.java  
+ * @clase: ServletPopupAjax.java  
  * @descripción descripción de la clase.
  * @author_web: http://frameworksjava2008.blogspot.com
                 http://viviendoconjavaynomoririntentandolo.blogspot.com
@@ -49,7 +47,7 @@ import com.ttporg.pe.util.UtilEncriptacion;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  **/
-public class ServletAjax extends BaseAjaxServlet{
+public class ServletPopupAjax extends BaseAjaxServlet{
 
 	private static final long serialVersionUID = 8156759678414871371L;
  	
@@ -68,10 +66,26 @@ public class ServletAjax extends BaseAjaxServlet{
 	private TransaccionDao    transaccionDAO     = null;
 	
 	//Utilitarios ...
-	private UtilCalendario    utilCalendario     = null;
-	private UtilEmail         utilEmail          = null; 
-	private UtilEncriptacion  utilEncriptacion   = null;
 	private BaseBean          beanBase           = null;
+	
+	{
+	 //this.servicio       = new ServiceFactory();
+		
+	 this.clienteDAO       = new ClienteDaoImpl();
+	 this.empresaDAO       = new EmpresaDaoImpl();	
+	 this.departamentoDAO  = new DepartamentoDaoImpl();
+	 this.agenciaDAO       = new AgenciaDaoImpl();		
+	 this.vehiculoDAO      = new VehiculoDaoImpl();	
+	 this.servicioDAO      = new ServicioDaoImpl();
+	 this.asientoDAO       = new AsientoDaoImpl();
+	 this.salidaDAO        = new SalidaDaoImpl();
+	 this.calendarioDAO    = new CalendarioDaoImpl();
+	 this.pagoDAO          = new PagoDaoImpl();
+	 this.clientePagoDAO   = new ClientePagoDaoImpl();
+	 this.transaccionDAO   = new TransaccionDaoImpl();
+
+	 this.beanBase         = new BaseBean();
+     }
 	
 	/**
 	 * init
@@ -111,7 +125,7 @@ public class ServletAjax extends BaseAjaxServlet{
 		 this.imprimeLog( "********** DENTRO DE 'acceso_ContextParam' **********" );
 		
 		 //INICIALIZANDO 'DAOs'...
-		 this.inicializaDAOs();	
+		 //this.inicializaDAOs();	
 	}
 	
 	/**
@@ -122,62 +136,56 @@ public class ServletAjax extends BaseAjaxServlet{
 	public String getXmlContent( HttpServletRequest request, HttpServletResponse response ){			   
 		   this.imprimeLog( "**** DENTRO DE 'ServletAjax', (extends BaseAjaxServlet) **** " );	
 		   
+		   //INICIALIZANDO 'DAOs'...
+		   this.inicializaDAOs();	
+		   
 		   String mensajeRespuesta = new String( "" ); 
 
 	       try{		
-	    	   String objValidacion = "Ricardo Guerra"; //request.getParameter( "PERSONA" );
+	    	   String idAsiento = request.getParameter( "idAsiento" );
+	    	   this.imprimeLog( "idAsiento: " + idAsiento );
 	    	   
-	    	   System.out.println("EL PARAMETRO LLEGADO ES: " + objValidacion );
-	    	   
-	    	   String MENSAJE = validator(objValidacion);                 //VALIDANDO PARAMETRO LLEGADO!!!
-	    	   
-	    	   System.out.println("EL PARAMETRO LLEGADO ES: " + MENSAJE );
-	    	     	   
-	    	   mensajeRespuesta = "<H1>" + MENSAJE + "</H1>";
-	    	   
+	    	   if( idAsiento != null ){
+	    		   
+	    		   DetallePopupDTO objDetallePopup = (DetallePopupDTO)empresaDAO.obtenerObjetoDatosPopup_x_codigoAsiento( Integer.parseInt( idAsiento ) );
+	    		   
+	    		   String saltoLinea  = "";
+	    		   String mensajeAJAX = "";
+	    			   
+		   		   this.imprimeLog( "" );
+				   this.imprimeLog( "====> [empresaDAO]:      " + empresaDAO   );
+				   this.imprimeLog( "" );			
+				   this.imprimeLog( "====> [objDetallePopup]: " + objDetallePopup   );		
+				   this.imprimeLog( "" );	
+				   this.imprimeLog( "AsientoId:          " + objDetallePopup.getAsientoId()      );
+				   this.imprimeLog( "AgenciaNombre:      " + objDetallePopup.getAgenciaNombre()  );
+				   this.imprimeLog( "VehiculoNombre:     " + objDetallePopup.getVehiculoNombre() );
+				   this.imprimeLog( "VehiculoModelo:     " + objDetallePopup.getVehiculoModelo() );
+				   this.imprimeLog( "VehiculoTipo:       " + objDetallePopup.getVehiculoTipo()   );
+				   this.imprimeLog( "AgenciaNombre:      " + objDetallePopup.getAgenciaNombre()      );
+				   this.imprimeLog( "EmpresaRazonSocial: " + objDetallePopup.getEmpresaRazonSocial() );
+				   this.imprimeLog( "" );
+	    		   
+				   //Armando Mensaje. AJAX.
+	    		   mensajeAJAX =  " <table with='200' bgcolor='white' > ";
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Razon Social: </strong>    " + objDetallePopup.getEmpresaRazonSocial() + "</td>  "; 
+	    		   mensajeAJAX += "      <td style='color:#003300'> <strong> - Agencia: </strong>         " + objDetallePopup.getAgenciaNombre()      + "</td> </tr>";
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Nombre Vehiculo: </strong> " + objDetallePopup.getVehiculoNombre()     + "</td>  ";
+	    		   mensajeAJAX += "      <td style='color:#003300'> <strong> - Modelo Vehiculo: </strong> " + objDetallePopup.getVehiculoModelo()     + "</td> </tr>";
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Tipo Vehiculo: </strong>   " + objDetallePopup.getVehiculoTipo()       + "</td>  ";
+	    		   mensajeAJAX += "      <td style='color:#003300'> <strong> - Fila #: </strong>          " + objDetallePopup.getAsientoId()          + "</td> </tr> "; 
+	    		   mensajeAJAX += " </table>"; 
+	    		   
+	    		   this.imprimeLog( "CADENA 'AJAX': " + mensajeAJAX );
+	    		   
+	    		   mensajeRespuesta = "" + mensajeAJAX + "";
+	    	   } 
 	       }
 	       catch( Exception e ){ 
 		   	      e.printStackTrace();
 	       } 
 	       
 		   return mensajeRespuesta;
-	}
-
-	/**
-	 * validator
-	 * @param  parametro
-	 * @return String
-	 **/
-    public String validator( String parametro ){		
-		
-		String cadena = ""; 
-		
-		if( parametro.equals( "Jesus Hernandez" ) ){
-			cadena = "GUADALAJARA";
-	   	    this.imprimeLog( "SELECCIONO: GUADALAJARA" );
-		}
-		else if( parametro.equals("Ricardo Guerra") ){
-			cadena = "CHORRILLOS";
-	   	    this.imprimeLog( "SELECCIONO: CHORRILLOS" );
-		}
-		else if( parametro.equals("Felipe Sebastiani") ){
-			cadena = "UNIVERSITARIA";
-	   	    this.imprimeLog( "SELECCIONO: UNIVERSITARIA" );
-		}
-		else if( parametro.equals("Maria Arnaiz") ){
-			cadena = "CALLAO";
-	   	    this.imprimeLog( "SELECCIONO: CALLAO" );
-		}
-		else if( parametro.equals("Cathy Cotrina") ){
-			cadena = "LOS OLIVOS";
-	   	    this.imprimeLog( "SELECCIONO: LOS OLIVOS" );
-		}		
-		else{
-			cadena = "PERSONA DESCONOCIDA!!!!";  
-	   	    this.imprimeLog( "SELECCIONO: PERSONA DESCONOCIDA!!!!" );
-		}	
-		
-		return cadena;
 	}
 	
 	/**

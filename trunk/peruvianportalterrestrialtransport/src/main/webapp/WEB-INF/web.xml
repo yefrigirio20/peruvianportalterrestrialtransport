@@ -88,29 +88,29 @@
 	
 	
 	<servlet>
-		<servlet-name>ServletAjax</servlet-name>
-		<servlet-class>com.ttporg.pe.servlet.ServletAjax</servlet-class>
-	</servlet>
+		<servlet-name>ServletPopupAjax</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletPopupAjax</servlet-class>
+	</servlet>	
 	
+	<servlet-mapping>
+		<servlet-name>ServletPopupAjax</servlet-name>
+		<url-pattern>/ServletPopupAjax</url-pattern>
+	</servlet-mapping>
+		
+				
 	<servlet>
 		<display-name>Apache-Axis Servlet</display-name>
 		<servlet-name>AxisServlet</servlet-name>
 		<servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
 	</servlet>
-	
-	
+		
 	<servlet>
 		<display-name>Axis Admin Servlet</display-name>
 		<servlet-name>AdminServlet</servlet-name>
 		<servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
 		<load-on-startup>100</load-on-startup>
 	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>ServletAjax</servlet-name>
-		<url-pattern>/ServletAjax</url-pattern>
-	</servlet-mapping>
-	
+		
 	
 	<servlet-mapping>
 		<servlet-name>AxisServlet</servlet-name>
@@ -121,6 +121,7 @@
 		<servlet-name>AxisServlet</servlet-name>
 		<url-pattern>*.jws</url-pattern>
 	</servlet-mapping>
+	
 	
 	<servlet-mapping>
 		<servlet-name>AxisServlet</servlet-name>
