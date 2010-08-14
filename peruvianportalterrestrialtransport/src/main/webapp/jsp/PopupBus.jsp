@@ -33,7 +33,7 @@
 	         //alert( url );
 
 	         var urlNew = url + '?idServicio=' + idServicio + '&idFila=' + idFila + txtFila + '&idAsiento=' + idAsiento;
-	         alert( urlNew );
+	         //alert( urlNew );
 	         	
 	         myFrm.method = '' + 'POST';
 	         myFrm.action = urlNew; 		 		 
