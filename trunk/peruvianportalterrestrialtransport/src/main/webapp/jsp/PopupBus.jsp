@@ -420,8 +420,7 @@
           <strong>#<fmt:message key="texto.label.totalAsientos" />:</strong> 
           <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;" />
         </center>
-        
-        <br> </br>
+
         <br> </br>
         
         <center> 
@@ -443,8 +442,7 @@
 	              </tr>        
 	         </table>
         </center>
-        
-        <br> </br>
+
         <br> </br>
     
     </form>

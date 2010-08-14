@@ -169,18 +169,18 @@ public class UtilGeneraBoletoViaje{
 		objTransaccion.setAsiento(   objAsiento  );
 		
 		//APLICAR GUARDAR EN BD EL OBJETO.
-		String textPDF = "Nombre de Cliente : " + objTransaccion.getCliente().getNombres() + " " + objTransaccion.getCliente().getApellidos() + 
-		"\n" + 
-		" Nombre Empresa:    " + objTransaccion.getEmpresa().getRazonSocial() + "\n" + "\n" + 
-		"Lugar de salida     : Lima                  " + "\n" +
-		"Lugar de Destino    : Cajamarca "             + "\n" + 
-		"Fecha y hora salida : 2010-06-30 06:00 a.m. " + "\n" +
-		"Duracion Estimada   : 20hras."                + "\n" + 
-		"Tipo Vehiculo       : "                       + "\n" + 
-		objTransaccion.getVehiculo().getNombre() + " - " + objTransaccion.getVehiculo().getTipo() + "\n" + 
-		"Nro. Asiento : " + objTransaccion.getAsiento().getId() + "\n" + "\n" 
-		/*+ "Nro. Tarjeta " + objTransaccion.getNumTarjeta() */ + 
-		"Pago Total : S/" + 45;
+		String saltoLinea = "\n";
+		
+		String textPDF = saltoLinea +
+		" - NOMBRE CLIENTE: " + objTransaccion.getCliente().getNombres() + " " + objTransaccion.getCliente().getApellidos() + saltoLinea + 
+		" - NOMBRE EMPRESA: " + objTransaccion.getEmpresa().getRazonSocial() + "\n" + "\n" + 
+		" - LUGAR DE SALIDA:     LIMA      " + saltoLinea +
+		" - LUGAR DE DESTINO:    CAJAMARCA " + saltoLinea +
+		" - FECHA & HORA SALIDA: 2010-06-30 06:00 a.m. " + saltoLinea +
+		" - DURACION ESTIMADA:   8hras."                 + saltoLinea +
+		" - TIPO VEHICULO:   " + objTransaccion.getVehiculo().getNombre() + " - " + objTransaccion.getVehiculo().getTipo() + saltoLinea +
+		" - NUM. ASIENTO:    " + objTransaccion.getAsiento().getId() + saltoLinea + saltoLinea +
+		" - PAGO TOTAL:    S/" + 45;
 		 
 		//Guarda en BD la transaccion.
 		Boolean  objEstadoTransaccion = (Boolean)this.transaccionDAO.ingresarTransaccion( objTransaccion );
