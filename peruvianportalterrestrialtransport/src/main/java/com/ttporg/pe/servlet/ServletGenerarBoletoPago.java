@@ -43,7 +43,7 @@ import com.ttporg.pe.util.UtilGeneraBoletoViaje;
 
 /**
  * @author Cesar Ricardo.
- * @clase: ServletGeneraBoleto.java  
+ * @clase: ServletGenerarBoletoPago.java  
  * @descripción descripción de la clase.
  * @author_web: http://frameworksjava2008.blogspot.com
                 http://viviendoconjavaynomoririntentandolo.blogspot.com
@@ -160,12 +160,14 @@ public class ServletGenerarBoletoPago extends HttpServlet implements Servlet{
 		    	
 		    	//OBTENIENDO DE SESION ...
 				Cliente objCliente         = (Cliente)session.getValue( "objCliente" );  		    	
-				Pago    objPago            = (Pago)session.getValue(    "objPago" ); 
-    	    	String  codigoDepartamento = (String)session.getValue(  "codigoDepartamento" ); 
-    	    	String  codigoEmpresa      = (String)session.getValue(  "codigoEmpresa" ); 							
-    	    	String  codigoAgencia      = (String)session.getValue(  "codigoAgencia" ); 
-    	    	String  codigoServicio     = (String)session.getValue(  "codigoServicio" ); 	    	    		    	
-    	    	String  codigoAsiento      = (String)session.getValue(  "idAsientoSeleccionado" ); 
+				Pago    objPago            = (Pago)session.getValue(    "objPago"    ); 
+		    	String  codigoDepartamento = (String)session.getValue(  "codigoDepartamento" ); 
+		    	String  codigoEmpresa      = (String)session.getValue(  "codigoEmpresa"  ); 							
+		    	String  codigoAgencia      = (String)session.getValue(  "codigoAgencia"  ); 
+		    	String  codigoServicio     = (String)session.getValue(  "codigoServicio" ); 	    	    		    	
+		    	String  codigoAsiento      = (String)session.getValue(  "idAsientoSeleccionado" ); 
+		    	String  codigoFila         = (String)session.getValue(  "idFila"    ); 
+		    	String  txtFila            = (String)session.getValue(  "txtFila"   );
     	    	  
     	    	this.imprimeLog( "" );
     	    	this.imprimeLog( "OBTENIENDO DATO DE MEMORIA");
@@ -177,6 +179,8 @@ public class ServletGenerarBoletoPago extends HttpServlet implements Servlet{
     	    	this.imprimeLog( "codigoAgencia:      " + codigoAgencia  );
     	    	this.imprimeLog( "codigoServicio:     " + codigoServicio );
     	    	this.imprimeLog( "codigoAsiento:      " + codigoAsiento  );
+    	    	this.imprimeLog( "codigoFila:         " + codigoFila     );
+    	    	this.imprimeLog( "txtFila:            " + txtFila        );
     	    	this.imprimeLog( "" );
     	    	
     	    	//Carga los Servicios.
@@ -188,7 +192,7 @@ public class ServletGenerarBoletoPago extends HttpServlet implements Servlet{
 		    	
 		    	//Genera Boleto.
 		    	utilGeneraBoleto.muestraBoletoViaje( objCliente, objPago, codigoDepartamento, codigoEmpresa, 
-		    			                             codigoAgencia, codigoServicio, codigoAsiento );
+                                                     codigoAgencia, codigoServicio, codigoFila, txtFila, codigoAsiento );
 	            
 	            this.contexto    = this.getServletContext();
 	            this.despachador = this.contexto.getRequestDispatcher( this.REDIRECCIONAMIENTO );

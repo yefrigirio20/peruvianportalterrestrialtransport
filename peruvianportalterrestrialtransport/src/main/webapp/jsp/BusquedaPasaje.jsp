@@ -123,7 +123,7 @@
 	         
 	         //alert( url );
 	
-	 		 var newwindow = window.open( url, 'name','height=580 width=450, scrollbars=1, left=520, top=50' );
+	 		 var newwindow = window.open( url, 'name','height=570 width=420, scrollbars=1, left=520, top=50' );
 			
 			 if( window.focus ){ 
 			     newwindow.focus()

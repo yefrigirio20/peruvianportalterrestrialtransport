@@ -50,15 +50,15 @@
              <br></br>
              <br></br>
                    
-			 <s:form id="frnValidacion" name="frnValidacion" action="/login.action" >	
+			 <s:form id="frnValidacion" name="frnValidacion" action="/login.action" method="post" >	
 			 
 			   		<s:i18n name="com.ttporg.pe.msj.Internacionalizacion_es" > 
-				        
+				    
 				        <span class="mensajeTextoError" >
 					      <s:actionerror cssErrorStyle="mensajeTextoError" />  
 					      <s:fielderror  cssErrorStyle="mensajeTextoError" />  
 					    </span>
-					                      
+					  					                      
 		                <center> 
 					    <table width="80%" > 
 					      <tr> 
@@ -68,8 +68,9 @@
 		                  
 						   <td align="right" width="90%" >  
 						     
-						       <table width="90%"> 
+						       <table width="70%"> 
 		                       
+		                          <!--
 							   	  <tr>                           
 									  <td>										 
 										 <label><fmt:message key="texto.label.usuario" /></label>										   
@@ -78,7 +79,7 @@
 									     <s:textfield name="usuario" cssStyle="textoLabel" disabled="false" />  
 								     </td>
 								  </tr>  
-								  
+								  								    
 								  <tr> 
 									  <td>
 										  <span class="textoLabel" >
@@ -87,9 +88,23 @@
 									  </td>
 									  <td> 
 									    <s:password name="password" cssStyle="textoLabel" disabled="false" />
+									    
 									  </td>
-								  </tr>
+								  </tr>								  
+								  -->
 								  
+								  <tr>
+									 <td colspan="2" align="center" > 
+                                         <s:textfield name="usuario" key="texto.label.usuario" size="25" />
+ 									 </td>
+								  </tr>	
+								  								  
+								  <tr>
+									 <td colspan="2" align="center" > 
+                                         <s:password name="password" key="texto.label.password" size="25" />
+ 									 </td>
+								  </tr>								  
+								  								  								  
 							   	  <tr>
 									 <td colspan="2" align="center" > 
 	                                     <br></br>
@@ -100,7 +115,7 @@
 							   	  <tr>
 									 <td colspan="2" align="center" >
 									   <span class="botonStruts2" > 
-	                                      <s:submit name="btnLogin" cssStyle="botonStruts2" value="  %{getText('texto.button.procesar')} " />
+	                                      <s:submit method="execute" name="btnLogin"  key="texto.button.procesar" align="center" />
 	                                   </span>  
  									 </td>
 								  </tr>				  		  
@@ -110,11 +125,12 @@
 						  </tr>
 						  
 						</table> 
-					  </center>
+							 						
+					  </center>					 
 					
 	              </s:i18n>  	
 			  </s:form>
-                      
+     
          </td>  
          <!-- FIN INCLUDE PRINCIPAL -->
          

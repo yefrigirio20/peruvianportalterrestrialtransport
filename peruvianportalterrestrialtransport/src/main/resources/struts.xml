@@ -13,7 +13,7 @@
 	    <!-- ***** PROCESO: LOGIN ***** -->
 		<action name="login" class="com.ttporg.pe.action.LoginMB" method="" >	
 			<result name="input"   type="dispatcher" >jsp/Login.jsp</result>
-			<result name="error"   type="dispatcher" >jsp/ErrorLogin.jsp</result>			
+			<result name="error"   type="dispatcher" >jsp/Login.jsp</result>			
 			<result name="success" type="dispatcher" >jsp/Bienvenida.jsp</result>
 		</action>
 

@@ -147,20 +147,18 @@ public class AsientoDaoImpl extends SqlMapClientDaoSupport implements AsientoDao
 	public Asiento obtenerObjetoAsiento_x_codigo( int codigo ){
         this.imprimeLog( "DENTRO DE 'obtenerObjetoAsiento_x_codigo' " );
 		
-        Asiento Asiento = null; 
+        Asiento asiento = null; 
         
         try{
         	String nombReferMetodoMapeado = this.getObjetoNegocio( "getAsiento" );
  
-        	Asiento = (Asiento)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );   //FORMA #2
-             
-        	this.imprimeLog( "Asiento: " + Asiento ); 
+        	asiento = (Asiento)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigo );    
  		} 
         catch( Exception e ){
 			   e.printStackTrace();
 		}	
 
-        return Asiento;	
+        return asiento;	
 	}	
 	
 	/**

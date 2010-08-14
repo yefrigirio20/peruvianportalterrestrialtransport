@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
@@ -133,6 +132,7 @@ public class UtilGeneraBoletoViaje{
 	public void muestraBoletoViaje( Cliente objCliente,        Pago objPago, 
 			                        String codigoDepartamento, String codigoEmpresa,
 			                        String codigoAgencia,      String codigoServicio, 
+			                        String codigoFilaAsiento,  String txtFilaAsiento,         
 			                        String codigoAsiento ){
 		
 		this.imprimeLog( "********* DENTRO DE [muestraBoletoViaje] **********" ); 
@@ -143,17 +143,17 @@ public class UtilGeneraBoletoViaje{
 		Empresa        objEmpresa      = (Empresa)this.empresaDAO.obtenerObjetoEmpresa_x_codigo(        Integer.parseInt( codigoEmpresa  ) );
 		Agencia        objAgencia      = (Agencia)this.agenciaDAO.obtenerObjetoAgencia_x_codigo(        Integer.parseInt( codigoAgencia  ) );
 		Servicio       objServicio     = (Servicio)this.servicioDAO.obtenerObjetoServicio_x_codigo(     Integer.parseInt( codigoServicio ) );		
-		Asiento        objAsiento      = (Asiento)this.asientoDAO.obtenerObjetoAsiento_x_codigo(        Integer.parseInt( codigoAsiento  ) );		
+		Asiento        objAsiento      = (Asiento)this.asientoDAO.obtenerObjetoAsiento_x_codigo(        Integer.parseInt( codigoFilaAsiento   ) );		
 		List<Vehiculo> objVehiculo     = (List<Vehiculo>)this.vehiculoDAO.obtenerListaVehiculo_x_idServicio( Integer.parseInt( codigoServicio ) );
 		List<Salida>   objSalida       = (List<Salida>)this.salidaDAO.obtenerListaSalida_x_idServicio(       Integer.parseInt( codigoServicio ) );
 		
-		System.out.println( "objDepartamento: " + objDepartamento );
-		System.out.println( "objEmpresa:      " + objEmpresa  );
-		System.out.println( "objAgencia:      " + objAgencia  );
-		System.out.println( "objServicio:     " + objServicio );
-		System.out.println( "objAsiento:      " + objAsiento  );
-		System.out.println( "objVehiculo:     " + objVehiculo.get( 0 ) );
-		System.out.println( "objSalida:       " + objSalida.get(   0 ) );
+		this.imprimeLog( "objDepartamento: " + objDepartamento );
+		this.imprimeLog( "objEmpresa:      " + objEmpresa  );
+		this.imprimeLog( "objAgencia:      " + objAgencia  );
+		this.imprimeLog( "objServicio:     " + objServicio );
+		this.imprimeLog( "objAsiento:      " + objAsiento  );
+		this.imprimeLog( "objVehiculo:     " + objVehiculo.get( 0 ) );
+		this.imprimeLog( "objSalida:       " + objSalida.get(   0 ) );
 		
 		//Seteando datos para la 'TRANSACCION'.
 		Transaccion objTransaccion = new Transaccion();
@@ -184,11 +184,23 @@ public class UtilGeneraBoletoViaje{
 		 
 		//Guarda en BD la transaccion.
 		Boolean  objEstadoTransaccion = (Boolean)this.transaccionDAO.ingresarTransaccion( objTransaccion );
-		System.out.println( "objEstadoTransaccion: " + objEstadoTransaccion );
-				
+		
 		//Modificando Asiendo en BD. (FALTA MOFICAR EN BD EL ASIENTO)
-		//objAsiento.set		
-		//this.asientoDAO.modificarAsiento( asiento );
+		if( txtFilaAsiento.equalsIgnoreCase( "A" ) ){			
+			objAsiento.setEstado_A( "TRUE" );		
+		}
+		else if( txtFilaAsiento.equalsIgnoreCase( "B" ) ){
+			objAsiento.setEstado_B( "TRUE" );		
+		}
+		else if( txtFilaAsiento.equalsIgnoreCase( "C" ) ){
+			objAsiento.setEstado_C( "TRUE" );		
+		}
+		else if( txtFilaAsiento.equalsIgnoreCase( "D" ) ){
+			objAsiento.setEstado_D( "TRUE" );		
+		}
+		
+		//Guarda en BD.
+		this.asientoDAO.modificarAsiento( objAsiento );
 		
 		//GUI		
 		int ancho = 800;

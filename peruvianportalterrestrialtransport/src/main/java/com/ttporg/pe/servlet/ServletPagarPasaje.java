@@ -315,13 +315,15 @@ public class ServletPagarPasaje extends HttpServlet implements Servlet{
     	
     	//OBTENIENDO DE SESION ...
 		Cliente objCliente         = (Cliente)session.getValue( "objCliente" );  		    	
-		Pago    objPago            = (Pago)session.getValue(    "objPago" ); 
+		Pago    objPago            = (Pago)session.getValue(    "objPago"    ); 
     	String  codigoDepartamento = (String)session.getValue(  "codigoDepartamento" ); 
-    	String  codigoEmpresa      = (String)session.getValue(  "codigoEmpresa" ); 							
-    	String  codigoAgencia      = (String)session.getValue(  "codigoAgencia" ); 
+    	String  codigoEmpresa      = (String)session.getValue(  "codigoEmpresa"  ); 							
+    	String  codigoAgencia      = (String)session.getValue(  "codigoAgencia"  ); 
     	String  codigoServicio     = (String)session.getValue(  "codigoServicio" ); 	    	    		    	
     	String  codigoAsiento      = (String)session.getValue(  "idAsientoSeleccionado" ); 
-    	  
+    	String  codigoFila         = (String)session.getValue(  "idFila"    ); 
+    	String  txtFila            = (String)session.getValue(  "txtFila"   );
+    	    	  
     	this.imprimeLog( "" );
     	this.imprimeLog( "OBTENIENDO DATO DE MEMORIA");
     	this.imprimeLog( "-------------------------" );
@@ -332,6 +334,8 @@ public class ServletPagarPasaje extends HttpServlet implements Servlet{
     	this.imprimeLog( "codigoAgencia:      " + codigoAgencia  );
     	this.imprimeLog( "codigoServicio:     " + codigoServicio );
     	this.imprimeLog( "codigoAsiento:      " + codigoAsiento  );
+    	this.imprimeLog( "codigoFila:         " + codigoFila     );
+    	this.imprimeLog( "txtFila:            " + txtFila        );
     	this.imprimeLog( "" );
     	
     	UtilGeneraBoletoViaje utilGeneraBoleto = new UtilGeneraBoletoViaje( this.clienteDAO,    this.empresaDAO,  this.departamentoDAO, this.agenciaDAO,
@@ -339,7 +343,7 @@ public class ServletPagarPasaje extends HttpServlet implements Servlet{
     			                                                            this.calendarioDAO, this.pagoDAO,     this.clientePagoDAO,  this.transaccionDAO );  
     	
     	utilGeneraBoleto.muestraBoletoViaje( objCliente, objPago, codigoDepartamento, codigoEmpresa, 
-    			                             codigoAgencia, codigoServicio, codigoAsiento );	
+    			                             codigoAgencia, codigoServicio, codigoFila, txtFila, codigoAsiento );	
 	} 
 	 
 	/**
