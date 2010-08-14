@@ -38,7 +38,7 @@
           <%}
             else{
           %>     
-            <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.menuPrincipal.registrarse" /> </font> </strong>                 
+            <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.loguearse" /> </font> </strong>                 
           <%}%>  
 	     
 		</center> 

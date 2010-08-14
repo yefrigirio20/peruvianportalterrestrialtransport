@@ -7,14 +7,21 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
          
     <!-- ******************************************************** -->
     <!-- ****************** SQL 'REUTILIZABLE' ****************** -->
-    <!-- ******************************************************** -->  
-     
-     <sql id="selectAsientosSinTag">   
-		SELECT a.ID, 
-		       a.COLUMNA_A, a.COLUMNA_B, a.COLUMNA_C, a.COLUMNA_D, 
-		       a.ESTADO_CA, a.ESTADO_CB, a.ESTADO_CC, a.ESTADO_CD, 
-		       a.ESTADO, a.VEHICULO_ID
-		FROM   ASIENTO a
+    <!-- ******************************************************** --> 
+           
+     <sql id="selectAsientosConTag">   
+		SELECT a.ID          AS  "id",  
+		       a.ESTADO_CA   AS  "estado_A",  
+		       a.ESTADO_CB   AS  "estado_B",  
+		       a.ESTADO_CC   AS  "estado_C",  
+		       a.ESTADO_CD   AS  "estado_D",  
+		       a.COLUMNA_A   AS  "columna_A",  
+		       a.COLUMNA_B   AS  "columna_B",  
+		       a.COLUMNA_C   AS  "columna_C",  
+		       a.COLUMNA_D   AS  "columna_D",  		       
+		       a.ESTADO      AS  "estado",  
+		       a.VEHICULO_ID AS  "vehiculo.id"
+		FROM   ASIENTO a   
      </sql>	       
         
     <!-- ******************************************************** -->
@@ -25,12 +32,12 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	<typeAlias alias="asiento" type="com.ttporg.pe.bean.Asiento" />
 	
 	<select id="getAsiento" resultClass="asiento" parameterClass="java.lang.Integer" >
-        <include refid="selectAsientosSinTag" />
+        <include refid="selectAsientosConTag" />
 		WHERE  a.ID = #id#
     </select>
 
 	<select id="getListaAsiento" resultClass="asiento" >
-        <include refid="selectAsientosSinTag" />
+        <include refid="selectAsientosConTag" />
     </select>
 
 	<insert id="insertAsiento" parameterClass="com.ttporg.pe.bean.Asiento" >
@@ -41,14 +48,14 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     
 	<update id="updateAsiento" parameterClass="com.ttporg.pe.bean.Asiento" >
 		     UPDATE ASIENTO a SET 
-							a.COLUMNA_A   = #columna_A#,
-							a.COLUMNA_B   = #columna_B#,
-							a.COLUMNA_C   = #columna_C#,
-							a.COLUMNA_D   = #columna_D#,
 							a.ESTADO_CA   = #estado_A#,
 							a.ESTADO_CB   = #estado_B#,
 							a.ESTADO_CC   = #estado_C#,
 							a.ESTADO_CD   = #estado_D#,
+							a.COLUMNA_A   = #columna_A#,
+							a.COLUMNA_B   = #columna_B#,
+							a.COLUMNA_C   = #columna_C#,
+							a.COLUMNA_D   = #columna_D#,
 							a.ESTADO      = #estado#,
 							a.VEHICULO_ID = #vehiculo.id#
 		     WHERE a.ID = #id#

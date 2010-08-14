@@ -26,14 +26,14 @@
 		    moveTo( eje_x, eje_y );
 	    }  
 
-	    function conexionServlet( myFrm, idServicio, idAsiento ){              
-			 //alert( "**** DENTRO DE 'conexionServlet' ****" );	 
+	    function conexionServlet( myFrm, idFila, idServicio, idAsiento, txtFila ){              
+			 alert( "**** DENTRO DE 'conexionServlet' ****" );	 
 			 
 	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
 	         //alert( url );
 
-	         var urlNew = url + '?idServicio=' + idServicio + '&idAsiento=' + idAsiento;
-	         //alert( urlNew );
+	         var urlNew = url + '?idServicio=' + idServicio + '&idFila=' + idFila + txtFila + '&idAsiento=' + idAsiento;
+	         alert( urlNew );
 	         	
 	         myFrm.method = '' + 'POST';
 	         myFrm.action = urlNew; 		 		 
@@ -248,13 +248,13 @@
                                       <c:if test="${objListaPopup.estado_A == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
                                                 style="background:#060; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA} )" />
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_A == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
                                                 style="background:#BB0000; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA} )" />   
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" />   
                                       </c:if>                                     
                                   </td>   
                                   
@@ -263,13 +263,13 @@
                                       <c:if test="${objListaPopup.estado_B == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
                                                 style="background:#060; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB} )" />
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_B == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
                                                 style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB} )" />
+                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" />
                                       </c:if> 
                                    
                                   </td> 
@@ -283,13 +283,13 @@
                                       <c:if test="${objListaPopup.estado_C == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
                                                 style="background:#060;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC} )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_C == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
                                                 style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC} )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" />
                                       </c:if> 
                                     
                                   </td> 
@@ -299,13 +299,13 @@
                                       <c:if test="${objListaPopup.estado_D == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
                                                 style="background:#060;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD} )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_D == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
                                                 style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD} )" />
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" />
                                       </c:if> 
                                     
                                   </td>                     

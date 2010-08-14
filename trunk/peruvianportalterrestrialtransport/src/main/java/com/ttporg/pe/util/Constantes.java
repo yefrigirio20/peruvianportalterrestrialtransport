@@ -17,6 +17,7 @@ public class Constantes{
 	
 	public static final String MENSAJE_AUTENTICACION_OK       = "AUTENTICACION EXITOSA ..!!";
 	public static final String MENSAJE_AUTENTICACION_ERROR_01 = "Usuario o Password Incorrecto.";
-	public static final String MENSAJE_AUTENTICACION_ERROR_02 = "Se encontraron datos Nulos.";	
+	public static final String MENSAJE_AUTENTICACION_ERROR_02 = "Completar los campos vacios.";		
+	public static final String MENSAJE_AUTENTICACION_ERROR_03 = "Se encontraron datos Nulos.";	
 	
 }

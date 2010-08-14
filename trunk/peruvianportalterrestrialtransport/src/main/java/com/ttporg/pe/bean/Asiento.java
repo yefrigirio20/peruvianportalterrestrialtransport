@@ -23,11 +23,10 @@ public class Asiento{
 	private String		estado_B;
 	private String		estado_C;
 	private String		estado_D;
-	private String		estado;	    //True = Libre - False = Ocupado
+	private String		estado;	   //True = Libre - False = Ocupado
 	private Vehiculo	vehiculo;
 
-
-	// Constructores ...
+	//Constructores ...
 	public Asiento(){
 		this.vehiculo = new Vehiculo();
 	}
@@ -50,6 +49,22 @@ public class Asiento{
 
 	public String getColumna_D(){
 		return columna_D;
+	}
+
+	public String getEstado_A(){
+		return estado_A;
+	}
+
+	public String getEstado_B(){
+		return estado_B;
+	}
+
+	public String getEstado_C(){
+		return estado_C;
+	}
+
+	public String getEstado_D(){
+		return estado_D;
 	}
 
 	public String getEstado(){
@@ -80,30 +95,6 @@ public class Asiento{
 		this.columna_D = columna_D;
 	}
 
-	public void setEstado( String estado ){
-		this.estado = estado;
-	}
-
-	public void setVehiculo( Vehiculo vehiculo ){
-		this.vehiculo = vehiculo;
-	}
-
-	public String getEstado_A(){
-		return estado_A;
-	}
-
-	public String getEstado_B(){
-		return estado_B;
-	}
-
-	public String getEstado_C(){
-		return estado_C;
-	}
-
-	public String getEstado_D(){
-		return estado_D;
-	}
-
 	public void setEstado_A( String estado_A ){
 		this.estado_A = estado_A;
 	}
@@ -120,5 +111,12 @@ public class Asiento{
 		this.estado_D = estado_D;
 	}
 
- }
+	public void setEstado( String estado ){
+		this.estado = estado;
+	}
 
+	public void setVehiculo( Vehiculo vehiculo ){
+		this.vehiculo = vehiculo;
+	}
+
+ }

@@ -110,7 +110,7 @@ public class LoginMB extends BaseBean{
 		try{
 			this.imprimeLog( "Usuario:  " + this.usuario  );
 			this.imprimeLog( "Password: " + this.password );
-
+			
 			boolean estadoUsuario  = this.getValidaDatosInput( this.getUsuario()  );
 			boolean estadoPassword = this.getValidaDatosInput( this.getPassword() );
 			
@@ -138,20 +138,27 @@ public class LoginMB extends BaseBean{
 				this.imprimeLog( "objClienteDB: " + objClienteBD );
 				//------------------------------------------------------//
     	    	 
-    	    	 //Validando ...
-    	    	 if( objClienteBD.getUsuario().equalsIgnoreCase(  this.usuario  ) &&
-    	    		 objClienteBD.getPassword().equalsIgnoreCase( cadenaEncriptada ) ){
-    	    		 
-    				 //Setear Obj.Singleton en SESION.
-                     this.getObjSession().put( "objCliente", objClienteBD ); 
-    	    		  
-  					 addActionMessage( MENSAJE_AUTENTICACION_OK );
-					 estadoRetorno = SUCCESS;                          //Se reenvia a la interfaz siguiente.	
- 				}
- 				else{	
- 					 addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
- 					 estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
- 				}	
+				if( objClienteBD != null ){
+					
+					//Validando ...
+					if( objClienteBD.getUsuario().equalsIgnoreCase(  this.usuario  ) &&
+							objClienteBD.getPassword().equalsIgnoreCase( cadenaEncriptada ) ){
+						
+						//Setear Obj.Singleton en SESION.
+						this.getObjSession().put( "objCliente", objClienteBD ); 
+						
+						addActionMessage( MENSAJE_AUTENTICACION_OK );
+						estadoRetorno = SUCCESS;                          //Se reenvia a la interfaz siguiente.	
+					}
+					else{	
+						addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
+						estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
+					}	
+				}
+				else{
+					addActionError( MENSAJE_AUTENTICACION_ERROR_01 ); //Setea el mensaje de Error Personalizado.
+					estadoRetorno = INPUT;                            //Regresa a la misma interfaz.
+				}
 			}
 			else{
 				 addActionError( MENSAJE_AUTENTICACION_ERROR_02 );

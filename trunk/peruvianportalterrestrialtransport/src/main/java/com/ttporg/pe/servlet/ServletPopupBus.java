@@ -158,9 +158,11 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	    
 	    try{
 	    	String idServicio            = request.getParameter( "idServicio" );	    	
+	    	String idFila                = request.getParameter( "idFila"     );	
 	    	String idAsientoSeleccionado = request.getParameter( "idAsiento"  );
-	    		    	
+	    	
 	    	this.imprimeLog( "idServicio: " + idServicio );	    	
+	    	this.imprimeLog( "idFila:     " + idFila     );
 	    	this.imprimeLog( "idAsiento:  " + idAsientoSeleccionado );
 	    	
 	    	//-------------- Obtener 'BASE DE DATOS'. --------------//
@@ -170,7 +172,14 @@ public class ServletPopupBus extends HttpServlet implements Servlet{
 	    	//------------------------------------------------------//
 	    	
 	    	//SETEANDO EN SESION ...--------------------------
-	    	if( idAsientoSeleccionado != null ){	    		
+	    	if( (idFila != null) && (idAsientoSeleccionado != null) ){	  
+	    		
+	    		String[] arraSting = idFila.split( "-" );
+	    		String filaId  = arraSting[ 0 ];
+	    		String filaTxt = arraSting[ 1 ];
+	    		
+	    		session.setAttribute( "idFila",                filaId     ); 
+	    		session.setAttribute( "txtFila",               filaTxt    ); 
 	    		session.setAttribute( "idServicio",            idServicio ); 
 	    		session.setAttribute( "idAsientoSeleccionado", idAsientoSeleccionado ); 
 	    	}	    	

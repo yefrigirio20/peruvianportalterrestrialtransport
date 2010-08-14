@@ -1,12 +1,10 @@
 
- <%@ page contentType="text/html;charset=utf-8" %>
- 
- <%@ page import="com.ttporg.pe.util.UtilSingleton" %>
- 
- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
- 
+ <%@ page contentType="text/html;charset=utf-8" %> 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 
-<%@page import="com.ttporg.pe.bean.Cliente"%><fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
+ <%@page import="com.ttporg.pe.bean.Cliente"%>
+
+<fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
 
 <jsp:include page="../include/Estilos.jsp" flush="true" />
 
@@ -175,7 +173,7 @@ function seleccionarEstrella( msnParam ){
 	           else{
                %>     
                   <tr> 
-                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.menuPrincipal.registrarse" /> </font> </strong>  </td>  
+                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.loguearse" /> </font> </strong>  </td>  
                   </tr> 
                <%}%>  
               
@@ -226,7 +224,7 @@ function seleccionarEstrella( msnParam ){
 	           else{
                %>     
                   <tr> 
-                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.menuPrincipal.registrarse" /> </font> </strong>  </td>  
+                    <td width="100" colspan="2"> <strong> <font size="2" face="Arial" color="red"> <fmt:message key="texto.label.loguearse" /> </font> </strong>  </td>  
                   </tr>  
                <%}%>  
                   

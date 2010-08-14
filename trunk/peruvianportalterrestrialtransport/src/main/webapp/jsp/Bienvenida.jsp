@@ -7,8 +7,6 @@
  
  <%@taglib uri="/struts-tags"                       prefix="s"    %>
  <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %> 
- 
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  
@@ -20,7 +18,7 @@
      <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
      
 	 <script type="text/javascript">
-		dojo.event.topic.subscribe("/beforeSelect", function(event, tab, tabContainer){
+		dojo.event.topic.subscribe( "/beforeSelect", function(event, tab, tabContainer ){
 		    event.cancel = true;
 		});
 	</script>    
