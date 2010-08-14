@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://impl.dao.pe.ttporg.com"
+	xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://impl.dao.pe.ttporg.com"
+	xmlns:intf="http://impl.dao.pe.ttporg.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--
+		WSDL created by Apache Axis version: 1.4 Built on Apr 22, 2006
+		(06:55:48 PDT)
+	-->
+	<wsdl:types>
+		<schema elementFormDefault="qualified" targetNamespace="http://impl.dao.pe.ttporg.com"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<complexType name="ArrayOf_xsd_anyType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="item"
+						type="xsd:anyType" />
+				</sequence>
+			</complexType>
+			<element name="obtenerListaSalidasReturn" type="impl:ArrayOf_xsd_anyType" />
+			<element name="idEmpresa" type="xsd:int" />
+			<element name="idAgencia" type="xsd:int" />
+			<element name="idServicio" type="xsd:int" />
+			<element name="departamentoSalida" type="xsd:string" />
+			<element name="departamentoDestino" type="xsd:string" />
+			<element name="fechaHoraSalida" type="xsd:dateTime" />
+			<element name="obtenerListaDetallePasajeDTOReturn" type="impl:ArrayOf_xsd_anyType" />
+			<element name="idServicio1" type="xsd:int" />
+			<element name="obtenerListaDetalleAsientoDTOReturn" type="impl:ArrayOf_xsd_anyType" />
+		</schema>
+	</wsdl:types>
+
+	<wsdl:message name="obtenerListaSalidasResponse">
+
+		<wsdl:part element="impl:obtenerListaSalidasReturn" name="obtenerListaSalidasReturn" />
+
+	</wsdl:message>
+
+	<wsdl:message name="obtenerListaDetallePasajeDTOResponse">
+
+		<wsdl:part element="impl:obtenerListaDetallePasajeDTOReturn"
+			name="obtenerListaDetallePasajeDTOReturn" />
+
+	</wsdl:message>
+
+	<wsdl:message name="obtenerListaDetalleAsientoDTORequest">
+
+		<wsdl:part element="impl:idServicio1" name="idServicio" />
+
+	</wsdl:message>
+
+	<wsdl:message name="obtenerListaDetalleAsientoDTOResponse">
+
+		<wsdl:part element="impl:obtenerListaDetalleAsientoDTOReturn"
+			name="obtenerListaDetalleAsientoDTOReturn" />
+
+	</wsdl:message>
+
+	<wsdl:message name="obtenerListaSalidasRequest">
+
+	</wsdl:message>
+
+	<wsdl:message name="obtenerListaDetallePasajeDTORequest">
+
+		<wsdl:part element="impl:idEmpresa" name="idEmpresa" />
+
+		<wsdl:part element="impl:idAgencia" name="idAgencia" />
+
+		<wsdl:part element="impl:idServicio" name="idServicio" />
+
+		<wsdl:part element="impl:departamentoSalida" name="departamentoSalida" />
+
+		<wsdl:part element="impl:departamentoDestino" name="departamentoDestino" />
+
+		<wsdl:part element="impl:fechaHoraSalida" name="fechaHoraSalida" />
+
+	</wsdl:message>
+
+	<wsdl:portType name="SalidaDaoImpl">
+
+		<wsdl:operation name="obtenerListaSalidas">
+
+			<wsdl:input message="impl:obtenerListaSalidasRequest"
+				name="obtenerListaSalidasRequest" />
+
+			<wsdl:output message="impl:obtenerListaSalidasResponse"
+				name="obtenerListaSalidasResponse" />
+
+		</wsdl:operation>
+
+		<wsdl:operation name="obtenerListaDetallePasajeDTO"
+			parameterOrder="idEmpresa idAgencia idServicio departamentoSalida departamentoDestino fechaHoraSalida">
+
+			<wsdl:input message="impl:obtenerListaDetallePasajeDTORequest"
+				name="obtenerListaDetallePasajeDTORequest" />
+
+			<wsdl:output message="impl:obtenerListaDetallePasajeDTOResponse"
+				name="obtenerListaDetallePasajeDTOResponse" />
+
+		</wsdl:operation>
+
+		<wsdl:operation name="obtenerListaDetalleAsientoDTO"
+			parameterOrder="idServicio">
+
+			<wsdl:input message="impl:obtenerListaDetalleAsientoDTORequest"
+				name="obtenerListaDetalleAsientoDTORequest" />
+
+			<wsdl:output message="impl:obtenerListaDetalleAsientoDTOResponse"
+				name="obtenerListaDetalleAsientoDTOResponse" />
+
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="SalidaDaoImplSoapBinding" type="impl:SalidaDaoImpl">
+
+		<wsdlsoap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<wsdl:operation name="obtenerListaSalidas">
+
+			<wsdlsoap:operation soapAction="" />
+
+			<wsdl:input name="obtenerListaSalidasRequest">
+
+				<wsdlsoap:body use="literal" />
+
+			</wsdl:input>
+
+			<wsdl:output name="obtenerListaSalidasResponse">
+
+				<wsdlsoap:body use="literal" />
+
+			</wsdl:output>
+
+		</wsdl:operation>
+
+		<wsdl:operation name="obtenerListaDetallePasajeDTO">
+
+			<wsdlsoap:operation soapAction="" />
+
+			<wsdl:input name="obtenerListaDetallePasajeDTORequest">
+
+				<wsdlsoap:body use="literal" />
+
+			</wsdl:input>
+
+			<wsdl:output name="obtenerListaDetallePasajeDTOResponse">
+
+				<wsdlsoap:body use="literal" />
+
+			</wsdl:output>
+
+		</wsdl:operation>
+
+		<wsdl:operation name="obtenerListaDetalleAsientoDTO">
+
+			<wsdlsoap:operation soapAction="" />
+
+			<wsdl:input name="obtenerListaDetalleAsientoDTORequest">
+
+				<wsdlsoap:body use="literal" />
+
+			</wsdl:input>
+
+			<wsdl:output name="obtenerListaDetalleAsientoDTOResponse">
+
+				<wsdlsoap:body use="literal" />
+
+			</wsdl:output>
+
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+	<wsdl:service name="SalidaDaoImplService">
+		<wsdl:port binding="impl:SalidaDaoImplSoapBinding" name="SalidaDaoImpl">
+			<wsdlsoap:address location="http://localhost:8080/peruvianportalterrestrialtransport/services/SalidaDaoImpl" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

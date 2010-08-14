@@ -63,7 +63,7 @@
 					    <table width="80%" > 
 					      <tr> 
 		                   <td align="right" width="30%" >
-		                     <img src="<%=request.getContextPath()%>/imagenes/Atenticacion.png" alt="Atenticacion" width="133" height="137" border="0" />
+		                     &nbsp; &nbsp; &nbsp; &nbsp; <img src="<%=request.getContextPath()%>/imagenes/Atenticacion.png" alt="Atenticacion" width="200" height="205" border="0" />
 		                   </td>               
 		                  
 						   <td align="right" width="90%" >  

@@ -71,11 +71,10 @@ public class LoginMB extends BaseBean{
 	//Utilitarios ...
 	private UtilEncriptacion utilEncriptacion = null; 
 	private BaseBean         beanBase         = null;
+	 
+	private String	         usuario          = null;  //Struts2
+	private String	         password         = null;  //Struts2
 	
-	//Parametros de acceso 'GUI'.
-	private String	usuario;
-	private String	password;
- 
 	{
 	 //this.servicio         = new ServiceFactory();
 		
@@ -107,12 +106,12 @@ public class LoginMB extends BaseBean{
 		//INICIALIZANDO 'DAOs'...
 		this.inicializaDAOs();	
 		
-		try{
-			this.imprimeLog( "Usuario:  " + this.usuario  );
-			this.imprimeLog( "Password: " + this.password );
+		try{			
+			this.imprimeLog( "Usuario:  " + usuario  );
+			this.imprimeLog( "Password: " + password );
 			
-			boolean estadoUsuario  = this.getValidaDatosInput( this.getUsuario()  );
-			boolean estadoPassword = this.getValidaDatosInput( this.getPassword() );
+			boolean estadoUsuario  = this.getValidaDatosInput( usuario  );
+			boolean estadoPassword = this.getValidaDatosInput( password );
 			
 			this.imprimeLog( "Estado Usuario:  " + estadoUsuario  );
 			this.imprimeLog( "Estado Password: " + estadoPassword );
@@ -122,14 +121,14 @@ public class LoginMB extends BaseBean{
 				
 				Cliente objCliente = new Cliente();
  
-				String cadenaEncriptada    = this.utilEncriptacion.encriptarCIPHER(    this.password    );
+				String cadenaEncriptada    = this.utilEncriptacion.encriptarCIPHER(    password    );
 				String cadenaDesencriptada = this.utilEncriptacion.desencriptarCIPHER( cadenaEncriptada );
 				
-				this.imprimeLog( "Cadena Original:      " + this.password       );
+				this.imprimeLog( "Cadena Original:      " + password       );
 				this.imprimeLog( "Cadena Encriptada:    " + cadenaEncriptada    );
 				this.imprimeLog( "Cadena Desencriptada: " + cadenaDesencriptada );
 				
-				objCliente.setUsuario(  this.usuario  );
+				objCliente.setUsuario(  usuario  );
 				objCliente.setPassword( cadenaEncriptada );
 				//objCliente.setPassword( this.password ); 
 				 
@@ -141,7 +140,7 @@ public class LoginMB extends BaseBean{
 				if( objClienteBD != null ){
 					
 					//Validando ...
-					if( objClienteBD.getUsuario().equalsIgnoreCase(  this.usuario  ) &&
+					if( objClienteBD.getUsuario().equalsIgnoreCase(  usuario  ) &&
 							objClienteBD.getPassword().equalsIgnoreCase( cadenaEncriptada ) ){
 						
 						//Setear Obj.Singleton en SESION.
@@ -193,23 +192,7 @@ public class LoginMB extends BaseBean{
 		
 		return estadoRetorno;
 	}
-	
-	public String getUsuario(){
-		return usuario;
-	}
-	
-	public void setUsuario( String usuario ){
-		this.usuario = usuario;
-	}
-	
-	public String getPassword(){
-		return password;
-	}
-	
-	public void setPassword( String password ){
-		this.password = password;
-	}
-	
+		
 	public static long getSerialVersionUID(){
 		return serialVersionUID;
 	}	
@@ -266,5 +249,21 @@ public class LoginMB extends BaseBean{
 		this.beanBase.imprimeLog( mensaje, this.getClass().toString() );
 	}
 	
+	public String getUsuario(){
+		return usuario;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	public void setUsuario( String usuario ){
+		this.usuario = usuario;
+	}
+	
+	public void setPassword( String password ){
+		this.password = password;
+	}
+		
 }
 
