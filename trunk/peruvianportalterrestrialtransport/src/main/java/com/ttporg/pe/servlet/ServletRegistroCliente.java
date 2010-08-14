@@ -224,7 +224,7 @@ public class ServletRegistroCliente extends HttpServlet implements Servlet{
     		    estadoValidacion = false;
     	    }
     	    if( confirPassword.equals( "" ) ){
-    		    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Apellidos]" );
+    		    objValidacion.getMensajesNOK().add( MENSAJE_VALIDACION + "[Confirmacion de Password]" );
     		    estadoValidacion = false;
     	    }
     	    if( !(password.equals( confirPassword )) ){
