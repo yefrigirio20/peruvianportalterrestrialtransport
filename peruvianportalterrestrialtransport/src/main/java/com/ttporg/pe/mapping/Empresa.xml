@@ -25,7 +25,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 		       e.DEPARTAMENTO_ID AS "idDepartamento"
 		FROM   EMPRESA e 
      </sql>	
-        
+         
     <!-- ******************************************************** -->
     <!-- ***************** PROCESOS 'GENERICOS' ***************** -->
     <!-- ******************************************************** -->
@@ -41,6 +41,31 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 		<result property="estado"          column="ESTADO"          columnIndex="7" />
 		<result property="departamento.id" column="DEPARTAMENTO_ID" columnIndex="8" />			
 	</resultMap>
+    
+    
+    <typeAlias alias="detallePopupDto" type="com.ttporg.pe.dto.DetallePopupDTO" />
+    
+	<select id="getDatosAjax" resultClass="detallePopupDto" parameterClass="java.lang.Integer" >
+         SELECT a.ID           AS "asientoId",
+                v.NOMBRE       AS "vehiculoNombre", 
+                v.MODELO       AS "vehiculoModelo", 
+                v.TIPO         AS "vehiculoTipo", 
+                ag.NOMBRE      AS "agenciaNombre", 
+                e.RAZON_SOCIAL AS "empresaRazonSocial" 
+         FROM   ASIENTO a,  VEHICULO v, 
+                SERVICIO s, AGENCIA ag, 
+                EMPRESA e
+         WHERE  a.VEHICULO_ID = v.ID  AND
+		        v.SERVICIO_ID = s.ID  AND
+		        s.AGENCIA_ID  = ag.ID AND
+		        ag.EMPRESA_ID = e.ID  AND
+		        ( 
+			        a.COLUMNA_A = #asientoId# OR 
+					a.COLUMNA_B = #asientoId# OR 
+					a.COLUMNA_C = #asientoId# OR 
+					a.COLUMNA_D = #asientoId# 
+				)
+    </select>      
    
 	<select id="getEmpresa" resultMap="atributosEmpresa" parameterClass="java.lang.Integer" >
         <include refid="selectEmpresasSinTag" />

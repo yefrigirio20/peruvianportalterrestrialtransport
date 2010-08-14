@@ -8,6 +8,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.ttporg.pe.bean.BaseBean;
 import com.ttporg.pe.bean.Empresa;
 import com.ttporg.pe.dao.EmpresaDao;
+import com.ttporg.pe.dto.DetallePopupDTO;
 
 /**
  * @author Cesar Ricardo.
@@ -191,7 +192,7 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 	/**
 	 * obtenerObjetoEmpresa_x_codigo
 	 * @param codigo
-	 */
+	 **/
 	public Empresa obtenerObjetoEmpresa_x_codigo( int codigo ){
         this.imprimeLog( "DENTRO DE 'obtenerObjetoEmpresa_x_codigo' " );
 		
@@ -210,6 +211,28 @@ public class EmpresaDaoImpl extends SqlMapClientDaoSupport implements EmpresaDao
 
         return empresa;	
 	}
+	
+	/**
+	 * obtenerObjetoDatosPopup_x_codigoAsiento
+	 * @param codigoAsiento
+	 **/
+	public DetallePopupDTO obtenerObjetoDatosPopup_x_codigoAsiento( int codigoAsiento ){
+        this.imprimeLog( "DENTRO DE 'obtenerObjetoDatosAjax_x_codigoAsiento' " );
+		
+        DetallePopupDTO detallePopupDTO = null;
+        
+        try{
+        	String nombReferMetodoMapeado = this.getObjetoNegocio( "getDatosAjax" );
+ 
+        	detallePopupDTO = (DetallePopupDTO)getSqlMapClientTemplate().queryForObject( nombReferMetodoMapeado, codigoAsiento );   
+ 		} 
+        catch( Exception e ){
+			   e.printStackTrace();
+		}	
+
+        return detallePopupDTO;	
+	}	
+	
 	
 	/**
 	 * getObjetoNegocio

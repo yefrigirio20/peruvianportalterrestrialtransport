@@ -147,7 +147,16 @@ CREATE TABLE DETALLE_ASIENTO(
     ESTADO_CD          VARCHAR(10) NULL,		
 	ESTADO_VEHICULO    VARCHAR(10) NULL
 );
- 
+
+CREATE TABLE DETALLE_POPUP(
+	ASIENTO_ID            INT         NULL, 
+	VEHICULO_NOMBRE       VARCHAR(45) NULL,
+	VEHICULO_MODELO       VARCHAR(45) NULL,
+	VEHICULO_TIPO         VARCHAR(45) NULL,
+	AGENCIA_NOMBRE        VARCHAR(45) NULL,
+	EMPRESA_RAZON_SOCIAL  VARCHAR(45) NULL
+);
+
 /***************************************/
 /************ INSERTs 'SQL' ************/
 /***************************************/

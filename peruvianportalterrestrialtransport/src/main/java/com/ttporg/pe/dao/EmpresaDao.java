@@ -2,6 +2,7 @@ package com.ttporg.pe.dao;
 
 import java.util.List;
 import com.ttporg.pe.bean.Empresa;
+import com.ttporg.pe.dto.DetallePopupDTO;
  
 /**
  * @author Cesar Ricardo.
@@ -17,6 +18,12 @@ import com.ttporg.pe.bean.Empresa;
  */
 public interface EmpresaDao{
  
+	/**
+	 * obtenerObjetoDatosPopup_x_codigoAsiento
+	 * @param codigoAsiento
+	 **/
+	public DetallePopupDTO obtenerObjetoDatosPopup_x_codigoAsiento( int codigoAsiento );
+	
 	/**
 	 * obtenerObjetoEmpresa_x_codigo
 	 */
