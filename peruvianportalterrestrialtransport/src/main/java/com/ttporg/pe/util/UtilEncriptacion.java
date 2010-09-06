@@ -14,8 +14,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import com.thoughtworks.xstream.core.util.Base64Encoder;
 import cryptix.util.core.Hex;
 
 /**
@@ -63,8 +62,8 @@ public class UtilEncriptacion implements Serializable{
 	  private String 			caracterDecodificacion;
       private Cipher 			encriptacionCipher; 
       private Cipher 			desencryptacionCipher; 
-      private BASE64Encoder 	base64Encoder;
-      private BASE64Decoder 	base64Decoder;
+      private Base64Encoder 	base64Encoder;
+      private Base64Encoder 	base64Decoder;
 	  
       /** 
        * Constructor.
@@ -74,8 +73,8 @@ public class UtilEncriptacion implements Serializable{
 			this.manejador              = new UtilConvertidores();
 	    		    	
 	    	this.caracterDecodificacion = "UTF-8";
-	    	this.base64Encoder          = new BASE64Encoder();
-	    	this.base64Decoder          = new BASE64Decoder();
+	    	this.base64Encoder          = new Base64Encoder();
+	    	this.base64Decoder          = new Base64Encoder();
 	    	this.algoritmoEncriptacion  = "";
 	    	
 	    	//Inicializa 'Algoritmos Encriptacion'.
@@ -487,7 +486,7 @@ public class UtilEncriptacion implements Serializable{
 		  String datoDesenCriptado = null;
 		  
 		  try{	
-		      byte[] cadenaArrayBytes  = this.base64Decoder.decodeBuffer( cadenaEncryptada );
+		      byte[] cadenaArrayBytes  = this.base64Decoder.decode( cadenaEncryptada );
 	          byte[] cadenaEncriptada  = this.desencryptacionCipher.doFinal( cadenaArrayBytes );
 	          datoDesenCriptado = new String( cadenaEncriptada, this.caracterDecodificacion );
 		  }
@@ -536,7 +535,7 @@ public class UtilEncriptacion implements Serializable{
 			
 		   String datoEncriptado = null;
 		   
-		   try{
+		   try{		   
 			    //Proveedor
 				Provider proveedor = new com.sun.crypto.provider.SunJCE();
 				Security.addProvider(proveedor);

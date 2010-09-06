@@ -62,6 +62,8 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
  
 	private static final long serialVersionUID = -2689096730483634614L;
  
+	List<DetallePasajeDTO> listaXXX = new ArrayList<DetallePasajeDTO>();
+	
 	private ServletContext    contexto           = null;
 	private RequestDispatcher despachador        = null;
 	
@@ -344,19 +346,19 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 																			    					 nomCiudadOrigen,  
 																			    					 nomCiudadDestina, 
 																			    					 new Date() );  //FILTRAR ...    		
+				    			listaXXX = listaDetallePasajeDTO;
 				    		}        
 				    	}
 				    	//--------------------------------------------------------------//
 	    	    }
 	    	}
 			    	
-	    	System.out.println( "totalErrores: " + objValidacion.getMensajesNOK().size() );
-	    	
-	    	
+	    	this.imprimeLog( "totalErrores: " + objValidacion.getMensajesNOK().size() );
+	    		    	
             request.setAttribute( "estadoValidacion", estadoValidacion );  //estadoValidacion ...
             request.setAttribute( "objValidacion",    objValidacion    );  //Objeto Validacion ...            
             request.setAttribute( "totalErrores",     objValidacion.getMensajesNOK().size() );  //Objeto Validacion ...
-            request.setAttribute( "estado",           estado );  //Objeto Validacion ...
+            request.setAttribute( "estado",           estado );            //Objeto Validacion ...
             
 	    	
 	    	request.setAttribute( "codigoDepartamento", codigoDepartamento );        //estadoValidacion ... (PARA QUE SE QUEDE SELECCIONADO EN EL COMBO).       
@@ -382,6 +384,16 @@ public class ServletBusquedaPasaje extends HttpServlet implements Servlet{
 			   e.printStackTrace();
 		}	    
 	 }  
+	 
+		/**
+		 * getListaTotalAutos
+		 * @return List<Car>
+		 */
+		public List<DetallePasajeDTO> getListaXXX(){ 
+			return listaXXX;
+		}
+	 
+	 
 	 
 	/**
 	 * inicializaDAOs
