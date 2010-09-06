@@ -1,8 +1,9 @@
 
- <%@ page contentType="text/html;charset=utf-8" %> 
- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+<%@ page contentType="text/html;charset=utf-8" %> 
+<%@ taglib uri="http://ajaxtags.sourceforge.net/tags/ajaxtags" prefix="ajax" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"              prefix="fmt"  %>
 
- <%@page import="com.ttporg.pe.bean.Cliente"%>
+<%@ page import="com.ttporg.pe.bean.Cliente"%>
 
 <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" />  
 
@@ -273,31 +274,35 @@ function seleccionarEstrella( msnParam ){
           <tr>
 		   <td valign="top" width="22" >  
 		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_01" id="estrella_01" onMouseOver="cambiarEstrella('UNO')" 
-		      onClick="seleccionarEstrella('Malo!!!')" style="cursor:hand" />   
+		        onClick="seleccionarEstrella('Malo!!!')" style="cursor:hand" />   
 		   </td>
 		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_02" id="estrella_02" onMouseOver="cambiarEstrella('DOS')"    
-		      onClick="seleccionarEstrella('Regular!!!')" style="cursor:hand" />    
+			   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_02" id="estrella_02" onMouseOver="cambiarEstrella('DOS')"    
+			        onClick="seleccionarEstrella('Regular!!!')" style="cursor:hand" />    
 		   </td>
 		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_03" id="estrella_03" onMouseOver="cambiarEstrella('TRES')"    
-		      onClick="seleccionarEstrella('Pasable!!!')" style="cursor:hand" />   
+			   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_03" id="estrella_03" onMouseOver="cambiarEstrella('TRES')"    
+			        onClick="seleccionarEstrella('Pasable!!!')" style="cursor:hand" />   
 		   </td>
 		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_04" id="estrella_04" onMouseOver="cambiarEstrella('CUATRO')"    
-		      onClick="seleccionarEstrella('Bueno!!!')" style="cursor:hand" />    
+			   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_04" id="estrella_04" onMouseOver="cambiarEstrella('CUATRO')"    
+			        onClick="seleccionarEstrella('Bueno!!!')" style="cursor:hand" />    
 		   </td>
-		   <td valign="top" width="22">
-		   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_05" id="estrella_05" onMouseOver="cambiarEstrella('CINCO')"    
-		     onClick="seleccionarEstrella('Excelente!!!')" style="cursor:hand" />    
+		   <td valign="top" width="22" >
+			   <img src="<%=request.getContextPath()%>/imagenes/EstrellaApagada.gif" name="estrella_05" id="estrella_05" 
+			        onMouseOver="cambiarEstrella('CINCO')"    
+			        onClick="seleccionarEstrella('Excelente!!!')" style="cursor:hand" />    
 		   </td>
 		  </tr>
 		  
-		  <tr> <td></td> </tr> 
+		  <tr> 		  
+			  <td>
+			  </td> 
+		  </tr> 
 		  
 		  <tr>
-		    <td colspan="5"> 
-			  <input type="text" id="mensajeRanking" value="Ranking seleccionar!!!" class="textoMenu" >
+		    <td colspan="5" >                      
+			    <input type="text" id="mensajeRanking" value="Ranking seleccionar!!!" class="textoMenu" >
 			</td>
 		  </tr>    
 		</table>
