@@ -78,7 +78,27 @@
   
 	  <!-- Permite que corra en 'Jetty', asi los Jars de Tomcat son seran incluidos.-->
 	  <repositories>
-		
+	  
+		        
+		        <repository>
+		            <id>org.jboss.repository.maven</id>
+		            <url>http://repository.jboss.org/maven2</url>
+		            <snapshots>
+		                <enabled>false</enabled>
+		            </snapshots>
+		        </repository>	 
+	 
+				<repository>
+					<id>atlassian</id>
+					<url>http://maven.atlassian.com/repository/public/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+  
                <repository>
                         <releases><enabled>false</enabled></releases>
                         <snapshots><enabled>true</enabled></snapshots>
@@ -172,10 +192,25 @@
 	    
 			<!-- ***** API: AJAXTAGS (INICIO) ***** -->
 			<dependency>
-				<groupId>org.ajaxtags</groupId>
-				<artifactId>ajaxtags</artifactId>
-				<version>1.1.5</version>
-			</dependency>
+			    <groupId>org.ajaxtags</groupId>
+			    <artifactId>ajaxtags</artifactId>
+			    <version>1.1.5</version>
+			    <scope>compile</scope>
+			</dependency> 
+			
+			<dependency>
+			    <groupId>net.sourceforce.ajaxtags</groupId>
+			    <artifactId>ajaxtags</artifactId>
+			    <version>1.5.1</version>
+			    <scope>compile</scope>
+			</dependency> 
+			
+			<dependency>
+			    <groupId>net.sourceforce.ajaxtags</groupId>
+			    <artifactId>resources</artifactId>
+			    <version>1.5.1</version>
+			    <scope>compile</scope>
+			</dependency> 
 			<!-- ***** API: AJAXTAGS (FIN) ***** -->
 	    
 			<!-- ***** API: JAVAMAIL (INICIO) ***** -->
@@ -235,6 +270,12 @@
 			    <groupId>commons-pool</groupId>
 			    <artifactId>commons-pool</artifactId>
 			    <version>1.5.4</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.4</version>
 			</dependency>
 	        <!-- ***** API: COMMONS (FIN) ***** -->          
 	        
@@ -409,11 +450,11 @@
 		    </dependency>
 	     	<!-- ***** ADICIONALES (FIN) ****** -->
 	     	
-	     	<!-- ***** DISPLAY-TAG(INICIO) ******
+	     	<!-- ***** DISPLAY-TAG(INICIO) ****** -->
 		    <dependency>
 		       <groupId>displaytag</groupId>
 		       <artifactId>displaytag</artifactId>
-		       <version>1.1.1</version>
+		       <version>1.2</version>
 		    </dependency>     	
 		 
 		    <dependency>
@@ -422,7 +463,7 @@
 		       <artifactId>displaytag-export-poi</artifactId>
 		       <version>1.1.1</version>
 		    </dependency> 
-	     	****** DISPLAY-TAG(FIN) ******* -->   
+	     	<!-- ****** DISPLAY-TAG(FIN) ******* -->    
                 
                 
             <!-- ***** ITEXT (INICIO) ****** -->
@@ -441,7 +482,19 @@
             </dependency>
             -->
             <!-- ******* ITEXT (FIN) ******* -->
-                 
+              
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>1.4.2</version>
+		    </dependency>
+			
+			<dependency>
+			    <artifactId>slf4j-api</artifactId>
+				<groupId>org.slf4j</groupId>
+                <version>1.4.2</version> 
+			</dependency>
+     
 	  </dependencies>
 	
 	  <!-- ************************************* -->
