@@ -4,18 +4,24 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>   
+ 
  <%@ taglib uri="/struts-tags"                      prefix="s"   %>
  <%@ taglib uri="/struts-dojo-tags"                 prefix="sx"  %>  
+
+ <%@ taglib uri="http://ajaxtags.sourceforge.net/tags/ajaxtags" prefix="ajax" %>
+ <%@ taglib uri="http://displaytag.sf.net"                      prefix="display" %>
 
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  
  <head>
+	 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" ></meta>
+	 
      <jsp:include page="../include/Titulo.jsp"  flush="false" />
      <jsp:include page="../include/Estilos.jsp" flush="false" />
      <jsp:include page="../include/Scripts.jsp" flush="false" />    
      
      <fmt:setBundle basename="com.ttporg.pe.msj.Internacionalizacion_es" /> 
-     
+          
      <script type="text/javascript" > 
 	 
 	    function centrarPopup(){ 
@@ -30,6 +36,11 @@
 	         var url = "<%=request.getContextPath()%>/ServletPopupBus";
 	         //alert( url );
 
+	         //idFila     = ${objListaPopup.idAsiento}, 
+	         //idServicio = ${objListaPopup.idServicio}, 
+	         //idAsiento  = ${objListaPopup.columnaAsientoA},
+	         //txtFila    =  '-A'
+	         
 	         var urlNew = url + '?idServicio=' + idServicio + '&idFila=' + idFila + txtFila + '&idAsiento=' + idAsiento;
 	         //alert( urlNew );
 	         	
@@ -57,7 +68,7 @@
 			vAJAX.onreadystatechange = funcionCallback;        //IMPORTANTE LOS LLAMADOS A LOS METODOS SE HACEN SIN PONER '()'
 		    
 			//ENVIAMOS LA PETICION...
-			vAJAX.open( "GET", "<%=request.getContextPath()%>/ServletPopupAjax?idAsiento=" + idAsiento , true );
+			vAJAX.open( "GET", "<%=request.getContextPath()%>/ServletAjax?idAsiento=" + idAsiento , true );
 			vAJAX.send( "" );
 		 }
 		
@@ -76,7 +87,7 @@
 				}
 			}
 			else{
-				     //alert("NO SE PUDO EN: 'vAJAX.readyState == 4' ");
+				 //alert("NO SE PUDO EN: 'vAJAX.readyState == 4' ");
 			}
 		 }
 	    		
@@ -88,131 +99,12 @@
 
   <form id="idFrmPopupBus" name="frmBusquedaPasaje" >
     
-  <center>
-    <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloVerificaAsiento" /> </font>
-  </center> 
-   
-  <br> </br>
-  <br> </br>
-   
-  <!-- PLANTILLA 
-
-       <table border="0" >
-            <tr>
-                <td colspan="3" >&nbsp; </td>
-            </tr>
-            <tr>
-                <td>
-	<input type="button" name="    " value="   1   " style="background:#060;color:#CCC" />
-	<input type="button" name="    " value="   2   " style="background:#060;color:#CCC" />
-                </td>
-                <td>&nbsp;
-                    </td>
-                <td>
-<input type="button" name="    " value="   4   " style="background:#060;color:#CCC" />
-<input type="button" name="    " value="   5   " style="background:#060;color:#CCC" />
-                </td>      
-            </tr>
-            <tr>
-                <td >
-<input type="button" name="    " value="   6   " style="background:#060;color:#CCC" />
-<input type="button" name="    " value="   7   " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                    </td>
-                <td>
-<input type="button" name="    " value="   8   " style="background:#060;color:#CCC" />
-<input type="button" name="    " value="   9   " style="background:#060;color:#CCC" />
-                </td>  
-            </tr>
-            <tr>
-                <td >
- <input type="button" name="    " value="  10  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  11  " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                    </td>
-                <td>
- <input type="button" name="    " value="  12  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  13  " style="background:#060;color:#CCC" />
-                </td>  
-            </tr>
-            <tr>
-                <td>
- <input type="button" name="    " value="  14  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  15  " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                    </td>
-                <td>
- <input type="button" name="    " value="  16  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  17  " style="background:#060;color:#CCC" />
-                </td>  
-            </tr>
-            <tr>
-                <td>
- <input type="button" name="    " value="  18  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  19  " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                    </td>
-                <td>
- <input type="button" name="    " value="  20  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  21  " style="background:#060;color:#CCC" />
-                </td>  
-            </tr>
-            <tr>
-                <td>
- <input type="button" name="    " value="  22  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  23  " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                    </td>
-                <td>
- <input type="button" name="    " value="  24  " style="background:#060;color:#CCC" />
- <input type="button" name="    " value="  25  " style="background:#060;color:#CCC" />
-                </td>  
-            </tr>
-            <tr>
-                <td>
-   <input type="button" name="    " value="  26  " style="background:#060;color:#CCC" />
-   <input type="button" name="    " value="  27  " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                    </td>
-                <td>
-   <input type="button" name="    " value="  28  " style="background:#060;color:#CCC" />
-   <input type="button" name="    " value="  29  " style="background:#060;color:#CCC" />
-                </td>  
-            </tr>
-            <tr>
-                <td>
-   <input type="button" name="    " value="  30  " style="background:#060;color:#CCC" />
-   <input type="button" name="    " value="  31  " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                 </td>
-                <td>
-   <input type="button" name="    " value="  32  " style="background:#060;color:#CCC" />
-   <input type="button" name="    " value="  33  " style="background:#060;color:#CCC" />
-                </td>  
-            </tr>
-            <tr>
-                <td>
-   <input type="button" name="    " value="  34  " style="background:#060;color:#CCC" />
-   <input type="button" name="    " value="  35  " style="background:#060;color:#CCC" />
-                </td>  
-                <td>&nbsp;
-                    </td>
-                <td>
-   <input type="button" name="    " value="  36  " style="background:#900" />
-   <input type="button" name="    " value="  37  " style="background:#900" />
-                </td>  
-            </tr>
-        </table>
-        
-        <br> </br>
-        PLANTILLA --> 
+	  <center>
+	    <font class="textoTituloFormulario" > <fmt:message key="texto.label.tituloVerificaAsiento" /> </font>
+	  </center> 
+	   
+	  <br> </br>
+	  <br> </br>
         
         <% int contador = 0; %>
         
@@ -274,7 +166,9 @@
                                     </font> 
                                 </center>  
                             </td>
-                            <td colspan="3" > &nbsp;&nbsp; </td>
+                            <td colspan="3" > &nbsp;&nbsp; 	 
+                            </td>
+
                          </tr>    
                                 
                          <c:forEach var="objListaPopup" items="${listaDetalleAsientoDTO}" >                                 
@@ -286,36 +180,56 @@
                                   <td style="text-align:center" bgcolor="white" >  		                      
                                          
                                       <c:if test="${objListaPopup.estado_A == 'FALSE'}" >
-                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
-                                                style="background:#060; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" 
-                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoA} )" />
-                                      </c:if>
+                                                                                
+	                                         <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}" 
+	                                                style="background:#060; color:#CCC;cursor:pointer" class="onMouseOver_A" 
+	                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" />    
+									             
+	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_A"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01" 
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
+                                      </c:if>                                       
                                       
                                       <c:if test="${objListaPopup.estado_A == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoA}  " 
-                                                style="background:#BB0000; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" 
-                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoA} )" />  
-                                      </c:if>                                     
+                                                style="background:#BB0000; color:#CCC;cursor:pointer" class="onMouseOver_B"
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoA}, '-A' )" />
+									             
+	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_B"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01"  
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
+                                      </c:if>                                    
                                   </td>   
                                   
                                   <td style="text-align:center" bgcolor="white" >  		                      
                                          
                                       <c:if test="${objListaPopup.estado_B == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
-                                                style="background:#060; color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" 
-                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoB} )" />  
-                                      </c:if>
+                                                style="background:#060; color:#CCC;cursor:pointer" class="onMouseOver_B"
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" />
+ 	       		                             
+ 	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_B"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01" 
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
+                                      </c:if> 
                                       
                                       <c:if test="${objListaPopup.estado_B == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoB}  " 
-                                                style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                         onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" 
-                                         onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoB} )" />
-                                      </c:if> 
-                                   
+                                                style="background:#BB0000;color:#CCC;cursor:pointer" class="onMouseOver_B"
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoB}, '-B' )" />
+		                             
+ 	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_B"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01" 
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
+                                      </c:if>                                    
                                   </td> 
                                   
                                   <td style="text-align:center" bgcolor="white" > 
@@ -326,36 +240,54 @@
                                          
                                       <c:if test="${objListaPopup.estado_C == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
-                                                style="background:#060;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" 
-                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoC} )" />
-                                      </c:if>
+                                                style="background:#060;color:#CCC;cursor:pointer" class="onMouseOver_C"
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" />
+		                             
+ 	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_C"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01" 
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
+                                      </c:if> 
                                       
                                       <c:if test="${objListaPopup.estado_C == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoC}  " 
-                                                style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" 
-                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoC} )" />
-                                      </c:if> 
-                                    
+                                                style="background:#BB0000;color:#CCC;cursor:pointer" class="onMouseOver_C"
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoC}, '-C' )" />
+		                             
+ 	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_C"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01" 
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
+                                      </c:if>                                     
                                   </td> 
                                   
                                   <td style="text-align:center" bgcolor="white" >  	                      
                                          
                                       <c:if test="${objListaPopup.estado_D == 'FALSE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
-                                                style="background:#060;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" 
-                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoD} )" />
+                                                style="background:#060;color:#CCC;cursor:pointer" class="onMouseOver_D"
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" />
+		                             
+ 	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_D"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01" 
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
                                       </c:if>
                                       
                                       <c:if test="${objListaPopup.estado_D == 'TRUE'}" >
                                          <input type="button" name="    " value="  ${objListaPopup.columnaAsientoD}  " 
-                                                style="background:#BB0000;color:#CCC;cursor:pointer" 
-                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" 
-                                                onmouseover="javascript:conexionAjaxServlet( this.form, ${objListaPopup.columnaAsientoD} )" />
-                                      </c:if> 
-                                    
+                                                style="background:#BB0000;color:#CCC;cursor:pointer" class="onMouseOver_D"
+                                                onclick="javascript:conexionServlet( this.form, ${objListaPopup.idAsiento}, ${objListaPopup.idServicio}, ${objListaPopup.columnaAsientoD}, '-D' )" />
+		                             
+ 	       		                             <ajax:callout baseUrl     = "${pageContext.request.contextPath}/ServletAjax" 
+										                   sourceClass = "onMouseOver_D"
+										                   parameters  = "idAsiento={ajaxParameter},opcionAjax=PROCESO_AJAX_01" 
+										                   title       = "REGISTRO DE PASAJES"  										                   
+										     />
+                                      </c:if>                                    
                                   </td>                     
                                   
                                   <% contador ++; %>                
@@ -392,7 +324,7 @@
        </c:if>         
        <!-- GRAFICO BUS --> 
          
-       <br> </br>
+       <br></br>
          
        <center>  
 	       <table width="70%">
@@ -410,7 +342,7 @@
 	       </table>
        </center>    
         
-        <br> </br>
+        <br></br>
         
         <center>
           <% 
@@ -421,7 +353,7 @@
           <input type="text" name="datos" id="datos" value="<%=contador%>" width="280" style=" width : 103px;" />
         </center>
 
-        <br> </br>
+        <br></br>
         
         <center> 
 	        <table width="80%" >
@@ -443,8 +375,8 @@
 	         </table>
         </center>
 
-        <br> </br>
-    
+        <br></br>
+     
     </form>
     
   </body>

@@ -1,18 +1,21 @@
  <%@ page contentType="text/html;charset=utf-8" %>
   
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>  
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>   
  
- <%@taglib uri="/struts-tags"                       prefix="s"    %>
- <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %> 
+ <%@ taglib uri="/struts-tags"                      prefix="s"   %>
+ <%@ taglib uri="/struts-dojo-tags"                 prefix="sx"  %>  
+
+ <%@ taglib uri="http://ajaxtags.sourceforge.net/tags/ajaxtags" prefix="ajax" %>
+ <%@ taglib uri="http://displaytag.sf.net"                      prefix="display" %> 
  
  <%@page import="com.ttporg.pe.bean.Cliente" %>
  
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
- <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" >
  
  <head> 
       <jsp:include page="../include/Titulo.jsp"  flush="false" />
@@ -199,7 +202,7 @@
 		                  </c:if>                 			         
 				         
 	                      <fieldset style="border:1px solid #0066FF;font-family: Arial; font-size: 13px;" >
-	                        <legend accesskey=I style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><label><fmt:message key="texto.label.filtro" />:</label> </legend>
+	                        <legend accesskey="Isss" style="color:#0066FF; background-color:#AFD2F9; font-size:12px; font-family:Arial; text-align:left; font:bold" ><label><fmt:message key="texto.label.filtro" />:</label> </legend>
 	                   
 	                          <table width="100%" >
                                  
@@ -269,23 +272,6 @@
                                      <td><label><fmt:message key="texto.label.ciudadOrigen" />:</label></td>
                                      <td>
                                        <select id="idChoCiudadOrigen" name="choCiudadOrigen" style="width:150px;">
-                                           <!-- 
-                                           <option value="LIMA"  > LIMA </option> 
-                                           <option value="ICA"  > ICA </option> 
-                                           <option value="CHINCHA" > CHINCHA </option> 
-                                           <option value="AYACUCHO"  > AYACUCHO </option> 
-                                           <option value="CUZCO"  > CUZCO </option> 
-                                           <option value="LORETO"  > LORETO </option> 
-                                           <option value="PIURA"  > PIURA</option> 
-                                           <option value="TACNA"  > TACNA </option> 
-                                           <option value="HUANUCO"  > HUANUCO </option> 
-                                           <option value="HUANCAYO" > HUANCAYO </option> 
-                                           <option value="CAJAMARCA" > CAJAMARCA </option> 
-                                           <option value="SAN MARTIN" > SAN MARTIN </option> 
-                                           <option value="PUNO" > PUNO </option> 
-                                           <option value="UCAYALI" > UCAYALI </option> 
-                                           <option value="CHIMBOTE" > CHIMBOTE </option> 
-                                           -->
                                            <option value="0" > Seleccionar </option>                                           
                                            <c:forEach var="paramListaDepartamentoOrigen" items="${listaDepartaOrigen}" >                                              
             								  <option value="${paramListaDepartamentoOrigen.id}">${paramListaDepartamentoOrigen.nombre}</option>  
@@ -300,22 +286,6 @@
                                      <td><label><fmt:message key="texto.label.ciudadDestino" />:</label></td>
                                      <td>
                                        <select id="idChoCiudadDestino" name="choCiudadDestino" style="width:150px;">
-                                           <!-- 
-                                           <option value="ICA"  > ICA </option> 
-                                           <option value="CHINCHA"  > CHINCHA </option> 
-                                           <option value="AYACUCHO"  > AYACUCHO </option> 
-                                           <option value="CUZCO"  > CUZCO </option> 
-                                           <option value="LORETO"  > LORETO </option> 
-                                           <option value="PIURA"  > PIURA</option> 
-                                           <option value="TACNA"  > TACNA </option> 
-                                           <option value="HUANUCO"  > HUANUCO </option> 
-                                           <option value="HUANCAYO" > HUANCAYO </option> 
-                                           <option value="CAJAMARCA" > CAJAMARCA </option> 
-                                           <option value="SAN MARTIN" > SAN MARTIN </option> 
-                                           <option value="PUNO" > PUNO </option> 
-                                           <option value="UCAYALI" > UCAYALI </option> 
-                                           <option value="CHIMBOTE" > CHIMBOTE </option> 
-                                           -->
                                            <option value="0" > Seleccionar </option>
                                            <c:forEach var="paramListaDepartamentoDestino" items="${listaDepartaDestino}" >
             								  <option value="${paramListaDepartamentoDestino.id}">${paramListaDepartamentoDestino.nombre}</option> 
@@ -388,6 +358,7 @@
 			                                     
 			                                 </tr>                                                                 
 		                               </c:forEach> 
+		                               
 		                            </c:if>
                             </table>  
                          </c:if> 

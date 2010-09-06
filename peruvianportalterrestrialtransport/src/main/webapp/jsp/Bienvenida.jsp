@@ -1,12 +1,15 @@
  <%@ page contentType="text/html;charset=utf-8" %>
   
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>  
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>   
  
- <%@taglib uri="/struts-tags"                       prefix="s"    %>
- <%@taglib uri="/struts-dojo-tags"                  prefix="sx"   %> 
+ <%@ taglib uri="/struts-tags"                      prefix="s"   %>
+ <%@ taglib uri="/struts-dojo-tags"                 prefix="sx"  %>  
+
+ <%@ taglib uri="http://ajaxtags.sourceforge.net/tags/ajaxtags" prefix="ajax" %>
+ <%@ taglib uri="http://displaytag.sf.net"                      prefix="display" %>
 
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  

@@ -20,6 +20,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>	
      
+                    
     <!-- ********** SERVLETS ********** -->  
     <servlet>
 		<servlet-name>ServletGenerarBoletoPago</servlet-name>
@@ -88,15 +89,16 @@
 	
 	
 	<servlet>
-		<servlet-name>ServletPopupAjax</servlet-name>
-		<servlet-class>com.ttporg.pe.servlet.ServletPopupAjax</servlet-class>
+		<servlet-name>ServletAjax</servlet-name>
+		<servlet-class>com.ttporg.pe.servlet.ServletAjax</servlet-class>
 	</servlet>	
 	
 	<servlet-mapping>
-		<servlet-name>ServletPopupAjax</servlet-name>
-		<url-pattern>/ServletPopupAjax</url-pattern>
+		<servlet-name>ServletAjax</servlet-name>
+		<url-pattern>/ServletAjax</url-pattern>
 	</servlet-mapping>
-		
+ 
+ 		
 				
 	<servlet>
 		<display-name>Apache-Axis Servlet</display-name>
@@ -134,7 +136,35 @@
 	</servlet-mapping>
 	
 	<!-- ***************************** --> 
-		
+	 
+    <!-- **** SERVLET: [CARGA INICIAL] LAS LIBRERIS AJAX DESDE 'JAR' **** -->
+	<servlet>
+		<servlet-name>sourceloader</servlet-name>
+		<servlet-class>net.sourceforge.ajaxtags.servlets.SourceLoader</servlet-class>
+		<init-param>
+			<param-name>prefix</param-name>
+			<param-value>/ajaxtags</param-value>
+		</init-param>
+	</servlet>
+    
+	<servlet-mapping>
+		<servlet-name>sourceloader</servlet-name>
+		<url-pattern>/ajaxtags/js/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>sourceloader</servlet-name>
+		<url-pattern>/img/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- ASIGNA UN CSS A TODA LA APLICACION
+	<servlet-mapping>
+		<servlet-name>sourceloader</servlet-name>
+		<url-pattern>/css/*</url-pattern>
+	</servlet-mapping>  
+	-->
+    <!-- **************************************************************** --> 
+    				
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
