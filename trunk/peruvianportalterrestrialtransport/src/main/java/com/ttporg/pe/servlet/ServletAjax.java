@@ -1,11 +1,14 @@
 package com.ttporg.pe.servlet;
- 
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.ajaxtags.servlets.BaseAjaxServlet;
+import net.sourceforge.ajaxtags.xml.AjaxXmlBuilder;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.ttporg.pe.bean.BaseBean;
@@ -33,11 +36,26 @@ import com.ttporg.pe.dao.impl.SalidaDaoImpl;
 import com.ttporg.pe.dao.impl.ServicioDaoImpl;
 import com.ttporg.pe.dao.impl.TransaccionDaoImpl;
 import com.ttporg.pe.dao.impl.VehiculoDaoImpl;
-import com.ttporg.pe.dto.DetallePopupDTO;
+import com.ttporg.pe.dto.DetallePopupDTO;  
+
+//---------------------- IMPORTANTE: ----------------------//
+//1.- AJAX-TAGs v1.1.5: Version estable descargada con el MAVEN de intenet y su paquete es:
+//                      [org.ajaxtags.servlets].
+//2.- AJAX-TAGs v1.5.1: Ultima version (Mas controles AJAX), instalacion manual en la
+//                      carpeta .lib, ya que no se hay repositorio MAVEN en internet 
+//                      donde descargar esta version. Su paquete es:
+//                      [org.ajaxtags.servlets.BaseAjaxServlet]. 
+//
+//Actualmente se estan utilizando las 2 versiones, la primera para evitar errores de compilacion 
+//al pasar el MAVEN y la segunda para fines de la aplicacion (Librerias mas completa).
+
+//import org.ajaxtags.servlets.BaseAjaxServlet;             //PARA COMPILACION MAVEN.
+import net.sourceforge.ajaxtags.servlets.BaseAjaxServlet;   //PARA USO.
+//----------------------------------------------------------/
 
 /**
  * @author Cesar Ricardo.
- * @clase: ServletPopupAjax.java  
+ * @clase: ServletAjax.java  
  * @descripción descripción de la clase.
  * @author_web: http://frameworksjava2008.blogspot.com
                 http://viviendoconjavaynomoririntentandolo.blogspot.com
@@ -47,7 +65,7 @@ import com.ttporg.pe.dto.DetallePopupDTO;
  * @fecha_de_ultima_actualización: dd-mm-yyyy.
  * @versión 1.0
  **/
-public class ServletPopupAjax extends BaseAjaxServlet{
+public class ServletAjax extends BaseAjaxServlet{
 
 	private static final long serialVersionUID = 8156759678414871371L;
  	
@@ -137,19 +155,43 @@ public class ServletPopupAjax extends BaseAjaxServlet{
 		   this.imprimeLog( "**** DENTRO DE 'ServletAjax', (extends BaseAjaxServlet) **** " );	
 		   
 		   //INICIALIZANDO 'DAOs'...
-		   this.inicializaDAOs();	
+		   this.inicializaDAOs();
 		   
+		   String opcionAjax = request.getParameter( "opcionAjax" ).trim();
+		   System.out.println( "OPCION AJAX: " + opcionAjax );
+		   
+		   String cadenaAjaxReturn = "";
+		   
+			if( (opcionAjax != null) && (opcionAjax.equalsIgnoreCase( "PROCESO_AJAX_01" )) ){			
+				cadenaAjaxReturn = this.procesoAjax_01( request, response );
+			}		
+			else if( (opcionAjax != null) && (opcionAjax.equalsIgnoreCase( "PROCESO_AJAX_02" )) ){		
+				     cadenaAjaxReturn = this.procesoAjax_02( request, response );
+			}		
+ 	       
+		    return cadenaAjaxReturn;
+	}
+ 	
+	/**
+	 * procesoAjax_01
+	 * @param  request
+	 * @param  response
+	 * @return String
+	 **/
+	public String procesoAjax_01( HttpServletRequest request, HttpServletResponse response ){	
+		   this.imprimeLog( "******* DENTRO DE: 'procesoAjax_01' *******" );
+		
 		   String mensajeRespuesta = new String( "" ); 
 
-	       try{		
-	    	   String idAsiento = request.getParameter( "idAsiento" );
-	    	   this.imprimeLog( "idAsiento: " + idAsiento );
+	       try{	
+	    	   AjaxXmlBuilder constructorAjaxXML = new AjaxXmlBuilder();
 	    	   
-	    	   if( idAsiento != null ){
+        	   String posicion = request.getParameter( "idAsiento" ).trim();
+        	   
+	    	   if( posicion != null ){
 	    		   
-	    		   DetallePopupDTO objDetallePopup = (DetallePopupDTO)empresaDAO.obtenerObjetoDatosPopup_x_codigoAsiento( Integer.parseInt( idAsiento ) );
-	    		   
-	    		   String saltoLinea  = "";
+	    		   DetallePopupDTO objDetallePopup = (DetallePopupDTO)this.empresaDAO.obtenerObjetoDatosPopup_x_codigoAsiento( Integer.parseInt( posicion ) );
+
 	    		   String mensajeAJAX = "";
 	    			   
 		   		   this.imprimeLog( "" );
@@ -164,22 +206,50 @@ public class ServletPopupAjax extends BaseAjaxServlet{
 				   this.imprimeLog( "VehiculoTipo:       " + objDetallePopup.getVehiculoTipo()   );
 				   this.imprimeLog( "AgenciaNombre:      " + objDetallePopup.getAgenciaNombre()      );
 				   this.imprimeLog( "EmpresaRazonSocial: " + objDetallePopup.getEmpresaRazonSocial() );
+				   this.imprimeLog( "Posicion:           " + posicion );
 				   this.imprimeLog( "" );
 	    		   
 				   //Armando Mensaje. AJAX.
-	    		   mensajeAJAX =  " <table with='200' bgcolor='white' > ";
-	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Razon Social: </strong>    " + objDetallePopup.getEmpresaRazonSocial() + "</td>  "; 
-	    		   mensajeAJAX += "      <td style='color:#003300'> <strong> - Agencia: </strong>         " + objDetallePopup.getAgenciaNombre()      + "</td> </tr>";
-	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Nombre Vehiculo: </strong> " + objDetallePopup.getVehiculoNombre()     + "</td>  ";
-	    		   mensajeAJAX += "      <td style='color:#003300'> <strong> - Modelo Vehiculo: </strong> " + objDetallePopup.getVehiculoModelo()     + "</td> </tr>";
-	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Tipo Vehiculo: </strong>   " + objDetallePopup.getVehiculoTipo()       + "</td>  ";
-	    		   mensajeAJAX += "      <td style='color:#003300'> <strong> - Fila #: </strong>          " + objDetallePopup.getAsientoId()          + "</td> </tr> "; 
+	    		   mensajeAJAX =  " <table with='100' bgcolor='white' > ";
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Razon Social: </strong>    </td> <td style='color:#003300'>" + objDetallePopup.getEmpresaRazonSocial() + "</td> </tr>"; 
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Agencia: </strong>         </td> <td>" + objDetallePopup.getAgenciaNombre()      + "</td> </tr>";
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Nombre Vehiculo: </strong> </td> <td>" + objDetallePopup.getVehiculoNombre()     + "</td> </tr>"; 
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Modelo Vehiculo: </strong> </td> <td>" + objDetallePopup.getVehiculoModelo()     + "</td> </tr>";
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Tipo Vehiculo: </strong>   </td> <td>" + objDetallePopup.getVehiculoTipo()       + "</td> </tr>"; 
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Columna #: </strong>       </td> <td>" + objDetallePopup.getAsientoId()          + "</td> </tr>";  
+	    		   mensajeAJAX += " <tr> <td style='color:#003300'> <strong> - Posicion #: </strong>      </td> <td>" + posicion          + "</td> </tr>"; 
 	    		   mensajeAJAX += " </table>"; 
 	    		   
 	    		   this.imprimeLog( "CADENA 'AJAX': " + mensajeAJAX );
-	    		   
-	    		   mensajeRespuesta = "" + mensajeAJAX + "";
+	    		   	    		   
+	    		   mensajeRespuesta = constructorAjaxXML.addItemAsCData( "INFORMACION", mensajeAJAX ).toString();
 	    	   } 
+	       }
+	       catch( Exception e ){ 
+		   	      e.printStackTrace();
+	       } 
+	       
+		   return mensajeRespuesta;
+	}
+	
+	/**
+	 * procesoAjax_02
+	 * @param  request
+	 * @param  response
+	 * @return String
+	 **/
+	public String procesoAjax_02( HttpServletRequest request, HttpServletResponse response ){	
+		   this.imprimeLog( "******* DENTRO DE: 'procesoAjax_02' *******" );
+		
+		   String mensajeRespuesta = new String( "" ); 
+
+	       try{				
+				//EJECUTAR UN PROCESO EN BASE AL PARAMETRO PROCESAR...
+				
+				this.imprimeLog( "PROCESO EJECUTADO ...!!! " );
+				
+				//Proceso ASINCRONO.
+				return "";
 	       }
 	       catch( Exception e ){ 
 		   	      e.printStackTrace();
