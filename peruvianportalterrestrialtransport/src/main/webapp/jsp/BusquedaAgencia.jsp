@@ -1,9 +1,16 @@
  <%@ page contentType="text/html;charset=utf-8" %>
-  
+
+<<<<<<< .mine
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"    %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql"  %>
+=======
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"  prefix="x"   %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>   
+>>>>>>> .r267
  
  <%@ taglib uri="/struts-tags"                      prefix="s"   %>
  <%@ taglib uri="/struts-dojo-tags"                 prefix="sx"  %>  
